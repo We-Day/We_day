@@ -1,4 +1,4 @@
-package com.theironyard;
+package com.theironyard.Entities;
 
 import javax.persistence.*;
 
@@ -32,7 +32,7 @@ public class User {
     public String password;
 
     @Column (nullable = false)
-    boolean isAdmin;
+    public boolean isAdmin;
 
 
 

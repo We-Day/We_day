@@ -1,8 +1,7 @@
-package com.theironyard;
+package com.theironyard.Services;
 
+import com.theironyard.Entities.User;
 import org.springframework.data.repository.CrudRepository;
-
-import javax.persistence.ManyToOne;
 
 /**
  * Created by macbookair on 12/8/15.

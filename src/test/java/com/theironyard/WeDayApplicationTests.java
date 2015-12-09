@@ -1,5 +1,7 @@
 package com.theironyard;
-
+import com.theironyard.Services.PostRepository;
+import com.theironyard.Services.UserRepository;
+import com.theironyard.Services.WeddingRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,18 +14,19 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.validation.constraints.AssertTrue;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WeDayApplication.class)
 @WebAppConfiguration
 public class WeDayApplicationTests {
 
 	@Autowired
-	WeddingRepository weddings;
+    WeddingRepository weddings;
 
 	@Autowired
-	UserRepository users;
+    UserRepository users;
+
+    @Autowired
+    PostRepository posts;
 
 	@Autowired
 	WebApplicationContext wap;
@@ -34,6 +37,7 @@ public class WeDayApplicationTests {
 	public void before(){
 		weddings.deleteAll();
 		users.deleteAll();
+        posts.deleteAll();
 		mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
 
 	}
@@ -41,20 +45,44 @@ public class WeDayApplicationTests {
 	@Test
 	public void testCreateWedding()throws Exception {
 		mockMvc.perform(
-				MockMvcRequestBuilders.post("/create-wedding")
-				.param("date", "test")
-				.param("name","test")
-				.param("location", "test")
-				.param("userName", "test")
-				.param("phone", "test")
-				.param("zip", "test")
-				.param("address", "test")
-				.param("password", "test")
-				.param("email", "test")
-				.param("isAdmin", "true")
-		);
+                MockMvcRequestBuilders.post("/create-wedding")
+                    .param("date", "2016-01-08")
+                    .param("weddingName", "test")
+                    .param("location", "test")
+                    .param("userName", "test")
+                    .param("phone", "test")
+                    .param("zip", "test")
+                    .param("address", "test")
+                    .param("password", "test")
+                    .param("email", "test")
+                    .param("isAdmin", "true")
+        );
 
 		Assert.assertTrue(weddings.count()==1 && users.count()==1);
 	}
+    @Test
+    public void testCreateAdmin()throws Exception{
+        users.deleteAll();
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/create-admin")
+                    .param("userName", "test")
+                    .param("phone", "test")
+                    .param("zip", "test")
+                    .param("address", "test")
+                    .param("email", "test")
+                    .param("password", "test")
+                    .param("isAdmin", "true")
+        );
+        Assert.assertTrue(users.count()==1 && users.findOne(1).isAdmin) ;
+    }
+    @Test
+    public void createPost()throws Exception{
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/create-post")
+                .param("text", "testText")
+                .sessionAttr("userName", "testUser")
+        );
+        Assert.assertTrue(posts.count()==1);
+    }
 
 }
