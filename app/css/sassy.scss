@@ -226,8 +226,77 @@ form{
   padding: 0 10px;
 }
 //create-wedding------------------------------------------/
-
-.wedding-sign-up{
-	background-color: white;
-	color:black;
+.wrapper-create-wedding{
+	width: 100%;
+	height: 100%;
+	background-image: url('http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg');
+	position: absolute;
+}
+ .create-wedding-form{
+	display: block;
+	background: rgba(5, 5, 10, .5);
+	width: 90%;
+	margin:auto;
+	margin-top: 10%;
+	height:60%;
+	border-radius: 25px;
+}
+.admin-form{
+	width: 90%;
+	height: 90%;
+	text-align: center;
+}
+.wedding-name{
+	h1{
+		width: 50%;
+		margin-left: 25%;
+	}
+	input{
+		float: left;
+		margin-top: 10%;
+		width: 600px !important;
+		height: 2em;
+		margin-left: 25%;
+		font-size: 3em;
+	}
+	.glyphicon{
+		margin-top: 10%;
+		margin-left: 3%;
+		float: left;
+		font-size: 4em;
+	}
+}
+.calendar-create-wedding{
+	 p{
+		 margin-top: 5%;
+		 input{
+			 font-size: 3em;
+			 width: 600px !important;
+			 height: 2em  !important;
+		 }
+		 .calendar-span{
+			 padding-left: 10%;
+		 }
+		 .glyphicon-calendar{
+			 font-size: 5em;
+		 }
+	 }
+	 .glyphicon-arrow-right{
+		 font-size: 4em;
+		 margin-left: 10%;
+		 height: 20%;
+		 top: 40px;
+	 }
+}
+.create-wedding-password{
+	margin-top: 5%;
+	input{
+		font-size: 1.2em;
+	}
+	span{
+		color:black;
+		margin-left: 3%;
+		top: 20px;
+		font-size: 4em;
+	}
 }

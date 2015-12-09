@@ -1,0 +1,299 @@
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+@-moz-keyframes fadeOut {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+@keyframes fadeOut {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@-webkit-keyframes slide-in {
+  from {
+    left: 0; }
+  to {
+    left: 25%; } }
+
+@-moz-keyframes slide-in {
+  from {
+    left: 0; }
+  to {
+    left: 30%; } }
+
+@keyframes slide-in {
+  from {
+    left: 0; }
+  to {
+    left: 30%; } }
+
+body, html, main {
+  /* important */
+  height: 100%;
+  width: 100%;
+  margin: 0; }
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: -2%; }
+  .navbar .navbar-brand {
+    opacity: 0;
+    /* make things invisible upon start */
+    -webkit-animation: fadeIn ease-in 1;
+    /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeIn ease-in 1;
+    animation: fadeIn ease-in 1;
+    -webkit-animation-fill-mode: forwards;
+    /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    animation-duration: 3s; }
+  .navbar li {
+    display: inline-block; }
+  .navbar .login {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    margin-top: 8%; }
+
+.cd-fixed-bg {
+  min-height: 500px;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center center; }
+  .cd-fixed-bg h1 {
+    width: 60%;
+    margin-left: 30%;
+    padding-top: 10%;
+    color: white;
+    font-size: 10rem;
+    opacity: 0;
+    /* make things invisible upon start */
+    -webkit-animation: fadeOut ease-in 1;
+    /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeOut ease-in 1;
+    animation: fadeOut ease-in 1;
+    -webkit-animation-fill-mode: forwards;
+    /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    animation-duration: 3s; }
+  .cd-fixed-bg #slider {
+    width: 300px;
+    height: 100px;
+    background: rgba(5, 5, 10, 0.5);
+    color: white;
+    padding: 1%;
+    position: absolute;
+    left: -400px;
+    top: 40%;
+    font-size: 3em; }
+    .cd-fixed-bg #slider:hover {
+      left: 30%; }
+  .cd-fixed-bg p {
+    width: 60%;
+    margin-left: 30%;
+    height: 100px;
+    background: rgba(20, 5, 5, 0.5);
+    opacity: 0;
+    /* make things invisible upon start */
+    -webkit-animation: fadeIn ease-in 1;
+    /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeIn ease-in 1;
+    animation: fadeIn ease-in 1;
+    -webkit-animation-fill-mode: forwards;
+    /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    animation-duration: 3s; }
+    .cd-fixed-bg p a {
+      text-decoration: none;
+      color: white;
+      font-size: 4em; }
+    .cd-fixed-bg p:hover {
+      -webkit-animation: fadeOut ease-in 1;
+      /* call our keyframe named slide, use animattion ease-in and repeat it only 1 time */
+      -moz-animation: fadeOut ease-in 1;
+      animation: fadeOut ease-in 1;
+      -webkit-animation-fill-mode: forwards;
+      /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+      -moz-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      animation-duration: 1s; }
+      .cd-fixed-bg p:hover ~ #slider {
+        -webkit-animation: slide-in ease-in 1;
+        /* call our keyframe named slide, use animattion ease-in and repeat it only 1 time */
+        -moz-animation: slide-in ease-in 1;
+        animation: slide-in ease-in 1;
+        -webkit-animation-fill-mode: forwards;
+        /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+        -moz-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+        -webkit-animation-duration: 1.5s;
+        -moz-animation-duration: 1.5s;
+        animation-duration: 1.5s; }
+
+.cd-fixed-bg.cd-bg-1 {
+  margin-top: 3%;
+  background-image: url("http://nathandesch.com/wp-content/uploads/2014/11/07-7939-post/Doylestown-wedding-photography-18-of-66.jpg"); }
+
+.cd-fixed-bg.cd-bg-2 {
+  background-image: url("https://weminoredinfilm.files.wordpress.com/2013/06/will-ferrell-in-wedding-crashers-will-ferrell-18126324-1280-720.jpg"); }
+
+.cd-fixed-bg.cd-bg-3 {
+  background-image: url("http://charleston-wedding-packages.com/images/angel-oak-2.jpg"); }
+
+.cd-scrolling-bg {
+  min-height: 100%; }
+  .cd-scrolling-bg .block {
+    vertical-align: top;
+    max-width: 30%;
+    display: inline-block;
+    margin-left: 2%; }
+    .cd-scrolling-bg .block img {
+      width: 100%; }
+    .cd-scrolling-bg .block h1 {
+      width: 100%; }
+
+.wrapper {
+  display: block; }
+
+.display-none {
+  display: none; }
+
+form {
+  margin-top: 10%;
+  width: 80%;
+  margin-left: 10%;
+  display: none; }
+
+.nav-column .nav-tabs {
+  margin-top: 20%;
+  float: left;
+  border-bottom: 0; }
+  .nav-column .nav-tabs li {
+    float: none;
+    margin-bottom: 3%; }
+    .nav-column .nav-tabs li p {
+      display: none; }
+    .nav-column .nav-tabs li:hover p {
+      display: block; }
+    .nav-column .nav-tabs li a {
+      margin-right: 0;
+      border: 0;
+      background-color: #333; }
+      .nav-column .nav-tabs li a:hover {
+        background-color: #444; }
+  .nav-column .nav-tabs .glyphicon {
+    color: #fff;
+    font-size: 2em; }
+  .nav-column .nav-tabs .active .glyphicon {
+    color: #333; }
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 2s; }
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px; }
+
+.wrapper-create-wedding {
+  width: 100%;
+  height: 100%;
+  background-image: url("http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg");
+  position: absolute; }
+
+.create-wedding-form {
+  display: block;
+  background: rgba(5, 5, 10, 0.5);
+  width: 90%;
+  margin: auto;
+  margin-top: 10%;
+  height: 60%;
+  border-radius: 25px; }
+
+.admin-form {
+  width: 90%;
+  height: 90%;
+  text-align: center; }
+
+.wedding-name h1 {
+  width: 50%;
+  margin-left: 25%; }
+
+.wedding-name input {
+  float: left;
+  margin-top: 10%;
+  width: 600px !important;
+  height: 2em;
+  margin-left: 25%;
+  font-size: 3em; }
+
+.wedding-name .glyphicon {
+  margin-top: 10%;
+  margin-left: 3%;
+  float: left;
+  font-size: 4em; }
+
+.calendar-create-wedding p {
+  margin-top: 5%; }
+  .calendar-create-wedding p input {
+    font-size: 3em;
+    width: 600px !important;
+    height: 2em  !important; }
+  .calendar-create-wedding p .calendar-span {
+    padding-left: 10%; }
+  .calendar-create-wedding p .glyphicon-calendar {
+    font-size: 5em; }
+
+.calendar-create-wedding .glyphicon-arrow-right {
+  font-size: 4em;
+  margin-left: 10%;
+  height: 20%;
+  top: 40px; }
+
+.create-wedding-password {
+  margin-top: 5%; }
+  .create-wedding-password input {
+    font-size: 1.2em; }
+  .create-wedding-password span {
+    color: black;
+    margin-left: 3%;
+    top: 20px;
+    font-size: 4em; }
