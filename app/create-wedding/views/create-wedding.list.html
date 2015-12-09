@@ -1,18 +1,33 @@
-<div class="container create-wedding ">
-  <form class="wedding-form" action="index.html" method="post">
-    <div class="wedding-sign-up">
-      <h1>What is your unique Wedding Name?</h1>
-      <input type="text" name="name" placeholder="Wedding Name"value="">
-      <span ng-click=""class = "glyphicon glyphicon-arrow-right"></span>
+<div class="wrapper-create-wedding">
+    <form class=" create-wedding-form form-inline" role="form">
+    <div ng-show = 'isCurrentIndex(0)'class="form-group admin-form wedding-name">
+      <h1> Your Wedding Name</h1>
+      <label class="sr-only" for="text">Your Wedding Name:</label>
+      <input type="text" placeholder="Sarah & John's Wedding"class="form-control" id="wedding-name">
+      <span ng-click = 'setCurrentIndex(1)'class = "glyphicon glyphicon-arrow-right"></span>
     </div>
-    <div class="wedding-sign-up">
-      <span ng-click=""class = "glyphicon glyphicon-arrow-right"></span>
+
+  <div ng-show = 'isCurrentIndex(1)'class="form-group admin-form calendar-create-wedding">
+    <h1>Your Wedding Date:</h1>
+    <p class="input-group">
+      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+      <span class="input-group-btn calendar-span">
+        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+    <span ng-click = 'setCurrentIndex(2)'class = "glyphicon glyphicon-arrow-right"></span>
+  </div>
+  <div ng-show = 'isCurrentIndex(2)'class="form-group admin-form create-wedding-password">
+    <h1>Create New Admin: <small></small></h1>
+    <input type="email" placeholder="email address"class="form-control" id="email">
+    <input type="tel" placeholder = 'phone-number'class="form-control" id="phone">
+    <input type="password" placeholder="password"class="form-control" id="pwd">
+    <input type="password" placeholder="password authentication"class="form-control" id="pwd">
+  <span ng-click = 'setCurrentIndex(3)'class = "glyphicon glyphicon-arrow-right"></span>
+  </div>
+  <div ng-show = 'isCurrentIndex(3)'class="form-group admin-form">
+    <h1>Invite Contacts <small></small></h1>
+  <button type="submit" class="btn btn-default">Submit</button>
     </div>
-    <div class="wedding-sign-up">
-      <span ng-click=""class = "glyphicon glyphicon-arrow-right"></span>
-    </div>
-    <div class="wedding-sign-up">
-      <span ng-click=""class = "glyphicon glyphicon-arrow-right"></span>
-    </div>
-  </form>
+</form>
 </div>
