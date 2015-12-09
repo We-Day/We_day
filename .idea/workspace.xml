@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6383c0fe-1fae-4c28-af23-2268a42aaafe" name="Default" comment="added &quot;/create-admin&quot; route and wrote test for it">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Entities/Photo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Services/PhotoRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/We_dayMINE.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" />
+    <list default="true" id="6383c0fe-1fae-4c28-af23-2268a42aaafe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/test/com/theironyard/WeDayApplicationTests.class" afterPath="$PROJECT_DIR$/build/classes/test/com/theironyard/WeDayApplicationTests.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theironyard/Entities/Post.java" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Entities/Post.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/theironyard/WeDayApplicationTests.java" afterPath="$PROJECT_DIR$/src/test/java/com/theironyard/WeDayApplicationTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theironyard/Contollers/WeDayController.java" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Contollers/WeDayController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="We_day.iws" />
@@ -1236,7 +1227,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449514320634</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="created and tested single photo file upload">
+      <created>1449694978515</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1449694978516</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1308,7 +1305,8 @@
     <MESSAGE value="Initial Import" />
     <MESSAGE value="Working on login still..." />
     <MESSAGE value="added &quot;/create-admin&quot; route and wrote test for it" />
-    <option name="LAST_COMMIT_MESSAGE" value="added &quot;/create-admin&quot; route and wrote test for it" />
+    <MESSAGE value="created and tested single photo file upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="created and tested single photo file upload" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
