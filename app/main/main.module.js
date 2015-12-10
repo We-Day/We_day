@@ -10,6 +10,7 @@
   angular
     .module('main', [
       'ngRoute',
+      'ui.router'
       'underscore',
       'admin',
       'ngAnimate',
