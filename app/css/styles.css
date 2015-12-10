@@ -58,6 +58,14 @@ body, html, main {
   width: 100%;
   margin: 0; }
 
+.login-button {
+  background: white;
+  position: absolute;
+  width: 80%;
+  margin-left: 10%;
+  top: 20%;
+  z-index: 3; }
+
 .navbar {
   position: fixed;
   width: 100%;
@@ -229,85 +237,43 @@ body, html, main {
 
 .wrapper-create-wedding {
   width: 100%;
-  height: 100%;
+  height: 1000px;
   background-image: url("http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg");
   position: absolute; }
 
-.create-wedding-form-wrapper {
-  display: block;
+.admin-form {
   background: rgba(5, 5, 10, 0.5);
   width: 90%;
   margin: auto;
   margin-top: 10%;
-  height: 60%;
   border-radius: 25px;
-  z-index: 1; }
-
-.create-wedding-form {
-  display: block;
-  width: 90%;
-  margin: auto;
-  margin-top: 10%;
-  height: 60%;
-  border-radius: 25px;
-  z-index: 2; }
-
-.admin-form {
-  width: 90%;
-  height: 90%;
+  z-index: 2;
+  width: 100%;
   text-align: center; }
-
-.wedding-name h1 {
-  width: 50%;
-  margin-left: 25%; }
-
-.wedding-name input {
-  float: left;
-  margin-top: 5%;
-  width: 600px !important;
-  height: 2em;
-  margin-left: 25%;
-  font-size: 1em; }
-
-.wedding-name .glyphicon {
-  margin-top: 5%;
-  margin-left: 3%;
-  float: left;
-  font-size: 4em; }
-
-.calendar-create-wedding p {
-  margin-top: 5%; }
-  .calendar-create-wedding p input {
-    font-size: 3em;
-    width: 600px !important;
-    height: 2em  !important; }
-  .calendar-create-wedding p .calendar-span {
-    padding-left: 10%; }
-  .calendar-create-wedding p .glyphicon-calendar {
-    font-size: 5em; }
-
-.calendar-create-wedding .glyphicon-arrow-right {
-  font-size: 4em;
-  margin-left: 10%;
-  height: 20%;
-  top: 40px; }
-
-.create-wedding-password {
-  margin-top: 5%; }
-  .create-wedding-password input {
-    font-size: 1.2em; }
-  .create-wedding-password span {
-    color: black;
-    margin-left: 3%;
-    top: 20px;
-    font-size: 4em; }
-
-.nested-invite-contacts-form {
-  z-index: 3;
-  margin-top: -20%; }
-
-#submit-new-admin {
-  position: absolute;
-  top: 65%;
-  left: 40%;
-  font-size: 2em; }
+  .admin-form h1 {
+    color: white; }
+  .admin-form .form-group {
+    padding-top: 5%;
+    width: 80%;
+    margin: auto;
+    font-size: 1.5em; }
+    .admin-form .form-group .calendar-p {
+      display: inline-block; }
+      .admin-form .form-group .calendar-p .calendar-span {
+        padding-right: 80%; }
+    .admin-form .form-group input {
+      float: left;
+      width: 65%; }
+  .admin-form .glyphicon-arrow-right {
+    font-size: 4em;
+    top: 100%; }
+    .admin-form .glyphicon-arrow-right:hover {
+      color: green; }
+  .admin-form button {
+    border-color: green; }
+  .admin-form #submit-new-admin {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: 2em; }
+    .admin-form #submit-new-admin a {
+      text-decoration: none; }

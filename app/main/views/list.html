@@ -6,7 +6,7 @@
 <div>
   <ul class="nav navbar-nav">
     <li class="active"><a href="#">Home</a></li>
-    <li><a href=""><my-login></my-login></a></li>
+    <li ng-click = 'isLoginOpen = !isLoginOpen'><a href=""><my-login></my-login></a></li>
     <li><a href="#/admin">Admin</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
@@ -16,7 +16,7 @@
 </div>
 </div>
 </nav>
-<!-- form pop up -->
+
 <my-form></my-form>
 <!-- all other content for front page -->
 <div id = 'wrapper'>

@@ -2,8 +2,8 @@
 "use strict"
 angular
   .module('create-wedding')
-  .controller('CreateWeddingController',function($scope,CreateWeddingService){
-    $scope.currentIndex = 3;
+  .controller('CreateWeddingController',function($scope,CreateWeddingService,$anchorScroll,$location){
+    $scope.currentIndex = 0;
     $scope.isCurrentIndex = function (index){
       if($scope.currentIndex === index){
         return true
@@ -15,6 +15,11 @@ angular
       $scope.currentIndex = index;
       console.log('currentIndex',$scope.currentIndex)
     };
+
+    $scope.scrollTo = function(id) {
+      $location.hash(id);
+      $anchorScroll();
+   }
 //calendar controlls
   $scope.today = function() {
     $scope.dt = new Date();
