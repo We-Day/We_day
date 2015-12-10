@@ -196,12 +196,6 @@ body, html, main {
 .display-none {
   display: none; }
 
-form {
-  margin-top: 10%;
-  width: 80%;
-  margin-left: 10%;
-  display: none; }
-
 .nav-column .nav-tabs {
   margin-top: 20%;
   float: left;
@@ -309,9 +303,8 @@ form {
     font-size: 4em; }
 
 .nested-invite-contacts-form {
-  position: absolute;
-  z-index: 1;
-  margin-top: 5%; }
+  z-index: 3;
+  margin-top: -20%; }
 
 #submit-new-admin {
   position: absolute;

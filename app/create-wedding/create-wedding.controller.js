@@ -3,7 +3,7 @@
 angular
   .module('create-wedding')
   .controller('CreateWeddingController',function($scope,CreateWeddingService){
-    $scope.currentIndex = 0;
+    $scope.currentIndex = 3;
     $scope.isCurrentIndex = function (index){
       if($scope.currentIndex === index){
         return true
