@@ -1,4 +1,5 @@
 package com.theironyard;
+import com.theironyard.Services.PhotoRepository;
 import com.theironyard.Services.PostRepository;
 import com.theironyard.Services.UserRepository;
 import com.theironyard.Services.WeddingRepository;
@@ -6,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,6 +20,9 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringApplicationConfiguration(classes = WeDayApplication.class)
 @WebAppConfiguration
 public class WeDayApplicationTests {
+
+    @Autowired
+    PhotoRepository photoRepo;
 
 	@Autowired
     WeddingRepository weddings;
@@ -84,5 +89,16 @@ public class WeDayApplicationTests {
         );
         Assert.assertTrue(posts.count()==1);
     }
-
+    @Test
+    public void testUpload()throws Exception{
+        MockMultipartFile testFile = new MockMultipartFile("file", "test.jpg", "image/jpeg", "test img".getBytes());
+        mockMvc.perform(
+                MockMvcRequestBuilders.fileUpload("/photo-upload")
+                .file(testFile)
+                .param("fileName", "GET REKT")
+                .param("description", "U WOTM 8")
+                .sessionAttr("username", "TestUser")
+        );
+        Assert.assertTrue(photoRepo.count() == 1);
+    }
 }

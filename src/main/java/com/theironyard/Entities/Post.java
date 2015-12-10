@@ -11,7 +11,7 @@ public class Post {
     @GeneratedValue
     int id;
 
-    @Column(nullable = false)
+    @Column (nullable = false)
     public String text;
 
     @Column (nullable = false)

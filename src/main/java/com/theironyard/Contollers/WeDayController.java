@@ -1,6 +1,8 @@
 package com.theironyard.Contollers;
+import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.Wedding;
+import com.theironyard.Services.PhotoRepository;
 import com.theironyard.Services.PostRepository;
 import com.theironyard.Utilities.PasswordHash;
 import com.theironyard.Services.WeddingRepository;
@@ -10,9 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -28,6 +36,8 @@ public class WeDayController {
     WeddingRepository weddings;
     @Autowired
     PostRepository posts;
+    @Autowired
+    PhotoRepository photos;
 
     @RequestMapping("/create-wedding")
     public void createWedding(String date, String weddingName,
@@ -54,16 +64,10 @@ public class WeDayController {
     }
 
     @RequestMapping ("/create-admin")
-    public void createAdmin(HttpSession session, String userName, String zip,
+    public void createAdmin(String userName, String zip,
                             String address, String password,
                             String email, String phone,
-                            @RequestParam(defaultValue = "true") boolean isAdmin) throws Exception {
-
-        session.setAttribute("userName", userName);
-
-        if (userName == null){
-            throw new Exception("Not Logged in");
-        }
+                            @RequestParam(defaultValue = "true") boolean isAdmin){
 
         User user = new User();
         user.userName = userName;
@@ -79,7 +83,6 @@ public class WeDayController {
     @RequestMapping("/create-post")
     public Iterable  createPost(HttpSession session, String text) throws Exception {
         String userName = (String)session.getAttribute("userName");
-
         if (userName ==null){
             throw new Exception("Not Logged in");
         }
@@ -91,6 +94,24 @@ public class WeDayController {
 
         return posts.findAll();
     }
+
+    @RequestMapping("/photo-upload")
+    public Photo upload (HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
+        String username = (String) session.getAttribute("username");
+
+        File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
+        FileOutputStream fos = new FileOutputStream(photoFile);
+        fos.write(file.getBytes());
+
+        Photo p = new Photo();
+        p.fileName = photoFile.getName();
+        p.description = description;
+        photos.save(p);
+
+
+        response.sendRedirect("/");
+
+        return p;
+    }
+
 }
-
-
