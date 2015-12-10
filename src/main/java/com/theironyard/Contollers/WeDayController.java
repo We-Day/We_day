@@ -96,8 +96,12 @@ public class WeDayController {
     }
 
     @RequestMapping("/photo-upload")
-    public Photo upload (HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
-        String username = (String) session.getAttribute("username");
+    public Photo upload (HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws Exception {
+        String userName = (String) session.getAttribute("userName");
+
+        if (userName == null){
+            throw new Exception("Not Logged in");
+        }
 
         File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
         FileOutputStream fos = new FileOutputStream(photoFile);
@@ -107,9 +111,6 @@ public class WeDayController {
         p.fileName = photoFile.getName();
         p.description = description;
         photos.save(p);
-
-
-        response.sendRedirect("/");
 
         return p;
     }
