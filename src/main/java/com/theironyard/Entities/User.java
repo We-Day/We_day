@@ -14,7 +14,7 @@ public class User {
     int id;
 
     @Column (nullable = false)
-    public String userName;
+    public String username;
 
     @Column (nullable = false)
     public String phone;
@@ -36,9 +36,9 @@ public class User {
 
     public User (){}
 
-    public User(int id, String userName, String phone, String zip, String address, String email, String password, boolean isAdmin) {
+    public User(int id, String username, String phone, String zip, String address, String email, String password, boolean isAdmin) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.phone = phone;
         this.zip = zip;
         this.address = address;

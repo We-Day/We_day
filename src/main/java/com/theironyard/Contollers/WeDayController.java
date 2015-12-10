@@ -9,10 +9,7 @@ import com.theironyard.Services.WeddingRepository;
 import com.theironyard.Entities.User;
 import com.theironyard.Services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +42,15 @@ public class WeDayController {
         weddings.save(wedding);
     }
 
+    @RequestMapping ("/login")
+    public void login(@RequestBody User user, String username, HttpSession session){
+        session.setAttribute("username",username);
+
+        user = users.findOneByusername(username);
+        if (user == null){
+        }
+    }
+
     @RequestMapping ("/create-admin")
     public void createAdmin(@RequestBody User user){
         if (user.isAdmin == null){
@@ -55,7 +61,7 @@ public class WeDayController {
 
     @RequestMapping("/create-post")
     public Iterable  createPost(@RequestBody Post post,  HttpSession session) throws Exception {
-        String userName = (String)session.getAttribute("userName");
+        String userName = (String)session.getAttribute("username");
         if (userName ==null){
             throw new Exception("Not Logged in");
         }
@@ -65,7 +71,7 @@ public class WeDayController {
 
     @RequestMapping("/photo-upload")
     public Photo upload (@RequestBody Photo photo, HttpSession session, MultipartFile file) throws Exception {
-        String userName = (String) session.getAttribute("userName");
+        String userName = (String) session.getAttribute("username");
         if (userName == null){
             throw new Exception("Not Logged in");
         }

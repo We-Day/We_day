@@ -1,20 +1,24 @@
 package com.theironyard;
-import com.theironyard.Services.PhotoRepository;
+import com.theironyard.Entities.Photo;
+import com.theironyard.Entities.Post;
+import com.theironyard.Entities.User;
+import com.theironyard.Entities.Wedding;
 import com.theironyard.Services.PostRepository;
 import com.theironyard.Services.UserRepository;
 import com.theironyard.Services.WeddingRepository;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WeDayApplication.class)
@@ -22,83 +26,83 @@ import org.springframework.web.context.WebApplicationContext;
 public class WeDayApplicationTests {
 
     @Autowired
-    PhotoRepository photoRepo;
-
-	@Autowired
     WeddingRepository weddings;
 
-	@Autowired
+    @Autowired
     UserRepository users;
 
     @Autowired
     PostRepository posts;
 
-	@Autowired
-	WebApplicationContext wap;
+    @Autowired
+    WebApplicationContext wap;
 
-	MockMvc mockMvc;
+    MockMvc mockMvc;
 
-	@org.junit.Before
-	public void before(){
-		weddings.deleteAll();
-		users.deleteAll();
-        posts.deleteAll();
-		mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
+    @Before
+    public void before() {
+        weddings.deleteAll();
+        users.deleteAll();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
+    }
 
-	}
+    @Test
+    public void createWedding() throws Exception {
+        Wedding wedding = new Wedding();
+        wedding.date = "2014-01-01";
+        wedding.location = "Charelston";
+        wedding.weddingName = "Our Wedding";
 
-	@Test
-	public void testCreateWedding()throws Exception {
-		mockMvc.perform(
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(wedding);
+
+        mockMvc.perform(
                 MockMvcRequestBuilders.post("/create-wedding")
-                    .param("date", "2016-01-08")
-                    .param("weddingName", "test")
-                    .param("location", "test")
-                    .param("userName", "test")
-                    .param("phone", "test")
-                    .param("zip", "test")
-                    .param("address", "test")
-                    .param("password", "test")
-                    .param("email", "test")
-                    .param("isAdmin", "true")
+                        .content(json)
+                        .contentType("application/json")
         );
 
-		Assert.assertTrue(weddings.count()==1 && users.count()==1);
-	}
+        assertTrue(weddings.count() == 1);
+    }
+
     @Test
-    public void testCreateAdmin()throws Exception{
-        users.deleteAll();
+    public void createAdmin() throws Exception {
+        User user = new User();
+        user.password = "1234";
+        user.username = "Nathan";
+        user.address = "123 Fake Street";
+        user.phone = "123- 456-789";
+        user.email = "user@hotmail.com";
+        user.zip = "4321";
+        user.isAdmin = true;
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(user);
+
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/create-admin")
-                    .param("userName", "test")
-                    .param("phone", "test")
-                    .param("zip", "test")
-                    .param("address", "test")
-                    .param("email", "test")
-                    .param("password", "test")
-                    .param("isAdmin", "true")
+                        .content(json)
+                        .contentType("application/json")
         );
-        Assert.assertTrue(users.count()==1 && users.findOne(1).isAdmin) ;
+
+        assertTrue(users.count() == 1);
     }
+
     @Test
-    public void createPost()throws Exception{
+    public void createPost() throws Exception {
+        Post post = new Post();
+        post.text = "This is a message";
+        post.sender = "Nathan";
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(post);
+
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/create-post")
-                .param("text", "testText")
-                .sessionAttr("userName", "testUser")
+                        .content(json)
+                        .contentType("application/json")
+                        .sessionAttr("username", "testUserName")
         );
-        Assert.assertTrue(posts.count()==1);
-    }
-    @Test
-    public void testUpload()throws Exception{
-        MockMultipartFile testFile = new MockMultipartFile("file", "test.jpg", "image/jpeg", "test img".getBytes());
-        mockMvc.perform(
-                MockMvcRequestBuilders.fileUpload("/photo-upload")
-                .file(testFile)
-                .param("fileName", "GET REKT")
-                .param("description", "U WOT M8")
-                .sessionAttr("username", "TestUser")
-        );
-        Assert.assertTrue(photoRepo.count() == 1);
+        assertTrue(posts.count() == 1);
     }
 }
