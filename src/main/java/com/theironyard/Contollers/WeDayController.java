@@ -45,10 +45,6 @@ public class WeDayController {
     @RequestMapping ("/login")
     public void login(@RequestBody User user, String username, HttpSession session){
         session.setAttribute("username",username);
-
-        user = users.findOneByusername(username);
-        if (user == null){
-        }
     }
 
     @RequestMapping ("/create-admin")
