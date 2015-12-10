@@ -34,6 +34,16 @@ public class User {
     @Column (nullable = false)
     public boolean isAdmin;
 
+    public User (){}
 
-
+    public User(int id, String userName, String phone, String zip, String address, String email, String password, boolean isAdmin) {
+        this.id = id;
+        this.userName = userName;
+        this.phone = phone;
+        this.zip = zip;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
 }
