@@ -297,3 +297,12 @@ form {
     margin-left: 3%;
     top: 20px;
     font-size: 4em; }
+
+.nested-form {
+  margin-top: 5%; }
+
+#submit-new-admin {
+  position: absolute;
+  top: 65%;
+  left: 40%;
+  font-size: 2em; }
