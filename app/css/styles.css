@@ -298,7 +298,9 @@ form {
     top: 20px;
     font-size: 4em; }
 
-.nested-form {
+.nested-invite-contacts-form {
+  position: absolute;
+  z-index: 1;
   margin-top: 5%; }
 
 #submit-new-admin {

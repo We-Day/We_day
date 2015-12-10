@@ -300,7 +300,10 @@ form{
 		font-size: 4em;
 	}
 }
-.nested-form{
+
+.nested-invite-contacts-form{
+	position: absolute;
+	z-index: 1;
 	margin-top: 5%;
 
 }
