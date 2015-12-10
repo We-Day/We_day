@@ -54,10 +54,16 @@ public class WeDayController {
     }
 
     @RequestMapping ("/create-admin")
-    public void createAdmin(String userName, String zip,
+    public void createAdmin(HttpSession session, String userName, String zip,
                             String address, String password,
                             String email, String phone,
-                            @RequestParam(defaultValue = "true") boolean isAdmin){
+                            @RequestParam(defaultValue = "true") boolean isAdmin) throws Exception {
+
+        session.setAttribute("userName", userName);
+
+        if (userName == null){
+            throw new Exception("Not Logged in");
+        }
 
         User user = new User();
         user.userName = userName;
@@ -73,6 +79,7 @@ public class WeDayController {
     @RequestMapping("/create-post")
     public Iterable  createPost(HttpSession session, String text) throws Exception {
         String userName = (String)session.getAttribute("userName");
+
         if (userName ==null){
             throw new Exception("Not Logged in");
         }
@@ -84,5 +91,6 @@ public class WeDayController {
 
         return posts.findAll();
     }
-
 }
+
+
