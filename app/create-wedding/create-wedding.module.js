@@ -10,6 +10,7 @@
   angular
     .module('create-wedding', [
       'ngRoute',
+      'ui.router'
     ])
     .config(function ($routeProvider) {
       $routeProvider
