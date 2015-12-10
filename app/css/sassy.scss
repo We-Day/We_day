@@ -232,7 +232,7 @@ form{
 	background-image: url('http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg');
 	position: absolute;
 }
- .create-wedding-form{
+ .create-wedding-form-wrapper{
 	display: block;
 	background: rgba(5, 5, 10, .5);
 	width: 90%;
@@ -240,7 +240,18 @@ form{
 	margin-top: 10%;
 	height:60%;
 	border-radius: 25px;
+	z-index: 1;
 }
+.create-wedding-form{
+	display: block;
+ 	width: 90%;
+ 	margin:auto;
+ 	margin-top: 10%;
+ 	height:60%;
+ 	border-radius: 25px;
+	z-index: 2;
+}
+
 .admin-form{
 	width: 90%;
 	height: 90%;
@@ -253,14 +264,14 @@ form{
 	}
 	input{
 		float: left;
-		margin-top: 10%;
+		margin-top: 5%;
 		width: 600px !important;
 		height: 2em;
 		margin-left: 25%;
-		font-size: 3em;
+		font-size: 1em;
 	}
 	.glyphicon{
-		margin-top: 10%;
+		margin-top: 5%;
 		margin-left: 3%;
 		float: left;
 		font-size: 4em;

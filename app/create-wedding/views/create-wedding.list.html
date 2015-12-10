@@ -1,9 +1,11 @@
 <div class="wrapper-create-wedding">
-    <form class=" create-wedding-form form-inline" role="form">
+  <div class="create-wedding-form-wrapper">
+    <form class=" form-inline  create-wedding-form" role="form">
     <div ng-show = 'isCurrentIndex(0)'class="form-group admin-form wedding-name">
       <h1> Your Wedding Name</h1>
       <label class="sr-only" for="text">Your Wedding Name:</label>
-      <input type="file" name="pic" accept="image/*">
+      <input type="text" name="name" value="" id = "name" placeholder="Your Wedding Name">
+      <input type="file" name="pic" accept="image/*" id = "image">
       <span ng-click = 'setCurrentIndex(1)'class = "glyphicon glyphicon-arrow-right"></span>
     </div>
 
@@ -54,4 +56,5 @@
       </div>
     </form>
   </div>
+</div>
 </div>
