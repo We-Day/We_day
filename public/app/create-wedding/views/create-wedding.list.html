@@ -15,7 +15,7 @@
       <div class="form-group">
         <label for="wedding-name" class="col-sm-4 control-label">Location:</label>
         <div class="col-sm-8">
-          <input type="text" name="location" value="" id = "location" placeholder="Charleston, SC 29401">
+          <input ui-keypress="{13:'setCurrentIndex(1)'}" type="text" ng-model = 'localId'name="name" value="" id = "location" placeholder="Charleston, SC 29401">
         </div>
       </div>
       <div class="form-group">
