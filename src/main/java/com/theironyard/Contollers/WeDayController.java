@@ -38,8 +38,9 @@ public class WeDayController {
     PhotoRepository photos;
 
     @RequestMapping("/create-wedding")
-    public void createWedding(@RequestBody Wedding wedding){
+    public Wedding createWedding(@RequestBody Wedding wedding){
         weddings.save(wedding);
+        return wedding;
     }
 
     @RequestMapping ("/login")
@@ -48,11 +49,12 @@ public class WeDayController {
     }
 
     @RequestMapping ("/create-admin")
-    public void createAdmin(@RequestBody User user){
+    public User createAdmin(@RequestBody User user){
         if (user.isAdmin == null){
             user.isAdmin = true;
         }
         users.save(user);
+        return user;
     }
 
     @RequestMapping("/create-post")
