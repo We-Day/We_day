@@ -96,7 +96,7 @@ public class WeDayApplicationTests {
                 MockMvcRequestBuilders.fileUpload("/photo-upload")
                 .file(testFile)
                 .param("fileName", "GET REKT")
-                .param("description", "U WOTM 8")
+                .param("description", "U WOT M8")
                 .sessionAttr("username", "TestUser")
         );
         Assert.assertTrue(photoRepo.count() == 1);

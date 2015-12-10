@@ -32,7 +32,7 @@ public class User {
     public String password;
 
     @Column (nullable = false)
-    public boolean isAdmin;
+    public Boolean isAdmin;
 
     public User (){}
 
