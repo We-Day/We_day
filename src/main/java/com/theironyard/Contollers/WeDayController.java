@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by macbookair on 12/8/15.
@@ -40,10 +41,14 @@ public class WeDayController {
     @Autowired
     PhotoRepository photos;
 
-    @RequestMapping("/create-wedding")
-    public Wedding createWedding(@RequestBody Wedding wedding){
+    @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
+    public void createWedding(@RequestBody Wedding wedding){
         weddings.save(wedding);
-        return wedding;
+    }
+
+    @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
+    public List<Wedding> AllWeddings (@RequestBody Wedding wedding){
+        return (List<Wedding>) weddings.findAll();
     }
 
     @RequestMapping ("/login")
@@ -52,21 +57,19 @@ public class WeDayController {
     }
 
     @RequestMapping ("/create-admin")
-    public User createAdmin(@RequestBody User user){
+    public void createAdmin(@RequestBody User user){
         if (user.isAdmin == null){
             user.isAdmin = true;
         }
         users.save(user);
-        return user;
     }
 
     @RequestMapping ("/create-user")
-    public User createUser(@RequestBody User user){
+    public void createUser(@RequestBody User user){
         if (user.isAdmin ==null){
             user.isAdmin = false;
             users.save(user);
         }
-        return user;
     }
 
     @RequestMapping("/create-post")

@@ -1,5 +1,4 @@
 package com.theironyard;
-import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.User;
 import com.theironyard.Entities.Wedding;
@@ -43,6 +42,7 @@ public class WeDayApplicationTests {
     public void before() {
         weddings.deleteAll();
         users.deleteAll();
+        posts.deleteAll();
         mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
     }
 
