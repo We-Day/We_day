@@ -6,7 +6,6 @@
     <div ng-show = 'isCurrentIndex(0)'class="admin-form wedding-name">
 
       <h1> Your Wedding Name</h1>
-      <button type="button" ng-click= 'weddingAlreadyExists(weddingName)' name="button">thing</button>
       <div class="form-group">
         <label for="wedding-name" class="col-sm-4 control-label">Your Wedding Name:</label>
         <div class="col-sm-8">
@@ -29,7 +28,7 @@
         </div>
       </div>
       <!--check there are no empty input fields-->
-      <span ng-click = 'weddingAlreadyExists(weddingName)&&weddingName.length && location.length && setCurrentIndex(1)'class = "glyphicon glyphicon-arrow-right"></span>
+      <span ng-click = '!weddingAlreadyExists(weddingName)&&weddingName.length && location.length && setCurrentIndex(1)'class = "glyphicon glyphicon-arrow-right"></span>
     </div>
 
   <div ng-show = 'isCurrentIndex(1)'class="admin-form calendar-create-wedding">
@@ -122,7 +121,10 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-    <button ng-click="inviteUser()" class="btn btn-default">Add User</button>
+    <button ng-click="!isAlreadyInvited(inviteEmail) && inviteUser(); inviteName = '';inviteEmail = ''" class="btn btn-default">Add User</button>
+        <p style= "color:red"ng-show = "personAlreadyInvited" class = "is-already-invited-error">
+          They are already invited
+        </p>
         </div>
         </div>
       </form>
