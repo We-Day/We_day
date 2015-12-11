@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Created by macbookair on 12/9/15.
  */
 @Entity
+@Table (name = "posts")
 public class Post {
     @Id
     @GeneratedValue

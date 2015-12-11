@@ -30,10 +30,13 @@ public class WeDayController {
 
     @Autowired
     UserRepository users;
+
     @Autowired
     WeddingRepository weddings;
+
     @Autowired
     PostRepository posts;
+
     @Autowired
     PhotoRepository photos;
 
@@ -57,10 +60,19 @@ public class WeDayController {
         return user;
     }
 
+    @RequestMapping ("/create-user")
+    public User createUser(@RequestBody User user){
+        if (user.isAdmin ==null){
+            user.isAdmin = false;
+            users.save(user);
+        }
+        return user;
+    }
+
     @RequestMapping("/create-post")
-    public Iterable  createPost(@RequestBody Post post,  HttpSession session) throws Exception {
-        String userName = (String)session.getAttribute("username");
-        if (userName ==null){
+    public Iterable  createPost(@RequestBody Post post, HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
             throw new Exception("Not Logged in");
         }
         posts.save(post);

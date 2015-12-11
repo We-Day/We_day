@@ -101,7 +101,7 @@ public class WeDayApplicationTests {
                 MockMvcRequestBuilders.post("/create-post")
                         .content(json)
                         .contentType("application/json")
-                        .sessionAttr("username", "testUserName")
+                        .sessionAttr("username", "testUsername")
         );
         assertTrue(posts.count() == 1);
     }
