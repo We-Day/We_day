@@ -34,7 +34,7 @@ angular
             $scope.weddingNameExists = true;
             return true;
           }else{
-
+            $scope.weddingNameExists = false;
             return false;
           }
         });

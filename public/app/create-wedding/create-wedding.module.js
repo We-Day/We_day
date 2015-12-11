@@ -14,7 +14,7 @@
     ])
     .config(function ($routeProvider) {
       $routeProvider
-        .when('/create-wedding', {
+        .when('/create-weddings', {
           templateUrl: 'app/create-wedding/views/create-wedding.list.html',
           controller: 'CreateWeddingController'
         })
