@@ -24,9 +24,6 @@ public class Wedding {
     @Column(nullable = false)
     public String date;
 
-    @ManyToOne
-    public User user;
-
     public Wedding(){
     }
 
