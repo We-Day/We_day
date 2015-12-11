@@ -2,12 +2,9 @@ package com.theironyard.Contollers;
 import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.Wedding;
-import com.theironyard.Services.PhotoRepository;
-import com.theironyard.Services.PostRepository;
+import com.theironyard.Services.*;
 import com.theironyard.Utilities.PasswordHash;
-import com.theironyard.Services.WeddingRepository;
 import com.theironyard.Entities.User;
-import com.theironyard.Services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +33,9 @@ public class WeDayController {
     WeddingRepository weddings;
 
     @Autowired
+    InviteeRepository invitees;
+
+    @Autowired
     PostRepository posts;
 
     @Autowired
@@ -47,7 +47,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
-    public List<Wedding> AllWeddings (@RequestBody Wedding wedding){
+    public List<Wedding> AllWeddings (){
         return (List<Wedding>) weddings.findAll();
     }
 
@@ -84,8 +84,8 @@ public class WeDayController {
 
     @RequestMapping("/photo-upload")
     public Photo upload (@RequestBody Photo photo, HttpSession session, MultipartFile file) throws Exception {
-        String userName = (String) session.getAttribute("username");
-        if (userName == null){
+        String username = (String) session.getAttribute("username");
+        if (username == null){
             throw new Exception("Not Logged in");
         }
         File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
