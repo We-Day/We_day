@@ -2,29 +2,33 @@
 
   <div class="create-wedding-form-wrapper" id = "top-of-page">
     <!---create new wedding-->
-    <form class="form-horizontal create-wedding-form" action = "/create-wedding" role="form">
+    <form class="form-horizontal create-wedding-form"  role="form">
     <div ng-show = 'isCurrentIndex(0)'class="admin-form wedding-name">
 
       <h1> Your Wedding Name</h1>
       <div class="form-group">
         <label for="wedding-name" class="col-sm-4 control-label">Your Wedding Name:</label>
         <div class="col-sm-8">
-          <input type="text" ng-model = 'localId'name="name" value="" id = "weddingName" placeholder="Your Wedding Name">
+          <input type="text" ng-change = 'weddingAlreadyExists(weddingName)'name="name" value="" ng-model = "weddingName" placeholder="Your Wedding Name">
+          <p ng-show = 'weddingNameExists'>
+            Name Already exists
+          </p>
         </div>
       </div>
       <div class="form-group">
         <label for="wedding-name" class="col-sm-4 control-label">Location:</label>
         <div class="col-sm-8">
-          <input ui-keypress="{13:'setCurrentIndex(1)'}" type="text" ng-model = 'localId'name="name" value="" id = "location" placeholder="Charleston, SC 29401">
+          <input type="text" name="locations" value="" ng-model = "location" placeholder="Charleston, SC 29401">
         </div>
       </div>
       <div class="form-group">
         <label for="upload-photo" class="col-sm-4 control-label">Upload Photo:</label>
         <div class="col-sm-8">
-          <input type="file" name="pic" accept="image/*" id = "image">
+          <input type="file" name="pic" accept="image/*" ng-model = "image">
         </div>
       </div>
-      <span ng-click = 'setCurrentIndex(1)'class = "glyphicon glyphicon-arrow-right"></span>
+      <!--check there are no empty input fields-->
+      <span ng-click = '!weddingAlreadyExists(weddingName)&&weddingName.length && location.length && setCurrentIndex(1)'class = "glyphicon glyphicon-arrow-right"></span>
     </div>
 
   <div ng-show = 'isCurrentIndex(1)'class="admin-form calendar-create-wedding">
@@ -33,7 +37,7 @@
       <label for="calendar" class="col-sm-4 control-label">Calendar:</label>
       <div class="col-sm-8 calendar-div-class">
         <p class="input-group calendar-p">
-          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" id="date"/>
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
           <span class="input-group-btn calendar-span">
             <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
@@ -46,8 +50,8 @@
   </div>
 
   <div ng-show = 'isCurrentIndex(4)'class=" admin-form admin-invite-contacts">
-    <h1>All Done! <small></small></h1>
-  <button id = 'submit-new-admin'type="submit" class="btn btn-default"><a href="#/admin/{{localId}}">Create New We-Day</a></button>
+    <h1>All Done! <small></small></h1>          
+  <button id = 'submit-new-admin' ng-click = 'addNewWedding()' class="btn btn-default"><a ng-href = "#/admin/{{weddingName}}">Create New We-Day</a></button>
 </form>
   </div>
 
@@ -55,44 +59,47 @@
 <!---create new admin-->
   <div ng-show = 'isCurrentIndex(2)'class=" admin-form create-wedding-password">
     <h1>Create New Admin: <small></small></h1>
-      <form class="form-horizontal" action="/create-admin" method="post">
+      <form class="form-horizontal" >
         <div class="form-group">
         <label for="name" class="col-sm-4 control-label">Name:</label>
         <div class="col-sm-8">
-          <input type="text" placeholder="Juan Pablo Sanchez de la Goma"class="form-control" id="userName">
+          <input type="text" required placeholder="Juan Pablo Sanchez de la Goma"class="form-control" ng-model="userName">
         </div>
       </div>
         <div class="form-group">
         <label for="email" class="col-sm-4 control-label">Email:</label>
         <div class="col-sm-8">
-          <input type="email" placeholder="email address"class="form-control" id="email">
+          <input type="email" required placeholder="email address"class="form-control" ng-model="email">
         </div>
       </div>
       <div class="form-group">
         <label for="phone" class="col-sm-4 control-label">Phone Number:</label>
         <div class="col-sm-8">
-          <input type="tel" placeholder = 'phone-number'class="form-control" id="phone">
+          <input type="tel" required placeholder = 'phone-number'class="form-control" ng-model="phone">
         </div>
       </div>
       <div class="form-group">
         <label for="zip" class="col-sm-4 control-label">Your Zipcode:</label>
         <div class="col-sm-8">
-          <input type="text" placeholder = 'zip-code'class="form-control" id="zip">
+          <input type="text" required placeholder = 'zip-code'class="form-control" ng-model="zip">
         </div>
       </div>
       <div class="form-group">
         <label for="password" class="col-sm-4 control-label">Password:</label>
         <div class="col-sm-8">
-          <input type="password" placeholder="password"class="form-control" id="password">
+          <input type="password" required placeholder="password"class="form-control" ng-model="password">
         </div>
       </div>
+      <p style="color:red; font-size:1.2em"id = "passwords-no-match" ng-show = '!passwordsAreSame'>
+        Passwords do not match!
+      </p>
       <div class="form-group">
         <label for="password-auth" class="col-sm-4 control-label">Confirm Password:</label>
         <div class="col-sm-8">
-          <input type="password" placeholder="password authentication"class="form-control" id="password-authentication">
+          <input type="password" required placeholder="password authentication" class="form-control" ng-model='passwordAuth'>
         </div>
       </div>
-    <span type = "submit" ng-click = 'scrollTo("top-of-page"); setCurrentIndex(3)'class = "glyphicon glyphicon-arrow-right"></span>
+    <span type = "submit" ng-click = 'createAdminInputsEmpty() && passwordsSame()&&setCurrentIndex(3) && addAdmin()'class = "glyphicon glyphicon-arrow-right"></span>
       </form>
     </div>
 
@@ -103,23 +110,25 @@
       <div class="form-group">
         <label for="userName" class="col-sm-2 control-label">Guest Name</label>
       <div class="col-sm-10 n">
-        <input type="text" class="form-control" id="userName" placeholder="First and Last Name">
+        <input type="text" class="form-control" ng-model="inviteName" placeholder="First and Last Name">
       </div>
       </div>
       <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" placeholder="Email">
+            <input type="email" class="form-control" ng-model="inviteEmail" placeholder="Email">
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-    <button type="submit" class="btn btn-default">Add User</button>
+    <button ng-click="!isAlreadyInvited(inviteEmail) && inviteUser(); inviteName = '';inviteEmail = ''" class="btn btn-default">Add User</button>
+        <p style= "color:red"ng-show = "personAlreadyInvited" class = "is-already-invited-error">
+          They are already invited
+        </p>
         </div>
         </div>
       </form>
       <span ng-click = 'setCurrentIndex(4)'class = "glyphicon glyphicon-arrow-right"></span>
   </div>
-
   </div>
 </div>

@@ -3,7 +3,94 @@
 angular
   .module('create-wedding')
   .controller('CreateWeddingController',function($scope,CreateWeddingService,$anchorScroll,$location){
+    //current Index page for wedding controller
     $scope.currentIndex = 0;
+
+    //check if person already invited
+    var invitedUsers = [];
+    $scope.personAlreadyInvited = false;
+    $scope.isAlreadyInvited = function(item){
+        if(_.contains(invitedUsers,item)){
+          $scope.personAlreadyInvited = true;
+          return true;
+        }else{
+          invitedUsers.push(item);
+          $scope.personAlreadyInvited = false;
+          return false;
+        }
+
+    };
+    //show if wedding name already exists
+    $scope.weddingNameExists = false;
+    var weddings = [];
+    CreateWeddingService.getExistingWeddings().success(function(res){
+      console.log(res);
+      weddings = res;
+      console.log(weddings);
+    });
+    $scope.weddingAlreadyExists = function(item){
+        _.each(weddings,function(el){
+          if(el.weddingName === item){
+            $scope.weddingNameExists = true;
+            return true;
+          }else{
+
+            return false;
+          }
+        });
+  };
+    //check if weddingName already exists
+
+
+    //check if passwords the same
+    $scope.passwordsAreSame = true;
+
+    $scope.addNewWedding = function(){
+      var wedding = {
+        weddingName:$scope.weddingName,
+        location:$scope.location,
+        date: $scope.date
+      }
+      CreateWeddingService.addNewWedding(wedding);
+      console.log('wedding object',wedding)
+    };
+    $scope.addAdmin = function(){
+      var user = {
+        userName: $scope.userName,
+        email:$scope.email,
+        phone:$scope.phone,
+        zip:$scope.zip,
+        password:$scope.password,
+      }
+      if($scope.password == $scope.passwordAuth){
+        CreateWeddingService.addNewAdmin(user);
+      }
+      else{alert('wrong password')};
+    };
+    $scope.inviteUser = function(){
+      var user = {
+        name: $scope.inviteName,
+        email:$scope.inviteEmail,
+        weddingName: $scope.weddingName
+      }
+      CreateWeddingService.inviteUser(user);
+    }
+    $scope.createAdminInputsEmpty = function(){
+      if($scope.userName && $scope.email && $scope.phone && $scope.zip && $scope.password){
+        return true;
+      }else{
+        return false;
+      }
+    };
+    $scope.passwordsSame = function(){
+      if($scope.password == $scope.passwordAuth){
+        return true;
+      }else{
+        $scope.passwordsAreSame = false;
+        return false
+      }
+    }
+    //currentIndex for ng-show function tabs
     $scope.isCurrentIndex = function (index){
       if($scope.currentIndex === index){
         return true
@@ -22,12 +109,12 @@ angular
    }
 //calendar controlls
   $scope.today = function() {
-    $scope.dt = new Date();
+    $scope.date = new Date();
   };
   $scope.today();
 
   $scope.clear = function () {
-    $scope.dt = null;
+    $scope.date = null;
   };
 
   // Disable weekend selection
@@ -46,7 +133,7 @@ angular
   };
 
   $scope.setDate = function(year, month, day) {
-    $scope.dt = new Date(year, month, day);
+    $scope.date = new Date(year, month, day);
   };
 
   $scope.dateOptions = {
