@@ -51,8 +51,8 @@ public class WeDayController {
         return (List<Wedding>) weddings.findAll();
     }
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
-    public Wedding findOne(@RequestBody User user){
-        Wedding wedding = weddings.findOne(user.id);
+    public Wedding findOne(@RequestBody Wedding wedding){
+        wedding = weddings.findOne(wedding.id);
         return wedding;
     }
 
