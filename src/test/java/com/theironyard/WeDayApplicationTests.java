@@ -1,5 +1,4 @@
 package com.theironyard;
-import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.User;
 import com.theironyard.Entities.Wedding;
@@ -43,6 +42,7 @@ public class WeDayApplicationTests {
     public void before() {
         weddings.deleteAll();
         users.deleteAll();
+        posts.deleteAll();
         mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
     }
 
@@ -101,7 +101,7 @@ public class WeDayApplicationTests {
                 MockMvcRequestBuilders.post("/create-post")
                         .content(json)
                         .contentType("application/json")
-                        .sessionAttr("username", "testUserName")
+                        .sessionAttr("username", "testUsername")
         );
         assertTrue(posts.count() == 1);
     }
