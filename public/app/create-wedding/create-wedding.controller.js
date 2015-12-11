@@ -4,7 +4,7 @@ angular
   .module('create-wedding')
   .controller('CreateWeddingController',function($scope,CreateWeddingService,$anchorScroll,$location){
     //current Index page for wedding controller
-    $scope.currentIndex = 3;
+    $scope.currentIndex = 0;
 
     //check if person already invited
     var invitedUsers = [];
@@ -22,9 +22,14 @@ angular
     };
     //show if wedding name already exists
     $scope.weddingNameExists = false;
+    var weddings = [];
+    CreateWeddingService.getExistingWeddings().success(function(res){
+      console.log(res);
+      weddings = res;
+      console.log(weddings);
+    });
     $scope.weddingAlreadyExists = function(item){
-      CreateWeddingService.getExistingWeddings().success(function(res){
-        _.each(res,function(el){
+        _.each(weddings,function(el){
           if(el.weddingName === item){
             $scope.weddingNameExists = true;
             return true;
@@ -33,7 +38,6 @@ angular
             return false;
           }
         });
-    });
   };
     //check if weddingName already exists
 
