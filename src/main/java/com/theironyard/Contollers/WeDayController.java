@@ -84,8 +84,8 @@ public class WeDayController {
 
     @RequestMapping("/photo-upload")
     public Photo upload (@RequestBody Photo photo, HttpSession session, MultipartFile file) throws Exception {
-        String userName = (String) session.getAttribute("username");
-        if (userName == null){
+        String username = (String) session.getAttribute("username");
+        if (username == null){
             throw new Exception("Not Logged in");
         }
         File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
