@@ -47,7 +47,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
-    public List<Wedding> AllWeddings (@RequestBody Wedding wedding){
+    public List<Wedding> AllWeddings (){
         return (List<Wedding>) weddings.findAll();
     }
 
