@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by macbookair on 12/8/15.
@@ -30,16 +31,24 @@ public class WeDayController {
 
     @Autowired
     UserRepository users;
+
     @Autowired
     WeddingRepository weddings;
+
     @Autowired
     PostRepository posts;
+
     @Autowired
     PhotoRepository photos;
 
-    @RequestMapping("/create-wedding")
+    @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public void createWedding(@RequestBody Wedding wedding){
         weddings.save(wedding);
+    }
+
+    @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
+    public List<Wedding> AllWeddings (@RequestBody Wedding wedding){
+        return (List<Wedding>) weddings.findAll();
     }
 
     @RequestMapping ("/login")
@@ -55,10 +64,18 @@ public class WeDayController {
         users.save(user);
     }
 
+    @RequestMapping ("/create-user")
+    public void createUser(@RequestBody User user){
+        if (user.isAdmin ==null){
+            user.isAdmin = false;
+            users.save(user);
+        }
+    }
+
     @RequestMapping("/create-post")
-    public Iterable  createPost(@RequestBody Post post,  HttpSession session) throws Exception {
-        String userName = (String)session.getAttribute("username");
-        if (userName ==null){
+    public Iterable  createPost(@RequestBody Post post, HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
             throw new Exception("Not Logged in");
         }
         posts.save(post);
