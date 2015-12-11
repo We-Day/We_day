@@ -1,8 +1,4 @@
 package com.theironyard.Entities;
-
-import org.springframework.data.repository.CrudRepository;
-
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,5 +18,4 @@ public class Invitee{
 
     @Column (nullable = false)
     String email;
-
 }

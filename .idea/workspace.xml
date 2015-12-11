@@ -6,19 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6383c0fe-1fae-4c28-af23-2268a42aaafe" name="Default" comment="updated &quot;/create-wedding&quot;, &quot;/create-admin&quot;, and &quot;/create-post&quot; with new format better suited for front-end">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Entities/Invitee.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Services/InviteeRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/test/com/theironyard/WeDayApplicationTests.class" afterPath="$PROJECT_DIR$/build/classes/test/com/theironyard/WeDayApplicationTests.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/com/theironyard/Contollers/WeDayController.class" afterPath="$PROJECT_DIR$/build/classes/main/com/theironyard/Contollers/WeDayController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.7/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theironyard/Services/UserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Services/UserRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/theironyard/WeDayApplicationTests.java" afterPath="$PROJECT_DIR$/src/test/java/com/theironyard/WeDayApplicationTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/theironyard/Contollers/WeDayController.java" afterPath="$PROJECT_DIR$/src/main/java/com/theironyard/Contollers/WeDayController.java" />
+    <list default="true" id="6383c0fe-1fae-4c28-af23-2268a42aaafe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="We_day.iws" />
@@ -1449,7 +1437,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449844455022</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fixed the &quot;/create-wedding&quot; and &quot;/create-admin&quot; routes that return json">
+      <created>1449850922386</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1449850922386</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1534,7 +1528,8 @@
     <MESSAGE value="Added photo upload functionality with a test" />
     <MESSAGE value="Moved the .jar to the main folder" />
     <MESSAGE value="updated &quot;/create-wedding&quot;, &quot;/create-admin&quot;, and &quot;/create-post&quot; with new format better suited for front-end" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated &quot;/create-wedding&quot;, &quot;/create-admin&quot;, and &quot;/create-post&quot; with new format better suited for front-end" />
+    <MESSAGE value="fixed the &quot;/create-wedding&quot; and &quot;/create-admin&quot; routes that return json" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the &quot;/create-wedding&quot; and &quot;/create-admin&quot; routes that return json" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
