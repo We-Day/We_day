@@ -50,8 +50,12 @@ public class WeDayController {
     public List<Wedding> AllWeddings (){
         return (List<Wedding>) weddings.findAll();
     }
+    @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
+    public Wedding findOne(@RequestBody User user){
+        Wedding wedding = weddings.findOne(user.id);
+        return wedding;
+    }
 
-    @RequestMapping ("/login")
     public void login(@RequestBody User user, String username, HttpSession session){
         session.setAttribute("username",username);
     }
