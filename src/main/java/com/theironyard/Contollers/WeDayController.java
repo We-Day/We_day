@@ -59,7 +59,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
-    public Wedding findOne(@RequestBody Wedding wedding){
+    public Wedding findOne(Wedding wedding){
         return weddings.findOne(wedding.id);
     }
 
