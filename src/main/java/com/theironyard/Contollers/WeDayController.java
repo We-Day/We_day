@@ -59,7 +59,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
-    public Wedding findOne(@RequestBody Wedding wedding){
+    public Wedding findOne(Wedding wedding){
         return weddings.findOne(wedding.id);
     }
 
@@ -77,7 +77,6 @@ public class WeDayController {
         else if (PasswordHash.validatePassword(password,user.password)) {
             response.sendRedirect("/landing/{id}");
         }
-        
     }
 
     @RequestMapping ("/create-admin")
