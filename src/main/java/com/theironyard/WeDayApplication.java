@@ -7,5 +7,6 @@ public class WeDayApplication {
 
     public static void main (String[] args) {
         SpringApplication.run(WeDayApplication.class, args);
+
     }
 }

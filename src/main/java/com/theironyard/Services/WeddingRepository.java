@@ -1,5 +1,6 @@
 package com.theironyard.Services;
 import com.theironyard.Entities.Wedding;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
