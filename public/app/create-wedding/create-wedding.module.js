@@ -18,6 +18,9 @@
           templateUrl: 'app/create-wedding/views/create-wedding.list.html',
           controller: 'CreateWeddingController'
         })
+        .when('/connect/facebook#_=_',{
+          redirectTo: "create-weddings"
+        })
 
     })
 
