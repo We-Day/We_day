@@ -2,6 +2,8 @@ package com.theironyard.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by macbookair on 12/8/15.
@@ -26,6 +28,9 @@ public class Wedding {
 
     public Wedding(){
     }
+
+    /*@ManyToMany (mappedBy = "weddings")
+    public List <User> users = new ArrayList<>();*/
 
     public Wedding(String date, String location, String weddingName, int id) {
         this.date = date;

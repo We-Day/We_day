@@ -27,7 +27,7 @@ public class WeDayController {
     Facebook facebook;
 
     @Inject
-    public WeDayController (Facebook facebook){
+    public WeDayController(Facebook facebook) {
         this.facebook = facebook;
     }
 
@@ -54,42 +54,43 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
-    public List<Wedding> AllWeddings (){
+    public List<Wedding> AllWeddings() {
         return (List<Wedding>) weddings.findAll();
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
-    public Wedding findOne(Wedding wedding){
+    public Wedding findOne(Wedding wedding) {
         return weddings.findOne(wedding.id);
     }
 
     @RequestMapping("/login")
     public void userLogin(HttpSession session, String email,
                           String password, HttpServletResponse response) throws Exception {
-        session.setAttribute("email",email);
+
+        session.setAttribute("email", email);
 
         User user = users.findOneByEmail(email);
 
-        if (user == null){
+        if (user == null) {
             throw new Exception("User does not exist. Please create an account");
-        }
-
-        else if (PasswordHash.validatePassword(password,user.password)) {
+        } else if (PasswordHash.validatePassword(password, user.password)) {
             response.sendRedirect("/landing/{id}");
+        } else if (!PasswordHash.validatePassword(password, user.password)) {
+            throw new Exception("Password is incorrect");
         }
     }
 
-    @RequestMapping ("/create-admin")
-    public void createAdmin(@RequestBody User user){
-        if (user.isAdmin == null){
+    @RequestMapping("/create-admin")
+    public void createAdmin(@RequestBody User user) {
+        if (user.isAdmin == null) {
             user.isAdmin = true;
         }
         users.save(user);
     }
 
-    @RequestMapping ("/create-user")
-    public void createUser(@RequestBody User user){
-        if (user.isAdmin ==null){
+    @RequestMapping("/create-user")
+    public void createUser(@RequestBody User user) {
+        if (user.isAdmin == null) {
             user.isAdmin = false;
             users.save(user);
         }
@@ -101,13 +102,13 @@ public class WeDayController {
             org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
             return user;
         } catch (Exception e) {
-            response.sendRedirect("/connect/facebook");
+            response.sendRedirect("/create-weddings");
         }
         return null;
     }
 
     @RequestMapping("/create-post")
-    public Iterable  createPost(@RequestBody Post post, HttpSession session) throws Exception {
+    public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not Logged in");
@@ -117,17 +118,20 @@ public class WeDayController {
     }
 
     @RequestMapping("/photo-upload")
-    public Photo upload (@RequestBody Photo photo, HttpSession session, MultipartFile file) throws Exception {
+    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
         String username = (String) session.getAttribute("username");
-        if (username == null){
-            throw new Exception("Not Logged in");
-        }
+
         File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(file.getBytes());
-        photos.save(photo);
 
-        return photo;
+        Photo p = new Photo();
+        p.fileName = photoFile.getName();
+        p.description = description;
+        photos.save(p);
+
+        response.sendRedirect("/");
+
+        return p;
     }
-
 }
