@@ -22,6 +22,9 @@ angular
       }else{
         return false;
       }
-    }
+    };
+
+//calendar bitch
+
   })
 })();

@@ -11,11 +11,11 @@
       ])
       .config(function ($routeProvider) {
       $routeProvider
-        .when('/admin/:userId', {
+        .when('/admins/:userId', {
           templateUrl: 'app/admin/views/admin.list.html',
           controller: 'AdminController as adminCtrl'
         })
-        .when('/admin',{
+        .when('/admins',{
           templateUrl:'app/admin/views/admin.list.html',
           controller:'AdminController as adminCtrl'
         })
