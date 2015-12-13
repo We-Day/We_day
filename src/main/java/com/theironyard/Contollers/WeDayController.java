@@ -4,6 +4,7 @@ import com.theironyard.Entities.Post;
 import com.theironyard.Entities.Wedding;
 import com.theironyard.Services.*;
 import com.theironyard.Entities.User;
+import com.theironyard.Utilities.PasswordHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,13 +48,9 @@ public class WeDayController {
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public void createWedding(@RequestBody Wedding wedding,
-                              HttpServletResponse response,
-                              User user,
-                              HttpSession session) throws IOException {
-        session.setAttribute("User", user);
+                              HttpServletResponse response) throws IOException {
         weddings.save(wedding);
-
-        response.sendRedirect("admin/{id}");
+        response.sendRedirect("admins/{id}");
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
@@ -66,8 +63,21 @@ public class WeDayController {
         return weddings.findOne(wedding.id);
     }
 
-    public void login(@RequestBody User user, String username, HttpSession session){
-        session.setAttribute("username",username);
+    @RequestMapping("/login")
+    public void userLogin(HttpSession session, String email,
+                          String password, HttpServletResponse response) throws Exception {
+        session.setAttribute("email",email);
+
+        User user = users.findOneByEmail(email);
+
+        if (user == null){
+            throw new Exception("User does not exist. Please create an account");
+        }
+
+        else if (PasswordHash.validatePassword(password,user.password)) {
+            response.sendRedirect("/landing/{id}");
+        }
+        
     }
 
     @RequestMapping ("/create-admin")
@@ -96,7 +106,6 @@ public class WeDayController {
         }
         return null;
     }
-
 
     @RequestMapping("/create-post")
     public Iterable  createPost(@RequestBody Post post, HttpSession session) throws Exception {
