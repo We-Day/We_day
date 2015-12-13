@@ -47,7 +47,7 @@ public class WeDayController {
     public void createWedding(@RequestBody Wedding wedding,
                               HttpServletResponse response) throws IOException {
         weddings.save(wedding);
-        response.sendRedirect("#/admins/{id}");
+        response.sendRedirect("/#/admins/{id}");
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
