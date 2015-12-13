@@ -1,9 +1,6 @@
 package com.theironyard.Contollers;
-import com.theironyard.Entities.Photo;
-import com.theironyard.Entities.Post;
-import com.theironyard.Entities.Wedding;
+import com.theironyard.Entities.*;
 import com.theironyard.Services.*;
-import com.theironyard.Entities.User;
 import com.theironyard.Utilities.PasswordHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,12 +47,17 @@ public class WeDayController {
     public void createWedding(@RequestBody Wedding wedding,
                               HttpServletResponse response) throws IOException {
         weddings.save(wedding);
-        response.sendRedirect("admins/{id}");
+        response.sendRedirect("#/admins/{id}");
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
     public List<Wedding> AllWeddings() {
         return (List<Wedding>) weddings.findAll();
+    }
+
+    @RequestMapping("/invitees")
+    public void invitees(@RequestBody Invitee invitee){
+        invitees.save(invitee);
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
