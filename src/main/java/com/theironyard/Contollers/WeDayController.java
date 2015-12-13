@@ -3,20 +3,18 @@ import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.Wedding;
 import com.theironyard.Services.*;
-import com.theironyard.Utilities.PasswordHash;
 import com.theironyard.Entities.User;
+import com.theironyard.Utilities.PasswordHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.social.facebook.api.Facebook;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -25,6 +23,13 @@ import java.util.List;
 
 @RestController
 public class WeDayController {
+
+    Facebook facebook;
+
+    @Inject
+    public WeDayController (Facebook facebook){
+        this.facebook = facebook;
+    }
 
     @Autowired
     UserRepository users;
@@ -42,22 +47,37 @@ public class WeDayController {
     PhotoRepository photos;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public void createWedding(@RequestBody Wedding wedding){
+    public void createWedding(@RequestBody Wedding wedding,
+                              HttpServletResponse response) throws IOException {
         weddings.save(wedding);
+        response.sendRedirect("admins/{id}");
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
     public List<Wedding> AllWeddings (){
         return (List<Wedding>) weddings.findAll();
     }
+
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
     public Wedding findOne(@RequestBody Wedding wedding){
-        wedding = weddings.findOne(wedding.id);
-        return wedding;
+        return weddings.findOne(wedding.id);
     }
 
-    public void login(@RequestBody User user, String username, HttpSession session){
-        session.setAttribute("username",username);
+    @RequestMapping("/login")
+    public void userLogin(HttpSession session, String email,
+                          String password, HttpServletResponse response) throws Exception {
+        session.setAttribute("email",email);
+
+        User user = users.findOneByEmail(email);
+
+        if (user == null){
+            throw new Exception("User does not exist. Please create an account");
+        }
+
+        else if (PasswordHash.validatePassword(password,user.password)) {
+            response.sendRedirect("/landing/{id}");
+        }
+        
     }
 
     @RequestMapping ("/create-admin")
@@ -74,6 +94,17 @@ public class WeDayController {
             user.isAdmin = false;
             users.save(user);
         }
+    }
+
+    @RequestMapping("/profile")
+    public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
+        try {
+            org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
+            return user;
+        } catch (Exception e) {
+            response.sendRedirect("/connect/facebook");
+        }
+        return null;
     }
 
     @RequestMapping("/create-post")
