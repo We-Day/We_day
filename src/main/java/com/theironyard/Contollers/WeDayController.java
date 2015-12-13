@@ -3,20 +3,17 @@ import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.Wedding;
 import com.theironyard.Services.*;
-import com.theironyard.Utilities.PasswordHash;
 import com.theironyard.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.social.facebook.api.Facebook;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -25,6 +22,13 @@ import java.util.List;
 
 @RestController
 public class WeDayController {
+
+    Facebook facebook;
+
+    @Inject
+    public WeDayController (Facebook facebook){
+        this.facebook = facebook;
+    }
 
     @Autowired
     UserRepository users;
@@ -42,18 +46,24 @@ public class WeDayController {
     PhotoRepository photos;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public void createWedding(@RequestBody Wedding wedding){
+    public void createWedding(@RequestBody Wedding wedding,
+                              HttpServletResponse response,
+                              User user,
+                              HttpSession session) throws IOException {
+        session.setAttribute("User", user);
         weddings.save(wedding);
+
+        response.sendRedirect("admin/{id}");
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
     public List<Wedding> AllWeddings (){
         return (List<Wedding>) weddings.findAll();
     }
+
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
     public Wedding findOne(@RequestBody Wedding wedding){
-        wedding = weddings.findOne(wedding.id);
-        return wedding;
+        return weddings.findOne(wedding.id);
     }
 
     public void login(@RequestBody User user, String username, HttpSession session){
@@ -75,6 +85,18 @@ public class WeDayController {
             users.save(user);
         }
     }
+
+    @RequestMapping("/profile")
+    public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
+        try {
+            org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
+            return user;
+        } catch (Exception e) {
+            response.sendRedirect("/connect/facebook");
+        }
+        return null;
+    }
+
 
     @RequestMapping("/create-post")
     public Iterable  createPost(@RequestBody Post post, HttpSession session) throws Exception {
