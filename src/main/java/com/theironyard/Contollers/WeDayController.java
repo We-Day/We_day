@@ -77,7 +77,6 @@ public class WeDayController {
         else if (PasswordHash.validatePassword(password,user.password)) {
             response.sendRedirect("/landing/{id}");
         }
-        
     }
 
     @RequestMapping ("/create-admin")
