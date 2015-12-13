@@ -6,7 +6,10 @@
       var urlWedding = '/create-wedding';
       var urlInviteUser = 'http://tiny-tiny.herokuapp.com/collections/invite-user';
       var urlAdmin = '/create-admin';
-
+      var urlFacebook = '/profile'
+      var getFacebookObject = function(item){
+        return $http.get(urlFacebook);
+      }
       var getExistingWeddings = function(item){
           return $http.get(urlWedding);
       };
@@ -32,6 +35,7 @@
 
 
     return{
+      getFacebookObject:getFacebookObject,
       getInvitedUsers:getInvitedUsers,
       getExistingWeddings:getExistingWeddings,
       addNewWedding:addNewWedding,
