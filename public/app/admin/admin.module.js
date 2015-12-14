@@ -4,6 +4,10 @@
     underscore.factory('_',function(){
       return window._;
     });
+    var jquery = angular.module('jquery',[]);
+      jquery.factory('$',function(){
+        return window._;
+      });
     angular
       .module('admin',[
         'ngRoute',

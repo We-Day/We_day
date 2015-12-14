@@ -18,6 +18,7 @@
       };
       var addNewWedding = function (wedding) {
           $http.post(urlWedding, wedding).success(function (res,status,headers,other) {
+
             $window.location.href = '#/admins';
             console.log(res,'headers');
             // $rootScope.$broadcast('like:added');

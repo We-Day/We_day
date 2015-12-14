@@ -6,7 +6,7 @@
       return {
         restrict: 'EA',
         transclue: true,
-        template: '<h1>Charles</h1>',
+        templateUrl: '/app/admin/views/calendar.directive.html',
         link: function (scope, element, attributes) {
 
 
