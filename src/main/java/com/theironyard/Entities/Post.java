@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Post {
     @Id
     @GeneratedValue
-    int id;
+    public int id;
 
     @Column (nullable = false)
     public String text;

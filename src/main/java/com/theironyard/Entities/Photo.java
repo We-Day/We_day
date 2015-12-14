@@ -13,7 +13,7 @@ import java.io.File;
 public class Photo {
     @Id
     @GeneratedValue
-    int id;
+    public int id;
 
     @Column (nullable= false)
     public String fileName;
