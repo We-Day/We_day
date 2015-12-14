@@ -7,7 +7,9 @@
     angular
       .module('admin',[
         'ngRoute',
-        'underscore'
+        'underscore',
+        'ui.calendar',
+        'ui.bootstrap'
       ])
       .config(function ($routeProvider) {
       $routeProvider

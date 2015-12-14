@@ -24,9 +24,8 @@ angular
     $scope.weddingNameExists = false;
     var weddings = [];
     CreateWeddingService.getExistingWeddings().success(function(res){
-      console.log(res);
       weddings = res;
-      console.log(weddings);
+      console.log('weddings pulled');
     });
     $scope.weddingAlreadyExists = function(item){
         _.each(weddings,function(el){
