@@ -44,13 +44,13 @@ public class WeDayController {
     PhotoRepository photos;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding,
-                              HttpServletResponse response) throws IOException {
+    public Wedding createWedding(@RequestBody Wedding wedding) throws IOException {
         return weddings.save(wedding);
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
     public List<Wedding> AllWeddings() {
+
         return (List<Wedding>) weddings.findAll();
     }
 
