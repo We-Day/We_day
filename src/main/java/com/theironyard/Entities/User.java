@@ -36,8 +36,6 @@ public class User {
     @Column (nullable = false)
     public Boolean isAdmin;
 
-    /*@ManyToMany (mappedBy = "users")
-    public List<Wedding> weddings = new ArrayList<>();*/
 
     public User (){}
 
