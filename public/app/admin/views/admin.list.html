@@ -27,10 +27,11 @@
     </p></li>      </ul>
 
 </div>
-<div class="animate-show col-md-8">
+<div class="animate-show col-md-10">
   <my-carousel ng-show="isCurrentIndex(0)"></my-carousel>
 </div>
-<div ng-show="isCurrentIndex(1)" class="me">
-  <h1>Charles</h1>
-</div>
+<div ng-controller = "CalendarController"ng-show= "isCurrentIndex(6)"class="animate-show col-md-8">
+  <calendar-directive></calendar-directive>
+  </div>
+
 </div>

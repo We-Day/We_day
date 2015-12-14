@@ -5,6 +5,7 @@
     <title>We Day</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/ui-bootstrap-csp.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <link rel="stylesheet" href="app/css/styles.css" media="screen" title="no title" charset="utf-8">
 
   </head>
@@ -12,11 +13,17 @@
 
     <ng-view></ng-view>
       <!-- dependencies bower  -->
-      <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="bower_components/moment/min/moment.min.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+      <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+      <script src="bower_components/fullcalendar/dist/gcal.js"></script>
       <script src="bower_components/angular-route/angular-route.js" charset="utf-8"></script>
       <script src="bower_components/underscore/underscore.js" charset="utf-8"></script>
       <script src="bower_components/angular-animate/angular-animate.js" charset="utf-8"></script>
       <script src="node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.min.js" charset="utf-8"></script>
+      <!--other dependencires-->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
       <script src="node_modules/ui-router/release/angular-ui-router.js" charset="utf-8"></script>
 
@@ -31,11 +38,19 @@
       <script src="app/admin/admin.services.js" charset="utf-8"></script>
       <script src="app/admin/admin.controller.js" charset="utf-8"></script>
       <script src="app/admin/directives/carousel.directive.js" charset="utf-8"></script>
+      <script src="app/admin/directives/calendar.directive.js" charset="utf-8"></script>
+      <script src="app/admin/admin.calendar.controller.js" charset="utf-8"></script>
+
       <!--create-wedding--->
       <script src="app/create-wedding/create-wedding.module.js" charset="utf-8"></script>
       <script src="app/create-wedding/create-wedding.service.js" charset="utf-8"></script>
       <script src="app/create-wedding/create-wedding.controller.js" charset="utf-8"></script>
       <script src="app/create-wedding/calendar.directive.js" charset="utf-8"></script>
+      <!--landing-->
+      <script src="app/landingPage/landing.module.js" charset="utf-8"></script>
+      <script src="app/landingPage/landing.services.js" charset="utf-8"></script>
+      <script src="app/landingPage/landing.controller.js" charset="utf-8"></script>
+
   </body>
 
 </html>

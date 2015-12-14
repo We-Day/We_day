@@ -15,7 +15,9 @@
       'admin',
       'ngAnimate',
       'ui.bootstrap',
-      'create-wedding'
+      'create-wedding',
+      'landing',
+      'ui.calendar'
     ])
     .config(function ($routeProvider) {
       $routeProvider
