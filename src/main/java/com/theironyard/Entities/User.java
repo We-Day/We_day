@@ -33,13 +33,9 @@ public class User {
     @Column (nullable = false)
     public String password;
 
-    @Column (nullable = false)
-    public Boolean isAdmin;
-
-
     public User (){}
 
-    public User(int id, String username, String phone, String zip, String address, String email, String password, boolean isAdmin) {
+    public User(int id, String username, String phone, String zip, String address, String email, String password) {
         this.id = id;
         this.username = username;
         this.phone = phone;
@@ -47,6 +43,5 @@ public class User {
         this.address = address;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
     }
 }

@@ -12,6 +12,9 @@ public class Invite {
     @GeneratedValue
     int Id;
 
+    @Column (nullable = false)
+    public Boolean isAdmin;
+
     @ManyToOne
     public User user;
 
