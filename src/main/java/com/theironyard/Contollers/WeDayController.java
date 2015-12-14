@@ -2,6 +2,12 @@ package com.theironyard.Contollers;
 import com.theironyard.Entities.*;
 import com.theironyard.Services.*;
 import com.theironyard.Utilities.PasswordHash;
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.resource.factory.MessageFactory;
+import com.twilio.sdk.resource.instance.Message;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,7 +61,6 @@ public class WeDayController {
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
     public List<Wedding> AllWeddings() {
-
         return (List<Wedding>) weddings.findAll();
     }
 
@@ -103,8 +108,10 @@ public class WeDayController {
 
         if (user == null) {
             throw new Exception("User does not exist. Please create an account");
+
         } else if (PasswordHash.validatePassword(password, user.password)) {
             response.sendRedirect("/landing/{id}");
+
         } else if (!PasswordHash.validatePassword(password, user.password)) {
             throw new Exception("Password is incorrect");
         }
@@ -152,5 +159,24 @@ public class WeDayController {
         response.sendRedirect("/");
 
         return p;
+
     }
+    public static final String ACCOUNT_SID = "ACccdbc98b4c34f1609bd410b42ea63155";
+    public static final String AUTH_TOKEN = "7523c186f7b532e10dac3f764d5c0ece";
+
+    public static void sendText(String destination) throws TwilioRestException {
+
+        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+
+        // Build a filter for the MessageList
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("Body", "Twilio Works!!"));
+        params.add(new BasicNameValuePair("To", destination));
+        params.add(new BasicNameValuePair("From", "+18436405964"));
+
+        MessageFactory messageFactory = client.getAccount().getMessageFactory();
+        Message message = messageFactory.create(params);
+        System.out.println(message.getSid());
+    }
+
 }
