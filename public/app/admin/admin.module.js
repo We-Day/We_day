@@ -4,18 +4,24 @@
     underscore.factory('_',function(){
       return window._;
     });
+    var jquery = angular.module('jquery',[]);
+      jquery.factory('$',function(){
+        return window._;
+      });
     angular
       .module('admin',[
         'ngRoute',
-        'underscore'
+        'underscore',
+        'ui.calendar',
+        'ui.bootstrap'
       ])
       .config(function ($routeProvider) {
       $routeProvider
-        .when('/admin/:userId', {
+        .when('/admins/:userId', {
           templateUrl: 'app/admin/views/admin.list.html',
           controller: 'AdminController as adminCtrl'
         })
-        .when('/admin',{
+        .when('/admins',{
           templateUrl:'app/admin/views/admin.list.html',
           controller:'AdminController as adminCtrl'
         })

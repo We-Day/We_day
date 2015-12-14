@@ -2,11 +2,14 @@
   "use strict"
   angular
     .module('create-wedding')
-    .factory('CreateWeddingService',function($http){
+    .factory('CreateWeddingService',function($http,$location,$window){
       var urlWedding = '/create-wedding';
       var urlInviteUser = 'http://tiny-tiny.herokuapp.com/collections/invite-user';
       var urlAdmin = '/create-admin';
-
+      var urlFacebook = '/profile'
+      var getFacebookObject = function(item){
+        return $http.get(urlFacebook);
+      }
       var getExistingWeddings = function(item){
           return $http.get(urlWedding);
       };
@@ -14,8 +17,10 @@
         return $http.get(urlInviteUser);
       };
       var addNewWedding = function (wedding) {
-          $http.post(urlWedding, wedding).success(function (res) {
-            console.log(res);
+          $http.post(urlWedding, wedding).success(function (res,status,headers,other) {
+
+            $window.location.href = '#/admins';
+            console.log(res,'headers');
             // $rootScope.$broadcast('like:added');
      });
         };
@@ -32,6 +37,7 @@
 
 
     return{
+      getFacebookObject:getFacebookObject,
       getInvitedUsers:getInvitedUsers,
       getExistingWeddings:getExistingWeddings,
       addNewWedding:addNewWedding,

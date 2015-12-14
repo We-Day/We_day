@@ -10,7 +10,7 @@
         <label for="wedding-name" class="col-sm-4 control-label">Your Wedding Name:</label>
         <div class="col-sm-8">
           <input type="text" ng-change = 'weddingAlreadyExists(weddingName)'name="name" value="" ng-model = "weddingName" placeholder="Your Wedding Name">
-          <p ng-show = 'weddingNameExists'>
+          <p style = "color:white"ng-show = 'weddingNameExists'>
             Name Already exists
           </p>
         </div>
@@ -50,14 +50,21 @@
   </div>
 
   <div ng-show = 'isCurrentIndex(4)'class=" admin-form admin-invite-contacts">
-    <h1>All Done! <small></small></h1>          
-  <button id = 'submit-new-admin' ng-click = 'addNewWedding()' class="btn btn-default"><a ng-href = "#/admin/{{weddingName}}">Create New We-Day</a></button>
+    <h1>All Done! <small></small></h1>
+  <button id = 'submit-new-admin' ng-click = 'addNewWedding()' class="btn btn-default">Create New We-Day</button>
 </form>
   </div>
 
 
 <!---create new admin-->
   <div ng-show = 'isCurrentIndex(2)'class=" admin-form create-wedding-password">
+    <form action="/connect/facebook" method="POST">
+        <input type="hidden" name="scope" value="read_stream" />
+        <div class="formInfo">
+            <p>You aren't connected to Facebook yet. Click the button to connect this application with your Facebook account.</p>
+        </div>
+        <p><button type="submit">Connect to Facebook</button></p>
+    </form>
     <h1>Create New Admin: <small></small></h1>
       <form class="form-horizontal" >
         <div class="form-group">
