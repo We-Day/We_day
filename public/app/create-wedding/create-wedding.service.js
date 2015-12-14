@@ -2,7 +2,7 @@
   "use strict"
   angular
     .module('create-wedding')
-    .factory('CreateWeddingService',function($http){
+    .factory('CreateWeddingService',function($http,$location,$window){
       var urlWedding = '/create-wedding';
       var urlInviteUser = 'http://tiny-tiny.herokuapp.com/collections/invite-user';
       var urlAdmin = '/create-admin';
@@ -17,8 +17,9 @@
         return $http.get(urlInviteUser);
       };
       var addNewWedding = function (wedding) {
-          $http.post(urlWedding, wedding).success(function (res) {
-            console.log(res);
+          $http.post(urlWedding, wedding).success(function (res,status,headers,other) {
+            $window.location.href = '#/admins';
+            console.log(res,'headers');
             // $rootScope.$broadcast('like:added');
      });
         };

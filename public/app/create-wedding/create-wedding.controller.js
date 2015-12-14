@@ -2,9 +2,9 @@
 "use strict"
 angular
   .module('create-wedding')
-  .controller('CreateWeddingController',function($scope,CreateWeddingService,$anchorScroll,$location){
+  .controller('CreateWeddingController',function($scope,CreateWeddingService,$anchorScroll,$location,$window){
     //current Index page for wedding controller
-    $scope.currentIndex = 0;
+    $scope.currentIndex = 2;
 
     //check if person already invited
     var invitedUsers = [];
@@ -46,13 +46,17 @@ angular
     $scope.passwordsAreSame = true;
 
     $scope.addNewWedding = function(){
+      // var wedding = {
+      //   weddingName:$scope.weddingName,
+      //   location:$scope.location,
+      //   date: $scope.date
+      // }
       var wedding = {
-        weddingName:$scope.weddingName,
-        location:$scope.location,
-        date: $scope.date
+        weddingName:'charles',
+        location:'location',
+        date:'date'
       }
       CreateWeddingService.addNewWedding(wedding);
-      console.log('wedding object',wedding)
     };
     $scope.addAdmin = function(){
       var user = {

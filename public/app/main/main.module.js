@@ -16,6 +16,7 @@
       'ngAnimate',
       'ui.bootstrap',
       'create-wedding',
+      'landing'
     ])
     .config(function ($routeProvider) {
       $routeProvider
