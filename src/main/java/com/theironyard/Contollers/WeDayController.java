@@ -103,7 +103,7 @@ public class WeDayController {
             org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
             return user;
         } catch (Exception e) {
-            response.sendRedirect("/create-weddings");
+            response.sendRedirect("http://localhost8080/#/create-weddings");
         }
         return null;
     }
