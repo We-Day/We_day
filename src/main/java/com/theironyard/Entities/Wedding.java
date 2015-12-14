@@ -29,8 +29,7 @@ public class Wedding {
     public Wedding(){
     }
 
-    /*@ManyToMany (mappedBy = "weddings")
-    public List <User> users = new ArrayList<>();*/
+
 
     public Wedding(String date, String location, String weddingName, int id) {
         this.date = date;

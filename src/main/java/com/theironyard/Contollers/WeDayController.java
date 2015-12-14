@@ -44,10 +44,9 @@ public class WeDayController {
     PhotoRepository photos;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public void createWedding(@RequestBody Wedding wedding,
+    public Wedding createWedding(@RequestBody Wedding wedding,
                               HttpServletResponse response) throws IOException {
-        weddings.save(wedding);
-        response.sendRedirect("/#/admins/{id}");
+        return weddings.save(wedding);
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
