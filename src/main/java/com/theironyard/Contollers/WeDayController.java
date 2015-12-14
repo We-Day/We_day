@@ -26,9 +26,14 @@ import java.util.stream.Collectors;
  * Created by macbookair on 12/8/15.
  */
 
+
+
 @RestController
 public class WeDayController {
 
+
+    public static final String ACCOUNT_SID = "ACccdbc98b4c34f1609bd410b42ea63155";
+    public static final String AUTH_TOKEN = "7523c186f7b532e10dac3f764d5c0ece";
     Facebook facebook;
 
     @Inject
@@ -161,8 +166,6 @@ public class WeDayController {
         return p;
 
     }
-    public static final String ACCOUNT_SID = "ACccdbc98b4c34f1609bd410b42ea63155";
-    public static final String AUTH_TOKEN = "7523c186f7b532e10dac3f764d5c0ece";
 
     public static void sendText(String destination) throws TwilioRestException {
 
