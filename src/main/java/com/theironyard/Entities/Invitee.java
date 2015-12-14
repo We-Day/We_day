@@ -11,11 +11,17 @@ import javax.persistence.Id;
 public class Invitee{
     @Id
     @GeneratedValue
-    int id;
+    public int id;
 
     @Column (nullable = false)
-    String name;
+    public String name;
 
     @Column (nullable = false)
-    String email;
+    public String email;
+
+    @Column(nullable = false)
+    public int weddingId;
+
+    @Column (nullable = false)
+    public Boolean isAdmin;
 }

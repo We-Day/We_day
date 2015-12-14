@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by macbookair on 12/8/15.
@@ -43,6 +45,9 @@ public class WeDayController {
     @Autowired
     PhotoRepository photos;
 
+    @Autowired
+    InviteRepository invites;
+
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public Wedding createWedding(@RequestBody Wedding wedding) throws IOException {
         return weddings.save(wedding);
@@ -54,9 +59,33 @@ public class WeDayController {
         return (List<Wedding>) weddings.findAll();
     }
 
-    @RequestMapping("/invitees")
-    public void invitees(@RequestBody Invitee invitee){
-        invitees.save(invitee);
+    @RequestMapping("/create-invite")
+    public void createInvite(@RequestBody Invitee invitee) throws Exception {
+        User user = users.findOneByEmail(invitee.email);
+        if (user == null) {
+            user= new User();
+            user.email = invitee.email;
+            user.username = invitee.name;
+            users.save(user);
+        }
+        Wedding wedding = weddings.findOne(invitee.weddingId);
+        if (wedding == null) {
+            throw new Exception("Wedding does not exist");
+        }
+        Invite invite= new Invite();
+        invite.user = user;
+        invite.isAdmin = invitee.isAdmin;
+        invite.wedding = wedding;
+        invites.save(invite);
+        /*send email here*/
+    }
+
+    @RequestMapping("/invites")
+    public List<Wedding> invitesList(@RequestBody User user) {
+        return invites.findByUser(user).stream()
+                .map(invite -> {
+                    return invite.wedding;
+                }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
@@ -81,20 +110,9 @@ public class WeDayController {
         }
     }
 
-    @RequestMapping("/create-admin")
-    public void createAdmin(@RequestBody User user) {
-        if (user.isAdmin == null) {
-            user.isAdmin = true;
-        }
-        users.save(user);
-    }
-
     @RequestMapping("/create-user")
     public void createUser(@RequestBody User user) {
-        if (user.isAdmin == null) {
-            user.isAdmin = false;
-            users.save(user);
-        }
+        users.save(user);
     }
 
     @RequestMapping("/profile")
