@@ -34,10 +34,12 @@ public class WeDayController {
 
     public static final String ACCOUNT_SID = "ACccdbc98b4c34f1609bd410b42ea63155";
     public static final String AUTH_TOKEN = "7523c186f7b532e10dac3f764d5c0ece";
+
     Facebook facebook;
 
     @Inject
     public WeDayController(Facebook facebook) {
+
         this.facebook = facebook;
     }
 
@@ -104,10 +106,10 @@ public class WeDayController {
     }
 
     @RequestMapping("/login")
-    public void userLogin(HttpSession session, String email,
+    public void userLogin(String email,HttpSession session,
                           String password, HttpServletResponse response) throws Exception {
 
-        session.setAttribute("email", email);
+        session.setAttribute("email",email);
 
         User user = users.findOneByEmail(email);
 
@@ -115,7 +117,7 @@ public class WeDayController {
             throw new Exception("User does not exist. Please create an account");
 
         } else if (PasswordHash.validatePassword(password, user.password)) {
-            response.sendRedirect("/landing/{id}");
+            response.sendRedirect("/landing/" + user.id);
 
         } else if (!PasswordHash.validatePassword(password, user.password)) {
             throw new Exception("Password is incorrect");
@@ -124,6 +126,7 @@ public class WeDayController {
 
     @RequestMapping("/create-user")
     public void createUser(@RequestBody User user) {
+
         users.save(user);
     }
 
