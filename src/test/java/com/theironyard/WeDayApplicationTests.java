@@ -90,6 +90,37 @@
 
             assertTrue(users.count()==1 && PasswordHash.validatePassword(password, user.password));
         }
+
+//        @Test
+//        public void testNotification() throws Exception {
+//            User user = new User();
+//            user.email = "nathan@gmail.com";
+//            user.username = "Nathan Martin";
+//            user.zip = "12345";
+//            user.password = "password";
+//            user.address = "123 Fake St";
+//            user.phone = "+18435180835";
+//            users.save(user);
+//
+//            User user1 = new User();
+//            user1.email = "charleslane@gmail.com";
+//            user1.username = "Charles Lane";
+//            user1.zip = "12345";
+//            user1.password = "password";
+//            user1.address = "123 Fake St";
+//            user1.phone = "+18436479951";
+//            users.save(user1);
+//
+//            String body = "Charles. if you're reading this our notifications work. ";
+//
+//            mockMvc.perform(
+//                    MockMvcRequestBuilders.post("/send-notification")
+//                            .param("body",body)
+//            );
+//
+//
+//        }
+
     }
 
 
