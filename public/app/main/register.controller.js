@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('main')
-  .controller('RegisterController',function($scope,RegisterService){
+  .controller('RegisterController',function($window,$location,$scope,RegisterService){
     $scope.passwordsAreSame = true;
 
     $scope.addNewUser = function(){
@@ -12,9 +12,12 @@ angular
         phone: $scope.phone,
         password: $scope.password
       }
-      console.log('currObj',currObj);
       if($scope.password == $scope.passwordAuth){
-        RegisterService.addNewUser(currObj);
+        RegisterService.addNewUser(currObj).success(function(res){
+          console.log('res',res);
+          $window.location.reload();
+          console.log('addedNewUser',res);
+        });
       }
       else{alert('wrong password')};
     };
