@@ -78,6 +78,23 @@ public class WeDayController {
         return (List<Wedding>) weddings.findAll();
     }
 
+    @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
+    public Wedding findOne(Wedding wedding) {
+        return weddings.findOne(wedding.id);
+    }
+
+
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
+    public User createUser (@RequestBody User user) {
+        return users.save(user);
+    }
+
+    @RequestMapping(path = "/create-user/{id}", method = RequestMethod.GET)
+    public User findOne(User user){
+        return users.findOne(user.id);
+    }
+
+
     @RequestMapping("/create-invite")
     public void createInvite(@RequestBody Invitee invitee) throws Exception {
         User user = users.findOneByEmail(invitee.email);
@@ -109,10 +126,6 @@ public class WeDayController {
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
-    @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
-    public Wedding findOne(Wedding wedding) {
-        return weddings.findOne(wedding.id);
-    }
 
     @RequestMapping("/login")
     public void userLogin(String email,HttpSession session,
@@ -131,11 +144,6 @@ public class WeDayController {
         } else if (!PasswordHash.validatePassword(password, user.password)) {
             throw new Exception("Password is incorrect");
         }
-    }
-
-    @RequestMapping("/create-user")
-    public User createUser (@RequestBody User user) {
-        return users.save(user);
     }
 
     @RequestMapping("/profile")
