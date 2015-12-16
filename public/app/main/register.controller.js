@@ -7,7 +7,7 @@ angular
 
     $scope.addNewUser = function(){
       var currObj = {
-        userName: $scope.userName,
+        username: $scope.userName,
         email: $scope.email,
         phone: $scope.phone,
         password: $scope.password

@@ -6,22 +6,24 @@
 <div>
   <ul class="nav navbar-nav">
     <li class="active"><a href="#">Home</a></li>
-    <!-- <li ng-click = 'isSignUp = !isSignUp'><a href=""><my-login></my-login></a></li> -->
+    <!-- <li ng-click = 'isRegister = !isRegister'><a href=""><my-login></my-login></a></li> -->
     <li><a href="#/admins">Admin</a></li>
     <li><a href="#/landing/1">Landing</a></li>
 
   </ul>
   <ul class="nav navbar-nav navbar-right">
-        <li ng-click = 'isSignUp = !isSignUp'><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#/create-weddings"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li ng-click = 'isRegister = !isRegister'><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li ng-click = 'isLogin = !isLogin'><a><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
 </div>
 </div>
 </nav>
 <!-- place to put sign-up page -->
-<my-form ng-init = "isSignUp = false" ng-show = 'isSignUp'></my-form>
+<register-form ng-init = "isRegister = false" ng-show = 'isRegister'></register-form>
 <!-- all other content for front page -->
-<div ng-show = "!isSignUp" id = 'wrapper'>
+<!-- <login-form ng-init = "isLogin = false" ng-show = "isLogin"><login-form> -->
+
+<div ng-show = "!isRegister" id = 'wrapper'>
 <section>
 	<div class="cd-fixed-bg cd-bg-1">
 		<h1>We-Day</h1>
