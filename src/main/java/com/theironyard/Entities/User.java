@@ -22,12 +22,6 @@ public class User {
     public String phone;
 
     @Column (nullable = false)
-    public String zip;
-
-    @Column (nullable = false)
-    public String address;
-
-    @Column (nullable = false)
     public String email;
 
     @Column (nullable = false)
@@ -39,8 +33,6 @@ public class User {
         this.id = id;
         this.username = username;
         this.phone = phone;
-        this.zip = zip;
-        this.address = address;
         this.email = email;
         this.password = password;
     }

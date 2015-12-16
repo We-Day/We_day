@@ -90,5 +90,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.objenesis:objenesis:2.1" level="project" />
     <orderEntry type="library" name="com.twilio.sdk:twilio-java-sdk:6.0.1-edge" level="project" />
     <orderEntry type="library" name="com.twilio.sdk:twilio-java-sdk:5.6.0" level="project" />
+    <orderEntry type="library" name="twilio-java-sdk-5.6.0-jar-with-dependencies" level="project" />
   </component>
 </module>
