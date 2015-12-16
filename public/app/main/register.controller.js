@@ -15,7 +15,7 @@ angular
       if($scope.password == $scope.passwordAuth){
         RegisterService.addNewUser(currObj).success(function(res){
           console.log('res',res);
-          $window.location.reload();
+          $window.location.href('/admin');
           console.log('addedNewUser',res);
         });
       }
