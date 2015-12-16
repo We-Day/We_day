@@ -204,6 +204,14 @@ body, html, main {
 .display-none {
   display: none; }
 
+.register-form {
+  padding-top: 10%;
+  text-align: center; }
+  .register-form .glyphicon-arrow-right {
+    font-size: 3em; }
+    .register-form .glyphicon-arrow-right:hover {
+      opacity: .5; }
+
 .nav-column .nav-tabs {
   margin-top: 20%;
   float: left;

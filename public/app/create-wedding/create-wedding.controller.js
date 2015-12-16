@@ -62,7 +62,6 @@ angular
         userName: $scope.userName,
         email:$scope.email,
         phone:$scope.phone,
-        zip:$scope.zip,
         password:$scope.password,
       }
       if($scope.password == $scope.passwordAuth){

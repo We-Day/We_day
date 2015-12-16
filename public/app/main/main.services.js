@@ -2,14 +2,10 @@
   "use strict"
   angular
     .module('main')
-    .factory('MainService',function(){
-      var charles = function(){
-        console.log('charles');
-      };
+    .factory('MainService',function($http){
 
 
     return{
-      charles:charles
     };
   });
 })();

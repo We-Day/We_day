@@ -181,7 +181,17 @@ body, html, main {
 .display-none{
   display: none;
 }
-
+//register-page
+.register-form{
+	padding-top: 10%;
+	text-align: center;
+	.glyphicon-arrow-right{
+		font-size: 3em;
+		&:hover{
+			opacity: .5;
+		}
+	}
+}
 //admin page-------------------------------------------------------//
 .nav-column{
 	.nav-tabs {
