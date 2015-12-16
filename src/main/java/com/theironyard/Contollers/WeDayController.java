@@ -1,5 +1,8 @@
 package com.theironyard.Contollers;
 import com.theironyard.Entities.*;
+import com.theironyard.Entities.Photo;
+import com.theironyard.Entities.Post;
+import com.theironyard.Entities.User;
 import com.theironyard.Services.*;
 import com.theironyard.Utilities.PasswordHash;
 import com.twilio.sdk.TwilioRestClient;
@@ -9,9 +12,10 @@ import com.twilio.sdk.resource.instance.Message;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.social.facebook.api.Facebook;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -61,8 +65,11 @@ public class WeDayController {
     @Autowired
     InviteRepository invites;
 
+    @Autowired
+    CalendarEventRepository events;
+
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding) throws IOException {
+    public Wedding createWedding(@RequestBody Wedding wedding){
         return weddings.save(wedding);
     }
 
@@ -131,6 +138,7 @@ public class WeDayController {
 
     @RequestMapping("/profile")
     public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
+
         try {
             org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
             return user;
@@ -144,14 +152,12 @@ public class WeDayController {
     public void sendNotification(String body) throws TwilioRestException {
         ArrayList <String> numbers = new ArrayList<>();
         Iterable<User> allUsers = users.findAll();
-
         for (User user : allUsers){
             String phone = user.phone;
             numbers.add(phone);
-
                 for (String destination : numbers){
                     sendText(destination, body);
-                }
+            }
         }
     }
 
@@ -163,6 +169,11 @@ public class WeDayController {
         }
         posts.save(post);
         return posts.findAll();
+    }
+
+    @RequestMapping("/create-event")
+    public CalendarEvent createEvent(@RequestBody CalendarEvent event){
+        return events.save(event);
     }
 
     @RequestMapping("/photo-upload")
@@ -178,17 +189,15 @@ public class WeDayController {
         p.description = description;
         photos.save(p);
 
-        response.sendRedirect("/");
+        // not sure where to redirect here...response.sendRedirect("/?");
 
         return p;
-
     }
 
     public static void sendText(String destination, String body) throws TwilioRestException {
 
         TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-        // Build a filter for the MessageList
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("Body", body));
         params.add(new BasicNameValuePair("To", destination));
@@ -198,5 +207,4 @@ public class WeDayController {
         Message message = messageFactory.create(params);
         System.out.println(message.getSid());
     }
-
 }

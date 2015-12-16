@@ -75,9 +75,7 @@
             User user = new User();
             user.email = "nathan@gmail.com";
             user.username = "Nathan";
-            user.zip = "12345";
             user.password = PasswordHash.createHash(password);
-            user.address = "123 Fake St";
             user.phone = "123-4567";
             users.save(user);
 
@@ -85,10 +83,35 @@
                     MockMvcRequestBuilders.post("/login")
                     .param("password",password)
                     .param("email", user.email)
-
             );
 
             assertTrue(users.count()==1 && PasswordHash.validatePassword(password, user.password));
+        }
+
+        @Test
+        public void createUser() throws Exception {
+            users.deleteAll();
+
+            String password = "password";
+
+            User user = new User();
+            user.email = "nathan@gmail.com";
+            user.username = "Nathan";
+            user.password = PasswordHash.createHash(password);
+            user.phone = "123-4567";
+            users.save(user);
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(user);
+
+            mockMvc.perform(
+                    MockMvcRequestBuilders.post("/create-user")
+            );
+
+            assertTrue(users.count()==1);
+
+
+
         }
 
 //        @Test
