@@ -34,10 +34,12 @@ public class WeDayController {
 
     public static final String ACCOUNT_SID = "ACccdbc98b4c34f1609bd410b42ea63155";
     public static final String AUTH_TOKEN = "7523c186f7b532e10dac3f764d5c0ece";
+
     Facebook facebook;
 
     @Inject
     public WeDayController(Facebook facebook) {
+
         this.facebook = facebook;
     }
 
@@ -104,10 +106,10 @@ public class WeDayController {
     }
 
     @RequestMapping("/login")
-    public void userLogin(HttpSession session, String email,
+    public void userLogin(String email,HttpSession session,
                           String password, HttpServletResponse response) throws Exception {
 
-        session.setAttribute("email", email);
+        session.setAttribute("email",email);
 
         User user = users.findOneByEmail(email);
 
@@ -115,7 +117,7 @@ public class WeDayController {
             throw new Exception("User does not exist. Please create an account");
 
         } else if (PasswordHash.validatePassword(password, user.password)) {
-            response.sendRedirect("/landing/{id}");
+            response.sendRedirect("/landing/" + user.id);
 
         } else if (!PasswordHash.validatePassword(password, user.password)) {
             throw new Exception("Password is incorrect");
@@ -136,6 +138,21 @@ public class WeDayController {
             response.sendRedirect("http://localhost8080/#/create-weddings");
         }
         return null;
+    }
+
+    @RequestMapping ("/send-notification")
+    public void sendNotification(String body) throws TwilioRestException {
+        ArrayList <String> numbers = new ArrayList<>();
+        Iterable<User> allUsers = users.findAll();
+
+        for (User user : allUsers){
+            String phone = user.phone;
+            numbers.add(phone);
+
+                for (String destination : numbers){
+                    sendText(destination, body);
+                }
+        }
     }
 
     @RequestMapping("/create-post")
@@ -167,13 +184,13 @@ public class WeDayController {
 
     }
 
-    public static void sendText(String destination) throws TwilioRestException {
+    public static void sendText(String destination, String body) throws TwilioRestException {
 
         TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
         // Build a filter for the MessageList
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("Body", "Twilio Works!!"));
+        params.add(new BasicNameValuePair("Body", body));
         params.add(new BasicNameValuePair("To", destination));
         params.add(new BasicNameValuePair("From", "+18436405964"));
 
