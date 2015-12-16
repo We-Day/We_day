@@ -1,9 +1,44 @@
+
+
 (function(){
 "use strict"
 angular
   .module('admin')
-  .controller('CalendarController',function($scope,AdminService,$compile,uiCalendarConfig){
-    //wedding test data
+  .controller('CalendarController',function($scope,CalendarService,$compile,uiCalendarConfig,$window){
+    //reload route
+    $scope.reloadRoute = function() {
+      $window.location.reload();
+    }
+    // console.log($scope.events,'scope events')
+    $scope.updateEvents = function(){
+    CalendarService.getDates().success(function(el){
+      var eventArray = el.map(function(newEl,idx) {
+        return {
+          _id: newEl._id,
+          start: new Date(newEl.start),
+          end: new Date(newEl.end),
+          title: newEl.title,
+          email:{
+            bool:newEl.email.bool,
+            time: newEl.email.time
+          },
+          text:{
+            bool:newEl.text.bool,
+            time: newEl.text.time
+          },
+          notification:{
+            bool:newEl.notification.bool,
+            time:newEl.notification.time,
+          }
+        }
+      })
+
+      $scope.events = eventArray;
+
+      $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+    })
+  };
+  $scope.updateEvents();
     $scope.weddingName = "Charles' Dope Ass Wedding"
 //calendar bitch
     var date = new Date();
@@ -19,23 +54,23 @@ angular
             currentTimezone: 'America/New York' // an option!
     };
     /* event source that contains custom events on the scope */
-    $scope.events = [
-      {title: 'All Day Event',start: new Date(2015, 11, 5)},
-      {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: true},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-      {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-    ];
-    $scope.$watch('events',function(el){
-      console.log(el,'eventSource');
-    })
+
+
+    // $scope.events = [
+    //   {_id:'1',title: 'Tester',start: new Date(2016, 0, 5),end: new Date(2016, 0, 8)},
+    //   {_id:2,title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
+    //   {_id:5,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),end: new Date(y, m, d - 2)},
+    //   {_id:6,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),end: new Date(y, m, d - 2)},
+    //   {_id:3,title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+    //   {_id:4,title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+    // ];
+    // console.log($scope.events);
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, timezone, callback) {
       var s = new Date(start).getTime() / 1000;
       var e = new Date(end).getTime() / 1000;
       var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+      var events = [{title: 'Feed Me ' + m,start: s ,end: s ,allDay: false, className: ['customFeed']}];
       callback(events);
     };
 
@@ -48,49 +83,122 @@ angular
           {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29)}
         ]
     };
-    /* alert on eventClick */
+    $scope.editDate = function(event){
+        CalendarService.editDate(event);
+    };
+
     $scope.alertOnEventClick = function( date, jsEvent, view){
         $scope.alertMessage = (date.title + ' was clicked ');
     };
+
     /* alert on Drop */
      $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-       $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
+
+       var startDate = new Date(event.start._d);
+       startDate.setHours(startDate.getHours()+5);
+       var endDate = new Date(event.end._d);
+       endDate.setHours(endDate.getHours()+5);
+       var currObject = {
+         _id: event._id,
+         start: startDate,
+         end: endDate,
+         title: event.title,
+         email:{
+           bool:event.email.bool,
+           time: event.email.time
+         },
+         text:{
+           bool:event.text.bool,
+           time: event.text.time
+         },
+         notification:{
+           bool:event.notification.bool,
+           time:event.notification.time,
+         }
+       }
+       console.log('currObject',currObject)
+       CalendarService.editDate(currObject).success(function(el){
+         $scope.updateEvents();
+       })
     };
     /* alert on Resize */
     $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-        console.log(event.end._d);
-        console.log(event,'event');
-        console.log(this,'this');
-        console.log(view,'view');
-        console.log(delta,'delta');
-
-       $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
-    };
-    /* add and removes an event source of choice */
-    $scope.addRemoveEventSource = function(sources,source) {
-      var canAdd = 0;
-      angular.forEach(sources,function(value, key){
-        if(sources[key] === source){
-          sources.splice(key,1);
-          canAdd = 1;
+      var startDate = new Date(event.start._d);
+      startDate.setHours(startDate.getHours()+5);
+      var endDate = new Date(event.end._d);
+      endDate.setHours(endDate.getHours()+5);
+      var currObject = {
+        _id: event._id,
+        start: startDate,
+        end: endDate,
+        title: event.title,
+        email:{
+          bool:event.email.bool,
+          time: event.email.time
+        },
+        text:{
+          bool:event.text.bool,
+          time: event.text.time
+        },
+        notification:{
+          bool:event.notification.bool,
+          time:event.notification.time,
         }
-      });
-      if(canAdd === 0){
-        sources.push(source);
       }
+      console.log('currObject',currObject)
+      CalendarService.editDate(currObject).success(function(el){
+        $scope.updateEvents();
+      })
+      // $scope.alertMessage = ('Event Resized to make dayDelta ' + event.end._d);
     };
+
+    /* add and removes an event source of choice */
+    // $scope.addRemoveEventSource = function(sources,source) {
+    //   var canAdd = 0;
+    //   angular.forEach(sources,function(value, key){
+    //     if(sources[key] === source){
+    //       sources.splice(key,1);
+    //       canAdd = 1;
+    //     }
+    //   });
+    //   if(canAdd === 0){
+    //     sources.push(source);
+    //   }
+    // };
     /* add custom event*/
     $scope.addEvent = function() {
-      $scope.events.push({
+      var newEvent = {
         title: 'Open Sesame',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        className: ['Open Sesame']
+        start: new Date(y, m, 22,5,10),
+        end: new Date(y, m, 22,6,15),
+        email:{
+          bool:false,
+          time: "1"
+        },
+        text:{
+          bool:false,
+          time: "30"
+        },
+        notification:{
+          bool:false,
+          time:"30",
+        }
+      };
+      $scope.events.push(newEvent);
+
+      CalendarService.addDate(newEvent).success(function(res){
+        console.log('addDate',res);
+        $scope.events.splice(0, $scope.events.length);
+        $scope.updateEvents();
       });
+
     };
     /* remove event */
-    $scope.remove = function(index) {
-      $scope.events.splice(index,1);
+    $scope.remove = function(index,event) {
+      CalendarService.deleteDate(event).success(function(res){
+        $scope.events.splice(0, $scope.events.length);
+        $scope.updateEvents();
+      });
     };
     /* Change View */
     $scope.changeView = function(view,calendar) {
@@ -103,11 +211,11 @@ angular
       }
     };
      /* Render Tooltip */
-    $scope.eventRender = function(event, element, view ) {
-        element.attr({'tooltip': event.title,
-                     'tooltip-append-to-body': true});
-        $compile(element)($scope);
-    };
+    // $scope.eventRender = function(event, element, view ) {
+    //     element.attr({'tooltip': event.title,
+    //                  'tooltip-append-to-body': true});
+    //     $compile(element)($scope);
+    // };
     /* config object */
     $scope.uiConfig = {
       calendar:{
@@ -137,9 +245,7 @@ angular
     //   }
     // };
     /* event sources array*/
-    $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-
-    $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
+    // $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
 
 
   })
