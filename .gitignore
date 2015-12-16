@@ -1,7 +1,8 @@
 *.db
 .idea
-.DS_Storepublic/node_modules
 .DS_Store
+public/node_modules
 bower_components
 node_modules
 public/file*
+build
