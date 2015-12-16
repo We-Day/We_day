@@ -1,0 +1,26 @@
+<div ng-controller = "NotController" class="notifications-div col-md-12">
+<form class="form-horizontal">
+  <input id = "title-notifications" placeholder="Notification"type="text" ng-model ="title" name="name" value="">
+<div class="checkboxes-notifications">
+  <div class="form-group checkbox">
+    <label><input type="checkbox" ng-model = "email"value="">Email</label>
+  </div>
+  <div class="form-group checkbox">
+      <label><input type="checkbox" ng-model = "text"value="">Text</label>
+    </div>
+  <div class="form-group checkbox">
+      <label><input type="checkbox" ng-model = "notification"value="">App</label>
+  </div>
+      <button ng-click = "postNot()"name="button">Submit</button>
+</div>
+</form>
+<div class="container admin-notifications-container">
+  <div class = "admin-notifications" ng-repeat = "not in notifications">
+    <a class="close" ng-click="deleteNot(not)"><span class="glyphicon glyphicon-remove"></span></a>
+    <h1>
+      {{not.title}}
+    </h1>
+  </div>
+</div>
+
+</div>

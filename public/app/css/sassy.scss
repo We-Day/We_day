@@ -219,14 +219,18 @@ body, html, main {
   }
 }
 }
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-  transition: all linear 2s;
+.animate-show.ng-hide-add{
+	transition: all linear 0;
+}
+
+.animate-show.ng-hide-remove {
+  transition: all linear 1s;
 }
 
 .animate-show.ng-hide {
   line-height: 0;
   opacity: 0;
-  padding: 0 10px;
+  padding: 5 5px;
 }
 //create-wedding------------------------------------------/
 .wrapper-create-wedding{
@@ -285,4 +289,35 @@ body, html, main {
 		text-decoration: none;
 	}
 }
+}
+//calendar
+.main-calendar{
+	margin-top: 2%;
+}
+//notifications
+.notifications-div{
+	#title-notifications{
+		font-size: 3em;
+		margin-left: 20%;
+		margin-top:5%;
+	}
+	.checkboxes-notifications{
+		margin-left: 30%;
+	}
+}
+.admin-notifications-container{
+	margin-top: 5%;
+
+}
+.admin-notifications{
+	display: inline-block;
+	color:white;
+	background: rgba(5, 5, 10, .9);
+	margin:1%;
+	h1{
+		font-size: 2em;
+	}
+	.glyphicon-remove{
+		color:white;
+	}
 }

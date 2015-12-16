@@ -1,6 +1,6 @@
 
-<div role="main">
-    <div class="container">
+<div role="main ">
+    <div class="container main-calendar">
         <section id="directives-calendar" ng-controller="CalendarController">
             <div class="well">
                 <div class="row-fluid">
@@ -22,9 +22,37 @@
                         <ul class="unstyled">
                             <li ng-repeat="e in events">
                                 <div class="alert alert-info">
-                                    <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
-                                    <b > <input ng-model="e.title"></b>
+                                    <a class="close" ng-click="remove($index,e)"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <b > <input ng-change = "editDate(e)"ng-model="e.title"></b>
                                     {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
+                                    <h5>How would you like to notify your contacts</h5>
+                                    <div class="checkbox">
+                                      <label><input ng-change = "editDate(e)"type="checkbox" ng-model = "e.email.bool"value="">Email</label>
+                                      <select ng-change = "editDate(e)"ng-model = "e.email.time"class="">
+                                        <option value="1">1 Hour Before</option>
+                                        <option value="6">6 Hour Before</option>
+                                        <option value="24">24 Hour Before</option>
+                                        <option value="48">2 Days Before</option>
+                                      </select>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input ng-change = "editDate(e)"type="checkbox" ng-model = "e.text.bool"value="">Text</label>
+                                        <select ng-change = "editDate(e)"ng-model = "e.text.time" class="">
+                                          <option value="10">10 Mins Before</option>
+                                          <option value="30">30 Mins Before</option>
+                                          <option value="1">1 Hour Before</option>
+                                          <option value="2">2 Hours Before</option>
+                                        </select>
+                                      </div>
+                                    <div class="checkbox">
+                                        <label><input ng-change = "editDate(e)"type="checkbox" ng-model = "e.notification.bool"value="">App</label>
+                                        <select ng-change = "editDate(e)"ng-model = "e.notification.time" class="">
+                                          <option value="30">30 Mins Before</option>
+                                          <option value="2">2 Hours Before</option>
+                                          <option value="5">5 Hour Before</option>
+                                          <option value="24">24 Hours Before</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -41,14 +69,14 @@
                                 <h4>{{alertMessage}}</h4>
                               </div>
                               <div class="btn-toolbar">
-                                <p class="pull-right lead">{{weddingName}} View Options</p>
+                                <p class="pull-right lead">{{weddingName}} <small>View Options</small></p>
                                 <div class="btn-group">
                                     <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar1')">AgendaDay</button>
                                     <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar1')">AgendaWeek</button>
                                     <button class="btn btn-success" ng-click="changeView('month', 'myCalendar1')">Month</button>
                                 </div>
                               </div>
-                            <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                            <div ng-if= "events.length > 0"class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
                            </tab>
                            <!-- <tab select="renderCalender('myCalendar2');">
                             <tab-heading>

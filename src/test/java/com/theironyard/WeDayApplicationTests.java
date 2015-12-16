@@ -49,23 +49,6 @@
         }
 
         @Test
-        public void testCreatePost() throws Exception {
-            Post post = new Post();
-            post.text = "This is a message";
-            post.sender = "Nathan";
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(post);
-
-            mockMvc.perform(
-                    MockMvcRequestBuilders.post("/create-post")
-                            .content(json)
-                            .contentType("application/json")
-                            .sessionAttr("username", "testUsername")
-            );
-            assertTrue(posts.count() == 1);
-        }
-        @Test
         public void testLogin() throws Exception {
 
             users.deleteAll();
@@ -75,21 +58,46 @@
             User user = new User();
             user.email = "nathan@gmail.com";
             user.username = "Nathan";
-            user.zip = "12345";
             user.password = PasswordHash.createHash(password);
-            user.address = "123 Fake St";
             user.phone = "123-4567";
             users.save(user);
 
             mockMvc.perform(
                     MockMvcRequestBuilders.post("/login")
-                    .param("password",password)
-                    .param("email", user.email)
-
+                            .param("password", password)
+                            .param("email", user.email)
             );
 
-            assertTrue(users.count()==1 && PasswordHash.validatePassword(password, user.password));
+            assertTrue(users.count() == 1 && PasswordHash.validatePassword(password, user.password));
         }
+
+        @Test
+        public void createUser() throws Exception {
+            users.deleteAll();
+
+            String password = "password";
+
+            User user = new User();
+            user.email = "nathan@gmail.com";
+            user.username = "Nathan";
+            user.password = PasswordHash.createHash(password);
+            user.phone = "123-4567";
+            users.save(user);
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(user);
+
+            mockMvc.perform(
+                    MockMvcRequestBuilders.post("/create-user")
+                    .content(json)
+                    .contentType("application/json")
+            );
+
+            assertTrue(users.count() == 1);
+
+
+        }
+    }
 
 //        @Test
 //        public void testNotification() throws Exception {
@@ -121,7 +129,7 @@
 //
 //        }
 
-    }
+
 
 
 

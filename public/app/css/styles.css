@@ -227,13 +227,16 @@ body, html, main {
   .nav-column .nav-tabs .active .glyphicon {
     color: #333; }
 
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-  transition: all linear 2s; }
+.animate-show.ng-hide-add {
+  transition: all linear 0; }
+
+.animate-show.ng-hide-remove {
+  transition: all linear 1s; }
 
 .animate-show.ng-hide {
   line-height: 0;
   opacity: 0;
-  padding: 0 10px; }
+  padding: 5 5px; }
 
 .wrapper-create-wedding {
   width: 100%;
@@ -277,3 +280,27 @@ body, html, main {
     font-size: 2em; }
     .admin-form #submit-new-admin a {
       text-decoration: none; }
+
+.main-calendar {
+  margin-top: 2%; }
+
+.notifications-div #title-notifications {
+  font-size: 3em;
+  margin-left: 20%;
+  margin-top: 5%; }
+
+.notifications-div .checkboxes-notifications {
+  margin-left: 30%; }
+
+.admin-notifications-container {
+  margin-top: 5%; }
+
+.admin-notifications {
+  display: inline-block;
+  color: white;
+  background: rgba(5, 5, 10, 0.9);
+  margin: 1%; }
+  .admin-notifications h1 {
+    font-size: 2em; }
+  .admin-notifications .glyphicon-remove {
+    color: white; }
