@@ -1,5 +1,6 @@
-/*
+
 package com.theironyard;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.User;
 import com.theironyard.Entities.Wedding;
@@ -48,45 +49,17 @@ public class WeDayApplicationTests {
     }
 
     @Test
-    public void createWedding() throws Exception {
-        Wedding wedding = new Wedding();
-        wedding.date = "2014-01-01";
-        wedding.location = "Charelston";
-        wedding.weddingName = "Our Wedding";
-
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(wedding);
-
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/create-wedding")
-                        .content(json)
-                        .contentType("application/json")
-        );
-
-        assertTrue(weddings.count() == 1);
-    }
-
-    @Test
-    public void createAdmin() throws Exception {
+    public void Login() throws JsonProcessingException {
         User user = new User();
-        user.password = "1234";
+        user.email = "nathan@gmail.com";
         user.username = "Nathan";
-        user.address = "123 Fake Street";
-        user.phone = "123- 456-789";
-        user.email = "user@hotmail.com";
-        user.zip = "4321";
-        user.isAdmin = true;
+        user.zip = "12345";
+        user.address = "123 Fake St";
+        user.phone = "123-4567";
 
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(user);
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/create-admin")
-                        .content(json)
-                        .contentType("application/json")
-        );
-
-        assertTrue(users.count() == 1);
     }
 
     @Test
@@ -106,4 +79,4 @@ public class WeDayApplicationTests {
         );
         assertTrue(posts.count() == 1);
     }
-}*/
+}
