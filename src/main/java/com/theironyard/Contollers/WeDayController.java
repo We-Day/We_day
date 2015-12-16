@@ -86,6 +86,8 @@ public class WeDayController {
             user.email = invitee.email;
             user.username = invitee.name;
             users.save(user);
+
+            //something to do with passwords needs to be in here.
         }
         Wedding wedding = weddings.findOne(invitee.weddingId);
         if (wedding == null) {
@@ -132,8 +134,8 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-user")
-    public void createUser(@RequestBody User user) {
-        users.save(user);
+    public User createUser (@RequestBody User user) {
+        return users.save(user);
     }
 
     @RequestMapping("/profile")
