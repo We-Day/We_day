@@ -4,7 +4,7 @@ angular
   .module('create-wedding')
   .controller('CreateWeddingController',function($scope,CreateWeddingService,$anchorScroll,$location,$window){
     //current Index page for wedding controller
-    $scope.currentIndex = 2;
+    $scope.currentIndex = 0;
 
     //check if person already invited
     var invitedUsers = [];
