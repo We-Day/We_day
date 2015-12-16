@@ -2,6 +2,12 @@ package com.theironyard.Contollers;
 import com.theironyard.Entities.*;
 import com.theironyard.Services.*;
 import com.theironyard.Utilities.PasswordHash;
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.resource.factory.MessageFactory;
+import com.twilio.sdk.resource.instance.Message;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,13 +26,20 @@ import java.util.stream.Collectors;
  * Created by macbookair on 12/8/15.
  */
 
+
+
 @RestController
 public class WeDayController {
+
+
+    public static final String ACCOUNT_SID = "ACccdbc98b4c34f1609bd410b42ea63155";
+    public static final String AUTH_TOKEN = "7523c186f7b532e10dac3f764d5c0ece";
 
     Facebook facebook;
 
     @Inject
     public WeDayController(Facebook facebook) {
+
         this.facebook = facebook;
     }
 
@@ -55,7 +68,6 @@ public class WeDayController {
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
     public List<Wedding> AllWeddings() {
-
         return (List<Wedding>) weddings.findAll();
     }
 
@@ -94,17 +106,19 @@ public class WeDayController {
     }
 
     @RequestMapping("/login")
-    public void userLogin(HttpSession session, String email,
+    public void userLogin(String email,HttpSession session,
                           String password, HttpServletResponse response) throws Exception {
 
-        session.setAttribute("email", email);
+        session.setAttribute("email",email);
 
         User user = users.findOneByEmail(email);
 
         if (user == null) {
             throw new Exception("User does not exist. Please create an account");
+
         } else if (PasswordHash.validatePassword(password, user.password)) {
-            response.sendRedirect("/landing/{id}");
+            response.sendRedirect("/landing/" + user.id);
+
         } else if (!PasswordHash.validatePassword(password, user.password)) {
             throw new Exception("Password is incorrect");
         }
@@ -124,6 +138,21 @@ public class WeDayController {
             response.sendRedirect("http://localhost8080/#/create-weddings");
         }
         return null;
+    }
+
+    @RequestMapping ("/send-notification")
+    public void sendNotification(String body) throws TwilioRestException {
+        ArrayList <String> numbers = new ArrayList<>();
+        Iterable<User> allUsers = users.findAll();
+
+        for (User user : allUsers){
+            String phone = user.phone;
+            numbers.add(phone);
+
+                for (String destination : numbers){
+                    sendText(destination, body);
+                }
+        }
     }
 
     @RequestMapping("/create-post")
@@ -152,5 +181,22 @@ public class WeDayController {
         response.sendRedirect("/");
 
         return p;
+
     }
+
+    public static void sendText(String destination, String body) throws TwilioRestException {
+
+        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+
+        // Build a filter for the MessageList
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("Body", body));
+        params.add(new BasicNameValuePair("To", destination));
+        params.add(new BasicNameValuePair("From", "+18436405964"));
+
+        MessageFactory messageFactory = client.getAccount().getMessageFactory();
+        Message message = messageFactory.create(params);
+        System.out.println(message.getSid());
+    }
+
 }
