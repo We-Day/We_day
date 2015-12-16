@@ -49,23 +49,6 @@
         }
 
         @Test
-        public void testCreatePost() throws Exception {
-            Post post = new Post();
-            post.text = "This is a message";
-            post.sender = "Nathan";
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(post);
-
-            mockMvc.perform(
-                    MockMvcRequestBuilders.post("/create-post")
-                            .content(json)
-                            .contentType("application/json")
-                            .sessionAttr("username", "testUsername")
-            );
-            assertTrue(posts.count() == 1);
-        }
-        @Test
         public void testLogin() throws Exception {
 
             users.deleteAll();
@@ -81,11 +64,11 @@
 
             mockMvc.perform(
                     MockMvcRequestBuilders.post("/login")
-                    .param("password",password)
-                    .param("email", user.email)
+                            .param("password", password)
+                            .param("email", user.email)
             );
 
-            assertTrue(users.count()==1 && PasswordHash.validatePassword(password, user.password));
+            assertTrue(users.count() == 1 && PasswordHash.validatePassword(password, user.password));
         }
 
         @Test
@@ -106,13 +89,15 @@
 
             mockMvc.perform(
                     MockMvcRequestBuilders.post("/create-user")
+                    .content(json)
+                    .contentType("application/json")
             );
 
-            assertTrue(users.count()==1);
-
+            assertTrue(users.count() == 1);
 
 
         }
+    }
 
 //        @Test
 //        public void testNotification() throws Exception {
@@ -144,7 +129,7 @@
 //
 //        }
 
-    }
+
 
 
 
