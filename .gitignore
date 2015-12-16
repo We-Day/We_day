@@ -1,5 +1,6 @@
 *.db
 .idea
+.idea/workspace.xml
 .DS_Store
 public/node_modules
 bower_components
