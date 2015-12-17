@@ -10,22 +10,23 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue
-    @Column (nullable = false)
+    @Column(nullable = false)
     public int id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     public String username;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     public String phone;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     public String email;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     public String password;
 
-    public User (){}
+    public User() {
+    }
 
     public User(int id, String username, String phone, String email, String password) {
         this.id = id;
@@ -33,5 +34,21 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

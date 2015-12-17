@@ -114,6 +114,13 @@ public class WeDayController {
         return weddings.findOne(wedding.id);
     }
 
+    @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
+    public User findUser(@PathVariable("id") int id) {
+        User u = users.findOne(id);
+        u.password = null;
+        return u;
+    }
+
     @RequestMapping("/login")
     public void userLogin(String email,HttpSession session,
                           String password, HttpServletResponse response) throws Exception {
@@ -135,9 +142,9 @@ public class WeDayController {
 
     @RequestMapping("/create-user")
     public User createUser (@RequestBody User user) {
-        User u = new User();
-        users.save(u);
-        return u;
+        users.save(user);
+        user.password = null;
+        return user;
     }
 
     @RequestMapping("/profile")
