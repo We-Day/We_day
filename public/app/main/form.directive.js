@@ -2,7 +2,7 @@
   "use strict";
   angular
     .module('main')
-    .directive('myForm', function () {
+    .directive('registerForm', function () {
       return {
         restrict: 'EA',
         templateUrl: 'app/main/views/form.directive.html',

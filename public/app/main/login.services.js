@@ -2,7 +2,7 @@
   "use strict"
   angular
     .module('main')
-    .factory('MainService',function($http){
+    .factory('LoginService',function($http){
 
 
     return{

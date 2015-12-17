@@ -5,7 +5,6 @@
     .factory('CreateWeddingService',function($http,$location,$window){
       var urlWedding = '/create-wedding';
       var urlInviteUser = 'http://tiny-tiny.herokuapp.com/collections/invite-user';
-      var urlAdmin = '/create-admin';
       var urlFacebook = '/profile'
       var getFacebookObject = function(item){
         return $http.get(urlFacebook);
@@ -29,11 +28,7 @@
          console.log(res);
        })
      };
-    var addNewAdmin = function(admin){
-      $http.post(urlAdmin,admin).success(function(res){
-        console.log(res);
-      })
-    };
+
 
 
     return{
@@ -42,7 +37,6 @@
       getExistingWeddings:getExistingWeddings,
       addNewWedding:addNewWedding,
       inviteUser:inviteUser,
-      addNewAdmin:addNewAdmin
     };
   });
 })();
