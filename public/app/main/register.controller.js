@@ -5,7 +5,6 @@ angular
   .controller('RegisterController',function($route,$window,$location,$scope,RegisterService){
     $scope.passwordsAreSame = true;
     var users = [];
-    console.log(users)
     $scope.emailExists = function(email){
       _.each(users,function(el){
         return el.email === email ? true :false;
@@ -25,8 +24,8 @@ angular
     };
     $scope.getUsers = function(){
       RegisterService.getAllUsers().success(function(res){
-        user = res;
-        console.log(el);
+        users.push(res);
+        console.log('users',users);
       })
     };
     $scope.getUsers();

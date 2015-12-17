@@ -5,7 +5,7 @@
     .factory('RegisterService',function($http){
       var tinyTiny = 'https://tiny-tiny.herokuapp.com/collections/create-users'
       var urlCreateUser = '/create-user';
-      var urlUsers = '/user'
+      var urlUsers = '/users'
       var addNewUser = function(user){
         return $http.post(urlCreateUser,user);
       };
