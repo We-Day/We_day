@@ -86,9 +86,8 @@ public class WeDayController {
             user.email = invitee.email;
             user.username = invitee.name;
             users.save(user);
-
-            //something to do with passwords needs to be in here.
         }
+
         Wedding wedding = weddings.findOne(invitee.weddingId);
         if (wedding == null) {
             throw new Exception("Wedding does not exist");
@@ -109,9 +108,12 @@ public class WeDayController {
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
-    @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
-    public Wedding findOne(Wedding wedding) {
-        return weddings.findOne(wedding.id);
+
+    @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
+    public User findUser(@PathVariable("id") int id) {
+        User user = users.findOne(id);
+        user.password = null;
+        return user;
     }
 
     @RequestMapping("/login")
@@ -135,7 +137,9 @@ public class WeDayController {
 
     @RequestMapping("/create-user")
     public User createUser (@RequestBody User user) {
-        return users.save(user);
+        users.save(user);
+        user.password = null;
+        return user;
     }
 
     @RequestMapping("/profile")
