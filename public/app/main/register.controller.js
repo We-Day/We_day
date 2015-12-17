@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('main')
-  .controller('RegisterController',function($window,$location,$scope,RegisterService){
+  .controller('RegisterController',function($route,$window,$location,$scope,RegisterService){
     $scope.passwordsAreSame = true;
     var users = [];
     $scope.emailExists = function(email){
@@ -21,13 +21,14 @@ angular
           }
         }
       })
-    }
+    };
     $scope.getUsers = function(){
       RegisterService.getAllUsers().success(function(res){
-        user = res;
-        console.log(el);
+        users.push(res);
+        console.log('users',users);
       })
     };
+    $scope.getUsers();
     $scope.addNewUser = function(){
       var currObj = {
         username: $scope.userName,
@@ -38,8 +39,7 @@ angular
       if($scope.password == $scope.passwordAuth){
         RegisterService.addNewUser(currObj).success(function(res){
           console.log('res',res);
-          $window.location.href('/admin');
-          console.log('addedNewUser',res);
+          $route.reload();
         });
       }
       else{alert('wrong password')};

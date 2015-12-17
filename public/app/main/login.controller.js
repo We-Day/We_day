@@ -5,10 +5,14 @@ angular
   .controller('LoginController',function($location,$scope,LoginService){
     var users = [];
     LoginService.getUsers().success(function(res){
-      var users = res;
-    })
+      users.push(res);
+    });
     $scope.loginUser = function(email,password){
-      _.each(users,function(el){
+      console.log('loginUser');
+      console.log(email,'email');
+      console.log('login users',users[0]);
+      _.each(users[0],function(el){
+        console.log(el);
         if(el.email === email){
           if(el.password === password){
             $location.path('/landingPage/'+el.id);
@@ -18,8 +22,5 @@ angular
           return false;}
       });
     };
-    $scope.reRoute = function(){
-      $location.path('landingPage/1');
-    }
-    });
+  });
 })();
