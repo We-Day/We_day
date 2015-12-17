@@ -135,7 +135,9 @@ public class WeDayController {
 
     @RequestMapping("/create-user")
     public User createUser (@RequestBody User user) {
-        return users.save(user);
+        User u = new User();
+        users.save(u);
+        return u;
     }
 
     @RequestMapping("/profile")
