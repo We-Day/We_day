@@ -108,6 +108,18 @@ public class WeDayController {
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
+    @RequestMapping("/create-user")
+    public User createUser (@RequestBody User user) {
+        users.save(user);
+        user.password = null;
+        return user;
+    }
+
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    public List<User>allUsers(){
+        return (List<User>) users.findAll();
+    }
+
 
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public User findUser(@PathVariable("id") int id) {
@@ -128,19 +140,13 @@ public class WeDayController {
             throw new Exception("User does not exist. Please create an account");
 
         } else if (PasswordHash.validatePassword(password, user.password)) {
-            response.sendRedirect("/landing/" + user.id);
+            response.sendRedirect("/landingPage/" + user.id);
 
         } else if (!PasswordHash.validatePassword(password, user.password)) {
             throw new Exception("Password is incorrect");
         }
     }
 
-    @RequestMapping("/create-user")
-    public User createUser (@RequestBody User user) {
-        users.save(user);
-        user.password = null;
-        return user;
-    }
 
     @RequestMapping("/profile")
     public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
@@ -177,11 +183,6 @@ public class WeDayController {
         return posts.findAll();
     }
 
-    @RequestMapping("/create-event")
-    public CalendarEvent createEvent(@RequestBody CalendarEvent event){
-        return events.save(event);
-    }
-
     @RequestMapping("/photo-upload")
     public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
         String username = (String) session.getAttribute("username");
@@ -213,4 +214,5 @@ public class WeDayController {
         Message message = messageFactory.create(params);
         System.out.println(message.getSid());
     }
+
 }
