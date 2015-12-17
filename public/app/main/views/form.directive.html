@@ -9,7 +9,7 @@
       </div>
       <p><button type="submit">Connect to Facebook</button></p>
   </form> -->
-  <h1>Create New Admin: <small></small></h1>
+  <h1>Register: <small></small></h1>
     <form class="form-horizontal" >
       <div class="form-group">
       <label for="name" class="col-sm-4 control-label">Name:</label>
@@ -44,6 +44,6 @@
         <input type="password" required placeholder="password authentication" class="form-control" ng-model='passwordAuth'>
       </div>
     </div>
-  <span type = "submit" ng-click = 'createAdminInputsEmpty() && passwordsSame()&& addNewUser()' class = "glyphicon glyphicon-arrow-right"><a href = "#/"></a></span>
+  <span type = "submit" ng-click = '!emailExists(email)&&createAdminInputsEmpty() && passwordsSame()&& addNewUser()' class = "glyphicon glyphicon-arrow-right"><a href = "#/"></a></span>
     </form>
   </div>

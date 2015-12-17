@@ -206,11 +206,17 @@ body, html, main {
 
 .register-form {
   padding-top: 10%;
-  text-align: center; }
+  text-align: center;
+  width: 90%; }
   .register-form .glyphicon-arrow-right {
     font-size: 3em; }
     .register-form .glyphicon-arrow-right:hover {
       opacity: .5; }
+
+.login-main-page {
+  margin-top: 10%;
+  width: 90%;
+  margin-left: 5%; }
 
 .nav-column .nav-tabs {
   margin-top: 20%;
