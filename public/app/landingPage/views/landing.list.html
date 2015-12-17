@@ -1,6 +1,12 @@
-  <div class="options" ng-repeat = "item in weddings">
-    <h1>{{item.weddingId}} <small></small></h1>
-    <div class="wedding-option-link">
-      <a href="#/{{isadmin}}/{{item.weddingId}}/{{routeParams}}">{{item.weddingName}}</a>
+
+<div class="landing-page-container container">
+  <span class = "top-horizontal-bar"></span>
+  <div class="landing-page">
+    <div class="landing-page-options" ng-repeat = "item in weddings">
+      <div class="wedding-option-link">
+        <a href="#/{{isadmin}}/{{item.weddingId}}/{{routeParams}}">{{item.weddingName}}</a>
+      </div>
     </div>
   </div>
+  <span class = "bottom-horizontal-bar"></span>
+</div>
