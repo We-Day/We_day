@@ -8,9 +8,7 @@ angular
       $scope.currentView = num;
     };
     $scope.isCurrentView = function(num){
-      // if($scope.currentView == num){return true}else{
-      //   return false;
-      // }
+
       return $scope.currentView === num ? true:false;
     }
   });
