@@ -8,8 +8,7 @@
         transclue: true,
         templateUrl: '/app/main/calendar.directive.html',
         link: function (scope, element, attributes) {
-
-
+          
         }
       };
     });

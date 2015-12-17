@@ -18,8 +18,5 @@ angular
           return false;}
       });
     };
-    $scope.reRoute = function(){
-      $location.path('landingPage/1');
-    }
-    });
+  });
 })();

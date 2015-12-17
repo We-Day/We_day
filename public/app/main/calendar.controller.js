@@ -1,5 +1,4 @@
 
-
 (function(){
 "use strict"
 angular
@@ -7,7 +6,6 @@ angular
   .controller('CalendarController',function($scope,CalendarService,$compile,uiCalendarConfig,$window){
     //reload route
     // console.log($scope.events,'scope events')
-
 
 
       $scope.events = [{
@@ -85,7 +83,6 @@ $scope.weddingName = "Charles & Sarah's Wedding"
     /* alert on Resize */
     $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
 
-      $scope.alertMessage = ('Event Resized to make dayDelta ' + event.end._d);
     };
 
 
