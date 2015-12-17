@@ -69,7 +69,7 @@ body, html, main {
 .navbar {
   position: fixed;
   width: 100%;
-  top: -2%; }
+  top: -1%; }
   .navbar .navbar-brand {
     opacity: 0;
     /* make things invisible upon start */
@@ -133,7 +133,7 @@ body, html, main {
     width: 60%;
     margin-left: 30%;
     height: 100px;
-    background: rgba(20, 5, 5, 0.5);
+    background: rgba(20, 5, 5, 0);
     opacity: 0;
     /* make things invisible upon start */
     -webkit-animation: fadeIn ease-in 1;
@@ -151,30 +151,8 @@ body, html, main {
       text-decoration: none;
       color: white;
       font-size: 4em; }
-    .cd-fixed-bg p:hover {
-      -webkit-animation: fadeOut ease-in 1;
-      /* call our keyframe named slide, use animattion ease-in and repeat it only 1 time */
-      -moz-animation: fadeOut ease-in 1;
-      animation: fadeOut ease-in 1;
-      -webkit-animation-fill-mode: forwards;
-      /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-      -moz-animation-fill-mode: forwards;
-      animation-fill-mode: forwards;
-      -webkit-animation-duration: 1s;
-      -moz-animation-duration: 1s;
-      animation-duration: 1s; }
-      .cd-fixed-bg p:hover ~ #slider {
-        -webkit-animation: slide-in ease-in 1;
-        /* call our keyframe named slide, use animattion ease-in and repeat it only 1 time */
-        -moz-animation: slide-in ease-in 1;
-        animation: slide-in ease-in 1;
-        -webkit-animation-fill-mode: forwards;
-        /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-        -moz-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
-        -webkit-animation-duration: 1.5s;
-        -moz-animation-duration: 1.5s;
-        animation-duration: 1.5s; }
+      .cd-fixed-bg p a:hover {
+        opacity: .7; }
 
 .cd-fixed-bg.cd-bg-1 {
   margin-top: 3%;
@@ -186,13 +164,21 @@ body, html, main {
 .cd-fixed-bg.cd-bg-3 {
   background-image: url("http://charleston-wedding-packages.com/images/angel-oak-2.jpg"); }
 
+.cd-container h1 {
+  width: 60%;
+  margin: auto; }
+
+.calendar-main-page {
+  margin-bottom: 5%; }
+
 .cd-scrolling-bg {
   min-height: 100%; }
   .cd-scrolling-bg .block {
     vertical-align: top;
     max-width: 30%;
     display: inline-block;
-    margin-left: 2%; }
+    margin-left: 2%;
+    text-align: center; }
     .cd-scrolling-bg .block img {
       width: 100%; }
     .cd-scrolling-bg .block h1 {
@@ -203,6 +189,20 @@ body, html, main {
 
 .display-none {
   display: none; }
+
+.register-form {
+  padding-top: 10%;
+  text-align: center;
+  width: 90%; }
+  .register-form .glyphicon-arrow-right {
+    font-size: 3em; }
+    .register-form .glyphicon-arrow-right:hover {
+      opacity: .5; }
+
+.login-main-page {
+  margin-top: 10%;
+  width: 90%;
+  margin-left: 5%; }
 
 .nav-column .nav-tabs {
   margin-top: 20%;
@@ -284,23 +284,73 @@ body, html, main {
 .main-calendar {
   margin-top: 2%; }
 
-.notifications-div #title-notifications {
-  font-size: 3em;
-  margin-left: 20%;
-  margin-top: 5%; }
+.notifications-div {
+  background-color: white;
+  margin-top: 5%;
+  border: 1px solid #89bdd3; }
+  .notifications-div .form-group-notifications {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    padding: 1%;
+    background-color: #9ad3de; }
+  .notifications-div #title-notifications {
+    font-size: 3em; }
+  .notifications-div .checkboxes-notifications {
+    margin-left: 5%; }
+    .notifications-div .checkboxes-notifications .form-group {
+      display: block; }
+  .notifications-div .admin-notifications-container {
+    margin-top: 5%; }
+  .notifications-div .admin-notifications {
+    display: inline-block;
+    color: white;
+    background-color: #c9c9c9;
+    margin: 1%;
+    border-radius: 3%; }
+    .notifications-div .admin-notifications h1 {
+      font-size: 2em; }
+    .notifications-div .admin-notifications .glyphicon-remove {
+      color: white; }
 
-.notifications-div .checkboxes-notifications {
-  margin-left: 30%; }
-
-.admin-notifications-container {
-  margin-top: 5%; }
-
-.admin-notifications {
-  display: inline-block;
-  color: white;
-  background: rgba(5, 5, 10, 0.9);
-  margin: 1%; }
-  .admin-notifications h1 {
-    font-size: 2em; }
-  .admin-notifications .glyphicon-remove {
-    color: white; }
+.landing-page-container {
+  width: 100%;
+  margin: 0;
+  padding: 0; }
+  .landing-page-container .top-horizontal-bar {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    border-top: 100px solid black;
+    border-right: 1500px solid transparent; }
+  .landing-page-container .bottom-horizontal-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    border-bottom: 100px solid black;
+    border-left: 1500px solid transparent; }
+  .landing-page-container .landing-page {
+    width: 80%;
+    margin: auto;
+    margin-top: 10%;
+    text-align: center; }
+    .landing-page-container .landing-page .landing-page-options {
+      display: inline-block;
+      width: 40%;
+      margin: auto;
+      margin: 3%;
+      border: solid #c9c9c9 3px;
+      padding: 5%;
+      text-align: center; }
+      .landing-page-container .landing-page .landing-page-options a {
+        text-decoration: none;
+        font-size: 3em;
+        color: black;
+        font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 26.4px; }
+      .landing-page-container .landing-page .landing-page-options:hover {
+        opacity: .5; }

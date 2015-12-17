@@ -1,7 +1,6 @@
 {
   "name": "weday",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "angular": "^1.4.8",
@@ -13,5 +12,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }

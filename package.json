@@ -1,5 +1,5 @@
 {
-  "name": "weday",
+  "name": "ls",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NathanMartin86/We_day.git"
+    "url": "git+https://github.com/spcbdrake/We_day.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NathanMartin86/We_day/issues"
+    "url": "https://github.com/spcbdrake/We_day/issues"
   },
-  "homepage": "https://github.com/NathanMartin86/We_day#readme"
+  "homepage": "https://github.com/spcbdrake/We_day#readme"
 }

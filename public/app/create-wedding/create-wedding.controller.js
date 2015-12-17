@@ -4,7 +4,7 @@ angular
   .module('create-wedding')
   .controller('CreateWeddingController',function($scope,CreateWeddingService,$anchorScroll,$location,$window){
     //current Index page for wedding controller
-    $scope.currentIndex = 2;
+    $scope.currentIndex = 0;
 
     //check if person already invited
     var invitedUsers = [];
@@ -62,7 +62,6 @@ angular
         userName: $scope.userName,
         email:$scope.email,
         phone:$scope.phone,
-        zip:$scope.zip,
         password:$scope.password,
       }
       if($scope.password == $scope.passwordAuth){

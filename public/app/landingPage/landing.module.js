@@ -11,7 +11,7 @@
       ])
       .config(function ($routeProvider) {
       $routeProvider
-        .when('/landing/:userId', {
+        .when('/landingPage/:userId', {
           templateUrl: 'app/landingPage/views/landing.list.html',
           controller: 'LandingController as landingCtrl'
         })

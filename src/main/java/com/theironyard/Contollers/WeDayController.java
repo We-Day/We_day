@@ -78,23 +78,6 @@ public class WeDayController {
         return (List<Wedding>) weddings.findAll();
     }
 
-    @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
-    public Wedding findOne(Wedding wedding) {
-        return weddings.findOne(wedding.id);
-    }
-
-
-    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
-    public User createUser (@RequestBody User user) {
-        return users.save(user);
-    }
-
-    @RequestMapping(path = "/create-user/{id}", method = RequestMethod.GET)
-    public User findOne(User user){
-        return users.findOne(user.id);
-    }
-
-
     @RequestMapping("/create-invite")
     public void createInvite(@RequestBody Invitee invitee) throws Exception {
         User user = users.findOneByEmail(invitee.email);
@@ -103,9 +86,8 @@ public class WeDayController {
             user.email = invitee.email;
             user.username = invitee.name;
             users.save(user);
-
-            //something to do with passwords needs to be in here.
         }
+
         Wedding wedding = weddings.findOne(invitee.weddingId);
         if (wedding == null) {
             throw new Exception("Wedding does not exist");
@@ -127,6 +109,13 @@ public class WeDayController {
     }
 
 
+    @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
+    public User findUser(@PathVariable("id") int id) {
+        User user = users.findOne(id);
+        user.password = null;
+        return user;
+    }
+
     @RequestMapping("/login")
     public void userLogin(String email,HttpSession session,
                           String password, HttpServletResponse response) throws Exception {
@@ -144,6 +133,13 @@ public class WeDayController {
         } else if (!PasswordHash.validatePassword(password, user.password)) {
             throw new Exception("Password is incorrect");
         }
+    }
+
+    @RequestMapping("/create-user")
+    public User createUser (@RequestBody User user) {
+        users.save(user);
+        user.password = null;
+        return user;
     }
 
     @RequestMapping("/profile")

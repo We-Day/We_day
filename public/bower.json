@@ -4,7 +4,7 @@
   "main": "",
   "moduleType": [],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/spcbdrake/We_day",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -23,5 +23,8 @@
   },
   "resolutions": {
     "angular": "~1.4.8"
-  }
+  },
+  "authors": [
+    "benjamindrake <spcbdrake@yahoo.com>"
+  ]
 }
