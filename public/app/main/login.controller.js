@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('main')
-  .controller('LoginController',function($scope,LoginService){
+  .controller('LoginController',function($location,$scope,LoginService){
     var users = [];
     LoginService.getUsers().success(function(res){
       var users = res;
@@ -14,9 +14,12 @@ angular
             $location.path('/landingPage/'+el.id);
             return true;
           }
-        }return false;
-        }
-      })
+        }else{
+          return false;}
+      });
+    };
+    $scope.reRoute = function(){
+      $location.path('landingPage/1');
     }
-  });
+    });
 })();

@@ -1,0 +1,134 @@
+
+<div role="main ">
+    <div class="container main-calendar">
+        <section id="directives-calendar" ng-controller="CalendarController">
+            <div class="well">
+                <div class="row-fluid">
+                    <div class="span4 col-md-4">
+
+
+                        <div class="btn-group calTools">
+                          <!-- <button class="btn" ng-click="changeLang()">
+                            {{changeTo}}
+                          </button>
+                          <button class="btn" ng-click="addRemoveEventSource(eventSources,eventSource)">
+                            Toggle Source
+                          </button> -->
+                          <button type="button" class="btn btn-primary" ng-click="addEvent()">
+                            Add Event
+                          </button>
+                        </div>
+
+                        <ul class="unstyled">
+                            <li ng-repeat="e in events">
+                                <div class="alert alert-info">
+                                    <a class="close" ng-click="remove($index,e)"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <b > <input ng-change = "editDate(e)"ng-model="e.title"></b>
+                                    {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
+                                    <h5>How would you like to notify your contacts</h5>
+                                    <div class="checkbox">
+                                      <label><input ng-change = "editDate(e)"type="checkbox" ng-model = "e.email.bool"value="">Email</label>
+                                      <select ng-model = "e.email.time"class="">
+                                        <option type = "number" value="1">1 Hour Before</option>
+                                        <option type = "number"value="6">6 Hour Before</option>
+                                        <option type = "number"value="24">24 Hour Before</option>
+                                        <option type = "number"value="48">2 Days Before</option>
+                                      </select>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model = "e.text.bool"value="">Text</label>
+                                        <select ng-model = "e.text.time" class="">
+                                          <option type = "number"value="10">10 Mins Before</option>
+                                          <option type = "number"value="30">30 Mins Before</option>
+                                          <option type = "number"value="60">1 Hour Before</option>
+                                          <option type = "number"value="120">2 Hours Before</option>
+                                        </select>
+                                      </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model = "e.notification.bool"value="">App</label>
+                                        <select ng-model = "e.notification.time" class="">
+                                          <option type = "number"value=".5">30 Mins Before</option>
+                                          <option type = "number"value="2">2 Hours Before</option>
+                                          <option type = "number"value="5">5 Hour Before</option>
+                                          <option type = "number"value="24">24 Hours Before</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="span8 col-md-8">
+                        <tabset>
+                            <tab select="renderCalender('myCalendar1');">
+                              <tab-heading>
+                               <i class="glyphicon glyphicon-bell"></i> {{weddingName}}
+                              </tab-heading>
+                              <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                                <h4>{{alertMessage}}</h4>
+                              </div>
+                              <div class="btn-toolbar">
+                                <p class="pull-right lead">{{weddingName}} <small>View Options</small></p>
+                                <div class="btn-group">
+                                    <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar1')">AgendaDay</button>
+                                    <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar1')">AgendaWeek</button>
+                                    <button class="btn btn-success" ng-click="changeView('month', 'myCalendar1')">Month</button>
+                                </div>
+                              </div>
+                            <div ng-if= "events.length > 0"class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                           </tab>
+                           <!-- <tab select="renderCalender('myCalendar2');">
+                            <tab-heading>
+                              <i class="glyphicon glyphicon-bell"></i> Calendar Two
+                            </tab-heading>
+                              <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                                <h4>{{alertMessage}}</h4>
+                              </div>
+                              <div class="btn-toolbar">
+                                <p class="pull-right lead">Calendar Two View Options</p>
+                                <div class="btn-group">
+                                    <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar2')">AgendaDay</button>
+                                    <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar2')">AgendaWeek</button>
+                                    <button class="btn btn-success" ng-click="changeView('month', 'myCalendar2')">Month</button>
+                                </div>
+                              </div>
+                            <div class="calendar" ng-model="eventSources" calendar="myCalendar2" ui-calendar="uiConfig.calendar"></div>
+                           </tab>
+                           <tab select="renderCalender('myCalendar3');">
+                            <tab-heading>
+                              <i class="glyphicon glyphicon-bell"></i> Calendar Three
+                            </tab-heading>
+                              <div class="alert-success calAlert">
+                                <h4>This calendar uses the extended form</h4>
+                              </div>
+                              <div class="btn-toolbar">
+                                <p class="pull-right lead">Calendar Three View Options</p>
+                                <div class="btn-group">
+                                    <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar3')">AgendaDay</button>
+                                    <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar3')">AgendaWeek</button>
+                                    <button class="btn btn-success" ng-click="changeView('month', 'myCalendar3')">Month</button>
+                                </div>
+                              </div>
+                            <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+                           </tab> -->
+                        </tabset>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+        <!-- <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-17352735-3']);
+            _gaq.push(['_trackPageview']);
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        </script> -->
