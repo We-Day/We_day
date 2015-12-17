@@ -5,23 +5,27 @@
 </div>
 <div>
   <ul class="nav navbar-nav">
-    <li class="active"><a href="#">Home</a></li>
-    <li ng-click = 'isLoginOpen = !isLoginOpen'><a href=""><my-login></my-login></a></li>
+    <li ng-click = 'setCurrentView(0)'class="active"><a>Home</a></li>
+    <!-- <li ng-click = 'isRegister = !isRegister'><a href=""><my-login></my-login></a></li> -->
     <li><a href="#/admins">Admin</a></li>
     <li><a href="#/landing/1">Landing</a></li>
 
   </ul>
   <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#/create-weddings"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li ng-click = 'setCurrentView(1)'><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li ng-click = 'setCurrentView(2)'><a><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
 </div>
 </div>
 </nav>
 
-<my-form></my-form>
+<!-- place to put sign-up page -->
+<register-form ng-show = 'isCurrentView(1)'></register-form>
 <!-- all other content for front page -->
-<div id = 'wrapper'>
+<login-form ng-show = 'isCurrentView(2)'></login-form>
+
+
+<div ng-show = "isCurrentView(0)" id = 'wrapper'>
 <section>
 	<div class="cd-fixed-bg cd-bg-1">
 		<h1>We-Day</h1>

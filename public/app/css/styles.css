@@ -69,7 +69,7 @@ body, html, main {
 .navbar {
   position: fixed;
   width: 100%;
-  top: -2%; }
+  top: -1%; }
   .navbar .navbar-brand {
     opacity: 0;
     /* make things invisible upon start */
@@ -204,6 +204,20 @@ body, html, main {
 .display-none {
   display: none; }
 
+.register-form {
+  padding-top: 10%;
+  text-align: center;
+  width: 90%; }
+  .register-form .glyphicon-arrow-right {
+    font-size: 3em; }
+    .register-form .glyphicon-arrow-right:hover {
+      opacity: .5; }
+
+.login-main-page {
+  margin-top: 10%;
+  width: 90%;
+  margin-left: 5%; }
+
 .nav-column .nav-tabs {
   margin-top: 20%;
   float: left;
@@ -284,23 +298,31 @@ body, html, main {
 .main-calendar {
   margin-top: 2%; }
 
-.notifications-div #title-notifications {
-  font-size: 3em;
-  margin-left: 20%;
-  margin-top: 5%; }
-
-.notifications-div .checkboxes-notifications {
-  margin-left: 30%; }
-
-.admin-notifications-container {
-  margin-top: 5%; }
-
-.admin-notifications {
-  display: inline-block;
-  color: white;
-  background: rgba(5, 5, 10, 0.9);
-  margin: 1%; }
-  .admin-notifications h1 {
-    font-size: 2em; }
-  .admin-notifications .glyphicon-remove {
-    color: white; }
+.notifications-div {
+  background-color: white;
+  margin-top: 5%;
+  border: 1px solid #89bdd3; }
+  .notifications-div .form-group-notifications {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    padding: 1%;
+    background-color: #9ad3de; }
+  .notifications-div #title-notifications {
+    font-size: 3em; }
+  .notifications-div .checkboxes-notifications {
+    margin-left: 5%; }
+    .notifications-div .checkboxes-notifications .form-group {
+      display: block; }
+  .notifications-div .admin-notifications-container {
+    margin-top: 5%; }
+  .notifications-div .admin-notifications {
+    display: inline-block;
+    color: white;
+    background-color: #c9c9c9;
+    margin: 1%;
+    border-radius: 3%; }
+    .notifications-div .admin-notifications h1 {
+      font-size: 2em; }
+    .notifications-div .admin-notifications .glyphicon-remove {
+      color: white; }

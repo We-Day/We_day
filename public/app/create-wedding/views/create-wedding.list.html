@@ -49,7 +49,7 @@
     <span ng-click = 'setCurrentIndex(2)'class = "glyphicon glyphicon-arrow-right"></span>
   </div>
 
-  <div ng-show = 'isCurrentIndex(4)'class=" admin-form admin-invite-contacts">
+  <div ng-show = 'isCurrentIndex(3)'class=" admin-form admin-invite-contacts">
     <h1>All Done! <small></small></h1>
   <button id = 'submit-new-admin' ng-click = 'addNewWedding()' class="btn btn-default">Create New We-Day</button>
 </form>
@@ -57,61 +57,10 @@
 
 
 <!---create new admin-->
-  <div ng-show = 'isCurrentIndex(2)'class=" admin-form create-wedding-password">
-    <form action="/connect/facebook" method="POST">
-        <input type="hidden" name="scope" value="read_stream" />
-        <div class="formInfo">
-            <p>You aren't connected to Facebook yet. Click the button to connect this application with your Facebook account.</p>
-        </div>
-        <p><button type="submit">Connect to Facebook</button></p>
-    </form>
-    <h1>Create New Admin: <small></small></h1>
-      <form class="form-horizontal" >
-        <div class="form-group">
-        <label for="name" class="col-sm-4 control-label">Name:</label>
-        <div class="col-sm-8">
-          <input type="text" required placeholder="Juan Pablo Sanchez de la Goma"class="form-control" ng-model="userName">
-        </div>
-      </div>
-        <div class="form-group">
-        <label for="email" class="col-sm-4 control-label">Email:</label>
-        <div class="col-sm-8">
-          <input type="email" required placeholder="email address"class="form-control" ng-model="email">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="phone" class="col-sm-4 control-label">Phone Number:</label>
-        <div class="col-sm-8">
-          <input type="tel" required placeholder = 'phone-number'class="form-control" ng-model="phone">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="zip" class="col-sm-4 control-label">Your Zipcode:</label>
-        <div class="col-sm-8">
-          <input type="text" required placeholder = 'zip-code'class="form-control" ng-model="zip">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password" class="col-sm-4 control-label">Password:</label>
-        <div class="col-sm-8">
-          <input type="password" required placeholder="password"class="form-control" ng-model="password">
-        </div>
-      </div>
-      <p style="color:red; font-size:1.2em"id = "passwords-no-match" ng-show = '!passwordsAreSame'>
-        Passwords do not match!
-      </p>
-      <div class="form-group">
-        <label for="password-auth" class="col-sm-4 control-label">Confirm Password:</label>
-        <div class="col-sm-8">
-          <input type="password" required placeholder="password authentication" class="form-control" ng-model='passwordAuth'>
-        </div>
-      </div>
-    <span type = "submit" ng-click = 'createAdminInputsEmpty() && passwordsSame()&&setCurrentIndex(3) && addAdmin()'class = "glyphicon glyphicon-arrow-right"></span>
-      </form>
-    </div>
+
 
 <!---create-new-user-->
-  <div ng-show = 'isCurrentIndex(3)'class=" admin-form nested-invite-contacts-form">
+  <div ng-show = 'isCurrentIndex(2)'class=" admin-form nested-invite-contacts-form">
     <h1>Invite Contacts <small></small></h1>
     <form class="form-inline" >
       <div class="form-group">
@@ -135,7 +84,7 @@
         </div>
         </div>
       </form>
-      <span ng-click = 'setCurrentIndex(4)'class = "glyphicon glyphicon-arrow-right"></span>
+      <span ng-click = 'setCurrentIndex(3)'class = "glyphicon glyphicon-arrow-right"></span>
   </div>
   </div>
 </div>

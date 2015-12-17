@@ -1,17 +1,25 @@
 <div ng-controller = "NotController" class="notifications-div col-md-12">
-<form class="form-horizontal">
-  <input id = "title-notifications" placeholder="Notification"type="text" ng-model ="title" name="name" value="">
-<div class="checkboxes-notifications">
-  <div class="form-group checkbox">
-    <label><input type="checkbox" ng-model = "email"value="">Email</label>
+<form class="form-inline form-group-notifications">
+  <div class="form-group">
+    <input id = "title-notifications" placeholder="Send a notification"type="text" ng-model ="title" name="name" value="">
   </div>
-  <div class="form-group checkbox">
-      <label><input type="checkbox" ng-model = "text"value="">Text</label>
+
+<div class="form-group checkboxes-notifications">
+  <h5>Send as <small>:</small></h5>
+  <form class = "form-group"role = 'form'>
+    <div class="form-group checkbox">
+      <label><input type="checkbox" ng-model = "email"value="">Email</label>
     </div>
-  <div class="form-group checkbox">
-      <label><input type="checkbox" ng-model = "notification"value="">App</label>
-  </div>
-      <button ng-click = "postNot()"name="button">Submit</button>
+    <div class=" form-group checkbox">
+        <label><input type="checkbox" ng-model = "text"value="">Text</label>
+      </div>
+    <div class=" form-group checkbox">
+        <label><input type="checkbox" ng-model = "notification"value="">App</label>
+    </div>
+  </form>
+</div>
+<div class="form-group button">
+  <input type = "submit"ng-click = "postNot()"name="button"></input>
 </div>
 </form>
 <div class="container admin-notifications-container">
