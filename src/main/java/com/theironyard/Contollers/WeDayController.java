@@ -115,23 +115,29 @@ public class WeDayController {
         return u;
     }
 
-    @RequestMapping("/login")
-    public void userLogin(String email,HttpSession session,
-                          String password, HttpServletResponse response) throws Exception {
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public Boolean userLogin(String email,HttpSession session,
+                          String password, HttpServletResponse response, Invite invite) throws Exception {
 
         User user = users.findOneByEmail(email);
 
         if (user == null) {
-            throw new Exception("User does not exist. Please create an account");
+            response.sendError(403);
 
         } else if (PasswordHash.validatePassword(password, user.password)) {
-            response.sendRedirect("/landing/" + user.id);
+            if (invites.findByEmail(email)!=null) {
+                return true;
+            } else {
+                return false;
+            }
 
         } else if (!PasswordHash.validatePassword(password, user.password)) {
-            throw new Exception("Password is incorrect");
+            response.sendError(403);
+
         }
 
         session.setAttribute("email",email);
+        return null;
     }
 
     @RequestMapping("/create-user")
