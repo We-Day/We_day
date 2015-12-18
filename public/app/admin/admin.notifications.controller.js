@@ -11,7 +11,7 @@ angular
     $scope.refresh();
     $scope.postNot = function(){
       console.log('clicked');
-      var dateTime = moment().format('MMMM Do YYYY, h:mm:ss a');
+      var dateTime = moment().calendar();
       var currObj = {
         title: $scope.title,
         email: $scope.email,

@@ -343,7 +343,9 @@ body, html, main {
 	padding: 10px;
 	h1{
 		font-size: 2em;
-
+	}
+	h4{
+		font-size: .8em;
 	}
 	.glyphicon-remove{
 		color:black;
@@ -386,6 +388,26 @@ body, html, main {
 		border-bottom: 100px solid black;
 		border-left: 1500px solid transparent;
 	}
+.landing-page-create-wedding{
+	width: 50%;
+	margin: auto;
+	border: solid #c9c9c9 3px;
+	padding: 5%;
+	text-align: center;
+	a{
+		text-decoration: none;
+		font-size: 3em;
+		color:black;
+		font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		line-height: 26.4px;
+	}
+	&:hover{
+		opacity: .5;
+	}
+}
 .landing-page{
 	width: 80%;
 	margin: auto;

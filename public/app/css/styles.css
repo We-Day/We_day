@@ -321,6 +321,8 @@ body, html, main {
     padding: 10px; }
     .notifications-div .admin-notifications h1 {
       font-size: 2em; }
+    .notifications-div .admin-notifications h4 {
+      font-size: .8em; }
     .notifications-div .admin-notifications .glyphicon-remove {
       color: black; }
 
@@ -353,6 +355,23 @@ body, html, main {
     height: 0;
     border-bottom: 100px solid black;
     border-left: 1500px solid transparent; }
+  .landing-page-container .landing-page-create-wedding {
+    width: 50%;
+    margin: auto;
+    border: solid #c9c9c9 3px;
+    padding: 5%;
+    text-align: center; }
+    .landing-page-container .landing-page-create-wedding a {
+      text-decoration: none;
+      font-size: 3em;
+      color: black;
+      font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 500;
+      line-height: 26.4px; }
+    .landing-page-container .landing-page-create-wedding:hover {
+      opacity: .5; }
   .landing-page-container .landing-page {
     width: 80%;
     margin: auto;
