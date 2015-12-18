@@ -164,7 +164,7 @@ body, html, main {
 .cd-fixed-bg.cd-bg-3 {
   background-image: url("http://charleston-wedding-packages.com/images/angel-oak-2.jpg"); }
 
-.calendar-container-div h1 {
+.cd-container h1 {
   width: 60%;
   margin: auto; }
 
@@ -204,28 +204,34 @@ body, html, main {
   width: 90%;
   margin-left: 5%; }
 
-.nav-column .nav-tabs {
-  margin-top: 20%;
-  float: left;
-  border-bottom: 0; }
-  .nav-column .nav-tabs li {
-    float: none;
-    margin-bottom: 3%; }
-    .nav-column .nav-tabs li p {
-      display: none; }
-    .nav-column .nav-tabs li:hover p {
-      display: block; }
-    .nav-column .nav-tabs li a {
-      margin-right: 0;
-      border: 0;
-      background-color: #333; }
-      .nav-column .nav-tabs li a:hover {
-        background-color: #444; }
-  .nav-column .nav-tabs .glyphicon {
-    color: #fff;
-    font-size: 2em; }
-  .nav-column .nav-tabs .active .glyphicon {
-    color: #333; }
+.nav-column {
+  width: 10%; }
+  .nav-column .nav-tabs {
+    margin-top: 20%;
+    float: left;
+    border-bottom: 0; }
+    .nav-column .nav-tabs li {
+      float: none;
+      padding-bottom: 3%;
+      transition: all 0.5s ease;
+      height: 80px; }
+      .nav-column .nav-tabs li p {
+        display: none;
+        transition: all 0.5s ease; }
+      .nav-column .nav-tabs li:hover p {
+        display: block; }
+      .nav-column .nav-tabs li a {
+        margin-right: 0;
+        border: 0;
+        background-color: #333;
+        transition: all 0.5s ease; }
+        .nav-column .nav-tabs li a:hover {
+          background-color: #444; }
+    .nav-column .nav-tabs .glyphicon {
+      color: #fff;
+      font-size: 2em; }
+    .nav-column .nav-tabs .active .glyphicon {
+      color: #333; }
 
 .animate-show.ng-hide-add {
   transition: all linear 0; }
@@ -266,7 +272,8 @@ body, html, main {
         padding-right: 80%; }
     .admin-form .form-group input {
       float: left;
-      width: 65%; }
+      width: 65%;
+      border-radius: 5px; }
   .admin-form .glyphicon-arrow-right {
     font-size: 4em;
     top: 100%; }
@@ -285,33 +292,51 @@ body, html, main {
   margin-top: 2%; }
 
 .notifications-div {
-  background-color: white;
   margin-top: 5%;
-  border: 1px solid #89bdd3; }
+  border-radius: 5px;
+  padding: 0; }
   .notifications-div .form-group-notifications {
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 5%;
-    padding: 1%;
-    background-color: #9ad3de; }
-  .notifications-div #title-notifications {
-    font-size: 3em; }
+    width: 100%;
+    background-color: #e3e3e3;
+    padding: 0;
+    margin: 0; }
   .notifications-div .checkboxes-notifications {
-    margin-left: 5%; }
+    padding-left: 30%; }
     .notifications-div .checkboxes-notifications .form-group {
       display: block; }
+  .notifications-div .form-inline {
+    border-radius: 5px; }
   .notifications-div .admin-notifications-container {
+    background-image: url("https://unsplash.com/photos/xMScfzgJ7_c");
+    width: 100%;
     margin-top: 5%; }
   .notifications-div .admin-notifications {
+    background-image: url("https://unsplash.com/photos/xMScfzgJ7_c");
     display: inline-block;
     color: white;
-    background-color: #c9c9c9;
+    background-color: #89bdd3;
     margin: 1%;
-    border-radius: 3%; }
+    border-radius: 30px;
+    margin-bottom: 30px;
+    padding: 10px; }
     .notifications-div .admin-notifications h1 {
       font-size: 2em; }
+    .notifications-div .admin-notifications h4 {
+      font-size: .8em; }
     .notifications-div .admin-notifications .glyphicon-remove {
-      color: white; }
+      color: black; }
+
+.full-page-div-form {
+  width: 100%; }
+
+.notification-input {
+  width: 500px;
+  font-size: 3em; }
+  .notification-input a {
+    text-decoration: none; }
+  .notification-input input {
+    width: 700px !important;
+    border-radius: 100px; }
 
 .landing-page-container {
   width: 100%;
@@ -330,6 +355,23 @@ body, html, main {
     height: 0;
     border-bottom: 100px solid black;
     border-left: 1500px solid transparent; }
+  .landing-page-container .landing-page-create-wedding {
+    width: 50%;
+    margin: auto;
+    border: solid #c9c9c9 3px;
+    padding: 5%;
+    text-align: center; }
+    .landing-page-container .landing-page-create-wedding a {
+      text-decoration: none;
+      font-size: 3em;
+      color: black;
+      font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 500;
+      line-height: 26.4px; }
+    .landing-page-container .landing-page-create-wedding:hover {
+      opacity: .5; }
   .landing-page-container .landing-page {
     width: 80%;
     margin: auto;

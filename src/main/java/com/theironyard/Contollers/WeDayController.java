@@ -4,6 +4,7 @@ import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.User;
 import com.theironyard.Services.*;
+import com.theironyard.Utilities.Params;
 import com.theironyard.Utilities.PasswordHash;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -54,9 +55,6 @@ public class WeDayController {
     WeddingRepository weddings;
 
     @Autowired
-    InviteeRepository invitees;
-
-    @Autowired
     PostRepository posts;
 
     @Autowired
@@ -69,84 +67,87 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding){
-        return weddings.save(wedding);
+    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
+        weddings.save(wedding);
+        User user = users.findOneByEmail((String) session.getAttribute("email"));
+        if (user == null) {
+            throw new Exception("User does not exist");
+        }
+        Invite invite =  new Invite();
+        invite.isAdmin= true;
+        invite.wedding= wedding;
+        invite.email = user.email;
+        createInvite(invite);
+        return wedding;
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.GET)
-    public List<Wedding> AllWeddings() {
+    public List<Wedding> allWeddings() {
         return (List<Wedding>) weddings.findAll();
     }
 
     @RequestMapping("/create-invite")
-    public void createInvite(@RequestBody Invitee invitee) throws Exception {
-        User user = users.findOneByEmail(invitee.email);
-        if (user == null) {
-            user= new User();
-            user.email = invitee.email;
-            user.username = invitee.name;
-            users.save(user);
-        }
-
-        Wedding wedding = weddings.findOne(invitee.weddingId);
+    public void createInvite(@RequestBody Invite invitee) throws Exception {
+        Wedding wedding = weddings.findOne(invitee.wedding.id);
         if (wedding == null) {
             throw new Exception("Wedding does not exist");
         }
-        Invite invite= new Invite();
-        invite.user = user;
-        invite.isAdmin = invitee.isAdmin;
-        invite.wedding = wedding;
-        invites.save(invite);
+        //something to do with passwords needs to be in here.
+        invites.save(invitee);
         /*send email here*/
     }
 
     @RequestMapping("/invites")
     public List<Wedding> invitesList(@RequestBody User user) {
-        return invites.findByUser(user).stream()
+        return invites.findByEmail(user.email).stream()
                 .map(invite -> {
                     return invite.wedding;
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
-    @RequestMapping("/create-user")
-    public User createUser (@RequestBody User user) {
-        users.save(user);
-        user.password = null;
-        return user;
+    @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
+    public Wedding findOne(Wedding wedding) {
+        return weddings.findOne(wedding.id);
     }
-
-    @RequestMapping(path = "/users", method = RequestMethod.GET)
-    public List<User>allUsers(){
-        return (List<User>) users.findAll();
-    }
-
 
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public User findUser(@PathVariable("id") int id) {
-        User user = users.findOne(id);
-        user.password = null;
+        User u = users.findOne(id);
+        return u;
+    }
+
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public Boolean userLogin(@RequestBody User user,HttpSession session,
+                             HttpServletResponse response) throws Exception {
+
+        User u = users.findOneByEmail(user.email);
+
+        if (u == null) {
+            response.sendError(403);
+
+        } else if (PasswordHash.validatePassword(u.password, user.password)) {
+            if (invites.findByEmail(u.email)!=null) {
+                session.setAttribute("email",u.email);
+                return true;
+            } else {
+                session.setAttribute("email",u.email);
+                return false;
+            }
+
+        } else if (!PasswordHash.validatePassword(u.password, user.password)) {
+            response.sendError(403);
+
+        }
+
+
+        return null;
+    }
+
+    @RequestMapping("/create-user")
+    public User createUser (@RequestBody User user) {
+        users.save(user);
         return user;
     }
-
-    @RequestMapping("/login")
-    public void userLogin(String email,HttpSession session,
-                          String password, HttpServletResponse response) throws Exception {
-
-        session.setAttribute("email",email);
-
-        User user = users.findOneByEmail(email);
-
-        if (user == null) {
-            throw new Exception("User does not exist. Please create an account");
-
-        } else if (PasswordHash.validatePassword(password, user.password)) {
-            response.sendRedirect("/landingPage/" + user.id);
-
-        } else if (!PasswordHash.validatePassword(password, user.password)) {
-            throw new Exception("Password is incorrect");
-        }
-    }
-
 
     @RequestMapping("/profile")
     public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
@@ -183,6 +184,11 @@ public class WeDayController {
         return posts.findAll();
     }
 
+    @RequestMapping("/create-event")
+    public CalendarEvent createEvent(@RequestBody CalendarEvent event){
+        return events.save(event);
+    }
+
     @RequestMapping("/photo-upload")
     public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
         String username = (String) session.getAttribute("username");
@@ -212,5 +218,4 @@ public class WeDayController {
         Message message = messageFactory.create(params);
         System.out.println(message.getSid());
     }
-
 }

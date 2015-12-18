@@ -4,7 +4,7 @@
     .module('create-wedding')
     .factory('CreateWeddingService',function($http,$location,$window){
       var urlWedding = '/create-wedding';
-      var urlInviteUser = '/create-invite';
+      var urlInviteUser = 'http://tiny-tiny.herokuapp.com/collections/invite-user';
       var urlFacebook = '/profile'
       var getFacebookObject = function(item){
         return $http.get(urlFacebook);

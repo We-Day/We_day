@@ -3,24 +3,33 @@
 angular
   .module('main')
   .controller('LoginController',function($location,$scope,LoginService){
+
+
     var users = [];
     LoginService.getUsers().success(function(res){
-      users.push(res);
-    });
+      var users = res;
+    })
     $scope.loginUser = function(email,password){
-      console.log('loginUser');
-      console.log(email,'email');
-      console.log('login users',users[0]);
-      _.each(users[0],function(el){
-        console.log(el);
-        if(el.email === email){
-          if(el.password === password){
-            $location.path('/landingPage/'+el.id);
-            return true;
-          }
-        }else{
-          return false;}
+      LoginService.isInvitedToWedding(email, password).success(function(res){
+        console.log('res',typeof(res))
+
+        // _.each(users,function(el){
+        //   if(el.email === email){
+        //     if(el.password === password){
+        //       if(res === 1){
+        //         $location.path('/create-wedding')
+        //       }else{
+        //         $location.path('/landingPage/'+el.id);
+        //       }
+        //       return true;
+        //     }
+        //   }else{
+        //     return false;}
+        // });
       });
     };
-  });
+    $scope.reRoute = function(){
+      $location.path('landingPage/1');
+    }
+    });
 })();
