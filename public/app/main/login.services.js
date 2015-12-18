@@ -3,7 +3,7 @@
   angular
     .module('main')
     .factory('LoginService',function($http){
-      var urlUsers = '/users';
+      var urlUsers = '/create-user';
       var getUsers = function(){
         return $http.get(urlUsers);
       }

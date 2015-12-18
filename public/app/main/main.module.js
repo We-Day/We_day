@@ -1,14 +1,10 @@
 (function () {
   "use strict";
 
-  var underscore = angular.module('underscore',[]);
-    underscore.factory('_',function(){
-      return window._;
-    });
-    var jquery = angular.module('jquery',[]);
-      jquery.factory('$',function(){
-        return window._;
-      });
+  var underscore = angular.module('underscore', []);
+          underscore.factory('_', function() {
+              return window._; //Underscore should be loaded on the page
+          });
 
 
   angular
@@ -17,7 +13,6 @@
       'ui.router',
       'underscore',
       'admin',
-      'jquery',
       'ngAnimate',
       'ui.bootstrap',
       'create-wedding',
