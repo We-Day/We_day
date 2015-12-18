@@ -9,7 +9,7 @@
         templateUrl: '/app/admin/views/calendar.directive.html',
         link: function (scope, element, attributes) {
 
-
+          element.css('color','red');
         }
       };
     });
