@@ -9,6 +9,7 @@ angular
     $scope.reloadRoute = function() {
       $window.location.reload();
     }
+
     // console.log($scope.events,'scope events')
     $scope.updateEvents = function(){
     CalendarService.getDates().success(function(el){
