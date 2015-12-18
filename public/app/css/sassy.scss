@@ -188,15 +188,20 @@ body, html, main {
 }
 //admin page-------------------------------------------------------//
 .nav-column{
+	width: 10%;
 	.nav-tabs {
 	margin-top: 20%;
   float: left;
   border-bottom: 0;
   li {
     float: none;
-    margin-bottom: 3%;
+    padding-bottom: 3%;
+		transition: all 0.5s ease;
+		height: 80px;
+
 		p{
 			display: none;
+			transition: all 0.5s ease;
 		}
 		&:hover p{
 			display: block;
@@ -205,6 +210,7 @@ body, html, main {
       margin-right: 0;
       border: 0;
       background-color: #333;
+			transition: all 0.5s ease;
 
       &:hover {
         background-color: #444;
@@ -272,6 +278,7 @@ body, html, main {
 		input{
 			float: left;
 			width: 65%;
+			border-radius: 5px;
 		}
 
 	}
@@ -299,47 +306,67 @@ body, html, main {
 	margin-top: 2%;
 }
 //notifications
-.notifications-div{
-	background-color: white; //tan
-	margin-top: 5%;
-	border: 1px solid #89bdd3; //dark blue
-	.form-group-notifications{
-		width: 90%;
-		margin-left: 5%;
-		margin-top: 5%;
-		padding: 1%;
-		background-color: #9ad3de; //light blue
 
-	}
-	#title-notifications{
-		font-size: 3em;
+.notifications-div{
+	margin-top: 5%;
+	border-radius: 5px;
+	padding: 0;
+	.form-group-notifications{
+		width: 100%;
+		background-color: #e3e3e3;
+		padding: 0;
+		margin: 0;
 	}
 
 	.checkboxes-notifications{
-		margin-left: 5%;
+		padding-left: 30%;
 		.form-group{
 			display: block;
 		}
 	}
-
+.form-inline {
+	border-radius: 5px;
+}
 .admin-notifications-container{
+	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
+	width: 100%;
 	margin-top: 5%;
 
 }
 .admin-notifications{
+	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
 	display: inline-block;
 	color:white;
-	background-color: #c9c9c9; //grey
+	background-color: #89bdd3; //blue
 	margin:1%;
-	border-radius: 3%;
+	border-radius: 30px;
+	margin-bottom: 30px;
+	padding: 10px;
 	h1{
 		font-size: 2em;
+
 	}
 	.glyphicon-remove{
-		color:white;
+		color:black;
 	}
 }
 }
+.full-page-div-form{
+	width: 100%;
+}
+.notification-input{
+	width: 500px;
+	font-size: 3em;
+	a{
+		text-decoration: none;
+	}
+	input{
+		width: 700px!important;
+		border-radius: 100px;
+
+	}
+}
+
 //landing page
 .landing-page-container{
 	width: 100%;
@@ -385,6 +412,7 @@ body, html, main {
 		}
 		&:hover{
 			opacity: .5;
+
 		}
 	}
 }
