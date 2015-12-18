@@ -13,5 +13,9 @@ public class Params {
 
     public Wedding wedding;
 
+    public String email;
+
+    public String password;
+
     public Invite invite;
 }
