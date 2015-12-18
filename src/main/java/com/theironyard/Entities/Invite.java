@@ -15,8 +15,8 @@ public class Invite {
     @Column (nullable = false)
     public Boolean isAdmin;
 
-    @ManyToOne
-    public User user;
+    @Column (nullable = false)
+    public String email;
 
     @ManyToOne
     public Wedding wedding;
