@@ -127,8 +127,10 @@ public class WeDayController {
 
         } else if (PasswordHash.validatePassword(u.password, user.password)) {
             if (invites.findByEmail(u.email)!=null) {
+                session.setAttribute("email",u.email);
                 return true;
             } else {
+                session.setAttribute("email",u.email);
                 return false;
             }
 
@@ -137,7 +139,7 @@ public class WeDayController {
 
         }
 
-        session.setAttribute("email",u.email);
+
         return null;
     }
 
@@ -199,8 +201,6 @@ public class WeDayController {
         p.fileName = photoFile.getName();
         p.description = description;
         photos.save(p);
-
-        // not sure where to redirect here...response.sendRedirect("/?");
 
         return p;
     }
