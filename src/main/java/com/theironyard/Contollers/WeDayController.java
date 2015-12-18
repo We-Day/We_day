@@ -196,8 +196,6 @@ public class WeDayController {
         p.description = description;
         photos.save(p);
 
-        // not sure where to redirect here...response.sendRedirect("/?");
-
         return p;
     }
 
