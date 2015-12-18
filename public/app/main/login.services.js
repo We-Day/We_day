@@ -8,8 +8,13 @@
       var getUsers = function(){
         return $http.get(urlUsers);
       }
-      var isInvitedToWedding = function(email){
-        return $http.post(urlInvited,email);
+
+      var isInvitedToWedding = function(email,password){
+        var currObj = {
+          email: email,
+          password: password
+        }
+        return $http.post(urlInvited,currObj);
       }
     return{
       isInvitedToWedding:isInvitedToWedding,
