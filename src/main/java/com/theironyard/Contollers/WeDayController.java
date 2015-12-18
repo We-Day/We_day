@@ -4,6 +4,7 @@ import com.theironyard.Entities.Photo;
 import com.theironyard.Entities.Post;
 import com.theironyard.Entities.User;
 import com.theironyard.Services.*;
+import com.theironyard.Utilities.Params;
 import com.theironyard.Utilities.PasswordHash;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -116,27 +117,27 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public Boolean userLogin(String email,HttpSession session,
-                          String password, HttpServletResponse response, Invite invite) throws Exception {
+    public Boolean userLogin(@RequestBody User user,HttpSession session,
+                             HttpServletResponse response) throws Exception {
 
-        User user = users.findOneByEmail(email);
+        User u = users.findOneByEmail(user.email);
 
-        if (user == null) {
+        if (u == null) {
             response.sendError(403);
 
-        } else if (PasswordHash.validatePassword(password, user.password)) {
-            if (invites.findByEmail(email)!=null) {
+        } else if (PasswordHash.validatePassword(u.password, user.password)) {
+            if (invites.findByEmail(u.email)!=null) {
                 return true;
             } else {
                 return false;
             }
 
-        } else if (!PasswordHash.validatePassword(password, user.password)) {
+        } else if (!PasswordHash.validatePassword(u.password, user.password)) {
             response.sendError(403);
 
         }
 
-        session.setAttribute("email",email);
+        session.setAttribute("email",u.email);
         return null;
     }
 
