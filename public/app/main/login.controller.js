@@ -12,20 +12,11 @@ angular
     $scope.loginUser = function(email,password){
       LoginService.isInvitedToWedding(email, password).success(function(res){
         console.log('res',res)
-
-        _.each(users,function(el){
-          if(el.email === email){
-            if(el.password === password){
-              if(res === 1){
-                $location.path('/create-wedding')
-              }else{
-                $location.path('/landingPage/'+el.id);
-              }
-              return true;
-            }
-          }else{
-            return false;}
-        });
+        if(!res){
+          $location.path('/create-wedding')
+        }else{
+          $location.path('/landingPage/'+el.id);  
+        }
       });
     };
     $scope.reRoute = function(){
