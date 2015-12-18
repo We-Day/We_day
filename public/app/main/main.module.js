@@ -17,7 +17,7 @@
       'ui.bootstrap',
       'create-wedding',
       'landing',
-      'ui.calendar'
+      'ui.calendar',
     ])
     .config(function ($routeProvider) {
       $routeProvider
