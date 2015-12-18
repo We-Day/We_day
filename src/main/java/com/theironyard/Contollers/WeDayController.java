@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -113,6 +115,7 @@ public class WeDayController {
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public User findUser(@PathVariable("id") int id) {
         User u = users.findOne(id);
+        u.password = null;
         return u;
     }
 
@@ -125,16 +128,18 @@ public class WeDayController {
         if (u == null) {
             response.sendError(403);
 
-        } else if (PasswordHash.validatePassword(u.password, user.password)) {
+        } else if (PasswordHash.validatePassword(user.password, u.password)) {
+
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
                 return true;
+
             } else {
                 session.setAttribute("email",u.email);
                 return false;
             }
 
-        } else if (!PasswordHash.validatePassword(u.password, user.password)) {
+        } else if (!PasswordHash.validatePassword(user.password, u.password)) {
             response.sendError(403);
 
         }
@@ -144,7 +149,8 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-user")
-    public User createUser (@RequestBody User user) {
+    public User createUser (@RequestBody User user) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        user.password = PasswordHash.createHash(user.password);
         users.save(user);
         return user;
     }
