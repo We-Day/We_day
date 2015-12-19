@@ -5,10 +5,10 @@ angular
   .controller('LoginController',function($location,$scope,LoginService){
 
 
-    var users = [];
-    LoginService.getUsers().success(function(res){
-      var users = res;
-    })
+    // var users = [];
+    // LoginService.getUsers().success(function(res){
+    //   var users = res;
+    // })
     $scope.loginUser = function(email,password){
       LoginService.isInvitedToWedding(email, password).success(function(res){
         console.log('res',res)
@@ -19,8 +19,6 @@ angular
         }
       });
     };
-    $scope.reRoute = function(){
-      $location.path('landingPage/1');
-    }
+
     });
 })();

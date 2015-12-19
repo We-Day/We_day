@@ -17,7 +17,7 @@
       ])
       .config(function ($routeProvider) {
       $routeProvider
-        .when('/admins/:userId', {
+        .when('/admins/:weddingId', {
           templateUrl: 'app/admin/views/admin.list.html',
           controller: 'AdminController as adminCtrl'
         })

@@ -15,9 +15,12 @@
       'admin',
       'ngAnimate',
       'ui.bootstrap',
+      'ngSanitize',
+      'angular-horizontal-timeline',
       'create-wedding',
       'landing',
       'ui.calendar',
+      'user'
     ])
     .config(function ($routeProvider) {
       $routeProvider

@@ -10,7 +10,7 @@ angular
       {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
       {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
     ];
-    $scope.currentIndex = 6;
+    $scope.currentIndex = 1;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;
