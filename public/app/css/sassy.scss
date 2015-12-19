@@ -29,6 +29,9 @@ body, html, main {
   position: fixed;
   width: 100%;
   top: -1%;
+	.navbar-right{
+		padding-right: 2%;
+	}
   .navbar-brand{
     opacity:0;  /* make things invisible upon start */
    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
@@ -186,8 +189,14 @@ body, html, main {
 	margin-left: 5%;
 }
 //admin page-------------------------------------------------------//
+.user-admin-directives{
+	margin-left: 10%;
+	margin-top: 5%;
+}
 .nav-column{
 	width: 10%;
+	margin-top: 10%;
+	position: fixed;
 	.nav-tabs {
 	margin-top: 20%;
   float: left;
@@ -201,6 +210,11 @@ body, html, main {
 		p{
 			display: none;
 			transition: all 0.5s ease;
+			font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+			font-style: normal;
+			font-variant: normal;
+			font-weight: 500;
+			line-height: 26.4px;
 		}
 		&:hover p{
 			display: block;
@@ -335,6 +349,7 @@ body, html, main {
 .admin-notifications{
 	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
 	display: inline-block;
+	min-width: 45%;
 	color:white;
 	background-color: #89bdd3; //blue
 	margin:1%;

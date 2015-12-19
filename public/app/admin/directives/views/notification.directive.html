@@ -1,9 +1,9 @@
-<div ng-controller = "NotController" class="notifications-div col-md-12">
+<div ng-controller = "NotControllers" class="notifications-div col-md-12">
 
 <div class=" admin-notifications-container">
   <div class = "admin-notifications" ng-repeat = "not in notifications">
     <a class="close" ng-click="deleteNot(not)"><span class="glyphicon glyphicon-remove"></span></a>
-    <h4> {{not.time}}</h4>
+    <h4> {{formatDate(not.time)}}</h4>
     <h1>
       {{not.title}}
     </h1>

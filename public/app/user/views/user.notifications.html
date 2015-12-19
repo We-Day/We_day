@@ -1,0 +1,12 @@
+
+<div ng-controller = "NotController" class="notifications-div col-md-12">
+<div class=" admin-notifications-container">
+  <div class = "admin-notifications" ng-repeat = "not in notifications">
+    <a class="close" ng-click="deleteNot(not)"></a>
+    <h4> {{formatDate(not.time)}}</h4>
+    <h1>
+      {{not.title}}
+    </h1>
+  </div>
+</div>
+</div>

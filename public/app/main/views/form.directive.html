@@ -44,6 +44,6 @@
         <input type="password" required placeholder="password authentication" class="form-control" ng-model='passwordAuth'>
       </div>
     </div>
-  <span type = "submit" ng-click = '!emailExists(email)&&createAdminInputsEmpty() && passwordsSame()&& addNewUser()&&setCurrentView(2)' class = "glyphicon glyphicon-arrow-right"><a href = "#/"></a></span>
+  <span type = "submit" ng-click = 'addNewUser();setCurrentView(2)' class = "glyphicon glyphicon-arrow-right"><a href = "#/"></a></span>
     </form>
   </div>
