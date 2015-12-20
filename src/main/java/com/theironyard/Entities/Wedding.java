@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by macbookair on 12/8/15.
@@ -12,10 +13,11 @@ import java.util.List;
 @Entity
 @Table(name = "weddings")
 public class Wedding {
+
     @Id
     @GeneratedValue
     @Column(nullable = false)
-     public int id;
+    public int id;
 
     @Column(nullable = false)
     public String weddingName;
@@ -26,30 +28,19 @@ public class Wedding {
     @Column(nullable = false)
     public String date;
 
+    public Wedding() {
 
-    public ArrayList guests;
-
-    public Wedding(String date, String location, String weddingName, int id) {
-        this.date = date;
-        this.location = location;
-        this.weddingName = weddingName;
-        this.id = id;
     }
 
-    public Wedding(ArrayList guests) {
-        this.guests = guests;
+    public Wedding(int id, String weddingName, String location, String date) {
+        this.id = id;
+        this.weddingName = weddingName;
+        this.location = location;
+        this.date = date;
     }
 
     public int getId() {
         return id;
-    }
-
-    public ArrayList getGuests() {
-        return guests;
-    }
-
-    public void setGuests(ArrayList guests) {
-        this.guests = guests;
     }
 
     public void setId(int id) {
@@ -79,4 +70,6 @@ public class Wedding {
     public void setDate(String date) {
         this.date = date;
     }
+
 }
+
