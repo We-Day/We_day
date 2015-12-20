@@ -26,10 +26,8 @@ public class Wedding {
     @Column(nullable = false)
     public String date;
 
-    public Wedding(){
-    }
 
-
+    public ArrayList guests;
 
     public Wedding(String date, String location, String weddingName, int id) {
         this.date = date;
@@ -38,8 +36,20 @@ public class Wedding {
         this.id = id;
     }
 
+    public Wedding(ArrayList guests) {
+        this.guests = guests;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public ArrayList getGuests() {
+        return guests;
+    }
+
+    public void setGuests(ArrayList guests) {
+        this.guests = guests;
     }
 
     public void setId(int id) {

@@ -75,11 +75,13 @@ public class WeDayController {
         if (user == null) {
             throw new Exception("User does not exist");
         }
+        user.userWeddings.add(wedding); // adding user to List in "User class"
         Invite invite =  new Invite();
         invite.isAdmin= true;
         invite.wedding= wedding;
         invite.email = user.email;
-        createInvite(invite);
+        createInvite(invite); // invite = first user. So the admin.
+        wedding.guests.add(user); // adding user to "gusts" array List in Wedding class.
         return wedding;
     }
 
@@ -120,10 +122,14 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public Boolean userLogin(@RequestBody Params user,HttpSession session,
+    public ArrayList<Object> userLogin(@RequestBody Params user,HttpSession session,
                              HttpServletResponse response) throws Exception {
+        ArrayList<Object> login = new ArrayList();
+        boolean isLoggedin = false;
 
         User u = users.findOneByEmail(user.email);
+        session.setAttribute("id",u.id);
+        login.add(u);
 
         if (u == null) {
             response.sendError(403);
@@ -132,21 +138,28 @@ public class WeDayController {
 
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
-                return true;
+                isLoggedin = true;
+                login.add(isLoggedin);
+                return login;
 
             } else {
                 session.setAttribute("email",u.email);
-                return false;
+                login.add(isLoggedin);
             }
 
         } else if (!PasswordHash.validatePassword(user.password, u.password)) {
-            response.sendError(403);
+            System.out.println("Wrong Password");
 
         }
-
-
         return null;
     }
+    @RequestMapping(path= "/landing/{id}", method = RequestMethod.GET)
+    public List<Wedding> userWeddings(@PathVariable("id")int id) {
+        User user = users.findOne(id);
+        return user.userWeddings;
+    }
+
+
 
     @RequestMapping("/create-user")
     public User createUser (@RequestBody User user) throws InvalidKeySpecException, NoSuchAlgorithmException {
@@ -157,7 +170,6 @@ public class WeDayController {
 
     @RequestMapping("/profile")
     public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
-
         try {
             org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
             return user;
@@ -189,6 +201,8 @@ public class WeDayController {
         posts.save(post);
         return posts.findAll();
     }
+
+
 
     @RequestMapping("/create-event")
     public CalendarEvent createEvent(@RequestBody CalendarEvent event){

@@ -1,6 +1,7 @@
 package com.theironyard.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 /**
  * Created by macbookair on 12/8/15.
@@ -25,7 +26,13 @@ public class User {
     @Column(nullable = false)
     public String password;
 
+    public ArrayList<Wedding>userWeddings;
+
     public User() {
+    }
+
+    public User(ArrayList<Wedding> userWeddings) {
+        this.userWeddings = userWeddings;
     }
 
     public User(int id, String username, String phone, String email, String password) {
@@ -34,6 +41,15 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.password = password;
+
+    }
+
+    public ArrayList<Wedding> getUserWeddings() {
+        return userWeddings;
+    }
+
+    public void setUserWeddings(ArrayList<Wedding> userWeddings) {
+        this.userWeddings = userWeddings;
     }
 
     public int getId() {
