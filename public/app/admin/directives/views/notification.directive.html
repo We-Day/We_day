@@ -18,18 +18,16 @@
 
 <div class="form-group checkboxes-notifications">
   <h5>Send as <small>:</small></h5>
-  <form class = "form-group"role = 'form'>
-    <div class="form-group checkbox">
-      <label><input type="checkbox" ng-model = "email"value="">Email</label>
-    </div>
-    <div class=" form-group check box">
-        <label><input type="checkbox" ng-model = "text"value="">Text</label>
+    <form class = "form-group"role = 'form'>
+      <div class="form-group checkbox">
+        <label><input type="checkbox" ng-model = "email"value="">Email</label>
       </div>
-    <div class=" form-group checkbox">
-        <label><input type="checkbox" ng-model = "notification"value="">App</label>
-    </div>
+      <div class=" form-group check box">
+          <label><input type="checkbox" ng-model = "text"value="">Text</label>
+        </div>
+    </form>
 </div>
-<div class="form-group button">
+<div class="button">
   <input class="btn btn-default" type = "submit"ng-click = "!toLong()&&postNot();title = ''"name="button"></input>
 </div>
 </form>

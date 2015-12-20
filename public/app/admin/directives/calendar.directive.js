@@ -5,7 +5,7 @@
     .directive('calendarDirective', function () {
       return {
         restrict: 'EA',
-        transclue: true,
+        transclude: true,
         templateUrl: '/app/admin/views/calendar.directive.html',
         link: function (scope, element, attributes) {
           // <span class="fc-icon fc-icon-right-single-arrow"></span>

@@ -12,8 +12,8 @@
       'ngRoute',
       'ui.router',
       'underscore',
-      'admin',
       'ngAnimate',
+      'admin',
       'ui.bootstrap',
       'ngSanitize',
       'angular-timeline',
@@ -22,6 +22,7 @@
       'ui.calendar',
       'user'
     ])
+
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {

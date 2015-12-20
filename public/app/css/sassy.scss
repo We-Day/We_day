@@ -133,10 +133,10 @@ body, html, main {
 
 .cd-fixed-bg.cd-bg-1 {
   margin-top: 3%;
-  background-image: url("http://nathandesch.com/wp-content/uploads/2014/11/07-7939-post/Doylestown-wedding-photography-18-of-66.jpg");
+  background-image: url("http://nathandesch.com/wp-content/uploads/2014/11/07-7939-post/Doylestown-weddiphotography-18-of-66.jpg");
 }
 .cd-fixed-bg.cd-bg-2 {
-  background-image: url("https://weminoredinfilm.files.wordpress.com/2013/06/will-ferrell-in-wedding-crashers-will-ferrell-18126324-1280-720.jpg");
+  background-image: url("https://weminoredinfilm.files.wordpress.com/2013/06/will-ferrell-in-weddicrashers-will-ferrell-18126324-1280-720.jpg");
 }
 .cd-fixed-bg.cd-bg-3 {
   background-image: url("http://charleston-wedding-packages.com/images/angel-oak-2.jpg");
@@ -193,6 +193,44 @@ body, html, main {
 	margin-left: 5%;
 }
 //admin page-------------------------------------------------------//
+
+
+.form-invite-guests{
+	width: 40%;
+	margin: auto;
+	margin-top: 5%;
+	font-size: 3em;
+	.buttons{
+		margin-left: 20%;
+	}
+	p{
+		font-size: .5em;
+	}
+}
+.individual-guests{
+	margin-top: 10%;
+	padding-left: 10%;
+	height: 100%;
+	button{
+		position: absolute;
+		right: 50%;
+		top:2%;
+	}
+	.repeat-guests{
+		font-size: 2em;
+		padding: 3%;
+		border: 10px solid #6ed3cf;
+		background-color: #DADADA;
+		display: inline-block;
+		margin-left: -8%;
+		transition: all 0.5s ease;
+		margin-top:-2%;
+		&:hover{
+			margin-right: 8%;
+		}
+	}
+}
+
 .user-admin-directives{
 	margin-left: 10%;
 	margin-top: 5%;
@@ -246,19 +284,7 @@ body, html, main {
   }
 }
 }
-.animate-show.ng-hide-add{
-	transition: all linear 0;
-}
 
-.animate-show.ng-hide-remove {
-  transition: all linear 1s;
-}
-
-.animate-show.ng-hide {
-  line-height: 0;
-  opacity: 0;
-  padding: 5 5px;
-}
 //create-wedding------------------------------------------/
 .wrapper-create-wedding{
 	width: 100%;
@@ -319,19 +345,17 @@ body, html, main {
 }
 }
 // calendar
-.ng-hide-add {
-  transition:2s linear all;
-}
 
-// .calendar-repeat-events{
-// 	transition: all 2s ease;
-// 	&:hover{
-// 		color:red;
-// 		.other-text-calendar{
-// 		display: block;
-// 		}
-// 	}
-// }
+
+.calendar-repeat-events{
+	transition: all 2s ease;
+	&:hover{
+		color:red;
+		.other-text-calendar{
+		display: block;
+		}
+	}
+}
 
 
 .main-calendar{
@@ -345,9 +369,17 @@ body, html, main {
 	padding: 0;
 	.form-group-notifications{
 		width: 100%;
-		background-color: #e3e3e3;
 		padding: 0;
 		margin: 0;
+	}
+	.button{
+		width: 60%;
+		margin-left: 12%;
+		.btn{
+			width: 80%;
+			margin:auto;
+			font-size: 2em;
+		}
 	}
 
 	.checkboxes-notifications{
@@ -369,7 +401,7 @@ body, html, main {
 .admin-notifications{
 	transition: all 0.4s ease-in-out;
 	&:hover{
-		// transform: rotate(360deg);
+		transform: rotate(360deg);
 		width: 500px;
 		h1{
 		font-size: 4em;

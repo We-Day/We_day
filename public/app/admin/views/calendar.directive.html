@@ -20,11 +20,11 @@
                         </div>
 
                         <ul class="unstyled">
-                            <li class = "calendar-repeat-events"ng-repeat="e in events">
+                            <li class = "calendar-repeat-events" ng-repeat="e in events">
                                 <div class="alert alert-info">
                                     <a class="close" ng-click="remove($index,e)"><span class="glyphicon glyphicon-remove"></span></a>
                                     <b > <input ng-mouseover="bool = !bool" ng-change = "editDate(e)"ng-model="e.title"></b>
-                                    <div ng-init = "bool = true" ng-hide = "bool"class="other-text-calendar ng-hide">
+                                    <div ng-init = "bool = true" ng-show = "!bool"class="animate-show">
                                     {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
                                     <h5>How would you like to notify your contacts</h5>
                                     <div class="checkbox">
