@@ -1,7 +1,9 @@
 
     package com.theironyard;
+    import com.fasterxml.jackson.core.JsonProcessingException;
     import com.theironyard.Entities.Post;
     import com.theironyard.Entities.User;
+    import com.theironyard.Entities.Wedding;
     import com.theironyard.Services.PostRepository;
     import com.theironyard.Services.UserRepository;
     import com.theironyard.Services.WeddingRepository;
@@ -42,9 +44,10 @@
 
         @Before
         public void before() {
-            weddings.deleteAll();
+            //weddings.deleteAll();
             users.deleteAll();
             posts.deleteAll();
+
             mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
         }
 
@@ -89,8 +92,8 @@
 
             mockMvc.perform(
                     MockMvcRequestBuilders.post("/create-user")
-                    .content(json)
-                    .contentType("application/json")
+                            .content(json)
+                            .contentType("application/json")
             );
 
             assertTrue(users.count() == 1);

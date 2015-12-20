@@ -1,6 +1,7 @@
 package com.theironyard.Entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by benjamindrake on 12/14/15.
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "invites")
 public class Invite {
+
     @Id
     @GeneratedValue
     int Id;
@@ -20,4 +22,6 @@ public class Invite {
 
     @ManyToOne
     public Wedding wedding;
-}
+
+    }
+
