@@ -10,7 +10,11 @@
 @-moz-keyframes slide-in { from { left:0; } to { left:30%; } }
 @keyframes slide-in { from { left:0; } to { left:30%; } }
 
-
+.animate-enter {
+	-webkit-transition: 1s linear all; /* Chrome */
+	transition: 1s linear all;
+	opacity: 0;
+}
 body, html, main {
 	/* important */
 	height: 100%;
@@ -314,11 +318,26 @@ body, html, main {
 	}
 }
 }
-//calendar
+// calendar
+.ng-hide-add {
+  transition:2s linear all;
+}
+
+// .calendar-repeat-events{
+// 	transition: all 2s ease;
+// 	&:hover{
+// 		color:red;
+// 		.other-text-calendar{
+// 		display: block;
+// 		}
+// 	}
+// }
+
+
 .main-calendar{
 	margin-top: 2%;
 }
-//notifications
+//ations
 
 .notifications-div{
 	margin-top: 5%;
@@ -342,25 +361,58 @@ body, html, main {
 }
 .admin-notifications-container{
 	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
-	width: 100%;
+	width: 80%;
+	margin: auto;
 	margin-top: 5%;
 
 }
 .admin-notifications{
-	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
-	display: inline-block;
-	min-width: 45%;
-	color:white;
-	background-color: #89bdd3; //blue
-	margin:1%;
-	border-radius: 30px;
-	margin-bottom: 30px;
-	padding: 10px;
+	transition: all 0.4s ease-in-out;
+	&:hover{
+		// transform: rotate(360deg);
+		width: 500px;
+		h1{
+		font-size: 4em;
+		}
+		h4{
+			font-size: .8em;
+		}
+	}
+	.tip-left{
+		width: 0px;
+  	height: 0px;
+  	position: absolute;
+  	background: transparent;
+  	border: 10px solid #ccc;
+		top: 10px;
+  	left: -25px;
+  	border-top-color: transparent;
+  	border-left-color: transparent;
+  	border-bottom-color: transparent;
+	}
+	font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+	position: relative;
+  margin: 20px 10px;
+  padding: 5px;
+  background-color: #DADADA;
+  border-radius: 3px;
+  border: 5px solid #6ed3cf;
+	max-width: 60%;
 	h1{
-		font-size: 2em;
+		font-size: .1em;
+		margin: 0;
+		height: auto;
+		max-width: 100%;
 	}
 	h4{
-		font-size: .8em;
+		font-size: 3em;
+		margin: 0;
+		height: auto;
+		max-width: 100%;
 	}
 	.glyphicon-remove{
 		color:black;
@@ -377,8 +429,9 @@ body, html, main {
 		text-decoration: none;
 	}
 	input{
+		margin-left: 5%;
 		width: 700px!important;
-		border-radius: 100px;
+		border-radius: 5px;
 
 	}
 }

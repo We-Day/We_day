@@ -19,7 +19,8 @@
     "angular-bootstrap": "~0.14.3",
     "angular-ui-calendar": "~1.0.1",
     "jquery": "~2.1.4",
-    "angular-horizontal-timeline": "*"
+    "angular-horizontal-timeline": "*",
+    "angular-timeline": "~1.6.1"
   },
   "resolutions": {
     "angular": "1.3.20"

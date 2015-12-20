@@ -16,6 +16,30 @@ angular
         return false;
       }
     };
+    UserService.getDates().success(function(res){
+      var localArray= [];
+      localArray = res;
+      console.log(localArray,'localArray')
+      localArray.sort(function (a, b) {
+        return a.start > b.start ? 1 : a.start < b.start ? -1 :0;
+    });
+    $scope.events = localArray;
+  });
+  $scope.formatDate = function(date){
+    return moment(date).calendar()
+  }
+
+//     $scope.events = [{
+//   badgeClass: 'info',
+//   badgeIconClass: 'glyphicon-check',
+//   title: 'First heading',
+//   content: 'Some awesome content.'
+// }, {
+//   badgeClass: 'warning',
+//   badgeIconClass: 'glyphicon-credit-card',
+//   title: 'Second heading',
+//   content: 'More awesome content.'
+// }];
 
   });
 })();
