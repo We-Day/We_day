@@ -2,6 +2,7 @@
 
 <div class=" admin-notifications-container">
   <div class = "admin-notifications" ng-repeat = "not in notifications">
+    <span class = "tip tip-left"></span>
     <a class="close" ng-click="deleteNot(not)"><span class="glyphicon glyphicon-remove"></span></a>
     <h4> {{formatDate(not.time)}}</h4>
     <h1>
@@ -11,7 +12,8 @@
 </div>
 <form class="formborder form-inline form-group-notifications">
   <div class="notification-input form-group">
-    <input placeholder="Send a notification" type="text" ng-model ="title" name="name" value="">
+    <h6 style="color:red"ng-show= "toLong()">Too many characters <small></small></h6>
+    <input placeholder="Send a notification" type="text" ng-change = "updateLength(title)" ng-model ="title" name="name" value="">
   </div>
 
 <div class="form-group checkboxes-notifications">
@@ -28,7 +30,7 @@
     </div>
 </div>
 <div class="form-group button">
-  <input class="btn btn-default" type = "submit"ng-click = "postNot();title = ''"name="button"></input>
+  <input class="btn btn-default" type = "submit"ng-click = "!toLong()&&postNot();title = ''"name="button"></input>
 </div>
 </form>
 </div>

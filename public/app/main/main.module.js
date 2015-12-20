@@ -16,7 +16,7 @@
       'ngAnimate',
       'ui.bootstrap',
       'ngSanitize',
-      'angular-horizontal-timeline',
+      'angular-timeline',
       'create-wedding',
       'landing',
       'ui.calendar',

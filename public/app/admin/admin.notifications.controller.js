@@ -3,6 +3,13 @@
 angular
   .module('admin')
   .controller('NotControllers',function($scope,NotServices){
+    var inputNotifcation = '';
+    $scope.toLong = function(){
+      return inputNotifcation.length > 115 ? true :false
+    }
+    $scope.updateLength = function(item){
+      inputNotifcation = item;
+    }
     $scope.refresh = function(){
     NotServices.getNot().success(function(res){
       $scope.notifications = res;
@@ -25,8 +32,8 @@ angular
         notification: $scope.notification,
         time: new Date()
       }
+      $scope.notifications.push(res);
       NotServices.postNot(currObj).success(function(res){
-        $scope.notifications.push(res);
       })
     };
     $scope.deleteNot = function(item){
