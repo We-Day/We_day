@@ -45,17 +45,15 @@ angular
     $scope.passwordsAreSame = true;
 
     $scope.addNewWedding = function(){
-      // var wedding = {
-      //   weddingName:$scope.weddingName,
-      //   location:$scope.location,
-      //   date: $scope.date
-      // }
       var wedding = {
-        weddingName:'charles',
-        location:'location',
-        date:'date'
+        weddingName:$scope.weddingName,
+        location:$scope.location,
+        date: $scope.date
       }
-      CreateWeddingService.addNewWedding(wedding);
+      CreateWeddingService.addNewWedding(wedding).success(function(res){
+        console.log(res);
+        $location.path('/');
+      });
     };
     $scope.addAdmin = function(){
       var user = {
