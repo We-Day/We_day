@@ -150,6 +150,7 @@ public class WeDayController {
                 session.setAttribute("email",u.email);
                 session.setAttribute("id",u.email);
             }
+
         } else if (!PasswordHash.validatePassword(user.password, u.password)) {
             response.sendError(403);
         }
@@ -157,10 +158,14 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-user")
-    public User createUser (@RequestBody User user) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public String createUser (@RequestBody User user, HttpServletResponse response) throws Exception {
+        User u = users.findOneByEmail(user.email);
+        if (u.email != null) {
+            return "User already exists";
+        }
         user.password = PasswordHash.createHash(user.password);
-        users.save(user);
-        return user;
+        users.save(u);
+        return "Success";
     }
 
     @RequestMapping("/profile")
