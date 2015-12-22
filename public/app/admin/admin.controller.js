@@ -8,7 +8,6 @@ angular
 //myguests
 $scope.viewInvitee = false;
   AdminService.getUsers().success(function(res){
-    console.log('users',res);
     $scope.guests = res;
   })
   $scope.inviteUser = function(name,email){
@@ -30,7 +29,7 @@ $scope.viewInvitee = false;
       {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
       {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
     ];
-    $scope.currentIndex = 6;
+    $scope.currentIndex = 1;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

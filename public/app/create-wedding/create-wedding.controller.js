@@ -51,7 +51,7 @@ angular
         date: $scope.date
       }
       CreateWeddingService.addNewWedding(wedding).success(function(res){
-        console.log(res);
+        console.log(res,'create-wedding/');
         $location.path('/');
       });
     };

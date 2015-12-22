@@ -62,7 +62,12 @@ body, html, main {
   /* important */
   height: 100%;
   width: 100%;
-  margin: 0; }
+  margin: 0;
+  font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 26.4px; }
 
 .login-button {
   background: white;
@@ -212,6 +217,9 @@ body, html, main {
   width: 90%;
   margin-left: 5%; }
 
+.fc-widget-content {
+  font-family: serif; }
+
 .form-invite-guests {
   width: 40%;
   margin: auto;
@@ -327,98 +335,102 @@ body, html, main {
       text-decoration: none; }
 
 .calendar-repeat-events {
-  transition: all 2s ease; }
+  transition: all 0.2s ease;
+  max-height: 20px; }
+  .calendar-repeat-events .other-text-calendar {
+    transition: all 0.1s ease;
+    visibility: hidden; }
   .calendar-repeat-events:hover {
-    color: red; }
+    margin-bottom: 200px; }
     .calendar-repeat-events:hover .other-text-calendar {
-      display: block; }
+      visibility: visible; }
 
 .main-calendar {
   margin-top: 2%; }
 
-.notifications-div {
-  margin-top: 5%;
-  border-radius: 5px;
-  padding: 0; }
-  .notifications-div .form-group-notifications {
-    width: 100%;
-    padding: 0;
-    margin: 0; }
-  .notifications-div .button {
-    width: 60%;
-    margin-left: 12%; }
-    .notifications-div .button .btn {
-      width: 80%;
-      margin: auto;
-      font-size: 2em; }
-  .notifications-div .checkboxes-notifications {
-    padding-left: 30%; }
-    .notifications-div .checkboxes-notifications .form-group {
-      display: block; }
-  .notifications-div .form-inline {
+.form-group-notifications {
+  box-shadow: 10px 10px 5px #888888;
+  height: 10%;
+  margin-left: 10%;
+  width: 60%;
+  border: solid black 3px;
+  border-radius: 5px; }
+  .form-group-notifications .glyphicon-remove {
+    color: black;
+    font-size: 1.8em;
+    opacity: .7;
+    float: right; }
+    .form-group-notifications .glyphicon-remove:hover {
+      opacity: .5; }
+  .form-group-notifications .notification-input input {
+    height: 100% !important;
+    width: 15em;
+    font-size: 2em;
+    border: none;
+    outline: none; }
+  .form-group-notifications .checkboxes-notifications {
+    padding: 2%;
+    height: 100px;
+    border-right: solid #DADADA 1px;
     border-radius: 5px; }
-  .notifications-div .admin-notifications-container {
-    background-image: url("https://unsplash.com/photos/xMScfzgJ7_c");
-    width: 80%;
-    margin: auto;
-    margin-top: 5%; }
-  .notifications-div .admin-notifications {
-    transition: all 0.4s ease-in-out;
-    font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500;
-    line-height: 26.4px;
-    position: relative;
-    margin: 20px 10px;
-    padding: 5px;
-    background-color: #DADADA;
-    border-radius: 3px;
-    border: 5px solid #6ed3cf;
-    max-width: 60%; }
-    .notifications-div .admin-notifications:hover {
-      transform: rotate(360deg);
-      width: 500px; }
-      .notifications-div .admin-notifications:hover h1 {
-        font-size: 4em; }
-      .notifications-div .admin-notifications:hover h4 {
-        font-size: .8em; }
-    .notifications-div .admin-notifications .tip-left {
-      width: 0px;
-      height: 0px;
-      position: absolute;
-      background: transparent;
-      border: 10px solid #ccc;
-      top: 10px;
-      left: -25px;
-      border-top-color: transparent;
-      border-left-color: transparent;
-      border-bottom-color: transparent; }
-    .notifications-div .admin-notifications h1 {
-      font-size: .1em;
-      margin: 0;
-      height: auto;
-      max-width: 100%; }
-    .notifications-div .admin-notifications h4 {
-      font-size: 3em;
-      margin: 0;
-      height: auto;
-      max-width: 100%; }
-    .notifications-div .admin-notifications .glyphicon-remove {
-      color: black; }
+    .form-group-notifications .checkboxes-notifications .form-group {
+      display: block; }
+
+.admin-notifications-container {
+  background-image: url("https://unsplash.com/photos/xMScfzgJ7_c");
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 5%;
+  margin-bottom: 30%; }
+
+.admin-notifications {
+  transition: all 1s ease-in-out;
+  font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 26.4px;
+  position: relative;
+  margin: 20px 10px;
+  padding: 5px;
+  background-color: #DADADA;
+  border-radius: 3px;
+  border: 5px solid #6ed3cf;
+  max-width: 60%; }
+  .admin-notifications h4, .admin-notifications h1 {
+    transition: all 0.5s ease-in-out; }
+  .admin-notifications:hover {
+    width: 500px; }
+    .admin-notifications:hover h1 {
+      font-size: 4em; }
+    .admin-notifications:hover h4 {
+      font-size: .8em; }
+  .admin-notifications .tip-left {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    background: transparent;
+    border: 10px solid #ccc;
+    top: 10px;
+    left: -25px;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent; }
+  .admin-notifications h1 {
+    font-size: .1em;
+    margin: 0;
+    height: auto;
+    max-width: 100%; }
+  .admin-notifications h4 {
+    font-size: 3em;
+    margin: 0;
+    height: auto;
+    max-width: 100%; }
+  .admin-notifications .glyphicon-remove {
+    color: black; }
 
 .full-page-div-form {
   width: 100%; }
-
-.notification-input {
-  width: 500px;
-  font-size: 3em; }
-  .notification-input a {
-    text-decoration: none; }
-  .notification-input input {
-    margin-left: 5%;
-    width: 700px !important;
-    border-radius: 5px; }
 
 .landing-page-container {
   width: 100%;

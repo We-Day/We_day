@@ -20,6 +20,12 @@ body, html, main {
 	height: 100%;
   width: 100%;
   margin: 0;
+	font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+
 }
 .login-button{
 	background: white;
@@ -192,6 +198,9 @@ body, html, main {
 	width: 90%;
 	margin-left: 5%;
 }
+.fc-widget-content{
+	font-family: serif;
+}
 //admin page-------------------------------------------------------//
 
 
@@ -348,11 +357,16 @@ body, html, main {
 
 
 .calendar-repeat-events{
-	transition: all 2s ease;
+	transition: all .2s ease;
+	max-height: 20px;
+	.other-text-calendar{
+		transition: all .1s ease;
+		visibility:hidden;
+	}
 	&:hover{
-		color:red;
+		margin-bottom: 200px;
 		.other-text-calendar{
-		display: block;
+			visibility: visible;
 		}
 	}
 }
@@ -363,45 +377,56 @@ body, html, main {
 }
 //ations
 
-.notifications-div{
-	margin-top: 5%;
+.form-group-notifications{
+	box-shadow: 10px 10px 5px #888888;
+	height: 10%;
+	margin-left: 10%;
+	width: 60%;
+	border: solid black 3px;
 	border-radius: 5px;
-	padding: 0;
-	.form-group-notifications{
-		width: 100%;
-		padding: 0;
-		margin: 0;
-	}
-	.button{
-		width: 60%;
-		margin-left: 12%;
-		.btn{
-			width: 80%;
-			margin:auto;
-			font-size: 2em;
+	.glyphicon-remove{
+		color:black;
+		font-size: 1.8em;
+		opacity: .7;
+		float: right;
+		&:hover{
+			opacity: .5;
 		}
 	}
-
+	.notification-input{
+		input{
+			height: 100% !important;
+			width: 15em;
+			font-size: 2em;
+			border: none;
+			outline: none;
+		}
+	}
 	.checkboxes-notifications{
-		padding-left: 30%;
+		padding: 2%;
+		height: 100px;
+		border-right: solid #DADADA 1px;
+		border-radius: 5px;
 		.form-group{
 			display: block;
 		}
 	}
-.form-inline {
-	border-radius: 5px;
+
 }
 .admin-notifications-container{
 	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
 	width: 80%;
-	margin: auto;
+	margin-left: 10%;
 	margin-top: 5%;
+	margin-bottom: 30%;
 
 }
 .admin-notifications{
-	transition: all 0.4s ease-in-out;
+	h4,h1{	transition: all .5s ease-in-out;
+}
+	transition: all 1s ease-in-out;
 	&:hover{
-		transform: rotate(360deg);
+		// transform: rotate(360deg);
 		width: 500px;
 		h1{
 		font-size: 4em;
@@ -450,23 +475,11 @@ body, html, main {
 		color:black;
 	}
 }
-}
+
 .full-page-div-form{
 	width: 100%;
 }
-.notification-input{
-	width: 500px;
-	font-size: 3em;
-	a{
-		text-decoration: none;
-	}
-	input{
-		margin-left: 5%;
-		width: 700px!important;
-		border-radius: 5px;
 
-	}
-}
 
 //landing page
 .landing-page-container{

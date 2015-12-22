@@ -13,13 +13,13 @@
       'ui.router',
       'underscore',
       'ngAnimate',
-      'admin',
       'ui.bootstrap',
       'ngSanitize',
       'angular-timeline',
+      'ui.calendar',
+      'admin',
       'create-wedding',
       'landing',
-      'ui.calendar',
       'user'
     ])
 
