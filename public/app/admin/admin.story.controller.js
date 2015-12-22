@@ -9,11 +9,8 @@ angular
       $scope.storyEmpty();
     })
     $scope.console = function(item){
-      var result = item.match(/<p>(.*?)<\/p>/g).map(function(val){
-        console.log('val',val);
-        return val.replace(/<\/?p>/g,'');
-      })
-      console.log(result,'result');
+      console.log('item',item)
+      $scope.content= item;
     }
     $scope.storyEmpty = function(){
       return $scope.story.length < 1 ? true : false
