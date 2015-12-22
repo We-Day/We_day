@@ -13,8 +13,9 @@
         'ngRoute',
         'underscore',
         'ui.calendar',
-        'ui.bootstrap'
+        'ui.bootstrap',
       ])
+
       .config(function ($routeProvider) {
       $routeProvider
         .when('/admins/:weddingId', {

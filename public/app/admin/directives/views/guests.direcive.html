@@ -1,0 +1,21 @@
+
+<div ng-init = "hide = true" ng-hide= "hide" class="form-invite-guests animate-show">
+  <form class="form" action="index.html" method="post">
+    <div class="form-group">
+      <input type="text" ng-model = "inviteName"name="name" placeholder="First & Last Name"value="">
+    </div>
+    <div class="form-group">
+      <input type="email" ng-model = "inviteEmail"placeholder="john@email.com"name="name" value="">
+    </div>
+    <div class="form-group buttons">
+      <button type="button" ng-click = "inviteUser(inviteName,inviteEmail);inviteEmail = '';inviteName = ''"class = "btn btn-sm" name="button">Invite</button>
+      <button ng-click = "hide = true"class = "btn btn-xs"type="button" name="button">Close</button>
+    </div>
+  </form>
+</div>
+<div ng-show = "hide" class=" individual-guests">
+<button ng-click = "hide = false" type="button" name="button">Invite More Guests</button>
+  <div class="repeat-guests" ng-repeat ="guest in guests">
+    {{guest.username}}
+  </div>
+</div>

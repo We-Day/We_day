@@ -5,13 +5,31 @@ angular
   .controller('AdminController',function($scope,AdminService){
   $scope.weddingName = "Charles's Dope Ass Wedding";
   $scope.currentUser = "Charles"
+//myguests
+$scope.viewInvitee = false;
+  AdminService.getUsers().success(function(res){
+    $scope.guests = res;
+  })
+  $scope.inviteUser = function(name,email){
+    var currObject = {
+      email: email,
+      username: name
+    }
+    $scope.guests.push(currObject);
+    AdminService.inviteUser(currObject).success(function(res){
+      console.log(res);
+      $scope.lastInvitee = res.username;
+      $scope.viewInvitee = true;
+    })
+  }
+//carousel
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [
       {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
       {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
     ];
-    $scope.currentIndex = 6;
+    $scope.currentIndex = 1;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

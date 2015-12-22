@@ -5,7 +5,7 @@
     .directive('mainCalendarDirective', function () {
       return {
         restrict: 'EA',
-        transclue: true,
+        transclude: true,
         templateUrl: '/app/main/calendar.directive.html',
         link: function (scope, element, attributes) {
 

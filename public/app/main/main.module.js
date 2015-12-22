@@ -12,16 +12,17 @@
       'ngRoute',
       'ui.router',
       'underscore',
-      'admin',
       'ngAnimate',
       'ui.bootstrap',
       'ngSanitize',
       'angular-timeline',
+      'ui.calendar',
+      'admin',
       'create-wedding',
       'landing',
-      'ui.calendar',
       'user'
     ])
+
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {

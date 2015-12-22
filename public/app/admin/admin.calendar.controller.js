@@ -5,6 +5,7 @@
 angular
   .module('admin')
   .controller('CalendarController',function($scope,CalendarService,$compile,uiCalendarConfig,$window){
+
     //reload route
     $scope.reloadRoute = function() {
       $window.location.reload();
