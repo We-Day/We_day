@@ -17,6 +17,7 @@
       'ngSanitize',
       'angular-timeline',
       'ui.calendar',
+      'textAngular',
       'admin',
       'create-wedding',
       'landing',
