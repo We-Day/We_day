@@ -3,7 +3,7 @@
   angular
     .module('create-wedding')
     .factory('CreateWeddingService',function($http,$location,$window){
-      var urlWedding = 'http://tiny-tiny.herokuapp.com/collections/weddings';
+      var urlWedding = 'create-wedding';
       var urlInviteUser = 'http://tiny-tiny.herokuapp.com/collections/invite-user';
       var urlFacebook = '/profile'
       var getFacebookObject = function(item){

@@ -91,6 +91,7 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-invite")
+
     public void createInvite(@RequestBody Invite invitee) throws Exception {
         Wedding wedding = weddings.findOne(invitee.wedding.id);
         if (wedding == null) {
@@ -102,8 +103,9 @@ public class WeDayController {
     }
 
     @RequestMapping("/invites")
-    public List<Wedding> invitesList(@RequestBody User user) {
-        return invites.findByEmail(user.email).stream()
+    public List<Wedding> invitesList(HttpSession session) {
+        String email = (String)session.getAttribute("email");
+        return invites.findByEmail(email).stream()
                 .map(invite -> {
                     return invite.wedding;
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
@@ -124,28 +126,22 @@ public class WeDayController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public Boolean userLogin(@RequestBody Params user,HttpSession session,
                              HttpServletResponse response) throws Exception {
-
         User u = users.findOneByEmail(user.email);
-
         if (u == null) {
             response.sendError(403);
-
         } else if (PasswordHash.validatePassword(user.password, u.password)) {
-
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
+                session.setAttribute("id",u.id);
                 return true;
-
             } else {
                 session.setAttribute("email",u.email);
+                session.setAttribute("id",u.email);
                 return false;
             }
-
         } else if (!PasswordHash.validatePassword(user.password, u.password)) {
             response.sendError(403);
-
         }
-
         return null;
     }
 
