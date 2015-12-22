@@ -3,12 +3,10 @@
   angular
     .module('landing')
     .factory('LandingService',function($http,$routeParams){
-      var urlWeddings = '/create-wedding';
+      var urlWeddings = '/invites';
       var urlWeddingsUser = '/landing/'
       var getWeddings = function(){
-        console.log($routeParams.userId)
-        console.log(urlWeddingsUser+$routeParams.userId);
-        return $http.get(urlWeddingsUser+$routeParams.userId);
+        return $http.get(urlWeddings);
       }
 
     return{
