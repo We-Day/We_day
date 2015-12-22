@@ -136,8 +136,10 @@ public class WeDayController {
         boolean isUser;
 
         User u = users.findOneByEmail(user.email);
+
         if (u == null) {
             response.sendError(403);
+
         } else if (PasswordHash.validatePassword(user.password, u.password)) {
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
@@ -150,22 +152,38 @@ public class WeDayController {
                 session.setAttribute("email",u.email);
                 session.setAttribute("id",u.email);
             }
+
         } else if (!PasswordHash.validatePassword(user.password, u.password)) {
-            response.sendError(403);
+            isUser = false;
+            userLogin.add(isUser);
+            userLogin.add(user);
+            return userLogin;
+
         }
         return null;
     }
 
     @RequestMapping("/create-user")
-    public User createUser (@RequestBody User user) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public String createUser (@RequestBody User user, HttpServletResponse response) throws Exception {
+        User u = users.findOneByEmail(user.email);
+        if (u.email != null) {
+            return "User already exists";
+        }
         user.password = PasswordHash.createHash(user.password);
-        users.save(user);
+        users.save(u);
+        return "Success";
+    }
+
+    @RequestMapping("/current-user")
+    public User currentUser(HttpSession session){
+        int id = (int)session.getAttribute("id");
+        User user = users.findOne(id);
+        user.password = null;
         return user;
     }
 
     @RequestMapping("/profile")
     public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
-
         try {
             org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
             return user;
@@ -175,15 +193,15 @@ public class WeDayController {
         return null;
     }
 
-    @RequestMapping ("/send-notification")
+    @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
     public void sendNotification(String body) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         Iterable<User> allUsers = users.findAll();
         for (User user : allUsers){
             String phone = user.phone;
             numbers.add(phone);
-            for (String destination : numbers){
-                sendText(destination, body);
+            for (String phoneDestination : numbers){
+                sendText(phoneDestination, body);
             }
         }
     }
