@@ -77,7 +77,9 @@ public class WeDayController {
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
+
         User user = users.findOneByEmail((String) session.getAttribute("email"));
+
         if (user == null) {
             throw new Exception("User does not exist");
         }
@@ -95,6 +97,7 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-invite")
+
     public void createInvite(@RequestBody Invite invitee) throws Exception {
         Wedding wedding = weddings.findOne(invitee.wedding.id);
         if (wedding == null) {
@@ -106,8 +109,9 @@ public class WeDayController {
     }
 
     @RequestMapping("/invites")
-    public List<Wedding> invitesList(@RequestBody User user) {
-        return invites.findByEmail(user.email).stream()
+    public List<Wedding> invitesList(HttpSession session) {
+        String email = (String)session.getAttribute("email");
+        return invites.findByEmail(email).stream()
                 .map(invite -> {
                     return invite.wedding;
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
@@ -126,30 +130,29 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public Boolean userLogin(@RequestBody Params user,HttpSession session,
+    public ArrayList <Object> userLogin(@RequestBody Params user,HttpSession session,
                              HttpServletResponse response) throws Exception {
+        ArrayList <Object> userLogin = new ArrayList<>();
+        boolean isUser;
 
         User u = users.findOneByEmail(user.email);
-
         if (u == null) {
             response.sendError(403);
-
         } else if (PasswordHash.validatePassword(user.password, u.password)) {
-
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
-                return true;
-
+                session.setAttribute("id",u.id);
+                isUser = true;
+                userLogin.add(isUser);
+                userLogin.add(user);
+                return userLogin;
             } else {
                 session.setAttribute("email",u.email);
-                return false;
+                session.setAttribute("id",u.email);
             }
-
         } else if (!PasswordHash.validatePassword(user.password, u.password)) {
             response.sendError(403);
-
         }
-
         return null;
     }
 
@@ -218,17 +221,17 @@ public class WeDayController {
 
     public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
 
-        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+    TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("Body", body));
-        params.add(new BasicNameValuePair("To", destination));
-        params.add(new BasicNameValuePair("From", "+18436405964"));
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    params.add(new BasicNameValuePair("Body", body));
+    params.add(new BasicNameValuePair("To", destination));
+    params.add(new BasicNameValuePair("From", "+18436405964"));
 
-        MessageFactory messageFactory = client.getAccount().getMessageFactory();
-        Message message = messageFactory.create(params);
-        System.out.println(message.getSid());
-    }
+    MessageFactory messageFactory = client.getAccount().getMessageFactory();
+    Message message = messageFactory.create(params);
+    System.out.println(message.getSid());
+}
 
     public static void sendEmail(String destination, String body, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
