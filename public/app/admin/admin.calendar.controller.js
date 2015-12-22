@@ -41,8 +41,12 @@ angular
     })
   };
   $scope.updateEvents();
-    $scope.weddingName = "Charles' Dope Ass Wedding"
-//calendar bitch
+  //add CurrentWedding Name
+  CalendarService.getWeddingObject().success(function(res){
+    $scope.weddingName = res.weddingName;
+    console.log(res,'res');
+  });
+  //calendar bitch
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();

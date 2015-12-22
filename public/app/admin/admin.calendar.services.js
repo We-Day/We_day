@@ -4,6 +4,8 @@
     .module('admin')
     .factory('CalendarService',function($http,$routeParams){
       var dateUrl = "https://tiny-tiny.herokuapp.com/collections/dates";
+      var currWedding = '/create-wedding/'+$routeParams.weddingId;
+
       var parseItem = function(item){
         var object = {
           _id: item._id,
@@ -40,9 +42,11 @@
         var pObject = parseItem(item);
         return $http.delete(dateUrl +'/' + pObject._id);
       };
-
-
+      var getWeddingObject = function(){
+        return $http.get(currWedding);
+      }
     return{
+      getWeddingObject:getWeddingObject,
       getDates:getDates,
       addDate:addDate,
       editDate:editDate,

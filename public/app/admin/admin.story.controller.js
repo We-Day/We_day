@@ -9,8 +9,11 @@ angular
       $scope.storyEmpty();
     })
     $scope.console = function(item){
-      console.log(item.split('<img'))
-      console.log($.parseHTML(item)[0].innerHTML);
+      var result = item.match(/<p>(.*?)<\/p>/g).map(function(val){
+        console.log('val',val);
+        return val.replace(/<\/?p>/g,'');
+      })
+      console.log(result,'result');
     }
     $scope.storyEmpty = function(){
       return $scope.story.length < 1 ? true : false

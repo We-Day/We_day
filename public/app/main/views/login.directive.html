@@ -13,5 +13,6 @@
   <div class="checkbox">
     <label><input type="checkbox"> Remember me</label>
   </div>
+  <p ng-show = "!passwordRight">Problem with login</p>
   <button ng-click = "loginUser(email,password)" class="btn btn-default">Submit</button>
 </form>
