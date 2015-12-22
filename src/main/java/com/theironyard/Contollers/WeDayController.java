@@ -71,7 +71,9 @@ public class WeDayController {
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
+
         User user = users.findOneByEmail((String) session.getAttribute("email"));
+
         if (user == null) {
             throw new Exception("User does not exist");
         }

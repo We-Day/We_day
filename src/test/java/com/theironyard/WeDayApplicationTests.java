@@ -97,9 +97,43 @@
             );
 
             assertTrue(users.count() == 1);
+        }
+        @Test
+        public void createWedding() throws Exception {
+            weddings.deleteAll();
+            users.deleteAll();
+
+            String password = "password";
+
+
+            User user = new User();
+            user.email = "nathan@gmail.com";
+            user.username = "Nathan";
+            user.password = PasswordHash.createHash(password);
+            user.phone = "123-4567";
+            users.save(user);
+
+            Wedding wedding = new Wedding();
+            wedding.location = "Charleston";
+            wedding.date = "date";
+            wedding.weddingName = "Nathan's Wedding";
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(wedding);
+
+            mockMvc.perform(
+                    MockMvcRequestBuilders.post("/create-wedding")
+                            .content(json)
+                            .contentType("application/json")
+                            .sessionAttr("email",user.email)
+
+            );
+
+            assertTrue(weddings.count() ==1);
 
 
         }
+
     }
 
 //        @Test
