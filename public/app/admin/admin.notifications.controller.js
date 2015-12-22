@@ -4,8 +4,9 @@ angular
   .module('admin')
   .controller('NotControllers',function($scope,NotServices){
     var inputNotifcation = '';
+
     $scope.toLong = function(){
-      return inputNotifcation.length > 115 ? true :false
+      return inputNotifcation.length > 110 ? true :false
     }
     $scope.updateLength = function(item){
       inputNotifcation = item;
@@ -32,14 +33,15 @@ angular
         notification: $scope.notification,
         time: new Date()
       }
-      $scope.notifications.push(res);
+      $scope.notifications.push(currObj);
       NotServices.postNot(currObj).success(function(res){
       })
     };
-    $scope.deleteNot = function(item){
+    $scope.deleteNot = function(item,index){
       console.log('hello');
+      console.log(index)
+      $scope.notifications.splice(index,1);
       NotServices.deleteNot(item).success(function(){
-        $scope.refresh();
       })
     }
 

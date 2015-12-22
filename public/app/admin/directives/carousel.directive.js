@@ -5,7 +5,7 @@
     .directive('myCarousel', function () {
       return {
         restrict: 'EA',
-        transclue: true,
+        transclude: true,
         templateUrl: 'app/admin/directives/views/carousel.directive.html',
         link: function (scope, element, attributes) {
 

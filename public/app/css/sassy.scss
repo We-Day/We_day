@@ -20,6 +20,12 @@ body, html, main {
 	height: 100%;
   width: 100%;
   margin: 0;
+	font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+
 }
 .login-button{
 	background: white;
@@ -133,10 +139,10 @@ body, html, main {
 
 .cd-fixed-bg.cd-bg-1 {
   margin-top: 3%;
-  background-image: url("http://nathandesch.com/wp-content/uploads/2014/11/07-7939-post/Doylestown-wedding-photography-18-of-66.jpg");
+  background-image: url("http://nathandesch.com/wp-content/uploads/2014/11/07-7939-post/Doylestown-weddiphotography-18-of-66.jpg");
 }
 .cd-fixed-bg.cd-bg-2 {
-  background-image: url("https://weminoredinfilm.files.wordpress.com/2013/06/will-ferrell-in-wedding-crashers-will-ferrell-18126324-1280-720.jpg");
+  background-image: url("https://weminoredinfilm.files.wordpress.com/2013/06/will-ferrell-in-weddicrashers-will-ferrell-18126324-1280-720.jpg");
 }
 .cd-fixed-bg.cd-bg-3 {
   background-image: url("http://charleston-wedding-packages.com/images/angel-oak-2.jpg");
@@ -192,7 +198,48 @@ body, html, main {
 	width: 90%;
 	margin-left: 5%;
 }
+.fc-widget-content{
+	font-family: serif;
+}
 //admin page-------------------------------------------------------//
+
+
+.form-invite-guests{
+	width: 40%;
+	margin: auto;
+	margin-top: 5%;
+	font-size: 3em;
+	.buttons{
+		margin-left: 20%;
+	}
+	p{
+		font-size: .5em;
+	}
+}
+.individual-guests{
+	margin-top: 10%;
+	padding-left: 10%;
+	height: 100%;
+	button{
+		position: absolute;
+		right: 50%;
+		top:2%;
+	}
+	.repeat-guests{
+		font-size: 2em;
+		padding: 3%;
+		border: 10px solid #6ed3cf;
+		background-color: #DADADA;
+		display: inline-block;
+		margin-left: -8%;
+		transition: all 0.5s ease;
+		margin-top:-2%;
+		&:hover{
+			margin-right: 8%;
+		}
+	}
+}
+
 .user-admin-directives{
 	margin-left: 10%;
 	margin-top: 5%;
@@ -246,19 +293,7 @@ body, html, main {
   }
 }
 }
-.animate-show.ng-hide-add{
-	transition: all linear 0;
-}
 
-.animate-show.ng-hide-remove {
-  transition: all linear 1s;
-}
-
-.animate-show.ng-hide {
-  line-height: 0;
-  opacity: 0;
-  padding: 5 5px;
-}
 //create-wedding------------------------------------------/
 .wrapper-create-wedding{
 	width: 100%;
@@ -319,19 +354,22 @@ body, html, main {
 }
 }
 // calendar
-.ng-hide-add {
-  transition:2s linear all;
-}
 
-// .calendar-repeat-events{
-// 	transition: all 2s ease;
-// 	&:hover{
-// 		color:red;
-// 		.other-text-calendar{
-// 		display: block;
-// 		}
-// 	}
-// }
+
+.calendar-repeat-events{
+	transition: all .2s ease;
+	max-height: 20px;
+	.other-text-calendar{
+		transition: all .1s ease;
+		visibility:hidden;
+	}
+	&:hover{
+		margin-bottom: 200px;
+		.other-text-calendar{
+			visibility: visible;
+		}
+	}
+}
 
 
 .main-calendar{
@@ -339,35 +377,54 @@ body, html, main {
 }
 //ations
 
-.notifications-div{
-	margin-top: 5%;
+.form-group-notifications{
+	box-shadow: 10px 10px 5px #888888;
+	height: 10%;
+	margin-left: 10%;
+	width: 60%;
+	border: solid black 3px;
 	border-radius: 5px;
-	padding: 0;
-	.form-group-notifications{
-		width: 100%;
-		background-color: #e3e3e3;
-		padding: 0;
-		margin: 0;
+	.glyphicon-remove{
+		color:black;
+		font-size: 1.8em;
+		opacity: .7;
+		float: right;
+		&:hover{
+			opacity: .5;
+		}
 	}
-
+	.notification-input{
+		input{
+			height: 100% !important;
+			width: 15em;
+			font-size: 2em;
+			border: none;
+			outline: none;
+		}
+	}
 	.checkboxes-notifications{
-		padding-left: 30%;
+		padding: 2%;
+		height: 100px;
+		border-right: solid #DADADA 1px;
+		border-radius: 5px;
 		.form-group{
 			display: block;
 		}
 	}
-.form-inline {
-	border-radius: 5px;
+
 }
 .admin-notifications-container{
 	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
 	width: 80%;
-	margin: auto;
+	margin-left: 10%;
 	margin-top: 5%;
+	margin-bottom: 30%;
 
 }
 .admin-notifications{
-	transition: all 0.4s ease-in-out;
+	h4,h1{	transition: all .5s ease-in-out;
+}
+	transition: all 1s ease-in-out;
 	&:hover{
 		// transform: rotate(360deg);
 		width: 500px;
@@ -418,23 +475,11 @@ body, html, main {
 		color:black;
 	}
 }
-}
+
 .full-page-div-form{
 	width: 100%;
 }
-.notification-input{
-	width: 500px;
-	font-size: 3em;
-	a{
-		text-decoration: none;
-	}
-	input{
-		margin-left: 5%;
-		width: 700px!important;
-		border-radius: 5px;
 
-	}
-}
 
 //landing page
 .landing-page-container{

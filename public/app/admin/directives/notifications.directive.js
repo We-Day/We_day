@@ -5,7 +5,7 @@
     .directive('myNotification', function () {
       return {
         restrict: 'EA',
-        transclue: true,
+        transclude: true,
         templateUrl: 'app/admin/directives/views/notification.directive.html',
         link: function (scope, element, attributes) {
 

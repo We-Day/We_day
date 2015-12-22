@@ -1,6 +1,7 @@
 <nav class="navbar navbar-inverse">
 <div class="navbar-header">
   <a class="navbar-brand" href="#/">We-Day</a>
+  <a ng-show = "viewInvitee"class= "navbar-brand">{{lastInvitee}} was invited</a>
 </div>
 <div>
   <ul class="nav navbar-nav navbar-right">
@@ -40,6 +41,7 @@
 </div>
 <div class="col-md-10 user-admin-directives">
   <my-notification ng-show = "isCurrentIndex(1)"></my-notification>
-  <calendar-directive ng-show= "isCurrentIndex(6)"class="animate-show"></calendar-directive>
+  <my-guests ng-show = "isCurrentIndex(2)"></my-guests>
+  <calendar-directive ng-show= "isCurrentIndex(6)"></calendar-directive>
   <my-carousel ng-show="isCurrentIndex(7)"></my-carousel>
 </div>

@@ -2,14 +2,17 @@
   "use strict"
   angular
     .module('admin')
-    .factory('AdminService',function(){
-      var charles = function(){
-        console.log('charles');
+    .factory('AdminService',function($http){
+      var guestsUrl = "https://tiny-tiny.herokuapp.com/collections/sweetUser/";
+      var getUsers = function(){
+        return $http.get(guestsUrl)
       };
-
-
+      var inviteUser = function(obj){
+        return $http.post(guestsUrl,obj);
+      }
     return{
-      charles:charles
+      getUsers:getUsers,
+      inviteUser:inviteUser
     };
   });
 })();
