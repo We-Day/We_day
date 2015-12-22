@@ -9,7 +9,8 @@ angular
       $scope.storyEmpty();
     })
     $scope.console = function(item){
-      console.log(item);
+      console.log(item.split('<img'))
+      console.log($.parseHTML(item)[0].innerHTML);
     }
     $scope.storyEmpty = function(){
       return $scope.story.length < 1 ? true : false

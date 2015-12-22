@@ -15,7 +15,7 @@ angular
         if(!res[1]){
           $location.path('/create-weddings')
         }else{
-          $location.path('/landingPage/'+res[0].id);
+          $location.path('/landingPage');
         }
       });
     };
