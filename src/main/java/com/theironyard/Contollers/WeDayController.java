@@ -6,6 +6,7 @@ import com.theironyard.Entities.User;
 import com.theironyard.Services.*;
 import com.theironyard.Utilities.Params;
 import com.theironyard.Utilities.PasswordHash;
+import com.theironyard.WeDayConfig;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
@@ -13,11 +14,16 @@ import com.twilio.sdk.resource.instance.Message;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.social.facebook.api.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -71,7 +77,9 @@ public class WeDayController {
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
+
         User user = users.findOneByEmail((String) session.getAttribute("email"));
+
         if (user == null) {
             throw new Exception("User does not exist");
         }
@@ -89,6 +97,7 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-invite")
+
     public void createInvite(@RequestBody Invite invitee) throws Exception {
         Wedding wedding = weddings.findOne(invitee.wedding.id);
         if (wedding == null) {
@@ -100,8 +109,9 @@ public class WeDayController {
     }
 
     @RequestMapping("/invites")
-    public List<Wedding> invitesList(@RequestBody User user) {
-        return invites.findByEmail(user.email).stream()
+    public List<Wedding> invitesList(HttpSession session) {
+        String email = (String)session.getAttribute("email");
+        return invites.findByEmail(email).stream()
                 .map(invite -> {
                     return invite.wedding;
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
@@ -120,30 +130,29 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public Boolean userLogin(@RequestBody Params user,HttpSession session,
+    public ArrayList <Object> userLogin(@RequestBody Params user,HttpSession session,
                              HttpServletResponse response) throws Exception {
+        ArrayList <Object> userLogin = new ArrayList<>();
+        boolean isUser;
 
         User u = users.findOneByEmail(user.email);
-
         if (u == null) {
             response.sendError(403);
-
         } else if (PasswordHash.validatePassword(user.password, u.password)) {
-
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
-                return true;
-
+                session.setAttribute("id",u.id);
+                isUser = true;
+                userLogin.add(isUser);
+                userLogin.add(user);
+                return userLogin;
             } else {
                 session.setAttribute("email",u.email);
-                return false;
+                session.setAttribute("id",u.email);
             }
-
         } else if (!PasswordHash.validatePassword(user.password, u.password)) {
             response.sendError(403);
-
         }
-
         return null;
     }
 
@@ -167,7 +176,7 @@ public class WeDayController {
     }
 
     @RequestMapping ("/send-notification")
-    public void sendNotification(String body) throws TwilioRestException {
+    public void sendNotification(String body) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         Iterable<User> allUsers = users.findAll();
         for (User user : allUsers){
@@ -210,17 +219,32 @@ public class WeDayController {
         return p;
     }
 
-    public static void sendText(String destination, String body) throws TwilioRestException {
+    public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
 
-        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+    TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("Body", body));
-        params.add(new BasicNameValuePair("To", destination));
-        params.add(new BasicNameValuePair("From", "+18436405964"));
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    params.add(new BasicNameValuePair("Body", body));
+    params.add(new BasicNameValuePair("To", destination));
+    params.add(new BasicNameValuePair("From", "+18436405964"));
 
-        MessageFactory messageFactory = client.getAccount().getMessageFactory();
-        Message message = messageFactory.create(params);
-        System.out.println(message.getSid());
+    MessageFactory messageFactory = client.getAccount().getMessageFactory();
+    Message message = messageFactory.create(params);
+    System.out.println(message.getSid());
+}
+
+    public static void sendEmail(String destination, String body, HttpSession session) throws MessagingException {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.register(WeDayConfig.class);
+        ctx.refresh();
+        JavaMailSenderImpl mailSender = ctx.getBean(JavaMailSenderImpl.class);
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper mailMsg = new MimeMessageHelper(mimeMessage);
+        mailMsg.setFrom("weday22@gmail.com");
+        mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
+        mailMsg.setTo(destination);
+        mailMsg.setSubject("You've just been invited to their wedding!");
+        mailMsg.setText("Hello World!");
+        mailSender.send(mimeMessage);
     }
 }
