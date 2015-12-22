@@ -130,8 +130,11 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public Boolean userLogin(@RequestBody Params user,HttpSession session,
+    public ArrayList <Object> userLogin(@RequestBody Params user,HttpSession session,
                              HttpServletResponse response) throws Exception {
+        ArrayList <Object> userLogin = new ArrayList<>();
+        boolean isUser;
+
         User u = users.findOneByEmail(user.email);
         if (u == null) {
             response.sendError(403);
@@ -139,11 +142,13 @@ public class WeDayController {
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
                 session.setAttribute("id",u.id);
-                return true;
+                isUser = true;
+                userLogin.add(isUser);
+                userLogin.add(user);
+                return userLogin;
             } else {
                 session.setAttribute("email",u.email);
                 session.setAttribute("id",u.email);
-                return false;
             }
         } else if (!PasswordHash.validatePassword(user.password, u.password)) {
             response.sendError(403);
@@ -216,17 +221,17 @@ public class WeDayController {
 
     public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
 
-        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+    TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("Body", body));
-        params.add(new BasicNameValuePair("To", destination));
-        params.add(new BasicNameValuePair("From", "+18436405964"));
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    params.add(new BasicNameValuePair("Body", body));
+    params.add(new BasicNameValuePair("To", destination));
+    params.add(new BasicNameValuePair("From", "+18436405964"));
 
-        MessageFactory messageFactory = client.getAccount().getMessageFactory();
-        Message message = messageFactory.create(params);
-        System.out.println(message.getSid());
-    }
+    MessageFactory messageFactory = client.getAccount().getMessageFactory();
+    Message message = messageFactory.create(params);
+    System.out.println(message.getSid());
+}
 
     public static void sendEmail(String destination, String body, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
