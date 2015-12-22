@@ -12,6 +12,10 @@
     import org.junit.Test;
     import org.junit.runner.RunWith;
     import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.mail.javamail.JavaMailSenderImpl;
+    import org.springframework.mail.javamail.MimeMessageHelper;
     import org.springframework.test.context.web.WebAppConfiguration;
     import org.springframework.boot.test.SpringApplicationConfiguration;
     import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,6 +24,10 @@
     import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
     import org.springframework.test.web.servlet.setup.MockMvcBuilders;
     import org.springframework.web.context.WebApplicationContext;
+
+    import javax.mail.MessagingException;
+    import javax.mail.internet.MimeMessage;
+    import javax.servlet.http.HttpSession;
 
     import static org.junit.Assert.assertTrue;
 
@@ -97,43 +105,26 @@
             );
 
             assertTrue(users.count() == 1);
+
+
         }
+
         @Test
-        public void createWedding() throws Exception {
-            weddings.deleteAll();
-            users.deleteAll();
-
-            String password = "password";
-
-
-            User user = new User();
-            user.email = "nathan@gmail.com";
-            user.username = "Nathan";
-            user.password = PasswordHash.createHash(password);
-            user.phone = "123-4567";
-            users.save(user);
-
-            Wedding wedding = new Wedding();
-            wedding.location = "Charleston";
-            wedding.date = "date";
-            wedding.weddingName = "Nathan's Wedding";
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(wedding);
-
-            mockMvc.perform(
-                    MockMvcRequestBuilders.post("/create-wedding")
-                            .content(json)
-                            .contentType("application/json")
-                            .sessionAttr("email",user.email)
-
-            );
-
-            assertTrue(weddings.count() ==1);
-
-
+        @Bean
+        public void sendEmail() throws MessagingException {
+            AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+            ctx.register(WeDayConfig.class);
+            ctx.refresh();
+            JavaMailSenderImpl mailSender = ctx.getBean(JavaMailSenderImpl.class);
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper mailMsg = new MimeMessageHelper(mimeMessage);
+            mailMsg.setFrom("weday22@gmail.com");
+            mailMsg.setReplyTo("weday22@gmail.com");
+            mailMsg.setTo("spcbdrake@yahoo.com");
+            mailMsg.setSubject("You've just been invited to their wedding!");
+            mailMsg.setText("Hello World!");
+            mailSender.send(mimeMessage);
         }
-
     }
 
 //        @Test
