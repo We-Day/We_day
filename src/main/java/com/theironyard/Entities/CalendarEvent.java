@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class CalendarEvent {
     @Id
     @GeneratedValue
-    public String id;
+    public int id;
 
     @Column (nullable = false)
     public LocalDateTime start;
@@ -24,16 +24,13 @@ public class CalendarEvent {
     @Column (nullable = false)
     public String title;
 
-
     public class email{
         boolean send; // default false;
         int time; // hours before sending email
     }
 
     public class text{
-
         boolean send;
         int time;
-
     }
 }

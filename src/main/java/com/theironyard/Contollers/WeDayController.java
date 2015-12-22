@@ -136,8 +136,10 @@ public class WeDayController {
         boolean isUser;
 
         User u = users.findOneByEmail(user.email);
+
         if (u == null) {
             response.sendError(403);
+
         } else if (PasswordHash.validatePassword(user.password, u.password)) {
             if (invites.findByEmail(u.email)!=null) {
                 session.setAttribute("email",u.email);
@@ -163,9 +165,16 @@ public class WeDayController {
         return user;
     }
 
+    @RequestMapping("/current-user")
+    public User currentUser(HttpSession session){
+        int id = (int)session.getAttribute("id");
+        User user = users.findOne(id);
+        user.password = null;
+        return user;
+    }
+
     @RequestMapping("/profile")
     public org.springframework.social.facebook.api.User getUser(HttpServletResponse response) throws IOException {
-
         try {
             org.springframework.social.facebook.api.User user = facebook.userOperations().getUserProfile();
             return user;
@@ -175,15 +184,15 @@ public class WeDayController {
         return null;
     }
 
-    @RequestMapping ("/send-notification")
+    @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
     public void sendNotification(String body) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         Iterable<User> allUsers = users.findAll();
         for (User user : allUsers){
             String phone = user.phone;
             numbers.add(phone);
-            for (String destination : numbers){
-                sendText(destination, body);
+            for (String phoneDestination : numbers){
+                sendText(phoneDestination, body);
             }
         }
     }
