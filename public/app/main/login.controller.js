@@ -9,13 +9,14 @@ angular
     // LoginService.getUsers().success(function(res){
     //   var users = res;
     // })
+    var passwordRight = true;
     $scope.loginUser = function(email,password){
       LoginService.isInvitedToWedding(email, password).success(function(res){
         console.log('res',res)
         if(!res[1]){
           $location.path('/create-weddings')
         }else{
-          $location.path('/landingPage');
+          $scope.passwordRight = false;
         }
       });
     };
