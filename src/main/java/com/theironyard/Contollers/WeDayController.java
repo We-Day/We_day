@@ -128,7 +128,6 @@ public class WeDayController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public Boolean userLogin(@RequestBody Params user,HttpSession session,
                              HttpServletResponse response) throws Exception {
-
         User u = users.findOneByEmail(user.email);
 
         if (u == null) {
