@@ -3,8 +3,13 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService){
-  $scope.weddingName = "Charles's Dope Ass Wedding";
   $scope.currentUser = "Charles"
+
+  AdminService.getWeddingObject().success(function(res){
+    $scope.weddingName = res.weddingName;
+    console.log(res,'res');
+  })
+
 //myguests
 $scope.viewInvitee = false;
   AdminService.getUsers().success(function(res){

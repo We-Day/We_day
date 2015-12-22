@@ -12,7 +12,7 @@ angular
       var result = item.match(/<p>(.*?)<\/p>/g).map(function(val){
         console.log('val',val);
         return val.replace(/<\/?p>/g,'');
-      });
+      })
       console.log(result,'result');
     }
     $scope.storyEmpty = function(){

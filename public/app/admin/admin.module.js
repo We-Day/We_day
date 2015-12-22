@@ -22,10 +22,7 @@
           templateUrl: 'app/admin/views/admin.list.html',
           controller: 'AdminController as adminCtrl'
         })
-        .when('/admins',{
-          templateUrl:'app/admin/views/admin.list.html',
-          controller:'AdminController as adminCtrl'
-        })
+        
     })
 
 })();
