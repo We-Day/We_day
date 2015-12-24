@@ -10,8 +10,8 @@
       var postStory = function(post){
         return $http.post(storyUrl,post)
       };
-      var editStory = function(post){
-        return $http.put(storyUrl,post)
+      var editStory = function(post,id){
+        return $http.put(storyUrl+'/'+id,post)
       }
     return{
       getStory:getStory,

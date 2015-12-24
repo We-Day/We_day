@@ -3,30 +3,31 @@
 angular
   .module('admin')
   .controller('StoryController',function($scope,StoryService){
-
+    var currentId = '';
     StoryService.getStory().success(function(res){
-      $scope.story = res;
-      $scope.storyEmpty();
+      console.log('res',res[0].storyContent.length);
+      $scope.isEmpty = $scope.storyEmpty(res[0]);
+      $scope.htmlVariable = res[0].storyContent;
     })
-    $scope.console = function(item){
-      var result = item.match(/<p>(.*?)<\/p>/g).map(function(val){
-        console.log('val',val);
-        return val.replace(/<\/?p>/g,'');
-      })
-      console.log(result,'result');
-    }
-    $scope.storyEmpty = function(){
-      return $scope.story.length < 1 ? true : false
+    $scope.storyEmpty = function(obj){
+      return obj.storyContent.length < 1 ? true : false
     };
-    $scope.postStory = function(){
-      $scope.story = story;
-      StoryService.postStory(story).success(function(){
-        console.log('story posted')
+    $scope.postStory = function(story){
+      var storyContent = {
+        storyContent: story,
+      }
+      if(currentId.length != 0){
+        $scope.editStory(storyContent,currentId);
+      }else{
+      StoryService.postStory(storyContent).success(function(res){
+        console.log(res,'response post');
+        currentId = res._id;
       })
     };
-    $scope.editStory = function(story){
+    };
+    $scope.editStory = function(story,id){
       $scope.story = story;
-      StoryService.editStory(story).success(function(){
+      StoryService.editStory(story,id).success(function(){
         console.log('story edited');
       })
     }

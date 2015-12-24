@@ -238,24 +238,50 @@ body, html, main {
     position: absolute;
     right: 50%;
     top: 2%; }
-  .individual-guests .repeat-guests {
-    font-size: 2em;
-    padding: 3%;
-    border: 10px solid #6ed3cf;
-    background-color: #DADADA;
-    display: inline-block;
-    margin-left: -8%;
-    transition: all 0.5s ease;
-    margin-top: -2%; }
-    .individual-guests .repeat-guests:hover {
-      margin-right: 8%; }
+
+.repeat-guests {
+  transition: all 0.5s ease;
+  max-width: 40%;
+  font-size: 1.6em;
+  display: inline-block;
+  border: solid #3b3a36 3px;
+  margin: 1%;
+  padding: 2%;
+  border-radius: 4px;
+  color: #3b3a36;
+  background-color: #e9ece5; }
+  .repeat-guests a, .repeat-guests p {
+    display: inline; }
+  .repeat-guests a {
+    opacity: 0; }
+    .repeat-guests a:hover {
+      opacity: .8; }
+  .repeat-guests .question, .repeat-guests .span-options {
+    display: none; }
+
+.large-class {
+  transition: all 0.5s ease;
+  width: 80%;
+  font-size: 3em;
+  font-weight: 500;
+  line-height: 35px; }
+  .large-class .question, .large-class .span-options {
+    display: block; }
+    .large-class .question span:hover, .large-class .span-options span:hover {
+      color: black; }
+  .large-class .span-options {
+    width: 60%;
+    margin: auto; }
+    .large-class .span-options span {
+      margin-left: 20%; }
+  .large-class .username, .large-class a {
+    display: none; }
 
 .user-admin-directives {
-  margin-left: 10%;
+  margin-left: 5%;
   margin-top: 5%; }
 
 .nav-column {
-  width: 10%;
   margin-top: 10%;
   position: fixed; }
   .nav-column .nav-tabs {
@@ -352,7 +378,7 @@ body, html, main {
   box-shadow: 10px 10px 5px #888888;
   height: 10%;
   margin-left: 10%;
-  width: 60%;
+  width: 100%;
   border: solid black 3px;
   border-radius: 5px; }
   .form-group-notifications .glyphicon-remove {
@@ -364,7 +390,7 @@ body, html, main {
       opacity: .5; }
   .form-group-notifications .notification-input input {
     height: 100% !important;
-    width: 15em;
+    width: 25em;
     font-size: 2em;
     border: none;
     outline: none; }
@@ -379,7 +405,7 @@ body, html, main {
 .admin-notifications-container {
   background-image: url("https://unsplash.com/photos/xMScfzgJ7_c");
   width: 80%;
-  margin-left: 10%;
+  margin-left: 20%;
   margin-top: 5%;
   margin-bottom: 30%; }
 
@@ -490,3 +516,11 @@ body, html, main {
         line-height: 26.4px; }
       .landing-page-container .landing-page .landing-page-options:hover {
         opacity: .5; }
+
+.story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
+  margin-top: 5%;
+  margin-left: 15%;
+  margin-bottom: 5%; }
+
+.story-directive-container .story-text-editor {
+  margin-left: 5%; }

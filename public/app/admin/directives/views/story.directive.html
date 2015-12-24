@@ -1,6 +1,9 @@
-<div class="story-directive-contatiner" ng-controller = "StoryController">
-  <form >
+<div class="story-directive-container" ng-controller = "StoryController">
+  <form class = "story-text-editor"ng-show = 'isEmpty'>
     <text-angular ng-model="htmlVariable"></text-angular>
-    <button type="button" ng-click = "console(htmlVariable)"name="button">Submit</button>
+    <button type="button" ng-click = "postStory(htmlVariable);isEmpty = false"name="button">Submit</button>
   </form>
+<div ng-show = '!isEmpty'class = 'our-story-div' ng-bind-html = "htmlVariable">
+</div>
+<button class = "our-story-div-button" ng-show = '!isEmpty' ng-click = "isEmpty = true" type="button" name="button">Edit Wedding</button>
 </div>

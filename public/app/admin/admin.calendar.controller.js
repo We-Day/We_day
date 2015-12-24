@@ -44,7 +44,6 @@ angular
   //add CurrentWedding Name
   CalendarService.getWeddingObject().success(function(res){
     $scope.weddingName = res.weddingName;
-    console.log(res,'res');
   });
   //calendar bitch
     var date = new Date();
@@ -90,7 +89,9 @@ angular
         ]
     };
     $scope.editDate = function(event){
-        CalendarService.editDate(event);
+        CalendarService.editDate(event).success(function(res){
+          console.log('editDate',res);
+      });
     };
 
     $scope.alertOnEventClick = function( date, jsEvent, view){
@@ -124,7 +125,7 @@ angular
        }
        console.log('currObject',currObject)
        CalendarService.editDate(currObject).success(function(el){
-         $scope.updateEvents();
+         console.log('el',el)
        })
     };
     /* alert on Resize */

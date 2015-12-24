@@ -15,7 +15,20 @@
 </div>
 <div ng-show = "hide" class=" individual-guests">
 <button ng-click = "hide = false" type="button" name="button">Invite More Guests</button>
-  <div class="repeat-guests" ng-repeat ="guest in guests">
-    {{guest.username}}
+
+  <div ng-class = 'myVar'class="repeat-guests" ng-repeat ="guest in guests">
+    <a><span ng-click = "myVar='large-class'"class="glyphicon glyphicon-remove"></span></a>
+    <p class = "question">Are you sure you want to delete {{guest.username}} from contacts ?
+      <br>
+      <div class="span-options">
+        <span ng-click = "myVar = ''"class="glyphicon glyphicon-remove"></span>
+        <span ng-click = "removeUser(guest._id,$index); MyVar = ''"class="glyphicon glyphicon-check"></span>
+      </div>
+        </p>
+
+    <p class = 'username'>
+      {{guest.username}}
+    </p>
   </div>
+
 </div>
