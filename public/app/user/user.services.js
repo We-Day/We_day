@@ -25,7 +25,7 @@
       }
 
     return{
-      logOutUrl:logOutUrl,
+      logOut:logOut,
       getStory:getStory,
       getUsers:getUsers,
       getCurrentUser:getCurrentUser,

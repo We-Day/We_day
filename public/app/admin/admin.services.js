@@ -7,7 +7,7 @@
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
       var currentUser = '/current-user';
       var logoutUrl = '/logout';
-      var logout = function(){
+      var logOut = function(){
         return $http.post(logoutUrl);
       }
       var getWeddingObject = function(){

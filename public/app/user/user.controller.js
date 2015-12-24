@@ -7,7 +7,7 @@ angular
     $scope.logOut = function(){
       UserService.logOut().success(function(res){
         $location.path('/');
-      })
+      });
     };
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;
