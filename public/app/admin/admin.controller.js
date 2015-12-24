@@ -3,11 +3,13 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService){
-  $scope.currentUser = "Charles"
+  AdminService.getCurrentUser().success(function(res){
+    console.log(res,'currentUser');
+    $scope.currentUser = res.username;
+  });
 
   AdminService.getWeddingObject().success(function(res){
     $scope.weddingName = res.weddingName;
-    console.log(res,'res');
   })
 
 //myguests
@@ -15,6 +17,12 @@ $scope.viewInvitee = false;
   AdminService.getUsers().success(function(res){
     $scope.guests = res;
   })
+  $scope.removeUser = function(id,index){
+    $scope.guests.splice(index,1);
+    AdminService.removeUser(id).success(function(res){
+      console.log(res,'response remove user');
+    })
+  }
   $scope.inviteUser = function(name,email){
     var currObject = {
       email: email,
@@ -34,7 +42,7 @@ $scope.viewInvitee = false;
       {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
       {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
     ];
-    $scope.currentIndex = 0;
+    $scope.currentIndex = 2;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;
