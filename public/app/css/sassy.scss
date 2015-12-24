@@ -203,19 +203,16 @@ body, html, main {
 }
 //admin page-------------------------------------------------------//
 
-
-.form-invite-guests{
-	width: 40%;
-	margin: auto;
-	margin-top: 5%;
-	font-size: 3em;
-	.buttons{
-		margin-left: 20%;
-	}
-	p{
-		font-size: .5em;
+.form-add-users{
+	margin-left: 10%;
+	width: 80%;
+	margin-top: 10%;
+	input{
+		width: 100%;
 	}
 }
+
+
 .individual-guests{
 	margin-top: 10%;
 	padding-left: 10%;

@@ -3,7 +3,10 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService){
-  $scope.currentUser = "Charles"
+  AdminService.getCurrentUser().success(function(res){
+    console.log(res,'currentUser');
+    $scope.currentUser = res.username;
+  });
 
   AdminService.getWeddingObject().success(function(res){
     $scope.weddingName = res.weddingName;
