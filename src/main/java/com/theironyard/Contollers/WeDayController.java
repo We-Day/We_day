@@ -51,7 +51,7 @@ public class WeDayController {
     Facebook facebook;
 
     @Inject
-    public WeDayController(Facebook facebook) {
+    public WeDayController(Facebook facebook) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         this.facebook = facebook;
     }
@@ -148,6 +148,7 @@ public class WeDayController {
                 userLogin.add(isUser);
                 userLogin.add(user);
                 return userLogin;
+
             } else {
                 session.setAttribute("email",u.email);
                 session.setAttribute("id",u.email);
@@ -164,22 +165,28 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-user")
-    public User createUser(@RequestBody User user) throws Exception {
+    public ArrayList<Object> Login(@RequestBody User user)
+            throws InvalidKeySpecException, NoSuchAlgorithmException {
+        ArrayList <Object> createUser = new ArrayList<>();
+        boolean exists;
+
         Iterable<User> allUsers = users.findAll();
-        String email = user.email;
         for (User alreadyUser : allUsers) {
             String alreadyEmail = alreadyUser.email;
             if (alreadyEmail.equals(user.email)) {
-                throw new Exception("User already Exists");
+                exists = false;
+                createUser.add(user);
+                createUser.add(exists);
+                return createUser;
             }
         }
-        if (!email.equals(user.email)) {
+            exists = true;
             user.password = PasswordHash.createHash(user.password);
             users.save(user);
-        }
-        return user;
+            createUser.add(user);
+            createUser.add(exists);
+            return createUser;
     }
-
 
     @RequestMapping("/current-user")
     public User currentUser(HttpSession session){
@@ -203,7 +210,7 @@ public class WeDayController {
     @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
     public void sendNotification(String body) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
-        Iterable<User> allUsers = users.findAll();
+        Iterable<User> allUsers = users.findAll(); // change to wedding-specific users
         for (User user : allUsers){
             String phone = user.phone;
             numbers.add(phone);
@@ -212,6 +219,7 @@ public class WeDayController {
             }
         }
     }
+    // THIS HAS TO BE ALTERED TO MAKE IT WEDDING SPECIFIC INSTEAD OF ALL USERS.
 
     @RequestMapping("/create-post")
     public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {

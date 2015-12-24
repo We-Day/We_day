@@ -26,13 +26,13 @@ public class Wedding {
     public String location;
 
     @Column(nullable = false)
-    public String date;
+    public LocalDate date;
 
     public Wedding() {
 
     }
 
-    public Wedding(int id, String weddingName, String location, String date) {
+    public Wedding(int id, String weddingName, String location, LocalDate date) {
         this.id = id;
         this.weddingName = weddingName;
         this.location = location;
@@ -63,11 +63,11 @@ public class Wedding {
         this.location = location;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
