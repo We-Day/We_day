@@ -4,7 +4,6 @@ angular
   .module('user')
   .controller('UserController',function($scope,UserService){
     $scope.currentIndex = 1;
-    $scope.currentUser = 'Charles'
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;
       console.log($scope.currentIndex)
@@ -29,17 +28,30 @@ angular
     return moment(date).calendar()
   }
 
-//     $scope.events = [{
-//   badgeClass: 'info',
-//   badgeIconClass: 'glyphicon-check',
-//   title: 'First heading',
-//   content: 'Some awesome content.'
-// }, {
-//   badgeClass: 'warning',
-//   badgeIconClass: 'glyphicon-credit-card',
-//   title: 'Second heading',
-//   content: 'More awesome content.'
-// }];
+//story information////////////////////
+  UserService.getStory().success(function(res){
+    $scope.htmlVariable = res[0].storyContent;
+    console.log('res story ',res[0]);
+  });
+//currentUser//////////////////
+UserService.getCurrentUser().success(function(res){
+  console.log('res currentUser',res);
+  $scope.currentUserName = res.username;
+});
+//all users to wedding////////////
+UserService.getUsers().success(function(res){
+  $scope.guests = res;
+  console.log('res users',res);
+})
+//carousel
+  $scope.myInterval = 5000;
+    $scope.noWrapSlides = false;
+    var slides = $scope.slides = [
+      {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
+      {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
+    ];
+    $scope.currentIndex = 2;
+    $scope.myValue = true;
 
   });
 })();

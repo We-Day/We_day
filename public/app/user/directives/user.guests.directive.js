@@ -1,12 +1,13 @@
 (function () {
   "use strict";
   angular
-    .module('admin')
-    .directive('userCarousel', function () {
+    .module('user')
+    .directive('userGuests', function () {
       return {
         restrict: 'EA',
         transclude: true,
-        templateUrl: 'app/admin/directives/views/carousel.directive.html',
+        controller: 'UserController',
+        templateUrl: 'app/user/views/user.guests.html',
         link: function (scope, element, attributes) {
 
 
