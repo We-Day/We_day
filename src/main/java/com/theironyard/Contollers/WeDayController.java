@@ -160,13 +160,13 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-user")
-    public String createUser (@RequestBody User user, HttpServletResponse response) throws Exception {
+    public String createUser (@RequestBody User user) throws Exception {
         User u = users.findOneByEmail(user.email);
         if (u.email != null) {
             return "User already exists";
         }
         user.password = PasswordHash.createHash(user.password);
-        users.save(u);
+        users.save(user);
         return "Success";
     }
 
