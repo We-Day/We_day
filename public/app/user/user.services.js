@@ -7,6 +7,7 @@
       var currentUserUrl = "/current-user"
       var guestsUrl = "https://tiny-tiny.herokuapp.com/collections/sweetUser/";
       var storyUrl = "https://tiny-tiny.herokuapp.com/collections/ourStory";
+      var logOutUrl = "/logout"
       var getStory = function(){
         return $http.get(storyUrl);
       };
@@ -19,7 +20,12 @@
       var getCurrentUser = function(){
         return $http.get(currentUserUrl);
       }
+      var logOut = function(){
+        return $http.post(logOutUrl);
+      }
+
     return{
+      logOutUrl:logOutUrl,
       getStory:getStory,
       getUsers:getUsers,
       getCurrentUser:getCurrentUser,

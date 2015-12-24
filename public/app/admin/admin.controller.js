@@ -3,6 +3,11 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService){
+    $scope.logOut = function(){
+      UserService.logOut().success(function(res){
+        $location.path('/');
+      });
+    };
   AdminService.getCurrentUser().success(function(res){
     console.log(res,'currentUser');
     $scope.currentUser = res.username;

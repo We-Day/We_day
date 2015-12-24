@@ -5,7 +5,11 @@
     .factory('AdminService',function($http,$routeParams){
       var guestsUrl = "https://tiny-tiny.herokuapp.com/collections/sweetUser/";
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
-      var currentUser = '/current-user'
+      var currentUser = '/current-user';
+      var logoutUrl = '/logout';
+      var logout = function(){
+        return $http.post(logoutUrl);
+      }
       var getWeddingObject = function(){
         return $http.get(currWedding);
       }
@@ -22,6 +26,7 @@
         return $http.get(currentUser);
       }
     return{
+      logOut:logOut,
       getCurrentUser:getCurrentUser,
       removeUser:removeUser,
       getWeddingObject:getWeddingObject,

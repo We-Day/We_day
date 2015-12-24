@@ -5,6 +5,7 @@ angular
   .controller('RegisterController',function($route,$window,$location,$scope,RegisterService){
     $scope.passwordsAreSame = true;
     var users = [];
+    $scope.emailAlreadyExists = false;
     $scope.emailExists = function(email){
       _.each(users,function(el){
         return el.email === email ? true :false;
@@ -28,6 +29,10 @@ angular
         console.log(el);
       })
     };
+    var continueBool = false;
+    $scope.canContinue = function(){
+      return continueBool === true ? 2 : 1
+    };
     $scope.addNewUser = function(){
       var currObj = {
         username: $scope.userName,
@@ -37,9 +42,9 @@ angular
       }
       if($scope.password == $scope.passwordAuth){
         RegisterService.addNewUser(currObj).success(function(res){
-          console.log('res',res);
-          
-          // $route.reload();
+          console.log('res createUSer',res)
+          $scope.emailAlreadyExists = !res[1];
+          res[1] ? $scope.setCurrentView(2): $scope.setCurrentView(1)
         });
       }
       else{alert('wrong password')};

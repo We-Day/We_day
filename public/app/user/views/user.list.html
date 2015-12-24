@@ -5,7 +5,7 @@
 <div>
   <ul class="nav navbar-nav navbar-right">
         <li> <a><span class="glyphicon glyphicon-user"></span>Hello,{{currentUserName}} </a></li>
-        <li><a><span class="glyphicon glyphicon-log-out"></span> Log-out</a></li>
+        <li ng-click = "logOut()"><a><span class="glyphicon glyphicon-log-out"></span> Log-out</a></li>
       </ul>
 </div>
 </div>
@@ -13,7 +13,7 @@
 <div class="col-md-2 nav-column nav-column-user-admin">
   <ul class="nav nav-tabs icons">
     <li ng-click = 'setCurrentIndex(0)'><a data-toggle="tab"><span class="glyphicon glyphicon-heart"></span></a><p class = 'your-story'>
-      Your Story
+      Our Story
     </p></li>
     <li ng-click = 'setCurrentIndex(1)'><a data-toggle="tab"><span class="glyphicon glyphicon-star"></span></a><p class = 'star'>
       Notifications

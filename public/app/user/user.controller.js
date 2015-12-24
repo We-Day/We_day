@@ -4,6 +4,11 @@ angular
   .module('user')
   .controller('UserController',function($scope,UserService){
     $scope.currentIndex = 1;
+    $scope.logOut = function(){
+      UserService.logOut().success(function(res){
+        $location.path('/');
+      })
+    };
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;
       console.log($scope.currentIndex)
