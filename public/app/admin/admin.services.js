@@ -14,7 +14,11 @@
       var inviteUser = function(obj){
         return $http.post(guestsUrl,obj);
       }
+      var removeUser = function(id){
+        return $http.delete(guestsUrl+id)
+      }
     return{
+      removeUser:removeUser,
       getWeddingObject:getWeddingObject,
       getUsers:getUsers,
       inviteUser:inviteUser
