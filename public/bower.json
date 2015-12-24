@@ -23,7 +23,9 @@
     "angular-timeline": "~1.6.1",
     "rangy": "~1.3.0",
     "font-awesome": "~4.5.0",
-    "textAngular": "~1.4.6"
+    "textAngular": "~1.4.6",
+    "masonry": "~3.3.2",
+    "angular-masonry": "~0.14.1"
   },
   "resolutions": {
     "angular": "1.3.20"
