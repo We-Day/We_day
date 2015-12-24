@@ -87,7 +87,7 @@ public class WeDayController {
         invite.isAdmin= true;
         invite.wedding= wedding;
         invite.email = user.email;
-        createInvite(invite);
+        createInvite(invite, invite.email, session);
         return wedding;
     }
 
@@ -98,14 +98,14 @@ public class WeDayController {
 
     @RequestMapping("/create-invite")
 
-    public void createInvite(@RequestBody Invite invitee) throws Exception {
+    public void createInvite(@RequestBody Invite invitee, String emailDestination, HttpSession session) throws Exception {
         Wedding wedding = weddings.findOne(invitee.wedding.id);
         if (wedding == null) {
             throw new Exception("Wedding does not exist");
         }
         //something to do with passwords needs to be in here.
         invites.save(invitee);
-        /*send email here*/
+        sendEmail(emailDestination, session);
     }
 
     @RequestMapping("/invites")
@@ -194,14 +194,19 @@ public class WeDayController {
     }
 
     @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
-    public void sendNotification(String body) throws TwilioRestException, MessagingException {
+    public void sendNotification(String body, HttpSession session) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         Iterable<User> allUsers = users.findAll();
         for (User user : allUsers){
             String phone = user.phone;
+            String email = user.email;
             numbers.add(phone);
+            numbers.add(email);
             for (String phoneDestination : numbers){
                 sendText(phoneDestination, body);
+            }
+            for (String notificationEmail : numbers) {
+                sendNotificationEmail(notificationEmail, session);
             }
         }
     }
@@ -251,7 +256,7 @@ public class WeDayController {
     System.out.println(message.getSid());
 }
 
-    public static void sendEmail(String destination, String body, HttpSession session) throws MessagingException {
+    public static void sendEmail(String emailDestination, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(WeDayConfig.class);
         ctx.refresh();
@@ -260,9 +265,24 @@ public class WeDayController {
         MimeMessageHelper mailMsg = new MimeMessageHelper(mimeMessage);
         mailMsg.setFrom("weday22@gmail.com");
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
-        mailMsg.setTo(destination);
+        mailMsg.setTo(emailDestination);
         mailMsg.setSubject("You've just been invited to their wedding!");
-        mailMsg.setText("Hello World!");
+        mailMsg.setText("You've been invited to" +session.getAttribute("username") +"'s wedding!");
+        mailSender.send(mimeMessage);
+    }
+
+    public static void sendNotificationEmail(String notificationDestination, HttpSession session) throws MessagingException {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.register(WeDayConfig.class);
+        ctx.refresh();
+        JavaMailSenderImpl mailSender = ctx.getBean(JavaMailSenderImpl.class);
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper mailMsg = new MimeMessageHelper(mimeMessage);
+        mailMsg.setFrom("weday22@gmail.com");
+        mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
+        mailMsg.setTo(notificationDestination);
+        mailMsg.setSubject("Wedding Notification");
+        mailMsg.setText("This is a test for" +session.getAttribute("username") +"'s wedding!");
         mailSender.send(mimeMessage);
     }
 }
