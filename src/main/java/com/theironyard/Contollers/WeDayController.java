@@ -83,9 +83,9 @@ public class WeDayController {
         if (user == null) {
             throw new Exception("User does not exist");
         }
-        Invite invite =  new Invite();
-        invite.isAdmin= true;
-        invite.wedding= wedding;
+        Invite invite = new Invite();
+        invite.isAdmin = true;
+        invite.wedding = wedding;
         invite.email = user.email;
         createInvite(invite);
         return wedding;
@@ -110,7 +110,7 @@ public class WeDayController {
 
     @RequestMapping("/invites")
     public List<Wedding> invitesList(HttpSession session) {
-        String email = (String)session.getAttribute("email");
+        String email = (String) session.getAttribute("email");
         return invites.findByEmail(email).stream()
                 .map(invite -> {
                     return invite.wedding;
@@ -131,7 +131,7 @@ public class WeDayController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ArrayList <Object> userLogin(@RequestBody Params user,HttpSession session,
-                             HttpServletResponse response) throws Exception {
+                                        HttpServletResponse response) throws Exception {
         ArrayList <Object> userLogin = new ArrayList<>();
         boolean isUser;
 
@@ -164,15 +164,22 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-user")
-    public String createUser (@RequestBody User user, HttpServletResponse response) throws Exception {
-        User u = users.findOneByEmail(user.email);
-        if (u.email != null) {
-            return "User already exists";
+    public User createUser(@RequestBody User user) throws Exception {
+        Iterable<User> allUsers = users.findAll();
+        String email = user.email;
+        for (User alreadyUser : allUsers) {
+            String alreadyEmail = alreadyUser.email;
+            if (alreadyEmail.equals(user.email)) {
+                throw new Exception("User already Exists");
+            }
         }
-        user.password = PasswordHash.createHash(user.password);
-        users.save(u);
-        return "Success";
+        if (!email.equals(user.email)) {
+            user.password = PasswordHash.createHash(user.password);
+            users.save(user);
+        }
+        return user;
     }
+
 
     @RequestMapping("/current-user")
     public User currentUser(HttpSession session){
