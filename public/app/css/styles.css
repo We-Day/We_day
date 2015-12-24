@@ -275,7 +275,7 @@ body, html, main {
     display: none; }
 
 .user-admin-directives {
-  margin-left: 5%;
+  margin-left: 10%;
   margin-top: 5%; }
 
 .nav-column {
@@ -318,6 +318,9 @@ body, html, main {
   height: 1000px;
   background-image: url("http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg");
   position: absolute; }
+
+uib-slide img {
+  max-width: 10%; }
 
 .admin-form {
   background: rgba(5, 5, 10, 0.5);

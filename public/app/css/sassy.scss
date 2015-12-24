@@ -264,7 +264,7 @@ body, html, main {
 	}
 }
 .user-admin-directives{
-	margin-left: 5%;
+	margin-left: 10%;
 	margin-top: 5%;
 }
 .nav-column{
@@ -324,7 +324,9 @@ body, html, main {
 	position: absolute;
 }
 
-
+uib-slide img{
+	max-width: 10%;
+}
 .admin-form{
 
 	background: rgba(5, 5, 10, .5);
