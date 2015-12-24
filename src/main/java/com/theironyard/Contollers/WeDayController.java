@@ -110,7 +110,7 @@ public class WeDayController {
 
     @RequestMapping("/invites")
     public List<Wedding> invitesList(HttpSession session) {
-        String email = (String)session.getAttribute("email");
+        String email = (String) session.getAttribute("email");
         return invites.findByEmail(email).stream()
                 .map(invite -> {
                     return invite.wedding;
@@ -131,7 +131,7 @@ public class WeDayController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ArrayList <Object> userLogin(@RequestBody Params user,HttpSession session,
-                             HttpServletResponse response) throws Exception {
+                                        HttpServletResponse response) throws Exception {
         ArrayList <Object> userLogin = new ArrayList<>();
         boolean isUser;
 
@@ -164,14 +164,27 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-user")
-    public String createUser (@RequestBody User user) throws Exception {
-        User u = users.findOneByEmail(user.email);
-        if (u.email != null) {
-            return "User already exists";
+    public ArrayList<Object> Login(@RequestBody User user)
+            throws InvalidKeySpecException, NoSuchAlgorithmException {
+        ArrayList <Object> createUser = new ArrayList<>();
+        boolean exists;
+
+        Iterable<User> allUsers = users.findAll();
+        for (User alreadyUser : allUsers) {
+            String alreadyEmail = alreadyUser.email;
+            if (alreadyEmail.equals(user.email)) {
+                exists = false;
+                createUser.add(user);
+                createUser.add(exists);
+                return createUser;
+            }
         }
-        user.password = PasswordHash.createHash(user.password);
-        users.save(user);
-        return "Success";
+            exists = true;
+            user.password = PasswordHash.createHash(user.password);
+            users.save(user);
+            createUser.add(user);
+            createUser.add(exists);
+            return createUser;
     }
 
     @RequestMapping("/current-user")
@@ -196,7 +209,7 @@ public class WeDayController {
     @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
     public void sendNotification(String body, HttpSession session) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
-        Iterable<User> allUsers = users.findAll();
+        Iterable<User> allUsers = users.findAll(); // change to wedding-specific users
         for (User user : allUsers){
             String phone = user.phone;
             String email = user.email;
@@ -210,6 +223,7 @@ public class WeDayController {
             }
         }
     }
+    // THIS HAS TO BE ALTERED TO MAKE IT WEDDING SPECIFIC INSTEAD OF ALL USERS.
 
     @RequestMapping("/create-post")
     public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {
