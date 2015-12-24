@@ -256,7 +256,7 @@ public class WeDayController {
         return p;
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping(path="/logout", method = RequestMethod.POST)
     public void logout(HttpSession session){
         session.invalidate();
     }
