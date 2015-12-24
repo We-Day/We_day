@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('user')
-  .controller('UserController',function($scope,UserService){
+  .controller('UserController',function($scope,UserService,$location){
     $scope.currentIndex = 1;
     $scope.logOut = function(){
       UserService.logOut().success(function(res){

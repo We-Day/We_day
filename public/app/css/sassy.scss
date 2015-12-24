@@ -10,6 +10,15 @@
 @-moz-keyframes slide-in { from { left:0; } to { left:30%; } }
 @keyframes slide-in { from { left:0; } to { left:30%; } }
 
+@mixin breakpoint($point) {
+
+  @if $point == mama-bear {
+    @media (max-width: 1000px) { @content; }
+  }
+  @else if $point == baby-bear {
+    @media (max-width: 650px)  { @content; }
+  }
+}
 .animate-enter {
 	-webkit-transition: 1s linear all; /* Chrome */
 	transition: 1s linear all;
@@ -214,6 +223,12 @@ body, html, main {
 
 
 .individual-guests{
+					@include breakpoint(mama-bear){
+						position: absolute;
+						margin-top:10%;
+						padding-top:5%;
+					}
+
 	margin-top: 10%;
 	padding-left: 10%;
 	height: 100%;
@@ -398,10 +413,17 @@ uib-slide img{
 
 .main-calendar{
 	margin-top: 2%;
+	@include breakpoint(mama-bear){
+		width:80%;
+		margin-top: 15%;
+	}
+
 }
 //ations
 
 .form-group-notifications{
+	@include breakpoint(mama-bear){
+	width:80%;}
 	box-shadow: 10px 10px 5px #888888;
 	height: 10%;
 	margin-left: 10%;
@@ -419,7 +441,8 @@ uib-slide img{
 	}
 	.notification-input{
 		input{
-			height: 100% !important;
+				@include breakpoint(mama-bear){
+				width:15em;}
 			width: 25em;
 			font-size: 2em;
 			border: none;

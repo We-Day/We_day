@@ -231,6 +231,11 @@ body, html, main {
   margin-top: 10%;
   padding-left: 10%;
   height: 100%; }
+  @media (max-width: 1000px) {
+    .individual-guests {
+      position: absolute;
+      margin-top: 10%;
+      padding-top: 5%; } }
   .individual-guests button {
     position: absolute;
     right: 50%;
@@ -373,6 +378,10 @@ uib-slide img {
 
 .main-calendar {
   margin-top: 2%; }
+  @media (max-width: 1000px) {
+    .main-calendar {
+      width: 80%;
+      margin-top: 15%; } }
 
 .form-group-notifications {
   box-shadow: 10px 10px 5px #888888;
@@ -381,6 +390,9 @@ uib-slide img {
   width: 100%;
   border: solid black 3px;
   border-radius: 5px; }
+  @media (max-width: 1000px) {
+    .form-group-notifications {
+      width: 80%; } }
   .form-group-notifications .glyphicon-remove {
     color: black;
     font-size: 1.8em;
@@ -389,11 +401,13 @@ uib-slide img {
     .form-group-notifications .glyphicon-remove:hover {
       opacity: .5; }
   .form-group-notifications .notification-input input {
-    height: 100% !important;
     width: 25em;
     font-size: 2em;
     border: none;
     outline: none; }
+    @media (max-width: 1000px) {
+      .form-group-notifications .notification-input input {
+        width: 15em; } }
   .form-group-notifications .checkboxes-notifications {
     padding: 2%;
     height: 100px;
