@@ -20,7 +20,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.social.facebook.api.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -31,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -254,6 +254,11 @@ public class WeDayController {
         photos.save(p);
 
         return p;
+    }
+
+    @RequestMapping("/logout")
+    public void logout(HttpSession session){
+        session.invalidate();
     }
 
     public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
