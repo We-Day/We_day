@@ -484,7 +484,14 @@ uib-slide img{
 	}
 
 }
-//ations
+//timeline
+.timeline{
+  margin-top: 100px;
+  @include breakpoint(tiny-bear){
+		width:80%;
+    margin-left: 30px;
+	}
+}
 
 .form-group-notifications{
 		@include breakpoint(mama-bear){
@@ -550,7 +557,7 @@ uib-slide img{
 	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
 	width: 80%;
 	margin-left: 20%;
-	margin-top: 5%;
+	margin-top: 100px;
 	margin-bottom: 30%;
 
 }
@@ -611,6 +618,17 @@ uib-slide img{
 
 .full-page-div-form{
 	width: 100%;
+}
+
+//carousel directive
+.carousel-wrapper-div{
+  margin-top: 100px;
+  form{
+    margin-left: 40%;
+    input{
+      display: inline-block;
+    }
+  }
 }
 
 
@@ -690,12 +708,11 @@ uib-slide img{
 			}
 			@include breakpoint(tiny-bear){
 		}
-		margin-top: 150px;
-		margin-left: 15%;
+    margin-top: 150px;
+		margin-left: 20%;
 		margin-bottom: 5%;
 	}
 	.story-text-editor{
 		margin-left: 5%;
 	}
-
 }
