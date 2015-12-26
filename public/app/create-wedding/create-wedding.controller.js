@@ -52,7 +52,7 @@ angular
       }
       CreateWeddingService.addNewWedding(wedding).success(function(res){
         console.log(res,'create-wedding/');
-        $location.path('/');
+        $location.path('/landingPage');
       });
     };
     $scope.addAdmin = function(){
