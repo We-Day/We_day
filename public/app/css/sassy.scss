@@ -16,8 +16,11 @@
     @media (max-width: 1000px) { @content; }
   }
   @else if $point == baby-bear {
-    @media (max-width: 650px)  { @content; }
+    @media (max-width: 770px)  { @content; }
   }
+	@else if $point == tiny-bear {
+		@media (max-width: 550px)  { @content; }
+	}
 }
 .animate-enter {
 	-webkit-transition: 1s linear all; /* Chrome */
@@ -48,9 +51,26 @@ body, html, main {
   position: fixed;
   width: 100%;
   top: -1%;
+
 	.navbar-right{
+			@include breakpoint(baby-bear){
+				float: right;
+				margin-top:-5%;}
+				@include breakpoint(tiny-bear){
+					float: left;
+					width:80%;
+					margin-left:20%;
+		  		}
 		padding-right: 2%;
+		.glyphicon-user-li{
+			@include breakpoint(tiny-bear){
+				float: left;
+				margin-left: -15%;
+	  		}
+		}
 	}
+
+
   .navbar-brand{
     opacity:0;  /* make things invisible upon start */
    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
@@ -64,6 +84,9 @@ body, html, main {
    -webkit-animation-duration:3s;
    -moz-animation-duration:3s;
    animation-duration:3s;
+	 @include breakpoint(tiny-bear){
+ 		margin-left: 40%;
+ 		}
   }
   li{display:inline-block;}
   .login{
@@ -215,7 +238,7 @@ body, html, main {
 .form-add-users{
 	margin-left: 10%;
 	width: 80%;
-	margin-top: 10%;
+	margin-top: 100px;
 	input{
 		width: 100%;
 	}
@@ -226,9 +249,10 @@ body, html, main {
 					@include breakpoint(mama-bear){
 						position: absolute;
 						margin-top:10%;
-						padding-top:5%;
+						padding-top:40px;
 					}
-
+					@include breakpoint(tiny-bear){
+					margin-top: 100px;}
 	margin-top: 10%;
 	padding-left: 10%;
 	height: 100%;
@@ -239,6 +263,13 @@ body, html, main {
 	}
 }
 .repeat-guests{
+	@include breakpoint(tiny-bear){
+	display: block;
+	font-size: 4em;
+	line-height: 50px;
+	background-color: white;
+	border: solid white 0px;
+}
 	transition: all 0.5s ease;
 	max-width: 40%;
 	font-size: 1.6em;
@@ -263,7 +294,17 @@ body, html, main {
 	font-size: 3em;
 	font-weight: 500;
 	line-height: 35px;
+	@include breakpoint(tiny-bear){
+	left: 5%;
+	top: 5%;
+	font-size: 3em;
+	width: 400px
+}
 	.question,.span-options{
+		@include breakpoint(tiny-bear){
+		max-width: 400px;
+		padding-right: 0;
+	}
 		display: block;
 		span:hover{color:black;}
 	}
@@ -283,7 +324,7 @@ body, html, main {
 	margin-top: 5%;
 }
 .nav-column{
-	margin-top: 10%;
+	margin-top: 50px;
 	position: fixed;
 	.nav-tabs {
 	margin-top: 20%;
@@ -394,7 +435,22 @@ uib-slide img{
 }
 // calendar
 
-
+.main-calendar{
+	.span4{
+		@include breakpoint(tiny-bear){
+  		display: none;
+  		}
+	}
+	@include breakpoint(tiny-bear){
+		margin-top:100px;
+		}
+		.btn-success{
+			@include breakpoint(tiny-bear){
+				width: 80%;
+				margin-bottom:5px;
+				}
+		}
+}
 .calendar-repeat-events{
 	transition: all .2s ease;
 	max-height: 20px;
@@ -411,7 +467,7 @@ uib-slide img{
 }
 
 
-.main-calendar{
+.endar{
 	margin-top: 2%;
 	@include breakpoint(mama-bear){
 		width:80%;
@@ -422,14 +478,18 @@ uib-slide img{
 //ations
 
 .form-group-notifications{
-	@include breakpoint(mama-bear){
-	width:80%;}
+		@include breakpoint(mama-bear){
+			width:80%;
+			}
+			@include breakpoint(baby-bear){
+			width:80%;}
 	box-shadow: 10px 10px 5px #888888;
-	height: 10%;
+	height: 150px;
 	margin-left: 10%;
 	width: 100%;
 	border: solid black 3px;
 	border-radius: 5px;
+	margin-top:80px;
 	.glyphicon-remove{
 		color:black;
 		font-size: 1.8em;
@@ -442,20 +502,37 @@ uib-slide img{
 	.notification-input{
 		input{
 				@include breakpoint(mama-bear){
-				width:15em;}
+				width:15em;
+			}
+				@include breakpoint(baby-bear){
+					margin-top:5%;
+					margin-left:5%;
+				}
+				@include breakpoint(tiny-bear){
+					width:8em;
+				}
 			width: 25em;
 			font-size: 2em;
 			border: none;
 			outline: none;
-		}
 	}
+}
 	.checkboxes-notifications{
+		@include breakpoint(baby-bear){
+		display: inline;
+		border-bottom: solid #DADADA 1px;
+		width: 30%;
+	}
+		width: 50px;
 		padding: 2%;
-		height: 100px;
+		height: 100%;
 		border-right: solid #DADADA 1px;
 		border-radius: 5px;
 		.form-group{
 			display: block;
+			@include breakpoint(baby-bear){
+			display: inline;
+		}
 		}
 	}
 
@@ -600,6 +677,10 @@ uib-slide img{
 }
 .story-directive-container{
 	.our-story-div,.our-story-div-button{
+			@include breakpoint(mama-bear){
+			margin-top: 10%;}
+			@include breakpoint(tiny-bear){
+			margin-top: 100px;}
 		margin-top: 5%;
 		margin-left: 15%;
 		margin-bottom: 5%;

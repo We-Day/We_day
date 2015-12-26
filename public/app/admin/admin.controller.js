@@ -28,10 +28,11 @@ $scope.viewInvitee = false;
       console.log(res,'response remove user');
     })
   }
-  $scope.inviteUser = function(name,email){
+  $scope.inviteUser = function(name,email,bool){
     var currObject = {
       email: email,
-      username: name
+      username: name,
+      isAdmin: bool
     }
     $scope.guests.push(currObject);
     AdminService.inviteUser(currObject).success(function(res){
