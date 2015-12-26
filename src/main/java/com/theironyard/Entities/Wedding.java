@@ -28,6 +28,8 @@ public class Wedding {
     @Column(nullable = false)
     public String date;
 
+    public String fileName;
+
     public Wedding() {
 
     }
@@ -69,6 +71,14 @@ public class Wedding {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
 }
