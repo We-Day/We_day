@@ -113,6 +113,11 @@ body, html, main {
     @media (max-width: 550px) {
       .navbar .navbar-brand {
         margin-left: 40%; } }
+  @media (max-width: 550px) {
+    .navbar .invitee-name {
+      width: 80%;
+      margin-left: 20%;
+      margin-bottom: 5%; } }
   .navbar li {
     display: inline-block; }
   .navbar .login {
@@ -254,6 +259,8 @@ body, html, main {
       padding-top: 40px; } }
   @media (max-width: 550px) {
     .individual-guests {
+      position: absolute;
+      margin-left: 20%;
       margin-top: 100px; } }
   .individual-guests button {
     position: absolute;
@@ -601,15 +608,9 @@ uib-slide img {
         opacity: .5; }
 
 .story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
-  margin-top: 5%;
+  margin-top: 150px;
   margin-left: 15%;
   margin-bottom: 5%; }
-  @media (max-width: 1000px) {
-    .story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
-      margin-top: 10%; } }
-  @media (max-width: 550px) {
-    .story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
-      margin-top: 100px; } }
 
 .story-directive-container .story-text-editor {
   margin-left: 5%; }

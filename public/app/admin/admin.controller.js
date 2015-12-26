@@ -19,6 +19,7 @@ angular
 
 //myguests
 $scope.viewInvitee = false;
+  $scope.guests = [];
   AdminService.getUsers().success(function(res){
     $scope.guests = res;
   })
