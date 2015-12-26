@@ -88,6 +88,13 @@ body, html, main {
  		margin-left: 40%;
  		}
   }
+  .invitee-name{
+    @include breakpoint(tiny-bear){
+    width: 80%;
+    margin-left:20%;
+    margin-bottom: 5%;
+     }
+  }
   li{display:inline-block;}
   .login{
     text-decoration: none;
@@ -252,6 +259,8 @@ body, html, main {
 						padding-top:40px;
 					}
 					@include breakpoint(tiny-bear){
+            position:absolute;
+            margin-left:20%;
 					margin-top: 100px;}
 	margin-top: 10%;
 	padding-left: 10%;
@@ -678,10 +687,10 @@ uib-slide img{
 .story-directive-container{
 	.our-story-div,.our-story-div-button{
 			@include breakpoint(mama-bear){
-			margin-top: 10%;}
+			}
 			@include breakpoint(tiny-bear){
-			margin-top: 100px;}
-		margin-top: 5%;
+		}
+		margin-top: 150px;
 		margin-left: 15%;
 		margin-bottom: 5%;
 	}
