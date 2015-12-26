@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('admin')
-  .controller('AdminController',function($scope,AdminService,$location){
+  .controller('AdminController',function($scope,AdminService,$location,$routeParams){
     $scope.logOut = function(){
       AdminService.logOut().success(function(res){
         $location.path('/');
@@ -33,7 +33,8 @@ $scope.viewInvitee = false;
     var currObject = {
       email: email,
       username: name,
-      isAdmin: bool
+      isAdmin: bool,
+      weddingId: $routeParams.weddingId
     }
     $scope.guests.push(currObject);
     AdminService.inviteUser(currObject).success(function(res){

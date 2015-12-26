@@ -1,11 +1,13 @@
-<form class="photo-upload-admin" action="/photo-upload" method="post">
-  <input type="file" name="pic" accept="image/*">
-  <input type="submit">
-</form>
-<div style="height: 305px">
-  <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
-    <uib-slide ng-repeat="slide in slides" active="slide.active">
-      <img ng-src="{{slide.image}}" style="margin:auto;">
-    </uib-slide>
-  </uib-carousel>
+<div class="carousel-wrapper-div">
+  <form class="photo-upload-admin" enctype= "multipart/form-data" action="/photo-upload" method="post">
+    <input type="file" name="pic" accept="image/*">
+    <input type="submit">
+  </form>
+  <div style="height: 305px">
+    <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
+      <uib-slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+      </uib-slide>
+    </uib-carousel>
+  </div>
 </div>
