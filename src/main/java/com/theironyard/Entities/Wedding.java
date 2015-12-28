@@ -28,8 +28,14 @@ public class Wedding {
     @Column(nullable = false)
     public String date;
 
-    public Wedding() {
+    @ManyToOne
+    public Invite invite;
 
+    @ManyToOne
+    public User user;
+
+
+    public Wedding() {
     }
 
     public Wedding(int id, String weddingName, String location, String date) {
