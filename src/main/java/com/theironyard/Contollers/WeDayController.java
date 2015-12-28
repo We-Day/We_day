@@ -240,10 +240,8 @@ public class WeDayController {
         return events.save(event);
     }
 
-    @RequestMapping("/photo-upload")
-    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
-        String username = (String) session.getAttribute("username");
-
+    @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
+    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile file) throws IOException {
         File photoFile = File.createTempFile("pic", file.getOriginalFilename(), new File("public"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(file.getBytes());
