@@ -199,28 +199,26 @@ public class WeDayController {
 
 
     @RequestMapping("/create-user")
-    public ArrayList<Object> newUser(@RequestBody User user)
+    public ArrayList<Object> Login(@RequestBody User user)
             throws InvalidKeySpecException, NoSuchAlgorithmException {
-        ArrayList <Object> createUser = new ArrayList<>();
+        ArrayList<Object> createUser = new ArrayList<>();
         boolean exists;
 
-        Iterable<User> allUsers = users.findAll();
-        for (User alreadyUser : allUsers) {
-            String alreadyEmail = alreadyUser.email;
-            if (alreadyEmail.equals(user.email)) {
-                exists = false;
-                createUser.add(user);
-                createUser.add(exists);
-                return createUser;
-            }
-            else if (!alreadyEmail.equals(user.email)){
-                exists = true;
-                user.password = PasswordHash.createHash(user.password);
-                users.save(user);
-                createUser.add(user);
-                createUser.add(exists);
-                return createUser;
-            }
+        User user1 = users.findOneByEmail(user.email);
+
+        if (user1 == null) {
+            exists = true;
+            user.password = PasswordHash.createHash(user.password);
+            users.save(user);
+            createUser.add(user);
+            createUser.add(exists);
+            return createUser;
+
+        } else if (user1 != null) {
+            exists = false;
+            createUser.add(user);
+            createUser.add(exists);
+            return createUser;
         }
         return null;
     }
