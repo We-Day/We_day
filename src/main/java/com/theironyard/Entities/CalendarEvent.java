@@ -28,7 +28,6 @@ public class CalendarEvent {
         boolean send; // default false;
         int time; // hours before sending email
     }
-    
     public class text{
         boolean send;
         int time;

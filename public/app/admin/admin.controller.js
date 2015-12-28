@@ -29,6 +29,7 @@ $scope.viewInvitee = false;
       console.log(res,'response remove user');
     })
   }
+  console.log($routeParams.weddingId,'weddingId');
   $scope.inviteUser = function(name,email,bool){
     var currObject = {
       email: email,
