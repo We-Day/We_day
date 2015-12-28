@@ -30,7 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -107,7 +106,6 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-invite")
-
     public void createInvite(@RequestBody Invite invitee, String emailDestination, HttpSession session) throws Exception {
         Wedding wedding = weddings.findOne(invitee.wedding.id);
         if (wedding == null) {
@@ -116,6 +114,15 @@ public class WeDayController {
         //something to do with passwords needs to be in here.
         invites.save(invitee);
         sendEmail(emailDestination, session);
+    }
+
+    @RequestMapping(path = "/create-guest", method = RequestMethod.POST)
+    public List <Invite> guestList(@RequestBody Invite invite, HttpSession session){
+        String id = (String)session.getAttribute("id");
+        Wedding wedding =weddings.findOne(Integer.valueOf(id));
+        wedding.invite = invite;
+        invites.save(invite);
+        return (List) wedding.invite;
     }
 
     @RequestMapping("/invites")
@@ -168,7 +175,6 @@ public class WeDayController {
             userLogin.add(isUser);
             userLogin.add(user);
             return userLogin;
-
         }
         return null;
     }
@@ -219,7 +225,9 @@ public class WeDayController {
     @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
     public void sendNotification(String body, HttpSession session) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
-        Iterable<User> allUsers = users.findAll(); // change to wedding-specific users
+        String id = (String)session.getAttribute("id");
+        Wedding wedding = weddings.findOne(Integer.valueOf(id));
+        Iterable<User> allUsers = (Iterable)wedding.user; // change to wedding-specific users
         for (User user : allUsers){
             String phone = user.phone;
             String email = user.email;
