@@ -6,10 +6,19 @@
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
-@-webkit-keyframes slide-in { from { left:0; } to { left:25%; } }
-@-moz-keyframes slide-in { from { left:0; } to { left:30%; } }
-@keyframes slide-in { from { left:0; } to { left:30%; } }
+@-webkit-keyframes slideOut { 0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); } }
+@-moz-keyframes slideOut { 0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); } }
+@keyframes slideOut { 0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); } }
 
+@-webkit-keyframes slideIn { 0% { transform: translateX(-100%); }
+        100% { transform: translateX(0%); } }
+@-moz-keyframes slideIn { 0% { transform: translateX(-100%); }
+        100% { transform: translateX(0%); } }
+@keyframes slideIn { 0% { transform: translateX(-100%); }
+        100% { transform: translateX(0%); } }
 @mixin breakpoint($point) {
 
   @if $point == mama-bear {
@@ -51,15 +60,42 @@ body, html, main {
   position: fixed;
   width: 100%;
   top: -1%;
+  .navbar-header{
+    @include breakpoint(tiny-bear){
+      margin-bottom: 10%;
+      margin-left: 30%;
+  }
+    .hamburger{
+      text-decoration: none;
+      color:white;
+      font-size: 1.2em;
+      margin-top: 9%;
+      @include breakpoint(baby-bear){
+      margin-left: 20px;}
 
+    @include breakpoint(tiny-bear){
+    float:right;
+  }
+}
+    a{
+      display: inline-block;
+      @include breakpoint(baby-bear){
+        display: block;}
+    }
+    @include breakpoint(tiny-bear){
+      display: inline-block;}
+
+}
+  }
 	.navbar-right{
 			@include breakpoint(baby-bear){
 				float: right;
-				margin-top:-5%;}
+        display: inline-block;
+				margin-top:-10%;}
 				@include breakpoint(tiny-bear){
 					float: left;
 					width:80%;
-					margin-left:20%;
+					margin-left:30%;
 		  		}
 		padding-right: 2%;
 		.glyphicon-user-li{
@@ -85,7 +121,7 @@ body, html, main {
    -moz-animation-duration:3s;
    animation-duration:3s;
 	 @include breakpoint(tiny-bear){
- 		margin-left: 40%;
+    width: 100px;
  		}
   }
   .invitee-name{
@@ -94,15 +130,9 @@ body, html, main {
     margin-left:20%;
     margin-bottom: 5%;
      }
-  }
-  li{display:inline-block;}
-  .login{
-    text-decoration: none;
-    color:white;
-    font-size: 1.1em;
-    margin-top: 8%;
-  }
+
 }
+
 .cd-fixed-bg {
 	min-height: 500px;
 	background-size: cover;
@@ -225,6 +255,9 @@ body, html, main {
 	padding-top: 10%;
 	text-align: center;
 	width: 90%;
+  @include breakpoint(tiny-bear){
+    margin-top: 100px;
+  }
 	.glyphicon-arrow-right{
 		font-size: 3em;
 		&:hover{
@@ -236,6 +269,12 @@ body, html, main {
 	margin-top: 10%;
 	width: 90%;
 	margin-left: 5%;
+  @include breakpoint(baby-bear){
+    margin-top: 100px;
+  }
+  @include breakpoint(tiny-bear){
+    margin-top:150px;
+  }
 }
 .fc-widget-content{
 	font-family: serif;
@@ -267,7 +306,7 @@ body, html, main {
 	height: 100%;
 	button{
 		position: absolute;
-		right: 50%;
+		left: 50%;
 		top:2%;
 	}
 }
@@ -278,6 +317,8 @@ body, html, main {
 	line-height: 50px;
 	background-color: white;
 	border: solid white 0px;
+  border-bottom: solid black 1px;
+  border-radius: 0px;
 }
 	transition: all 0.5s ease;
 	max-width: 40%;
@@ -329,10 +370,18 @@ body, html, main {
 	}
 }
 .user-admin-directives{
+  transition: all 2s ease;
 	margin-left: 10%;
 	margin-top: 5%;
 }
+.non-nav-wrapper{
+  @include breakpoint(baby-bear){
+    margin-top:120px;
+  }
+}
+
 .nav-column{
+  transition: all 2s ease;
 	margin-top: 50px;
 	position: fixed;
 	.nav-tabs {
@@ -380,7 +429,36 @@ body, html, main {
   }
 }
 }
+.slide-out{
 
+  -webkit-animation:slideOut ease-in 1;  /* call our keyframe named slideOut, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:slideOut ease-in 1;
+  animation:slideOut ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+.slide-in{
+  -webkit-animation:slideIn ease-in 1;  /* call our keyframe named slideIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:slideIn ease-in 1;
+  animation:slideIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+.expand-div{
+  margin-left: 0%;
+}
 //create-wedding------------------------------------------/
 .wrapper-create-wedding{
 	width: 100%;
@@ -388,7 +466,10 @@ body, html, main {
 	background-image: url('http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg');
 	position: absolute;
 }
-
+.button-add-invitees{
+  margin-top: 50px;
+  margin-bottom: 5px;
+}
 uib-slide img{
 	max-width: 10%;
 }
@@ -622,15 +703,36 @@ uib-slide img{
 
 //carousel directive
 .carousel-wrapper-div{
-  margin-top: 100px;
-  form{
-    margin-left: 40%;
-    input{
-      display: inline-block;
-    }
-  }
+  @include breakpoint(mama-bear){
+    margin-top: 80px;
+}
+  @include breakpoint(tiny-bear){
+    margin-left:50px;
 }
 
+// form{
+//   margin-bottom: 10px;
+//
+// }
+  .carousel{
+    width: 80%;
+  }
+
+
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(192, 192, 192);
+}
+
+.btn-file input[type='file'] {
+background-color: rgb(192, 192, 192);
+}
+}
+// .photo-upload-admin{
+//   position: absolute;
+//   bottom: -20px;
+// }
 
 //landing page
 .landing-page-container{
