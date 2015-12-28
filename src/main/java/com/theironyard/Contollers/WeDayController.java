@@ -77,16 +77,6 @@ public class WeDayController {
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session, MultipartFile file) throws Exception {
         weddings.save(wedding);
 
-        if (wedding.fileName != null) {
-            File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
-            FileOutputStream fos = new FileOutputStream(photoFile);
-            fos.write(file.getBytes());
-
-            Photo p = new Photo();
-            p.fileName = photoFile.getName();
-            photos.save(p);
-        }
-
         User user = users.findOneByEmail((String) session.getAttribute("email"));
 
         if (user == null) {
@@ -144,6 +134,20 @@ public class WeDayController {
         User u = users.findOne(id);
         u.password = null;
         return u;
+    }
+
+    @RequestMapping (path = "join-wedding", method = RequestMethod.POST)
+    public User newUser(String password, String phone, String email){
+        Invite invite = invites.findOneByEmail(email);
+        User user = new User();
+        user.email = invite.email;
+        user.password = password;
+        user.username = invite.username;
+        user.phone = phone;
+        user.isAdmin = invite.isAdmin;
+        users.save(user);
+        return user;
+
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)

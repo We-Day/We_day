@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface InviteRepository extends CrudRepository<Invite, Integer> {
      List<Invite> findByEmail(String email);
+     Invite findOneByEmail(String email);
 }
