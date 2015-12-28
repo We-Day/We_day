@@ -22,7 +22,8 @@
                             <li class = "calendar-repeat-events"ng-repeat="e in events">
                                 <div class="alert alert-info">
                                     <a class="close" ng-click="remove($index,e)"><span class="glyphicon glyphicon-remove"></span></a>
-                                    <b > <input ng-change = "editDate(e)"ng-model="e.title"></b>
+                                    <input ng-model = "title"placeholder="{{e.title}}">
+                                    <button ng-click = "e.title = title; editTitleDate(e)" type="button" name="button">Save Event</button>
                                     <div class="other-text-calendar">
                                     {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
                                     <h5>How would you like to notify your contacts</h5>
