@@ -81,53 +81,52 @@
 
             assertTrue(users.count() == 1 && PasswordHash.validatePassword(password, user.password));
         }
+
+        @Test
+        public void createUser() throws Exception {
+            users.deleteAll();
+
+            String password = "password";
+
+            User user = new User();
+            user.email = "nathan@gmail.com";
+            user.username = "Nathan";
+            user.password = PasswordHash.createHash(password);
+            user.phone = "123-4567";
+            users.save(user);
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(user);
+
+            mockMvc.perform(
+                    MockMvcRequestBuilders.post("/create-user")
+                            .content(json)
+                            .contentType("application/json")
+            );
+
+            assertTrue(users.count() == 1);
+
+
+        }
+
+        @Test
+        @Bean
+        public void sendEmail() throws MessagingException {
+            AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+            ctx.register(WeDayConfig.class);
+            ctx.refresh();
+            JavaMailSenderImpl mailSender = ctx.getBean(JavaMailSenderImpl.class);
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper mailMsg = new MimeMessageHelper(mimeMessage);
+            mailMsg.setFrom("weday22@gmail.com");
+            mailMsg.setReplyTo("weday22@gmail.com");
+            mailMsg.setTo("spcbdrake@yahoo.com");
+            mailMsg.setSubject("You've just been invited to their wedding!");
+            mailMsg.setText("Hello World!");
+            mailSender.send(mimeMessage);
+        }
     }
 
-//        @Test
-//        public void createUser() throws Exception {
-//            users.deleteAll();
-//
-//            String password = "password";
-//
-//            User user = new User();
-//            user.email = "nathan@gmail.com";
-//            user.username = "Nathan";
-//            user.password = PasswordHash.createHash(password);
-//            user.phone = "123-4567";
-//            users.save(user);
-//
-//            ObjectMapper mapper = new ObjectMapper();
-//            String json = mapper.writeValueAsString(user);
-//
-//            mockMvc.perform(
-//                    MockMvcRequestBuilders.post("/create-user")
-//                            .content(json)
-//                            .contentType("application/json")
-//            );
-//
-//            assertTrue(users.count() == 1);
-//
-//
-//        }
-//
-//        @Test
-//        @Bean
-//        public void sendEmail() throws MessagingException {
-//            AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-//            ctx.register(WeDayConfig.class);
-//            ctx.refresh();
-//            JavaMailSenderImpl mailSender = ctx.getBean(JavaMailSenderImpl.class);
-//            MimeMessage mimeMessage = mailSender.createMimeMessage();
-//            MimeMessageHelper mailMsg = new MimeMessageHelper(mimeMessage);
-//            mailMsg.setFrom("weday22@gmail.com");
-//            mailMsg.setReplyTo("weday22@gmail.com");
-//            mailMsg.setTo("spcbdrake@yahoo.com");
-//            mailMsg.setSubject("You've just been invited to their wedding!");
-//            mailMsg.setText("Hello World!");
-//            mailSender.send(mimeMessage);
-//        }
-//    }
-//
 ////        @Test
 ////        public void testNotification() throws Exception {
 ////            User user = new User();
