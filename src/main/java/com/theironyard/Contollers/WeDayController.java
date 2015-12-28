@@ -75,18 +75,8 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session, MultipartFile file) throws Exception {
+    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
-
-        if (wedding.fileName != null) {
-            File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
-            FileOutputStream fos = new FileOutputStream(photoFile);
-            fos.write(file.getBytes());
-
-            Photo p = new Photo();
-            p.fileName = photoFile.getName();
-            photos.save(p);
-        }
 
         User user = users.findOneByEmail((String) session.getAttribute("email"));
 
@@ -254,13 +244,12 @@ public class WeDayController {
     public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
         String username = (String) session.getAttribute("username");
 
-        File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
+        File photoFile = File.createTempFile("pic", file.getOriginalFilename(), new File("public"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(file.getBytes());
 
         Photo p = new Photo();
         p.fileName = photoFile.getName();
-        p.description = description;
         photos.save(p);
 
         return p;
