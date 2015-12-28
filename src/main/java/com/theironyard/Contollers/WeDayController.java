@@ -74,8 +74,18 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
+    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session, MultipartFile file) throws Exception {
         weddings.save(wedding);
+
+        if (wedding.fileName != null) {
+            File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
+            FileOutputStream fos = new FileOutputStream(photoFile);
+            fos.write(file.getBytes());
+
+            Photo p = new Photo();
+            p.fileName = photoFile.getName();
+            photos.save(p);
+        }
 
         User user = users.findOneByEmail((String) session.getAttribute("email"));
 
@@ -294,7 +304,7 @@ public class WeDayController {
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
         mailMsg.setTo(emailDestination);
         mailMsg.setSubject("You've just been invited to their wedding!");
-        mailMsg.setText("You've been invited to" +session.getAttribute("username") +"'s wedding!");
+        mailMsg.setText("You've been invited to a wedding!");
         mailSender.send(mimeMessage);
     }
 
@@ -309,7 +319,7 @@ public class WeDayController {
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
         mailMsg.setTo(notificationDestination);
         mailMsg.setSubject("Wedding Notification");
-        mailMsg.setText("This is a test for" +session.getAttribute("username") +"'s wedding!");
+        mailMsg.setText("This is a test notification for a wedding!");
         mailSender.send(mimeMessage);
     }
 }

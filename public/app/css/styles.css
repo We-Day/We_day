@@ -113,6 +113,11 @@ body, html, main {
     @media (max-width: 550px) {
       .navbar .navbar-brand {
         margin-left: 40%; } }
+  @media (max-width: 550px) {
+    .navbar .invitee-name {
+      width: 80%;
+      margin-left: 20%;
+      margin-bottom: 5%; } }
   .navbar li {
     display: inline-block; }
   .navbar .login {
@@ -254,6 +259,8 @@ body, html, main {
       padding-top: 40px; } }
   @media (max-width: 550px) {
     .individual-guests {
+      position: absolute;
+      margin-left: 20%;
       margin-top: 100px; } }
   .individual-guests button {
     position: absolute;
@@ -432,6 +439,13 @@ uib-slide img {
       width: 80%;
       margin-top: 15%; } }
 
+.timeline {
+  margin-top: 100px; }
+  @media (max-width: 550px) {
+    .timeline {
+      width: 80%;
+      margin-left: 30px; } }
+
 .form-group-notifications {
   box-shadow: 10px 10px 5px #888888;
   height: 150px;
@@ -489,7 +503,7 @@ uib-slide img {
   background-image: url("https://unsplash.com/photos/xMScfzgJ7_c");
   width: 80%;
   margin-left: 20%;
-  margin-top: 5%;
+  margin-top: 100px;
   margin-bottom: 30%; }
 
 .admin-notifications {
@@ -540,6 +554,13 @@ uib-slide img {
 
 .full-page-div-form {
   width: 100%; }
+
+.carousel-wrapper-div {
+  margin-top: 100px; }
+  .carousel-wrapper-div form {
+    margin-left: 40%; }
+    .carousel-wrapper-div form input {
+      display: inline-block; }
 
 .landing-page-container {
   width: 100%;
@@ -601,15 +622,9 @@ uib-slide img {
         opacity: .5; }
 
 .story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
-  margin-top: 5%;
-  margin-left: 15%;
+  margin-top: 150px;
+  margin-left: 20%;
   margin-bottom: 5%; }
-  @media (max-width: 1000px) {
-    .story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
-      margin-top: 10%; } }
-  @media (max-width: 550px) {
-    .story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
-      margin-top: 100px; } }
 
 .story-directive-container .story-text-editor {
   margin-left: 5%; }

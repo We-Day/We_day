@@ -2,7 +2,7 @@
   "use strict";
   angular
     .module('admin')
-    .directive('userCarousel', function () {
+    .directive('adminCarousel', function () {
       return {
         restrict: 'EA',
         transclude: true,
