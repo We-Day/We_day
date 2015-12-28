@@ -74,9 +74,8 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session, MultipartFile file) throws Exception {
+    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
-
         User user = users.findOneByEmail((String) session.getAttribute("email"));
 
         if (user == null) {
@@ -101,18 +100,39 @@ public class WeDayController {
         if (wedding == null) {
             throw new Exception("Wedding does not exist");
         }
-        //something to do with passwords needs to be in here.
         invites.save(invitee);
         sendEmail(emailDestination, session);
     }
 
+    //this is for people who have been invited, coming to the site and becoming guests.
+    @RequestMapping(path = "/confirmed-guest", method = RequestMethod.POST)
+    public User confirmedUser (String email, String password, String phone) throws Exception {
+        Invite invite = invites.findOneByEmail(email);
+        if (invite == null){
+            throw new Exception("no email found");
+        }else {
+            User user = new User();
+            user.email = invite.email;
+            user.username = invite.username;
+            user.phone = phone;
+            user.password = password;
+            users.save(user);
+            return user;
+            // what about transferring the isAdmin variable?
+            // Do we want to delete the invite after we make them a user?
+        }
+    }
+
     @RequestMapping(path = "/create-guest", method = RequestMethod.POST)
-    public List <Invite> guestList(@RequestBody Invite invite, HttpSession session){
-        String id = (String)session.getAttribute("id");
-        Wedding wedding =weddings.findOne(Integer.valueOf(id));
-        wedding.invite = invite;
+    public List <Invite> guestList(@RequestBody Params param){
+        Wedding wedding = weddings.findOne(param.weddingId);
+        Invite invite = new Invite();
+        invite.wedding = wedding;
+        invite.email = param.email;
+        invite.isAdmin = param.isAdmin;
+        invite.username = param.username;
         invites.save(invite);
-        return (List) wedding.invite;
+        return invites.findByWeddingId(param.weddingId);
     }
 
     @RequestMapping("/invites")
@@ -136,24 +156,10 @@ public class WeDayController {
         return u;
     }
 
-    @RequestMapping (path = "join-wedding", method = RequestMethod.POST)
-    public User newUser(String password, String phone, String email){
-        Invite invite = invites.findOneByEmail(email);
-        User user = new User();
-        user.email = invite.email;
-        user.password = password;
-        user.username = invite.username;
-        user.phone = phone;
-        user.isAdmin = invite.isAdmin;
-        users.save(user);
-        return user;
-
-    }
-
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ArrayList <Object> userLogin(@RequestBody Params user,HttpSession session,
                                         HttpServletResponse response) throws Exception {
-        ArrayList <Object> userLogin = new ArrayList<>();
+        ArrayList<Object> userLogin = new ArrayList<>();
         boolean isUser;
 
         User u = users.findOneByEmail(user.email);
@@ -162,29 +168,38 @@ public class WeDayController {
             response.sendError(403);
 
         } else if (PasswordHash.validatePassword(user.password, u.password)) {
-            if (invites.findByEmail(u.email)!=null) {
-                session.setAttribute("email",u.email);
-                session.setAttribute("id",u.id);
+            if (invites.findByEmail(u.email) != null) {
+                session.setAttribute("email", u.email);
+                session.setAttribute("id", u.id);
                 isUser = true;
                 userLogin.add(isUser);
                 userLogin.add(user);
                 return userLogin;
-            } else {
-                session.setAttribute("email",u.email);
-                session.setAttribute("id",u.email);
             }
 
-        } else if (!PasswordHash.validatePassword(user.password, u.password)) {
-            isUser = false;
-            userLogin.add(isUser);
-            userLogin.add(user);
-            return userLogin;
+            } else if (!PasswordHash.validatePassword(user.password, u.password)) {
+                isUser = false;
+                userLogin.add(isUser);
+                userLogin.add(user);
+                return userLogin;
+            }
+            return null;
         }
-        return null;
+
+    @RequestMapping ("/join-wedding")
+    public List <Wedding> joinWeddings(String email) throws Exception {
+        Invite invite = invites.findOneByEmail(email);
+        if (invite == null){
+            throw new Exception("No Guest Found by that Email");
+        }
+        else{
+            return weddings.findById(invite.wedding.id);
+        }
     }
 
+
     @RequestMapping("/create-user")
-    public ArrayList<Object> Login(@RequestBody User user)
+    public ArrayList<Object> newUser(@RequestBody User user)
             throws InvalidKeySpecException, NoSuchAlgorithmException {
         ArrayList <Object> createUser = new ArrayList<>();
         boolean exists;
@@ -198,13 +213,16 @@ public class WeDayController {
                 createUser.add(exists);
                 return createUser;
             }
+            else if (!alreadyEmail.equals(user.email)){
+                exists = true;
+                user.password = PasswordHash.createHash(user.password);
+                users.save(user);
+                createUser.add(user);
+                createUser.add(exists);
+                return createUser;
+            }
         }
-            exists = true;
-            user.password = PasswordHash.createHash(user.password);
-            users.save(user);
-            createUser.add(user);
-            createUser.add(exists);
-            return createUser;
+        return null;
     }
 
     @RequestMapping("/current-user")
@@ -232,7 +250,7 @@ public class WeDayController {
         String id = (String)session.getAttribute("id");
         Wedding wedding = weddings.findOne(Integer.valueOf(id));
         Iterable<User> allUsers = (Iterable)wedding.user; // change to wedding-specific users
-        for (User user : allUsers){
+        for (User user : allUsers){                       // maybe send weddingId through Params again & loop over users
             String phone = user.phone;
             String email = user.email;
             numbers.add(phone);
