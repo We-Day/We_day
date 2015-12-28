@@ -7,17 +7,17 @@
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 @-webkit-keyframes slideOut { 0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); } }
+    100% { transform: translateX(-200%); } }
 @-moz-keyframes slideOut { 0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); } }
+    100% { transform: translateX(-200%); } }
 @keyframes slideOut { 0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); } }
+    100% { transform: translateX(-200%); } }
 
-@-webkit-keyframes slideIn { 0% { transform: translateX(-100%); }
+@-webkit-keyframes slideIn { 0% { transform: translateX(-200%); }
         100% { transform: translateX(0%); } }
-@-moz-keyframes slideIn { 0% { transform: translateX(-100%); }
+@-moz-keyframes slideIn { 0% { transform: translateX(-200%); }
         100% { transform: translateX(0%); } }
-@keyframes slideIn { 0% { transform: translateX(-100%); }
+@keyframes slideIn { 0% { transform: translateX(-200%); }
         100% { transform: translateX(0%); } }
 @mixin breakpoint($point) {
 
@@ -68,8 +68,8 @@ body, html, main {
     .hamburger{
       text-decoration: none;
       color:white;
-      font-size: 1.2em;
-      margin-top: 9%;
+      font-size: 1.5em;
+      margin-top: 11%;
       @include breakpoint(baby-bear){
       margin-left: 20px;}
 
@@ -381,6 +381,11 @@ body, html, main {
 }
 
 .nav-column{
+  @include breakpoint(mama-bear){
+    border-right:solid white 0px;
+  }
+  border-right: ridge #9fa8a3 5px;
+  width: 10%;
   transition: all 2s ease;
 	margin-top: 50px;
 	position: fixed;
@@ -458,6 +463,8 @@ body, html, main {
 }
 .expand-div{
   margin-left: 0%;
+  margin-right: 0%;
+  width: 100%;
 }
 //create-wedding------------------------------------------/
 .wrapper-create-wedding{
@@ -585,7 +592,7 @@ uib-slide img{
 	margin-left: 10%;
 	width: 100%;
 	border: solid black 3px;
-	border-radius: 5px;
+	border-radius: 100px;
 	margin-top:80px;
 	.glyphicon-remove{
 		color:black;
@@ -619,12 +626,13 @@ uib-slide img{
 		display: inline;
 		border-bottom: solid #DADADA 1px;
 		width: 30%;
+    margin-left: 20%;
 	}
 		width: 50px;
 		padding: 2%;
 		height: 100%;
 		border-right: solid #DADADA 1px;
-		border-radius: 5px;
+		border-radius: 100px;
 		.form-group{
 			display: block;
 			@include breakpoint(baby-bear){
@@ -703,17 +711,15 @@ uib-slide img{
 
 //carousel directive
 .carousel-wrapper-div{
+  margin-left: 10%;
   @include breakpoint(mama-bear){
-    margin-top: 80px;
+    margin-top: 150px;
 }
   @include breakpoint(tiny-bear){
     margin-left:50px;
 }
 
-// form{
-//   margin-bottom: 10px;
-//
-// }
+
   .carousel{
     width: 80%;
   }

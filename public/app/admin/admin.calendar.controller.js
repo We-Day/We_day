@@ -10,12 +10,15 @@ angular
     $scope.reloadRoute = function() {
       $window.location.reload();
     }
-
+    $scope.events = [];
     // console.log($scope.events,'scope events')
     $scope.updateEvents = function(){
+      $scope.events.splice(0,$scope.events.length)
+
     CalendarService.getDates().success(function(el){
       var eventArray = el.map(function(newEl,idx) {
         return {
+          $$hashKey: newEl.$$hashKey,
           _id: newEl._id,
           start: new Date(newEl.start),
           end: new Date(newEl.end),
@@ -38,9 +41,11 @@ angular
       $scope.events = eventArray;
 
       $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+
     })
   };
   $scope.updateEvents();
+
   //add CurrentWedding Name
   CalendarService.getWeddingObject().success(function(res){
     $scope.weddingName = res.weddingName;
@@ -88,14 +93,21 @@ angular
           {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29)}
         ]
     };
+    $scope.editTitleDate = function(event){
+      $scope.updateEvents();
+      CalendarService.editDate(event).success(function(res){
+      });
+    };
     $scope.editDate = function(event){
+      console.log('editDate',event)
+      console.log('editDate',event)
         CalendarService.editDate(event).success(function(res){
-          console.log('editDate',res);
+
       });
     };
 
     $scope.alertOnEventClick = function( date, jsEvent, view){
-        $scope.alertMessage = (date.title + ' was clicked ');
+        $scope.alertMessage = (date.title);
     };
 
     /* alert on Drop */
@@ -105,6 +117,8 @@ angular
        startDate.setHours(startDate.getHours()+5);
        var endDate = new Date(event.end._d);
        endDate.setHours(endDate.getHours()+5);
+       console.log(event,'event');
+       console.log(event.$$hashKey,'event.$$hashkey')
        var currObject = {
          _id: event._id,
          start: startDate,
@@ -123,9 +137,9 @@ angular
            time:event.notification.time,
          }
        }
-       console.log('currObject',currObject)
+       console.log('currObject',currObject);
        CalendarService.editDate(currObject).success(function(el){
-         console.log('el',el)
+         console.log(el,'event drop object')
        })
     };
     /* alert on Resize */
@@ -152,9 +166,8 @@ angular
           time:event.notification.time,
         }
       }
-      console.log('currObject',currObject)
       CalendarService.editDate(currObject).success(function(el){
-        $scope.updateEvents();
+        console.log('event resize object',el);
       })
       // $scope.alertMessage = ('Event Resized to make dayDelta ' + event.end._d);
     };
@@ -191,7 +204,6 @@ angular
           time:"30",
         }
       };
-      $scope.events.push(newEvent);
 
       CalendarService.addDate(newEvent).success(function(res){
         console.log('addDate',res);

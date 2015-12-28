@@ -38,35 +38,35 @@
   0% {
     transform: translateX(0%); }
   100% {
-    transform: translateX(-100%); } }
+    transform: translateX(-200%); } }
 
 @-moz-keyframes slideOut {
   0% {
     transform: translateX(0%); }
   100% {
-    transform: translateX(-100%); } }
+    transform: translateX(-200%); } }
 
 @keyframes slideOut {
   0% {
     transform: translateX(0%); }
   100% {
-    transform: translateX(-100%); } }
+    transform: translateX(-200%); } }
 
 @-webkit-keyframes slideIn {
   0% {
-    transform: translateX(-100%); }
+    transform: translateX(-200%); }
   100% {
     transform: translateX(0%); } }
 
 @-moz-keyframes slideIn {
   0% {
-    transform: translateX(-100%); }
+    transform: translateX(-200%); }
   100% {
     transform: translateX(0%); } }
 
 @keyframes slideIn {
   0% {
-    transform: translateX(-100%); }
+    transform: translateX(-200%); }
   100% {
     transform: translateX(0%); } }
 
@@ -106,8 +106,8 @@ body, html, main {
   .navbar .navbar-header .hamburger {
     text-decoration: none;
     color: white;
-    font-size: 1.2em;
-    margin-top: 9%; }
+    font-size: 1.5em;
+    margin-top: 11%; }
     @media (max-width: 770px) {
       .navbar .navbar-header .hamburger {
         margin-left: 20px; } }
@@ -381,9 +381,14 @@ body, html, main {
     margin-top: 120px; } }
 
 .nav-column {
+  border-right: ridge #9fa8a3 5px;
+  width: 10%;
   transition: all 2s ease;
   margin-top: 50px;
   position: fixed; }
+  @media (max-width: 1000px) {
+    .nav-column {
+      border-right: solid white 0px; } }
   .nav-column .nav-tabs {
     margin-top: 20%;
     float: left;
@@ -443,7 +448,9 @@ body, html, main {
   animation-duration: 1s; }
 
 .expand-div {
-  margin-left: 0%; }
+  margin-left: 0%;
+  margin-right: 0%;
+  width: 100%; }
 
 .wrapper-create-wedding {
   width: 100%;
@@ -540,7 +547,7 @@ uib-slide img {
   margin-left: 10%;
   width: 100%;
   border: solid black 3px;
-  border-radius: 5px;
+  border-radius: 100px;
   margin-top: 80px; }
   @media (max-width: 1000px) {
     .form-group-notifications {
@@ -575,12 +582,13 @@ uib-slide img {
     padding: 2%;
     height: 100%;
     border-right: solid #DADADA 1px;
-    border-radius: 5px; }
+    border-radius: 100px; }
     @media (max-width: 770px) {
       .form-group-notifications .checkboxes-notifications {
         display: inline;
         border-bottom: solid #DADADA 1px;
-        width: 30%; } }
+        width: 30%;
+        margin-left: 20%; } }
     .form-group-notifications .checkboxes-notifications .form-group {
       display: block; }
       @media (max-width: 770px) {
@@ -643,24 +651,22 @@ uib-slide img {
 .full-page-div-form {
   width: 100%; }
 
-@media (max-width: 1000px) {
-  .carousel-wrapper-div {
-    margin-top: 80px; } }
-
-@media (max-width: 550px) {
-  .carousel-wrapper-div {
-    margin-left: 50px; } }
-
-.carousel-wrapper-div .carousel {
-  width: 80%; }
-
-.carousel-wrapper-div .btn-file {
-  position: relative;
-  overflow: hidden;
-  background-color: silver; }
-
-.carousel-wrapper-div .btn-file input[type='file'] {
-  background-color: silver; }
+.carousel-wrapper-div {
+  margin-left: 10%; }
+  @media (max-width: 1000px) {
+    .carousel-wrapper-div {
+      margin-top: 150px; } }
+  @media (max-width: 550px) {
+    .carousel-wrapper-div {
+      margin-left: 50px; } }
+  .carousel-wrapper-div .carousel {
+    width: 80%; }
+  .carousel-wrapper-div .btn-file {
+    position: relative;
+    overflow: hidden;
+    background-color: silver; }
+  .carousel-wrapper-div .btn-file input[type='file'] {
+    background-color: silver; }
 
 .landing-page-container {
   width: 100%;

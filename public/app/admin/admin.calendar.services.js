@@ -7,7 +7,9 @@
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
 
       var parseItem = function(item){
+        console.log('parsItem',item);
         var object = {
+          $$hashKey: item.$$hashKey,
           _id: item._id,
           start: new Date(item.start),
           end: new Date(item.end),
@@ -31,8 +33,9 @@
         return $http.get(dateUrl);
       };
       var addDate = function(item){
-        var pObject = parseItem(item);
-        return $http.post(dateUrl,pObject)
+        // console.log('add Date item', item)
+        // var pObject = parseItem(item);
+        return $http.post(dateUrl,item)
       };
       var editDate = function(item){
         return $http.put(dateUrl+'/'+item._id,item)
