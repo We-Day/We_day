@@ -1,5 +1,5 @@
-<form class="photo-upload-admin" action="/photo-upload" method="post">
-  <input type="file" name="pic" accept="image/*">
+<form class="photo-upload-admin" enctype="multipart/form-data" action="/photo-upload" method="post">
+  <input type="file" name="pic" multiple accept="image/*">
   <input type="submit">
 </form>
 <div style="height: 305px">
