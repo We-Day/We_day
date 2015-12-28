@@ -43,8 +43,7 @@ angular
       if($scope.password == $scope.passwordAuth){
         RegisterService.addNewUser(currObj).success(function(res){
           console.log('res createUSer',res)
-          $scope.emailAlreadyExists = !res[1];
-          res[1] ? $scope.setCurrentView(2): $scope.setCurrentView(1)
+          res[1] ? $scope.setCurrentView(2): $scope.emailAlreadyExists = true
         });
       }
       else{alert('wrong password')};
