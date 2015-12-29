@@ -188,14 +188,25 @@ public class WeDayController {
         }
 
     @RequestMapping ("/join-wedding")
-    public List <Wedding> joinWeddings(String email) throws Exception {
+    public List <Wedding> joinWeddings(String email, String password, String phone) throws Exception {
+
         Invite invite = invites.findOneByEmail(email);
+
         if (invite == null){
             throw new Exception("No Guest Found by that Email");
         }
-        else{
-            return weddings.findById(invite.wedding.id);
+
+        if (invite != null) {
+            User user = new User();
+            user.isAdmin = invite.isAdmin;
+            user.username = invite.username;
+            user.phone = phone;
+            user.email = email;
+            user.password = password;
+            users.save(user);
+            invites.delete(invite);
         }
+        return weddings.findById(invite.wedding.id);
     }
 
 
@@ -210,6 +221,7 @@ public class WeDayController {
         if (user1 == null) {
             exists = true;
             user.password = PasswordHash.createHash(user.password);
+            user.isAdmin = true;
             users.save(user);
             createUser.add(user);
             createUser.add(exists);
