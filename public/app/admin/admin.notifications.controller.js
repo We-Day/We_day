@@ -35,6 +35,7 @@ angular
       }
       $scope.notifications.push(currObj);
       NotServices.postNot(currObj).success(function(res){
+        $scope.title = '';
       })
     };
     $scope.deleteNot = function(item,index){

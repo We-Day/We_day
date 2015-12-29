@@ -29,6 +29,7 @@ $scope.viewInvitee = false;
       console.log(res,'response remove user');
     })
   }
+  console.log($routeParams.weddingId,'weddingId');
   $scope.inviteUser = function(name,email,bool){
     var currObject = {
       email: email,
@@ -50,7 +51,7 @@ $scope.viewInvitee = false;
       {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
       {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
     ];
-    $scope.currentIndex = 2;
+    $scope.currentIndex = 6;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

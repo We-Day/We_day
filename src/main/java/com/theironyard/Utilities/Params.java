@@ -17,5 +17,9 @@ public class Params {
 
     public String password;
 
-    public Invite invite;
+    public boolean isAdmin;
+
+    public String username;
+
+    public Integer weddingId;
 }

@@ -20,6 +20,9 @@ public class Invite {
     @Column (nullable = false)
     public String email;
 
+    @Column(nullable = true)
+    public String username;
+
     @ManyToOne
     public Wedding wedding;
 
