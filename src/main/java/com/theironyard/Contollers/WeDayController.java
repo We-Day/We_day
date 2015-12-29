@@ -121,6 +121,12 @@ public class WeDayController {
         return invites.findByWeddingId(Integer.valueOf(id));
     }
 
+    @RequestMapping(path = "/delete-invite", method = RequestMethod.POST)
+    public void deleteInvite(String inviteId){
+        Invite invite = invites.findOne(Integer.valueOf(inviteId));
+        invites.delete(invite);
+    }
+
     @RequestMapping("/invites")
     public List<Wedding> invitesList(HttpSession session) {
         String email = (String) session.getAttribute("email");
