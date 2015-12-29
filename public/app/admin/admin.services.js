@@ -4,6 +4,7 @@
     .module('admin')
     .factory('AdminService',function($http,$routeParams){
       var guestsUrl = "/create-guest";
+      var getInvitees = "/display-invites"
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
       var currentUser = '/current-user';
       var logoutUrl = '/logout';
@@ -14,7 +15,7 @@
         return $http.get(currWedding);
       }
       var getUsers = function(){
-        return $http.get(guestsUrl)
+        return $http.get(getInvitees)
       };
       var inviteUser = function(obj){
         return $http.post(guestsUrl,obj);
