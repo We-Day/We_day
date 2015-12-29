@@ -115,11 +115,10 @@ public class WeDayController {
         invites.save(invite);
     }
 
-    @RequestMapping(path="/display-invites", method = RequestMethod.GET)
-    public List <Invite> display(String weddingId){
-        return invites.findByWeddingId(Integer.valueOf(weddingId));
+    @RequestMapping(path="/display-invites/{id}", method = RequestMethod.GET)
+    public List <Invite> display(@PathVariable("id") int id){
+        return invites.findByWeddingId(Integer.valueOf(id));
     }
-
 
     @RequestMapping("/invites")
     public List<Wedding> invitesList(HttpSession session) {
