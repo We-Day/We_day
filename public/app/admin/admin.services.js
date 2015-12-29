@@ -16,7 +16,7 @@
         return $http.get(currWedding);
       }
       var getUsers = function(){
-        return $http.get(getInvitees+'/'+currId)
+        return $http.get(getInvitees+'/'+currId);
       };
       var inviteUser = function(obj){
         return $http.post(guestsUrl,obj);

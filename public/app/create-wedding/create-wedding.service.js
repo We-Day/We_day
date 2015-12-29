@@ -4,7 +4,7 @@
     .module('create-wedding')
     .factory('CreateWeddingService',function($http,$location,$window){
       var urlWedding = 'create-wedding';
-      var urlInviteUser = 'http://tiny-tiny.herokuapp.com/collections/invite-user';
+      var urlInviteUser = 'create-guest';
       var urlFacebook = '/profile'
       var getFacebookObject = function(item){
         return $http.get(urlFacebook);
@@ -19,9 +19,7 @@
           return $http.post(urlWedding, wedding);
         };
      var inviteUser = function(user){
-       $http.post(urlInviteUser,user).success(function(res){
-         console.log('Invite User',res);
-       })
+       return $http.post(urlInviteUser,user)
      };
 
 

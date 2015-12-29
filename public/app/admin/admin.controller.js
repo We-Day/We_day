@@ -21,6 +21,7 @@ angular
 $scope.viewInvitee = false;
   $scope.guests = [];
   AdminService.getUsers().success(function(res){
+    console.log('invites',res)
     $scope.guests = res;
   })
   $scope.removeUser = function(id,index){
