@@ -280,15 +280,15 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
-    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile pic) throws IOException {
-        session.getAttribute()
+    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile pic,@RequestBody Params param) throws IOException {
         File photoFile = File.createTempFile("pic", pic.getOriginalFilename(), new File("public/pics"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(pic.getBytes());
 
         Photo p = new Photo();
         p.fileName = photoFile.getName();
-        p.description = description;
+        p.wedding = param.wedding;
+
         photos.save(p);
 
         return p;

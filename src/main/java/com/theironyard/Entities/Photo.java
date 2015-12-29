@@ -20,6 +20,7 @@ public class Photo {
 
     public String description;
 
+    @ManyToOne
     public Wedding wedding;
 
     public int getId() {
