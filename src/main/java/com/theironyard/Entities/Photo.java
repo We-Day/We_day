@@ -18,7 +18,11 @@ public class Photo {
     @Column (nullable= false)
     public String fileName;
 
+    @Column (nullable = true)
     public String description;
+
+    @ManyToOne
+    public Wedding wedding;
 
     public int getId() {
         return id;
