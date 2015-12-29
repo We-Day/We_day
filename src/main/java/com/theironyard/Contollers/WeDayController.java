@@ -145,6 +145,11 @@ public class WeDayController {
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
+    @RequestMapping(path="/photos", method = RequestMethod.GET)
+    public List<Photo> photoList(HttpSession session, @RequestBody Params param) {
+        return photos.findByWedding(param.weddingId);
+    }
+
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
     public Wedding findOne(@PathVariable("id") int id) {
         return weddings.findOne(id);
@@ -299,6 +304,7 @@ public class WeDayController {
 
         Photo p = new Photo();
         p.fileName = photoFile.getName();
+        p.description = param.description;
         p.wedding = param.wedding;
 
         photos.save(p);
@@ -310,6 +316,8 @@ public class WeDayController {
     public void logout(HttpSession session){
         session.invalidate();
     }
+
+
 
     public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
 

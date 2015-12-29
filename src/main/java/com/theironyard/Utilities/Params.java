@@ -22,4 +22,6 @@ public class Params {
     public String username;
 
     public Integer weddingId;
+
+    public String description;
 }

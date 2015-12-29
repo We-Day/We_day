@@ -18,6 +18,7 @@ public class Photo {
     @Column (nullable= false)
     public String fileName;
 
+    @Column (nullable = true)
     public String description;
 
     @ManyToOne
