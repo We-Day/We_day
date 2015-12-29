@@ -24,7 +24,6 @@
         @Column(nullable = false)
         public String title;
 
-        //possibly use @Embedded here ?
         public Object email() {
             boolean send;
             int time; // hours before sending email

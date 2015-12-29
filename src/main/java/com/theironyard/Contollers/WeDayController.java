@@ -104,27 +104,8 @@ public class WeDayController {
         sendEmail(emailDestination, session);
     }
 
-    //this is for people who have been invited, coming to the site and becoming guests.
-    @RequestMapping(path = "/confirmed-guest", method = RequestMethod.POST)
-    public User confirmedUser (String email, String password, String phone) throws Exception {
-        Invite invite = invites.findOneByEmail(email);
-        if (invite == null){
-            throw new Exception("no email found");
-        }else {
-            User user = new User();
-            user.email = invite.email;
-            user.username = invite.username;
-            user.phone = phone;
-            user.password = password;
-            users.save(user);
-            return user;
-            // what about transferring the isAdmin variable?
-            // Do we want to delete the invite after we make them a user?
-        }
-    }
-
     @RequestMapping(path = "/create-guest", method = RequestMethod.POST)
-    public List <Invite> guestList(@RequestBody Params param){
+    public void addInvite(@RequestBody Params param){
         Wedding wedding = weddings.findOne(param.weddingId);
         Invite invite = new Invite();
         invite.wedding = wedding;
@@ -132,8 +113,13 @@ public class WeDayController {
         invite.isAdmin = param.isAdmin;
         invite.username = param.username;
         invites.save(invite);
-        return invites.findByWeddingId(param.weddingId);
     }
+
+    @RequestMapping(path="/display-invites", method = RequestMethod.GET)
+    public List <Invite> display(String weddingId){
+        return invites.findByWeddingId(Integer.valueOf(weddingId));
+    }
+
 
     @RequestMapping("/invites")
     public List<Wedding> invitesList(HttpSession session) {
@@ -201,7 +187,7 @@ public class WeDayController {
             user.username = invite.username;
             user.phone = phone;
             user.email = email;
-            user.password = password;
+            user.password = PasswordHash.createHash(password);
             users.save(user);
             invites.delete(invite);
         }
@@ -286,8 +272,8 @@ public class WeDayController {
     }
 
     @RequestMapping("/create-event")
-    public CalendarEvent createEvent(@RequestBody CalendarEvent event){
-        return events.save(event);
+    public void createEvent(@RequestBody CalendarEvent event){
+        events.save(event);
     }
 
     @RequestMapping("/photo-upload")
