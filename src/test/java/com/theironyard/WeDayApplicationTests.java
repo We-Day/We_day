@@ -109,7 +109,7 @@
 
         }
 
-        @Test
+        /*@Test
         @Bean
         public void sendEmail() throws MessagingException {
             AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
@@ -124,7 +124,7 @@
             mailMsg.setSubject("You've just been invited to their wedding!");
             mailMsg.setText("Hello World!");
             mailSender.send(mimeMessage);
-        }
+        }*/
     }
 
 //        @Test

@@ -242,6 +242,7 @@ public class WeDayController {
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
     public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile pic) throws IOException {
+        session.getAttribute()
         File photoFile = File.createTempFile("pic", pic.getOriginalFilename(), new File("public/pics"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(pic.getBytes());

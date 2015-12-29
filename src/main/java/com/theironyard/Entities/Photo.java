@@ -20,6 +20,8 @@ public class Photo {
 
     public String description;
 
+    public Wedding wedding;
+
     public int getId() {
         return id;
     }
