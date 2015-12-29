@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,7 +75,7 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
+    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session, MultipartFile file) throws Exception {
         weddings.save(wedding);
         User user = users.findOneByEmail((String) session.getAttribute("email"));
 
@@ -133,6 +134,11 @@ public class WeDayController {
                 .map(invite -> {
                     return invite.wedding;
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
+    }
+
+    @RequestMapping(path="/photos", method = RequestMethod.GET)
+    public List<Photo> photoList(HttpSession session, @RequestBody Params param) {
+        return photos.findByWedding(param.weddingId);
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
@@ -281,17 +287,17 @@ public class WeDayController {
         events.save(event);
     }
 
-    @RequestMapping("/photo-upload")
-    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile file, String fileName, String description) throws IOException {
-        String username = (String) session.getAttribute("username");
-
-        File photoFile = File.createTempFile("file", file.getOriginalFilename(), new File("public"));
+    @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
+    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile pic,@RequestBody Params param) throws IOException {
+        File photoFile = File.createTempFile("pic", pic.getOriginalFilename(), new File("public/pics"));
         FileOutputStream fos = new FileOutputStream(photoFile);
-        fos.write(file.getBytes());
+        fos.write(pic.getBytes());
 
         Photo p = new Photo();
         p.fileName = photoFile.getName();
-        p.description = description;
+        p.description = param.description;
+        p.wedding = weddings.findOne(param.weddingId);
+
         photos.save(p);
 
         return p;
@@ -301,6 +307,8 @@ public class WeDayController {
     public void logout(HttpSession session){
         session.invalidate();
     }
+
+
 
     public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
 
