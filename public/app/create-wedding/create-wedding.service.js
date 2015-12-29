@@ -3,7 +3,7 @@
   angular
     .module('create-wedding')
     .factory('CreateWeddingService',function($http,$location,$window){
-      var urlWedding = 'create-wedding';
+      var urlWedding = '/create-wedding';
       var urlInviteUser = 'create-guest';
       var urlFacebook = '/profile'
       var getFacebookObject = function(item){
