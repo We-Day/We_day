@@ -3,7 +3,7 @@
   angular
     .module('admin')
     .factory('AdminService',function($http,$routeParams){
-      var guestsUrl = "create-guest/";
+      var guestsUrl = "/create-guest";
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
       var currentUser = '/current-user';
       var logoutUrl = '/logout';

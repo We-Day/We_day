@@ -96,6 +96,7 @@ angular
     $scope.editTitleDate = function(event){
       $scope.updateEvents();
       CalendarService.editDate(event).success(function(res){
+        $scope.updateEvents();
       });
     };
     $scope.editDate = function(event){
