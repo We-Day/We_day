@@ -290,7 +290,7 @@ public class WeDayController {
         Photo p = new Photo();
         p.fileName = photoFile.getName();
         p.description = param.description;
-        p.wedding = param.wedding;
+        p.wedding = weddings.findOne(param.weddingId);
 
         photos.save(p);
 
