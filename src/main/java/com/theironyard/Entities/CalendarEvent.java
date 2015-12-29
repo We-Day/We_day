@@ -16,69 +16,36 @@
         public int id;
 
         @Column(nullable = false)
-        public LocalDateTime start;
+        public String start;
 
         @Column(nullable = false)
-        public LocalDateTime end;
+        public String end;
 
         @Column(nullable = false)
         public String title;
 
-        //possibly use @Embedded here ?
-        public Object email() {
+        public class Email {
             boolean send;
             int time; // hours before sending email
-            return email();
         }
+        @Transient
+        public Email email;
 
-        public Object text() {
+        public class Text {
             boolean send;
             int time;
-            return text();
         }
 
-        public Object notification() {
+        @Transient
+        public Text text;
+
+
+        public class Notification {
             boolean send;
             int time;
-            return notification();
         }
 
-        public CalendarEvent(int id, LocalDateTime start, LocalDateTime end, String title) {
-            this.id = id;
-            this.start = start;
-            this.end = end;
-            this.title = title;
-        }
+        @Transient
+        public Notification notification;
 
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public LocalDateTime getStart() {
-            return start;
-        }
-
-        public void setStart(LocalDateTime start) {
-            this.start = start;
-        }
-
-        public LocalDateTime getEnd() {
-            return end;
-        }
-
-        public void setEnd(LocalDateTime end) {
-            this.end = end;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
     }
