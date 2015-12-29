@@ -75,7 +75,7 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
-    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session, MultipartFile file) throws Exception {
+    public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
         User user = users.findOneByEmail((String) session.getAttribute("email"));
 
@@ -130,9 +130,9 @@ public class WeDayController {
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
-    @RequestMapping(path="/photos", method = RequestMethod.GET)
-    public List<Photo> photoList(HttpSession session, @RequestBody Params param) {
-        return photos.findByWedding(param.weddingId);
+    @RequestMapping("/photos/{id}")
+    public List<Photo> photoList(@PathVariable("id") int id) {
+        return photos.findByWedding(id);
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
