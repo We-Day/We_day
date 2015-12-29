@@ -1,5 +1,5 @@
 
-    package com.theironyard;
+    /*package com.theironyard;
     import com.fasterxml.jackson.core.JsonProcessingException;
     import com.theironyard.Entities.Post;
     import com.theironyard.Entities.User;
@@ -34,7 +34,7 @@
     @RunWith(SpringJUnit4ClassRunner.class)
     @SpringApplicationConfiguration(classes = WeDayApplication.class)
     @WebAppConfiguration
-    public class WeDayApplicationTests {
+    public class WeDayApplicationTests {}
 
         @Autowired
         WeddingRepository weddings;
@@ -109,7 +109,7 @@
 
         }
 
-        /*@Test
+        @Test
         @Bean
         public void sendEmail() throws MessagingException {
             AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
@@ -124,56 +124,30 @@
             mailMsg.setSubject("You've just been invited to their wedding!");
             mailMsg.setText("Hello World!");
             mailSender.send(mimeMessage);
-        }*/
-    }
+        }
+    }*/
+        /*@Test
+        public void testNotification() throws Exception {
+            User user = new User();
+            user.email = "nathan@gmail.com";
+            user.username = "Nathan Martin";
+            user.zip = "12345";
+            user.password = "password";
+            user.address = "123 Fake St";
+            user.phone = "+18435180835";
+            users.save(user);
+            User user1 = new User();
+            user1.email = "charleslane@gmail.com";
+            user1.username = "Charles Lane";
+            user1.zip = "12345";
+            user1.password = "password";
+            user1.address = "123 Fake St";
+            user1.phone = "+18436479951";
+            users.save(user1);
 
-////        @Test
-////        public void testNotification() throws Exception {
-////            User user = new User();
-////            user.email = "nathan@gmail.com";
-////            user.username = "Nathan Martin";
-////            user.zip = "12345";
-////            user.password = "password";
-////            user.address = "123 Fake St";
-////            user.phone = "+18435180835";
-////            users.save(user);
-////
-////            User user1 = new User();
-////            user1.email = "charleslane@gmail.com";
-////            user1.username = "Charles Lane";
-////            user1.zip = "12345";
-////            user1.password = "password";
-////            user1.address = "123 Fake St";
-////            user1.phone = "+18436479951";
-////            users.save(user1);
-////
-////            String body = "Charles. if you're reading this our notifications work. ";
-////
-////            mockMvc.perform(
-////                    MockMvcRequestBuilders.post("/send-notification")
-////                            .param("body",body)
-////            );
-////
-////
-////        }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+            String body = "Charles. if you're reading this our notifications work. ";
+
+            mockMvc.perform(
+                    MockMvcRequestBuilders.post("/send-notification")
+                            .param("body", body)
+            );*/
