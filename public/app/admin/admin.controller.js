@@ -46,6 +46,7 @@ $scope.viewInvitee = false;
     })
   }
 //carousel
+$scope.weddingId = $routeParams.weddingId;
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [
