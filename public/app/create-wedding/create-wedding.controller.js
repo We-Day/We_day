@@ -57,7 +57,7 @@ angular
     };
     $scope.addAdmin = function(){
       var user = {
-        userName: $scope.userName,
+        username: $scope.userName,
         email:$scope.email,
         phone:$scope.phone,
         password:$scope.password,
@@ -69,7 +69,7 @@ angular
     };
     $scope.inviteUser = function(){
       var user = {
-        name: $scope.inviteName,
+        username: $scope.inviteName,
         email:$scope.inviteEmail,
         weddingName: $scope.weddingName
       }

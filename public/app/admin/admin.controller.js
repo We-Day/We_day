@@ -21,6 +21,7 @@ angular
 $scope.viewInvitee = false;
   $scope.guests = [];
   AdminService.getUsers().success(function(res){
+    console.log('invites',res)
     $scope.guests = res;
   })
   $scope.removeUser = function(id,index){
@@ -45,6 +46,7 @@ $scope.viewInvitee = false;
     })
   }
 //carousel
+$scope.weddingId = $routeParams.weddingId;
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [
