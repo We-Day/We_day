@@ -3,7 +3,7 @@
   angular
     .module('admin')
     .factory('CalendarService',function($http,$routeParams){
-      var dateUrl = "https://tiny-tiny.herokuapp.com/collections/dates";
+      var dateUrl = "/create-event";
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
 
       var parseItem = function(item){
