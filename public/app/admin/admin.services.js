@@ -8,6 +8,7 @@
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
       var currentUser = '/current-user';
       var logoutUrl = '/logout';
+      var getPicsUrl = '/photos/'+$routeParams.weddingId
       var currId = $routeParams.weddingId;
       var logOut = function(){
         return $http.post(logoutUrl);
@@ -27,7 +28,11 @@
       var getCurrentUser = function(){
         return $http.get(currentUser);
       }
+      var getPhotos = function(){
+        return $http.get(getPicsUrl);
+      }
     return{
+      getPhotos:getPhotos,
       logOut:logOut,
       getCurrentUser:getCurrentUser,
       removeUser:removeUser,
