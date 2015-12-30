@@ -14,7 +14,7 @@
         var deleteNot = function(el){
           return $http.delete(urlN+'/'+el._id)
         }
-    return{
+    return{ 
       deleteNot:deleteNot,
       getNot:getNot,
       postNot:postNot,

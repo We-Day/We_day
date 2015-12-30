@@ -51,14 +51,21 @@ $scope.weddingId = $routeParams.weddingId;
 
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
+    $scope.slides = []
+    $scope.getPhotoSlides = function(){
+      $scope.slides.splice(0,$scope.slides.length);
     AdminService.getPhotos().success(function(res){
-      $scope.slides = res;
+      for (var i = 0; i < res.length; i++) {
+        var currItem = {image:'../pics/'+res[i].fileName};
+        console.log(currItem,'currItem')
+        $scope.slides.push(currItem);
+      }
+
       console.log(res,'photos in file');
     })
-    // var slides = $scope.slides = [
-    //   {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
-    //   {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
-    // ];
+  }
+  $scope.getPhotoSlides();
+
     $scope.currentIndex = 6;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
