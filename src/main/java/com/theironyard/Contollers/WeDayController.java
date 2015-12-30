@@ -288,7 +288,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
-    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description) throws IOException {
+    public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description, String userId) throws IOException {
         File photoFile = File.createTempFile("pic", pic.getOriginalFilename(), new File("public/pics"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(pic.getBytes());
@@ -299,9 +299,13 @@ public class WeDayController {
         p.wedding = weddings.findOne(weddingId);
 
         photos.save(p);
-        response.sendRedirect("/");
-
-        return p;
+        User user = users.findOne(Integer.valueOf(userId));
+        if(user.isAdmin){
+            response.sendRedirect("/#/admins/"+ weddingId);
+        }
+        else {
+            response.sendRedirect(("/#/user/"+ weddingId));
+        }
     }
 
     @RequestMapping(path="/logout", method = RequestMethod.POST)
