@@ -11,6 +11,7 @@ angular
     $scope.updateLength = function(item){
       inputNotifcation = item;
     }
+    $scope.notifications = [];
     $scope.refresh = function(){
     NotServices.getNot().success(function(res){
       $scope.notifications = res;

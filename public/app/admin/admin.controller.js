@@ -9,7 +9,6 @@ angular
       });
     };
   AdminService.getCurrentUser().success(function(res){
-    console.log(res,'currentUser');
     $scope.currentUser = res.username;
     $scope.userId = res.id;
   });
@@ -31,7 +30,6 @@ $scope.viewInvitee = false;
       console.log(res,'response remove user');
     })
   }
-  console.log($routeParams.weddingId,'weddingId');
   $scope.inviteUser = function(name,email,bool){
     var currObject = {
       email: email,
@@ -41,7 +39,6 @@ $scope.viewInvitee = false;
     }
     $scope.guests.push(currObject);
     AdminService.inviteUser(currObject).success(function(res){
-      console.log(res);
       $scope.lastInvitee = res.username;
       $scope.viewInvitee = true;
     })
@@ -51,14 +48,19 @@ $scope.weddingId = $routeParams.weddingId;
 
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
+    $scope.slides = []
+    $scope.getPhotoSlides = function(){
+      $scope.slides.splice(0,$scope.slides.length);
     AdminService.getPhotos().success(function(res){
-      $scope.slides = res;
+      for (var i = 0; i < res.length; i++) {
+        var currItem = {image:'../pics/'+res[i].fileName};
+        $scope.slides.push(currItem);
+      }
       console.log(res,'photos in file');
     })
-    // var slides = $scope.slides = [
-    //   {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
-    //   {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
-    // ];
+  }
+  $scope.getPhotoSlides();
+
     $scope.currentIndex = 6;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){

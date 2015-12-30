@@ -12,6 +12,7 @@
           return $http.post(urlN,el);
         }
         var deleteNot = function(el){
+          console.log(el,'el');
           return $http.delete(urlN+'/'+el._id)
         }
     return{

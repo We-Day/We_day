@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('user')
-  .controller('UserController',function($scope,UserService,$location){
+  .controller('UserController',function($scope,UserService,$location,$routeParams){
     $scope.currentIndex = 1;
     $scope.logOut = function(){
       UserService.logOut().success(function(res){
@@ -51,10 +51,20 @@ UserService.getUsers().success(function(res){
 //carousel
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
-    var slides = $scope.slides = [
-      {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
-      {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
-    ];
+    $scope.slides = []
+    $scope.getPhotoSlides = function(){
+      $scope.slides.splice(0,$scope.slides.length);
+    UserService.getPhotos().success(function(res){
+      for (var i = 0; i < res.length; i++) {
+        var currItem = {image:'../pics/'+res[i].fileName};
+        console.log(currItem,'currItem')
+        $scope.slides.push(currItem);
+      }
+
+      console.log(res,'photos in file');
+    })
+  }
+  $scope.getPhotoSlides();
     $scope.currentIndex = 2;
     $scope.myValue = true;
 
