@@ -136,7 +136,7 @@ public class WeDayController {
                 }).collect(Collectors.toCollection(ArrayList<Wedding>::new));
     }
 
-    @RequestMapping(path = "/photos/{id}", ,method = RequestMethod.GET)
+    @RequestMapping(path = "/photos/{id}", method = RequestMethod.GET)
     public List<Photo> photoList(@PathVariable("id") int id) {
         return photos.findByWedding(weddings.findOne(id));
     }
