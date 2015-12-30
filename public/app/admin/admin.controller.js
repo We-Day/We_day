@@ -51,10 +51,14 @@ $scope.weddingId = $routeParams.weddingId;
 
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
-    var slides = $scope.slides = [
-      {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
-      {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
-    ];
+    AdminService.getPhotos().success(function(res){
+      $scope.slides = res;
+      console.log(res,'photos in file');
+    })
+    // var slides = $scope.slides = [
+    //   {image:"http://cdn-media-2.lifehack.org/wp-content/files/2015/02/Wedding06-main.jpg"},
+    //   {image:"http://www.doraliveband.com/docs/upload/w1.jpg"}
+    // ];
     $scope.currentIndex = 6;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
