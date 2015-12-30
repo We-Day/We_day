@@ -254,8 +254,8 @@ public class WeDayController {
         return null;
     }
 
-    @RequestMapping (path = "/send-notification", method = RequestMethod.GET)
-    public void sendNotification( HttpSession session, String weddingId, String body) throws TwilioRestException, MessagingException {
+    @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
+    public void sendNotification( HttpSession session, String weddingId, String title) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         ArrayList <String> emails = new ArrayList<>();
         List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(weddingId));
@@ -264,10 +264,11 @@ public class WeDayController {
             String email = user.email;
             numbers.add(phone);
             emails.add(email);
+
             for (String phoneDestination : numbers){
-                sendText(phoneDestination, body);
+                sendText(phoneDestination, title);
             }
-            for (String notificationEmail : numbers) {
+            for (String notificationEmail : emails) {
                 sendNotificationEmail(notificationEmail, session);
             }
         }
@@ -311,17 +312,17 @@ public class WeDayController {
 
     public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
 
-    TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-    List<NameValuePair> params = new ArrayList<NameValuePair>();
-    params.add(new BasicNameValuePair("Body", body));
-    params.add(new BasicNameValuePair("To", destination));
-    params.add(new BasicNameValuePair("From", "+18436405964"));
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("Body", body));
+        params.add(new BasicNameValuePair("To", destination));
+        params.add(new BasicNameValuePair("From", "+18436405964"));
 
-    MessageFactory messageFactory = client.getAccount().getMessageFactory();
-    Message message = messageFactory.create(params);
-    System.out.println(message.getSid());
-}
+        MessageFactory messageFactory = client.getAccount().getMessageFactory();
+        Message message = messageFactory.create(params);
+        System.out.println(message.getSid());
+    }
 
     public static void sendEmail(String emailDestination, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
