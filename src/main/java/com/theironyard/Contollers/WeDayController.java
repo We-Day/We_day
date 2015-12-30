@@ -78,6 +78,7 @@ public class WeDayController {
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
         User user = users.findOneByEmail((String) session.getAttribute("email"));
+        user.wedding = wedding;
 
         if (user == null) {
             throw new Exception("User does not exist");
@@ -85,6 +86,7 @@ public class WeDayController {
         Invite invite =  new Invite();
         invite.isAdmin= true;
         invite.wedding= wedding;
+        invite.username = user.username;
         invite.email = user.email;
         createInvite(invite, invite.email, session);
         return wedding;
@@ -114,6 +116,7 @@ public class WeDayController {
         invite.isAdmin = param.isAdmin;
         invite.username = param.username;
         invites.save(invite);
+        // send - email method needs to go here?
     }
 
     @RequestMapping(path="/display-invites/{id}", method = RequestMethod.GET)
@@ -121,9 +124,9 @@ public class WeDayController {
         return invites.findByWeddingId(Integer.valueOf(id));
     }
 
-    @RequestMapping(path = "/delete-invite", method = RequestMethod.POST)
-    public void deleteInvite(String inviteId){
-        Invite invite = invites.findOne(Integer.valueOf(inviteId));
+    @RequestMapping(path = "/delete-invite{id}", method = RequestMethod.POST)
+    public void deleteInvite(@PathVariable("id") int id){
+        Invite invite = invites.findOne(Integer.valueOf(id));
         invites.delete(invite);
     }
 
@@ -252,25 +255,24 @@ public class WeDayController {
     }
 
     @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
-    public void sendNotification(String body, HttpSession session) throws TwilioRestException, MessagingException {
+    public void sendNotification( HttpSession session, String weddingId, String title) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
-        String id = (String)session.getAttribute("id");
-        Wedding wedding = weddings.findOne(Integer.valueOf(id));
-        Iterable<User> allUsers = (Iterable)wedding.user; // change to wedding-specific users
-        for (User user : allUsers){                       // maybe send weddingId through Params again & loop over users
+        ArrayList <String> emails = new ArrayList<>();
+        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(weddingId));
+        for (User user : weddingUsers){
             String phone = user.phone;
             String email = user.email;
             numbers.add(phone);
-            numbers.add(email);
+            emails.add(email);
+
             for (String phoneDestination : numbers){
-                sendText(phoneDestination, body);
+                sendText(phoneDestination, title);
             }
-            for (String notificationEmail : numbers) {
+            for (String notificationEmail : emails) {
                 sendNotificationEmail(notificationEmail, session);
             }
         }
     }
-    // THIS HAS TO BE ALTERED TO MAKE IT WEDDING SPECIFIC INSTEAD OF ALL USERS.
 
     @RequestMapping("/create-post")
     public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {
@@ -282,7 +284,7 @@ public class WeDayController {
         return posts.findAll();
     }
 
-    @RequestMapping("/create-event")
+    @RequestMapping(path = "/create-event", method = RequestMethod.POST)
     public void createEvent(@RequestBody CalendarEvent event){
         events.save(event);
     }
@@ -313,21 +315,19 @@ public class WeDayController {
         session.invalidate();
     }
 
-
-
     public static void sendText(String destination, String body) throws TwilioRestException, MessagingException {
 
-    TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-    List<NameValuePair> params = new ArrayList<NameValuePair>();
-    params.add(new BasicNameValuePair("Body", body));
-    params.add(new BasicNameValuePair("To", destination));
-    params.add(new BasicNameValuePair("From", "+18436405964"));
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("Body", body));
+        params.add(new BasicNameValuePair("To", destination));
+        params.add(new BasicNameValuePair("From", "+18436405964"));
 
-    MessageFactory messageFactory = client.getAccount().getMessageFactory();
-    Message message = messageFactory.create(params);
-    System.out.println(message.getSid());
-}
+        MessageFactory messageFactory = client.getAccount().getMessageFactory();
+        Message message = messageFactory.create(params);
+        System.out.println(message.getSid());
+    }
 
     public static void sendEmail(String emailDestination, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
