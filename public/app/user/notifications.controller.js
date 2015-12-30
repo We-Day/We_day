@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('user')
-  .controller('NotController',function($scope,NotServices){
+  .controller('NotificationsController',function($scope,NotServices){
     $scope.refresh = function(){
     NotServices.getNot().success(function(res){
       $scope.notifications = res;
