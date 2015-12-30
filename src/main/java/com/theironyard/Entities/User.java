@@ -28,8 +28,13 @@ public class User {
     @Column (nullable = true)
     public boolean isAdmin;
 
+    @ManyToOne
+    public Wedding wedding;
+
     public User() {
     }
+
+
 
     public User(int id, String username, String phone, String email, String password, boolean isAdmin) {
         this.id = id;
