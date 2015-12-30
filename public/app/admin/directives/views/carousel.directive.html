@@ -1,8 +1,8 @@
 <div class="carousel-wrapper-div">
-  <form ng-show = "isCurrentIndex(7)"class="photo-upload-admin" enctype= "multipart/form-data" action="/photo-upload" method="post">
+  <form ng-show = "isCurrentIndex(7)" class="photo-upload-admin" enctype= "multipart/form-data" action="/photo-upload" method="post">
 <span class = "btn btn-default btn-file">
   <input type="file" name="pic" accept="image/*">
-  <input type="button" name="name" value="{{weddingId}}">
+  <input type="hidden" name="weddingId" value="{{weddingId}}">
 </span>
   <input type="submit">
 </form>
