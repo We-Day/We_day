@@ -9,7 +9,6 @@ angular
       });
     };
   AdminService.getCurrentUser().success(function(res){
-    console.log(res,'currentUser');
     $scope.currentUser = res.username;
     $scope.userId = res.id;
   });
@@ -31,7 +30,6 @@ $scope.viewInvitee = false;
       console.log(res,'response remove user');
     })
   }
-  console.log($routeParams.weddingId,'weddingId');
   $scope.inviteUser = function(name,email,bool){
     var currObject = {
       email: email,
@@ -41,7 +39,6 @@ $scope.viewInvitee = false;
     }
     $scope.guests.push(currObject);
     AdminService.inviteUser(currObject).success(function(res){
-      console.log(res);
       $scope.lastInvitee = res.username;
       $scope.viewInvitee = true;
     })
@@ -57,10 +54,8 @@ $scope.weddingId = $routeParams.weddingId;
     AdminService.getPhotos().success(function(res){
       for (var i = 0; i < res.length; i++) {
         var currItem = {image:'../pics/'+res[i].fileName};
-        console.log(currItem,'currItem')
         $scope.slides.push(currItem);
       }
-
       console.log(res,'photos in file');
     })
   }
