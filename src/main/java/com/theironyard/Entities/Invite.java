@@ -9,10 +9,9 @@ import java.util.Set;
 @Entity
 @Table(name = "invites")
 public class Invite {
-
     @Id
     @GeneratedValue
-    int Id;
+    public int id;
 
     @Column (nullable = false)
     public Boolean isAdmin;
