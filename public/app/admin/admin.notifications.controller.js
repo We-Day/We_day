@@ -30,7 +30,7 @@ angular
         title: $scope.title,
         email: $scope.email,
         text: $scope.text,
-        notification: $scope.notification,
+        // notification: $scope.notification,
         time: new Date()
       }
       $scope.notifications.push(currObj);
