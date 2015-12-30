@@ -2,7 +2,7 @@
   "use strict"
   angular
     .module('user')
-    .factory('NotServices',function($http){
+    .factory('NotificationServices',function($http){
       var urlN = "send-notification";
         var getNot = function(el){
           return $http.get(urlN);

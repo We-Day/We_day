@@ -29,9 +29,9 @@ angular
       var dateTime = moment().calendar();
       var currObj = {
         title: $scope.title,
-        email: $scope.email,
-        text: $scope.text,
-        weddingId: $routeParams.weddingId,
+        // email: $scope.email,
+        // text: $scope.text,
+        wedId: $routeParams.weddingId,
         // notification: $scope.notification,
         time: new Date()
       }
