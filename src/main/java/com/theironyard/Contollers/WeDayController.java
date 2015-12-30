@@ -141,7 +141,7 @@ public class WeDayController {
 
     @RequestMapping("/photos/{id}")
     public List<Photo> photoList(@PathVariable("id") int id) {
-        return photos.findByWedding(id);
+        return photos.findByWedding(weddings.findOne(id));
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)
@@ -290,19 +290,24 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
-    public Photo upload(HttpSession session, HttpServletResponse response, MultipartFile pic,@RequestBody Params param) throws IOException {
+    public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description, String userId) throws IOException {
         File photoFile = File.createTempFile("pic", pic.getOriginalFilename(), new File("public/pics"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(pic.getBytes());
 
         Photo p = new Photo();
         p.fileName = photoFile.getName();
-        p.description = param.description;
-        p.wedding = weddings.findOne(param.weddingId);
+        p.description = description;
+        p.wedding = weddings.findOne(weddingId);
 
         photos.save(p);
-
-        return p;
+        User user = users.findOne(Integer.valueOf(userId));
+        if(user.isAdmin){
+            response.sendRedirect("/#/admins/"+ weddingId);
+        }
+        else {
+            response.sendRedirect(("/#/user/"+ weddingId));
+        }
     }
 
     @RequestMapping(path="/logout", method = RequestMethod.POST)

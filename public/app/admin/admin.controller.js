@@ -11,6 +11,7 @@ angular
   AdminService.getCurrentUser().success(function(res){
     console.log(res,'currentUser');
     $scope.currentUser = res.username;
+    $scope.userId = res.id;
   });
 
   AdminService.getWeddingObject().success(function(res){
@@ -47,6 +48,7 @@ $scope.viewInvitee = false;
   }
 //carousel
 $scope.weddingId = $routeParams.weddingId;
+
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [

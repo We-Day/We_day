@@ -10,5 +10,5 @@ import java.util.List;
  * Created by benjamindrake on 12/9/15.
  */
 public interface PhotoRepository extends CrudRepository <Photo, Integer> {
-     List<Photo> findByWedding(Integer id);
+     List<Photo> findByWedding(Wedding wedding);
 }
