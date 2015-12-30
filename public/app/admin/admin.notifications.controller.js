@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('admin')
-  .controller('NotControllers',function($scope,NotServices){
+  .controller('NotControllers',function($scope,NotServices,$routeParams){
     var inputNotifcation = '';
 
     $scope.toLong = function(){
@@ -30,6 +30,7 @@ angular
         title: $scope.title,
         email: $scope.email,
         text: $scope.text,
+        weddingId: $routeParams.weddingId,
         // notification: $scope.notification,
         time: new Date()
       }
