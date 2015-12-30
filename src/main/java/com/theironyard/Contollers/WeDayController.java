@@ -124,9 +124,9 @@ public class WeDayController {
         return invites.findByWeddingId(Integer.valueOf(id));
     }
 
-    @RequestMapping(path = "/delete-invite", method = RequestMethod.POST)
-    public void deleteInvite(String inviteId){
-        Invite invite = invites.findOne(Integer.valueOf(inviteId));
+    @RequestMapping(path = "/delete-invite{id}", method = RequestMethod.POST)
+    public void deleteInvite(@PathVariable("id") int id){
+        Invite invite = invites.findOne(Integer.valueOf(id));
         invites.delete(invite);
     }
 
