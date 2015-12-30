@@ -188,7 +188,6 @@ public class WeDayController {
 
     @RequestMapping ("/join-wedding")
     public List <Wedding> joinWeddings(String email, String password, String phone) throws Exception {
-
         Invite invite = invites.findOneByEmail(email);
 
         if (invite == null){
@@ -200,7 +199,7 @@ public class WeDayController {
             user.isAdmin = invite.isAdmin;
             user.username = invite.username;
             user.phone = phone;
-            user.email = email;
+            user.email = invite.email;
             user.password = PasswordHash.createHash(password);
             users.save(user);
             invites.delete(invite);
@@ -255,24 +254,24 @@ public class WeDayController {
     }
 
     @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
-    public void sendNotification( HttpSession session, String weddingId, String title) throws TwilioRestException, MessagingException {
+    public void sendNotification( @RequestBody Params params, HttpSession session) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         ArrayList <String> emails = new ArrayList<>();
-        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(weddingId));
-        for (User user : weddingUsers){
+        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.weddingId));
+        for (User user : weddingUsers) {
             String phone = user.phone;
             String email = user.email;
             numbers.add(phone);
             emails.add(email);
+        }
 
-            for (String phoneDestination : numbers){
-                sendText(phoneDestination, title);
+        for (String phoneDestination : numbers){
+                sendText(phoneDestination, params.title);
             }
-            for (String notificationEmail : emails) {
+        for (String notificationEmail : emails) {
                 sendNotificationEmail(notificationEmail, session);
             }
         }
-    }
 
     @RequestMapping("/create-post")
     public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {
