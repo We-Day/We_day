@@ -36,6 +36,7 @@ angular
       }
       $scope.notifications.push(currObj);
       NotServices.postNot(currObj).success(function(res){
+        console.log(currObj,'notification');
         $scope.title = '';
       })
     };
