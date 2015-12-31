@@ -74,6 +74,25 @@ public class WeDayController {
     @Autowired
     CalendarEventRepository events;
 
+    @RequestMapping(path = "/story", method = RequestMethod.POST)
+    public Post story (@RequestBody Params param, HttpSession session, String storyContent) {
+        Wedding wedding = weddings.findOne(param.weddingId);
+        storyContent = "storyContent";
+        Post post =  new Post();
+        post.text = storyContent;
+        post.id = param.weddingId;
+        posts.save(post);
+
+        return post;
+    }
+
+
+    @RequestMapping(path = "/story/{id}", method = RequestMethod.GET)
+    public Post story (@PathVariable("id") Integer id) {
+        Wedding wed = weddings.findOne(id);
+        return posts.findOneByWedding(wed);
+    }
+
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
@@ -141,7 +160,9 @@ public class WeDayController {
 
     @RequestMapping(path = "/photos/{id}", method = RequestMethod.GET)
     public List<Photo> photoList(@PathVariable("id") int id) {
-        return photos.findByWedding(weddings.findOne(id));
+        Wedding one = weddings.findOne(id);
+        List<Photo> all = photos.findByWedding(one);
+        return all;
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)

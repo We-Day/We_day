@@ -37,6 +37,9 @@ public class Wedding {
     @OneToMany
     public List<Photo> photos;
 
+    @OneToOne
+    Post post;
+
 
     public Wedding() {
     }
