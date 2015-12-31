@@ -208,10 +208,10 @@ body, html, main {
 
 .cd-fixed-bg.cd-bg-1 {
   margin-top: 3%;
-  background-image: url("http://nathandesch.com/wp-content/uploads/2014/11/07-7939-post/Doylestown-weddiphotography-18-of-66.jpg");
+  background-image: url("../../gif/first.jpg");
 }
 .cd-fixed-bg.cd-bg-2 {
-  background-image: url("https://weminoredinfilm.files.wordpress.com/2013/06/will-ferrell-in-weddicrashers-will-ferrell-18126324-1280-720.jpg");
+  background-image: url("../../gif/crasher.jpg");
 }
 .cd-fixed-bg.cd-bg-3 {
   background-image: url("http://charleston-wedding-packages.com/images/angel-oak-2.jpg");
@@ -530,6 +530,19 @@ uib-slide img{
 	}
 }
 }
+.loading-icon-container{
+  h1{font-size: 100px;
+    opacity: .5;
+    position:absolute;
+    left:40%;
+    top: 170px;
+  }
+  .loading-icon{
+    margin-left: 50%;
+    margin-top: 200px;
+  }
+}
+
 // calendar
 
 .main-calendar{
@@ -556,7 +569,7 @@ uib-slide img{
 		visibility:hidden;
 	}
 
-  }
+
 	&:hover{
 		margin-bottom: 200px;
 		.other-text-calendar{
@@ -630,7 +643,7 @@ uib-slide img{
 		width: 30%;
     margin-left: 20%;
 	}
-		width: 50px;ser
+		width: 50px;
 		padding: 2%;
 		height: 100%;
 		border-right: solid #DADADA 1px;
@@ -755,7 +768,7 @@ background-color: rgb(192, 192, 192);
 		border-right: 1500px solid transparent;
 	}
 	.bottom-horizontal-bar{
-		position: absolute;
+		position: relative;
 		bottom: 0;
 		width: 100%;
 		height: 0;
@@ -765,7 +778,7 @@ background-color: rgb(192, 192, 192);
 .landing-page-create-wedding{
 	width: 50%;
 	margin: auto;
-	border: solid #c9c9c9 3px;
+	border: solid #c9c9c9 15px;
 	padding: 5%;
 	text-align: center;
 	a{
@@ -775,7 +788,7 @@ background-color: rgb(192, 192, 192);
 		font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 		font-style: normal;
 		font-variant: normal;
-		font-weight: 500;
+		font-weight: 800;
 		line-height: 26.4px;
 	}
 	&:hover{

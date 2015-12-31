@@ -1,17 +1,21 @@
 
-<div class="landing-page-container container">
+<div ng-hide = "loading"class="landing-page-container container">
   <span class = "top-horizontal-bar"></span>
   <div class="landing-page">
     <div class="landing-page-options" ng-repeat = "item in weddings">
       <div class="wedding-option-link">
-        <a href="#/admins/{{item.id}}">{{item.weddingName}}</a>
+        <a ng-click = "loading = true"href="#/admins/{{item.id}}">{{item.weddingName}}</a>
       </div>
     </div>
   </div>
   <div class="landing-page-create-wedding" >
     <div class="landing-create-wedding-link">
-      <a href="#/create-weddings">Create A New Wedding</a>
+      <a ng-click = "loading = true"href="#/create-weddings">Create A New Wedding</a>
     </div>
   </div>
   <span class = "bottom-horizontal-bar"></span>
+</div>
+<div ng-show = "loading"class="container-fluid loading-icon-container">
+  <h1>We-Day</h1>
+  <img class = "loading-icon" src="../gif/ajax-loader.gif" alt="" />
 </div>

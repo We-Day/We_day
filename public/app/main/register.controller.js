@@ -25,10 +25,11 @@ angular
     }
     $scope.getUsers = function(){
       RegisterService.getAllUsers().success(function(res){
-        user = res;
-        console.log(el);
+        users = res;
+        console.log('all users',res)
       })
     };
+    $scope.getUsers();
     var continueBool = false;
     $scope.canContinue = function(){
       return continueBool === true ? 2 : 1

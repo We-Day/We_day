@@ -3,6 +3,10 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService,$location,$routeParams){
+    $scope.loading = true;
+    setTimeout(function () {
+      $scope.loading = false;
+    }, 300);
     $scope.logOut = function(){
       AdminService.logOut().success(function(res){
         $location.path('/');
