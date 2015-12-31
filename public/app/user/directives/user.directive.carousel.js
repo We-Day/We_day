@@ -5,8 +5,7 @@
     .directive('userCarousel', function () {
       return {
         restrict: 'EA',
-        transclude: true,
-        templateUrl: 'app/user/views/user.carousel.directive.html',
+        templateUrl: 'app/user/views/user.carousel.html',
         link: function (scope, element, attributes) {
 
 

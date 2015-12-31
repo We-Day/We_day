@@ -43,13 +43,14 @@ angular
 
     //check if passwords the same
     $scope.passwordsAreSame = true;
-
+    $scope.loading = false;
     $scope.addNewWedding = function(){
       var wedding = {
         weddingName:$scope.weddingName,
         location:$scope.location,
         date: $scope.date
       }
+      $scope.loading = true;
       CreateWeddingService.addNewWedding(wedding).success(function(res){
         console.log(res,'create-wedding/');
         $location.path('/landingPage');

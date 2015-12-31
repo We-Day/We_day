@@ -12,7 +12,7 @@
 </div>
 </div>
 </nav>
-<div class="non-nav-wrapper">
+<div ng-hide = "loading" class="non-nav-wrapper">
 
 
 <div ng-init = "hidden = false"ng-class="{'slide-out':hidden,'slide-in':!hidden}" class="col-md-2 nav-column nav-column-user-admin">
@@ -52,6 +52,10 @@
     </timeline-event>
   </timeline>
   <user-guests ng-show = "isCurrentIndex(2)"></user-guests>
-  <admin-carousel ng-show = "isCurrentIndex(4)"></admin-carousel>
+  <user-carousel ng-show = "isCurrentIndex(4)"></user-carousel>
 </div>
+</div>
+<div ng-show = "loading"class="container-fluid loading-icon-container">
+  <h1>We-Day</h1>
+  <img class = "loading-icon" src="../gif/ajax-loader.gif" alt="" />
 </div>

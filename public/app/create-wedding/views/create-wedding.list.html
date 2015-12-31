@@ -1,4 +1,4 @@
-<div class="wrapper-create-wedding">
+<div ng-hide = "loading"class="wrapper-create-wedding">
 
   <div class="create-wedding-form-wrapper" id = "top-of-page">
     <!---create new wedding-->
@@ -55,7 +55,6 @@
 </form>
   </div>
 
-
 <!---create new admin-->
 
 
@@ -87,4 +86,8 @@
       <button ng-click = 'setCurrentIndex(3)' class = " button-add-invitees btn btn-lg">Continue</button>
   </div>
   </div>
+</div>
+<div ng-show = "loading"class="container-fluid loading-icon-container">
+  <h1>We-Day</h1>
+  <img class = "loading-icon" src="../gif/ajax-loader.gif" alt="" />
 </div>
