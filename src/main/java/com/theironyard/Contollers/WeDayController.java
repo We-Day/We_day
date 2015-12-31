@@ -75,22 +75,22 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/story", method = RequestMethod.POST)
-    public Post story (@RequestBody Params param, HttpSession session, String storyContent) {
+    public Wedding story (@RequestBody Params param, HttpSession session) {
         Wedding wedding = weddings.findOne(param.weddingId);
-        storyContent = "storyContent";
-        Post post =  new Post();
-        post.text = storyContent;
-        post.id = param.weddingId;
-        posts.save(post);
-
-        return post;
+//        Post post = new Post();
+//        post.text = param.storyContent.replace("<p>", "").replace("</p>", "");
+//        post.wedding = wedding;
+//        posts.save(post);
+        wedding.storyContent = param.storyContent.replace("<p>", "").replace("</p>", "");
+        weddings.save(wedding);
+        return wedding;
     }
 
 
     @RequestMapping(path = "/story/{id}", method = RequestMethod.GET)
-    public Post story (@PathVariable("id") Integer id) {
-        Wedding wed = weddings.findOne(id);
-        return posts.findOneByWedding(wed);
+    public Wedding story (@PathVariable("id") Integer id) {
+        return weddings.findOne(id);
+//        return posts.findOneByWedding(wed);
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
@@ -293,6 +293,9 @@ public class WeDayController {
                 sendNotificationEmail(notificationEmail, session);
             }
         }
+
+
+
 
     @RequestMapping("/create-post")
     public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {
