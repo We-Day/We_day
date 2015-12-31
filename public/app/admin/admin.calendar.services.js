@@ -30,7 +30,7 @@
         return object;
       }
       var getDates = function(item){
-        return $http.get(dateUrl);
+        return $http.get(dateUrl+'/'+$routeParams.weddingId);
       };
       var addDate = function(item){
         // console.log('add Date item', item)
