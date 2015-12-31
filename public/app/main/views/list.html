@@ -1,3 +1,6 @@
+<div class = "ng-cloak">
+
+
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
 <div class="navbar-header">
@@ -11,11 +14,10 @@
 </div>
 </div>
 </nav>
-
 <!-- place to put sign-up page -->
-<register-form ng-show = 'isCurrentView(1)'></register-form>
+<register-form class = 'ng-hide'ng-cloak = ''ng-show = 'isCurrentView(1)'></register-form>
 <!-- all other content for front page -->
-<login-form ng-show = 'isCurrentView(2)'></login-form>
+<login-form class = 'ng-hide'ng-cloak ='' ng-show = 'isCurrentView(2)'></login-form>
 
 <div ng-show = "isCurrentView(0)">
 
@@ -23,9 +25,9 @@
 <section>
 	<div class="cd-fixed-bg cd-bg-1">
 		<h1>We-Day</h1>
-    <p>
-      <a>Create New Wedding</a>
-    </p>
+    <!-- <p>
+      <a>We-Day</a>
+    </p> -->
     <!-- <a href ="#/create-weddings"id = "slider" >
       <span class = "glyphicon glyphicon-arrow-right">
       </span>
@@ -89,5 +91,6 @@
 		</div>
 	</div>
 </section>
+</div>
 </div>
 </div>

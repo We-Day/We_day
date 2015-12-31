@@ -4,7 +4,7 @@
 "use strict"
 angular
   .module('admin')
-  .controller('CalendarController',function($scope,CalendarService,$compile,uiCalendarConfig,$window){
+  .controller('CalendarController',function($scope,$routeParams,CalendarService,$compile,uiCalendarConfig,$window){
 
     //reload route
     $scope.reloadRoute = function() {
@@ -189,6 +189,7 @@ angular
     /* add custom event*/
     $scope.addEvent = function() {
       var newEvent = {
+        weddingId:$routeParams.weddingId,
         title: 'Open Sesame',
         start: new Date(y, m, 22,5,10),
         end: new Date(y, m, 22,6,15),
