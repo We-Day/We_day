@@ -2,7 +2,7 @@
 "use strict"
 angular
   .module('admin')
-  .controller('StoryController',function($scope,StoryService){
+  .controller('StoryController',function($scope,StoryService,$routeParams){
     var currentId = '';
     StoryService.getStory().success(function(res){
       console.log('res',res[0].storyContent.length);
@@ -15,9 +15,10 @@ angular
     $scope.postStory = function(story){
       var storyContent = {
         storyContent: story,
+        weddingId:$routeParams.weddingId
       }
       if(currentId.length != 0){
-        $scope.editStory(storyContent,currentId);
+        $scope.editStory(storyContent);
       }else{
       StoryService.postStory(storyContent).success(function(res){
         console.log(res,'response post');
@@ -25,9 +26,8 @@ angular
       })
     };
     };
-    $scope.editStory = function(story,id){
-      $scope.story = story;
-      StoryService.editStory(story,id).success(function(){
+    $scope.editStory = function(storyContent){
+      StoryService.editStory(storyContent).success(function(){
         console.log('story edited');
       })
     }

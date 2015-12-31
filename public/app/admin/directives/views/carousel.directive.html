@@ -1,5 +1,5 @@
 <div class="carousel-wrapper-div">
-  <span ng-class = "red" ng-init = "slideUp = false"ng-click = "slideUp = !slideUp;console(slideUp)"class = "glyphicon glyphicon-upload"></span>
+  <span ng-class = "{'red':true}" ng-init = "slideUp = true"ng-click = "slideUp = !slideUp;console(slideUp)"class = "glyphicon glyphicon-upload"></span>
   <div>
     <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
       <uib-slide ng-repeat="slide in slides" active="slide.active">
@@ -7,7 +7,7 @@
       </uib-slide>
     </uib-carousel>
   </div>
-  <div class="upload-photo-form-div container-fluid">
+  <div ng-class = "{'slide-up':slideUp,'slide-down':!slideUp}"class="upload-photo-form-div container-fluid">
     <form class="photo-upload-admin" enctype= "multipart/form-data" action="/photo-upload" method="post">
   <span class = "btn btn-default btn-file">
     <input type="file" name="pic" accept="image/*">
@@ -18,4 +18,3 @@
   </form>
   </div>
 </div>
-<!-- ng-class = "{'slide-up':slideUp，'slide-down':!slideUp}" -->

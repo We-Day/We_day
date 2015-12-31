@@ -2,7 +2,7 @@
 <div class="navbar-header">
   <a class="navbar-brand" href="#/">We-Day</a>
   <a class = "hamburger"ng-click = "hidden = !hidden"><span class = "glyphicon glyphicon-menu-hamburger"></span></a>
-  <a ng-show = "viewInvitee"class= "navbar-brand invitee-name">{{lastInvitee}} was invited</a>
+  <a ng-class = "{'cOpacity':viewInvitee}"class= "invitee-name">{{lastInvitee}} was invited</a>
 </div>
 <div>
   <ul class="nav navbar-nav navbar-right">

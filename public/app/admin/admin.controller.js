@@ -46,8 +46,12 @@ $scope.viewInvitee = false;
     }
     $scope.guests.push(currObject);
     AdminService.inviteUser(currObject).success(function(res){
-      $scope.lastInvitee = res.username;
+      console.log(res,'inviteed USer');
+      $scope.lastInvitee = currObject.username;
       $scope.viewInvitee = true;
+      setTimeout(function () {
+        $scope.viewInvitee = false;
+      }, 500);
     })
   }
 //carousel
