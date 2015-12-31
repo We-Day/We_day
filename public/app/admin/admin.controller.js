@@ -3,6 +3,9 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService,$location,$routeParams){
+    $scope.console = function(el){
+      console.log(el);
+    }
     $scope.loading = true;
     setTimeout(function () {
       $scope.loading = false;
@@ -65,7 +68,7 @@ $scope.weddingId = $routeParams.weddingId;
   }
   $scope.getPhotoSlides();
 
-    $scope.currentIndex = 6;
+    $scope.currentIndex = 7;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

@@ -19,6 +19,21 @@
         100% { transform: translateX(0%); } }
 @keyframes slideIn { 0% { transform: translateX(-200%); }
         100% { transform: translateX(0%); } }
+
+@-webkit-keyframes slideUp { 0% { transform: translateY(-100%); }
+    100% { transform: translateY(0%); } }
+@-moz-keyframes slideUp { 0% { transform: translateY(-100%); }
+    100% { transform: translateY(0%); } }
+@keyframes slideUp { 0% { transform: translateY(-100%); }
+    100% { transform: translateY(0%); } }
+
+@-webkit-keyframes slideDown { 0% { transform: translateY(0%); }
+  100% { transform: translateY(-100%); } }
+@-moz-keyframes slideDown { 0% { transform: translateY(0%); }
+  100% { transform: translateY(-100%); } }
+@keyframes slideDown { 0% { transform: translateY(0%); }
+    100% { transform: translateY(-100%); } }
+
 @mixin breakpoint($point) {
 
   @if $point == mama-bear {
@@ -31,6 +46,7 @@
 		@media (max-width: 550px)  { @content; }
 	}
 }
+
 .animate-enter {
 	-webkit-transition: 1s linear all; /* Chrome */
 	transition: 1s linear all;
@@ -725,6 +741,7 @@ uib-slide img{
 }
 
 //carousel directive
+
 .carousel-wrapper-div{
   margin-left: 10%;
   @include breakpoint(mama-bear){
@@ -736,7 +753,7 @@ uib-slide img{
 
 
   .carousel{
-    width: 80%;
+    width: 60%;
   }
 
 
@@ -749,12 +766,39 @@ uib-slide img{
 .btn-file input[type='file'] {
 background-color: rgb(192, 192, 192);
 }
+.glyphicon-upload{
 }
-// .photo-upload-admin{
-//   position: absolute;
-//   bottom: -20px;
-// }
+}
+.red{
+  color:red;
+}
 
+.slide-up{
+  -webkit-animation:slideUp ease-in 1;  /* call our keyframe named slideUp, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:slideUp ease-in 1;
+  animation:slideUp ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+.slide-down{
+  -webkit-animation:slideDown ease-in 1;  /* call our keyframe named slideDown, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:slideDown ease-in 1;
+  animation:slideDown ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
 //landing page
 .landing-page-container{
 	width: 100%;
