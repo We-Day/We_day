@@ -108,7 +108,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-guest", method = RequestMethod.POST)
-    public void addInvite(@RequestBody Params param){
+    public void addInvite(@RequestBody Params param, HttpSession session) throws MessagingException {
         Wedding wedding = weddings.findOne(param.weddingId);
         Invite invite = new Invite();
         invite.wedding = wedding;
@@ -116,7 +116,7 @@ public class WeDayController {
         invite.isAdmin = param.isAdmin;
         invite.username = param.username;
         invites.save(invite);
-        // send - email method needs to go here?
+        sendEmail(invite.email, session);
     }
 
     @RequestMapping(path="/display-invites/{id}", method = RequestMethod.GET)
