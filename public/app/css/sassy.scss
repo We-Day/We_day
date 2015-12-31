@@ -20,19 +20,19 @@
 @keyframes slideIn { 0% { transform: translateX(-200%); }
         100% { transform: translateX(0%); } }
 
-@-webkit-keyframes slideUp { 0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); } }
-@-moz-keyframes slideUp { 0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); } }
-@keyframes slideUp { 0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); } }
-
-@-webkit-keyframes slideDown { 0% { transform: translateY(100%); }
-  100% { transform: translateY(-100%); } }
-@-moz-keyframes slideDown { 0% { transform: translateY(100%); }
-  100% { transform: translateY(-100%); } }
-@keyframes slideDown { 0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); } }
+// @-webkit-keyframes slideUp { 0% { transform: translateY(-100%); }
+//     100% { transform: translateY(100%); } }
+// @-moz-keyframes slideUp { 0% { transform: translateY(-100%); }
+//     100% { transform: translateY(100%); } }
+// @keyframes slideUp { 0% { transform: translateY(-100%); }
+//     100% { transform: translateY(100%); } }
+//
+// @-webkit-keyframes slideDown { 0% { transform: translateY(100%); }
+//   100% { transform: translateY(-100%); } }
+// @-moz-keyframes slideDown { 0% { transform: translateY(100%); }
+//   100% { transform: translateY(-100%); } }
+// @keyframes slideDown { 0% { transform: translateY(100%); }
+//     100% { transform: translateY(-100%); } }
 
 @mixin breakpoint($point) {
 
