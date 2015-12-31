@@ -33,6 +33,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListResourceBundle;
 import java.util.stream.Collectors;
 
 /**
@@ -208,15 +209,17 @@ public class WeDayController {
     }
 
 
-    @RequestMapping("/create-user")
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public ArrayList<Object> Login(@RequestBody User user)
             throws InvalidKeySpecException, NoSuchAlgorithmException {
         ArrayList<Object> createUser = new ArrayList<>();
         boolean exists;
 
+        List<Invite> allInvites = (List) invites.findAll();
+
         User user1 = users.findOneByEmail(user.email);
 
-        if (user1 == null) {
+        if (allInvites.size() == 0) {
             exists = true;
             user.password = PasswordHash.createHash(user.password);
             user.isAdmin = true;
@@ -224,15 +227,45 @@ public class WeDayController {
             createUser.add(user);
             createUser.add(exists);
             return createUser;
-
-        } else if (user1 != null) {
-            exists = false;
-            createUser.add(user);
-            createUser.add(exists);
-            return createUser;
         }
-        return null;
-    }
+
+        if (!allInvites.isEmpty()) {
+            for (Invite invite : allInvites) {
+                String inviteEmail = invite.email;
+                if (user.email.equals(inviteEmail)) {
+                    User transferUser = new User();
+                    transferUser.isAdmin = invite.isAdmin;
+                    transferUser.username = invite.username;
+                    transferUser.phone = user.phone;
+                    transferUser.email = invite.email;
+                    transferUser.password = PasswordHash.createHash(user.password);
+                    transferUser.wedding = invite.wedding;
+                    users.save(transferUser);
+                    createUser.add(transferUser);
+                    exists = true;
+                    createUser.add(exists);
+                    //invites.delete(invite);
+                    return createUser;
+                }
+            }
+                 if (user1 == null) {
+                    exists = true;
+                    user.password = PasswordHash.createHash(user.password);
+                    user.isAdmin = true;
+                    users.save(user);
+                    createUser.add(user);
+                    createUser.add(exists);
+                    return createUser;
+
+                } else if (user1 != null) {
+                    exists = true;
+                    createUser.add(user);
+                    createUser.add(exists);
+                    return createUser;
+                }
+            }
+            return null;
+        }
 
     @RequestMapping("/current-user")
     public User currentUser(HttpSession session){
@@ -257,7 +290,7 @@ public class WeDayController {
     public void sendNotification( @RequestBody Params params, HttpSession session) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         ArrayList <String> emails = new ArrayList<>();
-        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.weddingId));
+        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.wedId));
         for (User user : weddingUsers) {
             String phone = user.phone;
             String email = user.email;
