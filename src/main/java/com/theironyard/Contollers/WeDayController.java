@@ -367,7 +367,7 @@ public class WeDayController {
         mailSender.send(mimeMessage);
     }
 
-    public static void sendNotificationEmail(String notificationDestination, HttpSession session) throws MessagingException {
+    public static void sendNotificationEmail(@RequestBody Params params, String notificationDestination, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(WeDayConfig.class);
         ctx.refresh();
@@ -378,7 +378,7 @@ public class WeDayController {
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
         mailMsg.setTo(notificationDestination);
         mailMsg.setSubject("Wedding Notification");
-        mailMsg.setText("This is a test notification for a wedding!");
+        mailMsg.setText(params.title);
         mailSender.send(mimeMessage);
     }
 }
