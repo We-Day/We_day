@@ -4,13 +4,20 @@ angular
   .module('admin')
   .controller('StoryController',function($scope,StoryService,$routeParams){
     var currentId = '';
+    $scope.isEmpty = true;
+    $scope.htmlVariable = "Tell your story for everyone to see !";
     StoryService.getStory().success(function(res){
-      console.log('res',res[0].storyContent.length);
-      $scope.isEmpty = $scope.storyEmpty(res[0]);
-      $scope.htmlVariable = res[0].storyContent;
+      console.log('storyService',res);
+      $scope.isEmpty = $scope.storyEmpty(res);
+      // $scope.htmlVariable = res[0].storyContent;
     })
     $scope.storyEmpty = function(obj){
-      return obj.storyContent.length < 1 ? true : false
+      if(obj.storyContent.length < 1){
+        $scope.htmlVariable = "Write a story";
+        return true;
+      }else{
+        return false;
+      }
     };
     $scope.postStory = function(story){
       var storyContent = {
