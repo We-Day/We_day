@@ -33,6 +33,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListResourceBundle;
 import java.util.stream.Collectors;
 
 /**
@@ -143,7 +144,7 @@ public class WeDayController {
         return invites.findByWeddingId(Integer.valueOf(id));
     }
 
-    @RequestMapping(path = "/delete-invite{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete-invite/{id}", method = RequestMethod.POST)
     public void deleteInvite(@PathVariable("id") int id){
         Invite invite = invites.findOne(Integer.valueOf(id));
         invites.delete(invite);
@@ -207,37 +208,17 @@ public class WeDayController {
             return null;
         }
 
-    @RequestMapping ("/join-wedding")
-    public List <Wedding> joinWeddings(String email, String password, String phone) throws Exception {
-        Invite invite = invites.findOneByEmail(email);
-
-        if (invite == null){
-            throw new Exception("No Guest Found by that Email");
-        }
-
-        if (invite != null) {
-            User user = new User();
-            user.isAdmin = invite.isAdmin;
-            user.username = invite.username;
-            user.phone = phone;
-            user.email = invite.email;
-            user.password = PasswordHash.createHash(password);
-            users.save(user);
-            invites.delete(invite);
-        }
-        return weddings.findById(invite.wedding.id);
-    }
-
-
-    @RequestMapping("/create-user")
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public ArrayList<Object> Login(@RequestBody User user)
             throws InvalidKeySpecException, NoSuchAlgorithmException {
         ArrayList<Object> createUser = new ArrayList<>();
         boolean exists;
 
+        List<Invite> allInvites = (List) invites.findAll();
+
         User user1 = users.findOneByEmail(user.email);
 
-        if (user1 == null) {
+        if (allInvites.size() == 0) {
             exists = true;
             user.password = PasswordHash.createHash(user.password);
             user.isAdmin = true;
@@ -245,15 +226,45 @@ public class WeDayController {
             createUser.add(user);
             createUser.add(exists);
             return createUser;
-
-        } else if (user1 != null) {
-            exists = false;
-            createUser.add(user);
-            createUser.add(exists);
-            return createUser;
         }
-        return null;
-    }
+
+        if (!allInvites.isEmpty()) {
+            for (Invite invite : allInvites) {
+                String inviteEmail = invite.email;
+                if (user.email.equals(inviteEmail)) {
+                    User transferUser = new User();
+                    transferUser.isAdmin = invite.isAdmin;
+                    transferUser.username = invite.username;
+                    transferUser.phone = user.phone;
+                    transferUser.email = invite.email;
+                    transferUser.password = PasswordHash.createHash(user.password);
+                    transferUser.wedding = invite.wedding;
+                    users.save(transferUser);
+                    createUser.add(transferUser);
+                    exists = true;
+                    createUser.add(exists);
+                    //invites.delete(invite);
+                    return createUser;
+                }
+            }
+                 if (user1 == null) {
+                    exists = true;
+                    user.password = PasswordHash.createHash(user.password);
+                    user.isAdmin = true;
+                    users.save(user);
+                    createUser.add(user);
+                    createUser.add(exists);
+                    return createUser;
+
+                } else if (user1 != null) {
+                    exists = true;
+                    createUser.add(user);
+                    createUser.add(exists);
+                    return createUser;
+                }
+            }
+            return null;
+        }
 
     @RequestMapping("/current-user")
     public User currentUser(HttpSession session){
@@ -290,12 +301,9 @@ public class WeDayController {
                 sendText(phoneDestination, params.title);
             }
         for (String notificationEmail : emails) {
-                sendNotificationEmail(notificationEmail, params.title, session);
+                sendNotificationEmail(notificationEmail,params.title, session);
             }
         }
-
-
-
 
     @RequestMapping("/create-post")
     public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {
@@ -307,10 +315,16 @@ public class WeDayController {
         return posts.findAll();
     }
 
-    @RequestMapping(path = "/create-event", method = RequestMethod.POST)
-    public void createEvent(@RequestBody CalendarEvent event){
+    @RequestMapping(path = "/create-event/{id}", method = RequestMethod.POST)
+    public void createEvent(@RequestBody CalendarEvent event, @PathVariable("id") int id){
+        event.wedding = weddings.findOne(id);
         events.save(event);
     }
+
+    @RequestMapping(path = "/display-events/{id}", method = RequestMethod.GET)
+        public List <CalendarEvent> displayEvents(@PathVariable("id") int id){
+            return events.findByWeddingId(id);
+        }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
     public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description, String userId) throws IOException {
@@ -321,6 +335,7 @@ public class WeDayController {
         Photo p = new Photo();
         p.fileName = photoFile.getName();
         p.description = description;
+        p.wedding = weddings.findOne(weddingId);
         p.wedding = weddings.findOne(weddingId);
 
         photos.save(p);
@@ -363,11 +378,11 @@ public class WeDayController {
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
         mailMsg.setTo(emailDestination);
         mailMsg.setSubject("You've just been invited to their wedding!");
-        mailMsg.setText("You've been invited to a wedding!");
+        mailMsg.setText("You've been invited to a wedding! Please visit We-Day.com to stay up to date on all your wedding info!");
         mailSender.send(mimeMessage);
     }
 
-    public static void sendNotificationEmail(String notificationDestination,String title, HttpSession session) throws MessagingException {
+    public static void sendNotificationEmail(String notificationDestination, String title, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(WeDayConfig.class);
         ctx.refresh();
