@@ -38,7 +38,9 @@ public class Wedding {
     public List<Photo> photos;
 
     @OneToOne
-    Post post;
+    public Post post;
+
+    public String storyContent;
 
 
     public Wedding() {

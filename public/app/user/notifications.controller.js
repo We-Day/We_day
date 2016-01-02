@@ -6,8 +6,9 @@ angular
     $scope.refresh = function(){
     NotServices.getNot().success(function(res){
       $scope.notifications = res;
-      });
       $scope.notifications.length > 0 ? $scope.areNotifications = true : $scope.areNotifications = false;
+
+      });
     };
     $scope.refresh();
     $scope.formatDate = function(item){

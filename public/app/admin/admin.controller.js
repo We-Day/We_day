@@ -3,21 +3,23 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService,$location,$routeParams){
-    $scope.console = function(el){
-      console.log(el);
-    }
-    $scope.currentUser = "Charles the lane"
+    $scope.slides = [];
+    $scope.slides.splice(0,$scope.slides.length);
+
     $scope.loading = true;
+
     setTimeout(function () {
       $scope.loading = false;
     }, 300);
+
     $scope.logOut = function(){
       AdminService.logOut().success(function(res){
         $location.path('/');
       });
     };
+
   AdminService.getCurrentUser().success(function(res){
-    // $scope.currentUser = res.username;
+    $scope.currentUser = res.username;
     $scope.userId = res.id;
   });
 
@@ -60,9 +62,7 @@ $scope.weddingId = $routeParams.weddingId;
 
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
-    $scope.slides = []
     $scope.getPhotoSlides = function(){
-      $scope.slides.splice(0,$scope.slides.length);
     AdminService.getPhotos().success(function(res){
       for (var i = 0; i < res.length; i++) {
         var currItem = {image:'../pics/'+res[i].fileName};
@@ -87,7 +87,6 @@ $scope.weddingId = $routeParams.weddingId;
       }
     };
 
-//calendar bitch
 
 
   })

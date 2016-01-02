@@ -9,29 +9,7 @@
       var currWedding = '/create-wedding/'+weddingId;
       var editEventUrl = 'edit-event';
       var deleteEventUrl = 'delete-event';
-      // var parseItem = function(item){
-      //   console.log('parsItem',item);
-      //   var object = {
-      //     $$hashKey: item.$$hashKey,
-      //     _id: item._id,
-      //     start: new Date(item.start),
-      //     end: new Date(item.end),
-      //     title: item.title,
-      //     email:{
-      //       bool:item.email.bool,
-      //       time: item.email.time
-      //     },
-      //     text:{
-      //       bool:item.text.bool,
-      //       time: item.text.time
-      //     },
-      //     notification:{
-      //       bool:item.notification.bool,
-      //       time:item.notification.time,
-      //     }
-      //   }
-      //   return object;
-      // }
+
       var getDates = function(item){
         return $http.get(displayEventsUrl+'/'+weddingId);
       };
@@ -41,6 +19,7 @@
         return $http.post(dateUrl+'/'+weddingId,item)
       };
       var editDate = function(item){
+        console.log('item',item)
         return $http.put(editEventUrl+'/'+item._id,item)
       }
 

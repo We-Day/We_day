@@ -70,6 +70,42 @@
   100% {
     transform: translateX(0%); } }
 
+@-webkit-keyframes slideUp {
+  0% {
+    transform: translateY(-100%); }
+  100% {
+    transform: translateY(100%); } }
+
+@-moz-keyframes slideUp {
+  0% {
+    transform: translateY(-100%); }
+  100% {
+    transform: translateY(100%); } }
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(-100%); }
+  100% {
+    transform: translateY(100%); } }
+
+@-webkit-keyframes slideDown {
+  0% {
+    transform: translateY(100%); }
+  100% {
+    transform: translateY(-100%); } }
+
+@-moz-keyframes slideDown {
+  0% {
+    transform: translateY(100%); }
+  100% {
+    transform: translateY(-100%); } }
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(100%); }
+  100% {
+    transform: translateY(-100%); } }
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
@@ -110,7 +146,7 @@ body, html, main {
     text-decoration: none;
     color: white;
     font-size: 20px;
-    margin-top: 8px; }
+    margin-top: 12px; }
     @media (max-width: 550px) {
       .navbar .navbar-header .hamburger {
         float: left; } }
@@ -696,9 +732,9 @@ uib-slide img {
     background-color: silver; }
   .carousel-wrapper-div .upload-photo-form-div {
     transition: 1s linear all;
-    top: 50%;
     position: absolute;
-    top: 90%;
+    left: 35%;
+    top: 60%;
     height: 200px; }
 
 .slide-up {
