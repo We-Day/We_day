@@ -88,14 +88,14 @@ public class WeDayController {
     }
 
 
-    @RequestMapping(path = "/story}", method = RequestMethod.GET)
+    @RequestMapping(path = "/story/{id}", method = RequestMethod.GET)
     public String story (@PathVariable("id") Integer id) {
         Wedding wedding = weddings.findOne(id);
         return wedding.storyContent;
   //      return posts.findOneByWedding();
     }
 
-    @RequestMapping(path ="/story", method = RequestMethod.PATCH)
+    @RequestMapping(path ="/story", method = RequestMethod.PUT)
     public String story (@RequestBody Params params, @PathVariable("id") Integer id) {
         Wedding wedding = weddings.findOne(id);
         if (params.storyContent != null) {
