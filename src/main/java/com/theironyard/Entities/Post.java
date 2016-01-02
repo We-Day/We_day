@@ -12,12 +12,6 @@ public class Post {
     @GeneratedValue
     public int id;
 
-    @Column (nullable = false)
-    public String text;
-
-    @OneToOne
-    Wedding wedding;
-
     public String getText() {
         return text;
     }
@@ -25,5 +19,12 @@ public class Post {
     public void setText(String text) {
         this.text = text;
     }
+
+    @Column
+    public String text;
+
+    @OneToOne
+    public Wedding wedding;
+
 
 }

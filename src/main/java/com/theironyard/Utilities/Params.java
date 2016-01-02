@@ -1,8 +1,6 @@
 package com.theironyard.Utilities;
 
-import com.theironyard.Entities.Invite;
-import com.theironyard.Entities.User;
-import com.theironyard.Entities.Wedding;
+import com.theironyard.Entities.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -12,6 +10,14 @@ public class Params {
     public User user;
 
     public Wedding wedding;
+
+    public Post post;
+
+    public Photo photo;
+
+    public Invite invite;
+
+    public CalendarEvent calendarEvent;
 
     public String email;
 
@@ -28,4 +34,6 @@ public class Params {
     public String title;
 
     public String wedId;
+
+    public String storyContent;
 }
