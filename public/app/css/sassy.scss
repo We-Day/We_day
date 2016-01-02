@@ -114,16 +114,10 @@ body, html, main {
       }
 				@include breakpoint(tiny-bear){
 					float: left;
-					width:80%;
-					margin-left:30%;
+					width:100%;
+          text-align:center;
 		  		}
 		padding-right: 2%;
-		.glyphicon-user-li{
-			@include breakpoint(tiny-bear){
-				float: left;
-				margin-left: -15%;
-	  		}
-		}
 	}
 
 
@@ -322,14 +316,12 @@ body, html, main {
 .individual-guests{
 					@include breakpoint(mama-bear){
 						position: absolute;
-						margin-top:10%;
 						padding-top:40px;
 					}
 					@include breakpoint(tiny-bear){
             position:absolute;
             margin-left:20%;
 					margin-top: 100px;}
-	margin-top: 10%;
 	padding-left: 10%;
 	height: 100%;
 	button{
@@ -400,12 +392,11 @@ body, html, main {
 .user-admin-directives{
   transition: all 2s ease;
 	margin-left: 10%;
-	margin-top: 5%;
 }
 .non-nav-wrapper{
-  margin-top: 5px;
+  margin-top: 55px;
   @include breakpoint(baby-bear){
-    margin-top:150px;
+    margin-top:160px;
   }
 }
 
@@ -419,7 +410,7 @@ body, html, main {
 	margin-top: 50px;
 	position: absolute;
 	.nav-tabs {
-	margin-top: 20%;
+	margin-top: 20px;
   float: left;
   border-bottom: 0;
   li {
@@ -672,12 +663,14 @@ uib-slide img{
 		display: inline;
 		border-bottom: solid #DADADA 1px;
 		width: 30%;
-    margin-left: 20%;
+    margin-left: 25%;
 	}
 		width: 50px;
+    margin-left:10px;
 		padding: 2%;
 		height: 100%;
 		border-right: solid #DADADA 1px;
+    margin-right:20px;
 		border-radius: 100px;
 		.form-group{
 			display: block;
@@ -758,17 +751,31 @@ uib-slide img{
 //carousel directive
 
 .carousel-wrapper-div{
-  width: 40%;
+  width: 80%;
+  height: 600px;
   margin: auto;
   @include breakpoint(mama-bear){
-    margin-top: 150px;
+    // margin-top: 150px;
 }
   @include breakpoint(tiny-bear){
     margin-left:50px;
 }
+.upload-div{
+  top: 20px;
+  left: 40%;
+  margin-bottom: 5px;
+  text-align: center;
+  .glyphicon-upload{
+    font-size: 2em;
+  }
+  .upload-photos-p{
+    font-size: 3em;
+  }
+}
 
 
   .carousel{
+    margin-top:50px;
     width: 100%;
   }
 
@@ -782,10 +789,7 @@ uib-slide img{
 .btn-file input[type='file'] {
 background-color: rgb(192, 192, 192);
 }
-.glyphicon-upload{
-  font-size: 2em;
-  margin-left: 50%;
-}
+
 .upload-photo-form-div{
   transition: 1s linear all;
   top: 50%;

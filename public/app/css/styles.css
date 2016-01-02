@@ -133,12 +133,8 @@ body, html, main {
   @media (max-width: 550px) {
     .navbar-right {
       float: left;
-      width: 80%;
-      margin-left: 30%; } }
-  @media (max-width: 550px) {
-    .navbar-right .glyphicon-user-li {
-      float: left;
-      margin-left: -15%; } }
+      width: 100%;
+      text-align: center; } }
 
 .navbar-brand {
   opacity: 0;
@@ -305,13 +301,11 @@ body, html, main {
     width: 100%; }
 
 .individual-guests {
-  margin-top: 10%;
   padding-left: 10%;
   height: 100%; }
   @media (max-width: 1000px) {
     .individual-guests {
       position: absolute;
-      margin-top: 10%;
       padding-top: 40px; } }
   @media (max-width: 550px) {
     .individual-guests {
@@ -382,14 +376,13 @@ body, html, main {
 
 .user-admin-directives {
   transition: all 2s ease;
-  margin-left: 10%;
-  margin-top: 5%; }
+  margin-left: 10%; }
 
 .non-nav-wrapper {
-  margin-top: 5px; }
+  margin-top: 55px; }
   @media (max-width: 770px) {
     .non-nav-wrapper {
-      margin-top: 150px; } }
+      margin-top: 160px; } }
 
 .nav-column {
   border-right: ridge #9fa8a3 5px;
@@ -401,7 +394,7 @@ body, html, main {
     .nav-column {
       border-right: solid white 0px; } }
   .nav-column .nav-tabs {
-    margin-top: 20%;
+    margin-top: 20px;
     float: left;
     border-bottom: 0; }
     .nav-column .nav-tabs li {
@@ -602,16 +595,18 @@ uib-slide img {
         width: 8em; } }
   .form-group-notifications .checkboxes-notifications {
     width: 50px;
+    margin-left: 10px;
     padding: 2%;
     height: 100%;
     border-right: solid #DADADA 1px;
+    margin-right: 20px;
     border-radius: 100px; }
     @media (max-width: 770px) {
       .form-group-notifications .checkboxes-notifications {
         display: inline;
         border-bottom: solid #DADADA 1px;
         width: 30%;
-        margin-left: 20%; } }
+        margin-left: 25%; } }
     .form-group-notifications .checkboxes-notifications .form-group {
       display: block; }
       @media (max-width: 770px) {
@@ -675,15 +670,23 @@ uib-slide img {
   width: 100%; }
 
 .carousel-wrapper-div {
-  width: 40%;
+  width: 80%;
+  height: 600px;
   margin: auto; }
-  @media (max-width: 1000px) {
-    .carousel-wrapper-div {
-      margin-top: 150px; } }
   @media (max-width: 550px) {
     .carousel-wrapper-div {
       margin-left: 50px; } }
+  .carousel-wrapper-div .upload-div {
+    top: 20px;
+    left: 40%;
+    margin-bottom: 5px;
+    text-align: center; }
+    .carousel-wrapper-div .upload-div .glyphicon-upload {
+      font-size: 2em; }
+    .carousel-wrapper-div .upload-div .upload-photos-p {
+      font-size: 3em; }
   .carousel-wrapper-div .carousel {
+    margin-top: 50px;
     width: 100%; }
   .carousel-wrapper-div .btn-file {
     position: relative;
@@ -691,9 +694,6 @@ uib-slide img {
     background-color: silver; }
   .carousel-wrapper-div .btn-file input[type='file'] {
     background-color: silver; }
-  .carousel-wrapper-div .glyphicon-upload {
-    font-size: 2em;
-    margin-left: 50%; }
   .carousel-wrapper-div .upload-photo-form-div {
     transition: 1s linear all;
     top: 50%;

@@ -6,6 +6,7 @@ angular
     $scope.console = function(el){
       console.log(el);
     }
+    $scope.currentUser = "Charles the lane"
     $scope.loading = true;
     setTimeout(function () {
       $scope.loading = false;
@@ -16,7 +17,7 @@ angular
       });
     };
   AdminService.getCurrentUser().success(function(res){
-    $scope.currentUser = res.username;
+    // $scope.currentUser = res.username;
     $scope.userId = res.id;
   });
 
@@ -68,10 +69,10 @@ $scope.weddingId = $routeParams.weddingId;
         $scope.slides.push(currItem);
       }
       console.log(res,'photos in file');
+      $scope.slides.length > 0 ? $scope.photosExist = true: $scope.photosExist = false;
     })
   }
   $scope.getPhotoSlides();
-
     $scope.currentIndex = 7;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
