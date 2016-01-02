@@ -278,7 +278,7 @@ public class WeDayController {
     public void sendNotification( @RequestBody Params params, HttpSession session) throws TwilioRestException, MessagingException {
         ArrayList <String> numbers = new ArrayList<>();
         ArrayList <String> emails = new ArrayList<>();
-        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.weddingId));
+        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.wedId));
         for (User user : weddingUsers) {
             String phone = user.phone;
             String email = user.email;
@@ -290,7 +290,7 @@ public class WeDayController {
                 sendText(phoneDestination, params.title);
             }
         for (String notificationEmail : emails) {
-                sendNotificationEmail(notificationEmail, session);
+                sendNotificationEmail(notificationEmail, params.title, session);
             }
         }
 
@@ -367,7 +367,7 @@ public class WeDayController {
         mailSender.send(mimeMessage);
     }
 
-    public static void sendNotificationEmail(@RequestBody Params params, String notificationDestination, HttpSession session) throws MessagingException {
+    public static void sendNotificationEmail(String notificationDestination,String title, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(WeDayConfig.class);
         ctx.refresh();
@@ -378,7 +378,7 @@ public class WeDayController {
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
         mailMsg.setTo(notificationDestination);
         mailMsg.setSubject("Wedding Notification");
-        mailMsg.setText(params.title);
+        mailMsg.setText(title);
         mailSender.send(mimeMessage);
     }
 }
