@@ -10,9 +10,7 @@
     <label for="pwd">Password:</label>
     <input ng-model = "passwordLogin" type="password" class="form-control" id="pwd">
   </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-  </div>
-  <p ng-show = "!passwordRight">Problem with login</p>
+
+  <!-- <p ng-show = "!passwordRight">Problem with login</p> -->
   <button ng-click = "loginUser(emailLogin,passwordLogin)" class="btn btn-default">Submit</button>
 </form>
