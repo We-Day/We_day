@@ -15,8 +15,8 @@ public class Post {
     @Column (nullable = false)
     public String text;
 
-    @Column (nullable = false)
-    public String sender;
+    @OneToOne
+    Wedding wedding;
 
     public String getText() {
         return text;
@@ -26,11 +26,4 @@ public class Post {
         this.text = text;
     }
 
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
 }
