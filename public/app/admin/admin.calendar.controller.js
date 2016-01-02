@@ -22,18 +22,18 @@ angular
           start: new Date(newEl.start),
           end: new Date(newEl.end),
           title: newEl.title,
-          // email:{
-          //   bool:newEl.email.bool,
-          //   time: newEl.email.time
-          // },
-          // text:{
-          //   bool:newEl.text.bool,
-          //   time: newEl.text.time
-          // },
-          // notification:{
-          //   bool:newEl.notification.bool,
-          //   time:newEl.notification.time,
-          // }
+          Email:{
+            bool:newEl.email.bool,
+            time: newEl.email.time
+          },
+          Text:{
+            bool:newEl.text.bool,
+            time: newEl.text.time
+          },
+          Notification:{
+            bool:newEl.notification.bool,
+            time:newEl.notification.time,
+          }
         }
       })
       $scope.events = eventArray;
@@ -124,18 +124,18 @@ angular
          start: startDate,
          end: endDate,
          title: event.title,
-        //  email:{
-        //    bool:event.email.bool,
-        //    time: event.email.time
-        //  },
-        //  text:{
-        //    bool:event.text.bool,
-        //    time: event.text.time
-        //  },
-        //  notification:{
-        //    bool:event.notification.bool,
-        //    time:event.notification.time,
-        //  }
+         Email:{
+           bool:event.email.bool,
+           time: event.email.time
+         },
+         Text:{
+           bool:event.text.bool,
+           time: event.text.time
+         },
+         Notification:{
+           bool:event.notification.bool,
+           time:event.notification.time,
+         }
        }
        console.log('currObject',currObject);
        CalendarService.editDate(currObject).success(function(el){
@@ -153,18 +153,18 @@ angular
         start: startDate,
         end: endDate,
         title: event.title,
-        // email:{
-        //   bool:event.email.bool,
-        //   time: event.email.time
-        // },
-        // text:{
-        //   bool:event.text.bool,
-        //   time: event.text.time
-        // },
-        // notification:{
-        //   bool:event.notification.bool,
-        //   time:event.notification.time,
-        // }
+        Email:{
+          bool:event.email.bool,
+          time: event.email.time
+        },
+        Text:{
+          bool:event.text.bool,
+          time: event.text.time
+        },
+        Notification:{
+          bool:event.notification.bool,
+          time:event.notification.time,
+        }
       }
       CalendarService.editDate(currObject).success(function(el){
         console.log('event resize object',el);
@@ -191,18 +191,18 @@ angular
         title: 'Open Sesame',
         start: new Date(y, m, 22,5,10),
         end: new Date(y, m, 22,6,15),
-        // email:{
-        //   bool:false,
-        //   time: "1"
-        // },
-        // text:{
-        //   bool:false,
-        //   time: "30"
-        // },
-        // notification:{
-        //   bool:false,
-        //   time:"30",
-        // }
+        Email:{
+          bool:false,
+          time: "1"
+        },
+        Text:{
+          bool:false,
+          time: "30"
+        },
+        Notification:{
+          bool:false,
+          time:"30",
+        }
       };
 
       CalendarService.addDate(newEvent).success(function(res){

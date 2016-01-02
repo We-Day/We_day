@@ -2,12 +2,12 @@
 <div class="navbar-header">
   <a class="navbar-brand" href="#/">We-Day</a>
   <a class = "hamburger"ng-click = "hidden = !hidden"><span class = "glyphicon glyphicon-menu-hamburger"></span></a>
-
+  <a ng-class = "{'cOpacity':viewInvitee}"class= "invitee-name">{{lastInvitee}} was invited</a>
 </div>
 <div>
   <ul class="nav navbar-nav navbar-right">
-        <li> <a><span class="glyphicon glyphicon-user"></span>Hello,{{currentUserName}} </a></li>
-        <li ng-click = "logOut()"><a><span class="glyphicon glyphicon-log-out"></span> Log-out</a></li>
+        <li class = "glyphicon-user-li"> <a><span class="glyphicon glyphicon-user"></span>Hello, {{currentUser}} </a></li>
+        <li class = "glyphicon-logout-li"ng-click = "logOut()"><a><span class="glyphicon glyphicon-log-out"></span> Log-out</a></li>
       </ul>
 </div>
 </div>

@@ -79,6 +79,7 @@ body, html, main {
   position: fixed;
   width: 100%;
   top: -1%;
+  z-index: 5;
   .navbar-header{
     @include breakpoint(tiny-bear){
       margin-bottom: 10%;
@@ -144,10 +145,11 @@ body, html, main {
     margin-top: 6%;
     opacity: 0;
     float: right;
+    @include breakpoint(baby-bear){
+      float: left;
+    }
     @include breakpoint(tiny-bear){
-    width: 80%;
-    margin-left:20%;
-    margin-bottom: 5%;
+  float:left;
      }
 
 }
@@ -314,7 +316,8 @@ body, html, main {
 
 
 .individual-guests{
-					@include breakpoint(mama-bear){
+  width: 100%;
+  					@include breakpoint(mama-bear){
 						position: absolute;
 						padding-top:40px;
 					}
@@ -324,9 +327,11 @@ body, html, main {
 					margin-top: 100px;}
 	padding-left: 10%;
 	height: 100%;
+  padding-top: 30px;
 	button{
+    float: left;
+    width: 70%;
 		position: absolute;
-		left: 50%;
 		top:2%;
 	}
 }
@@ -796,6 +801,10 @@ background-color: rgb(192, 192, 192);
   left:35%;
   top: 60%;
   height: 200px;
+  @include breakpoint(baby-bear){
+    left: 20%;
+  }
+
 }
 }
 
@@ -900,16 +909,22 @@ background-color: rgb(192, 192, 192);
 }
 }
 .story-directive-container{
+  .our-story-div-button{
+    width: 400px;
+  }
 	.our-story-div,.our-story-div-button{
 			@include breakpoint(mama-bear){
 			}
 			@include breakpoint(tiny-bear){
 		}
-    margin-top: 150px;
+    margin-top: 30px;
 		margin-left: 20%;
-		margin-bottom: 5%;
+		margin-bottom: 100px;
 	}
 	.story-text-editor{
 		margin-left: 5%;
 	}
+  img{
+    max-width: 100%;
+  }
 }
