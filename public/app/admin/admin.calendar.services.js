@@ -19,6 +19,7 @@
         return $http.post(dateUrl+'/'+weddingId,item)
       };
       var editDate = function(item){
+        console.log('item',item)
         return $http.put(editEventUrl+'/'+item._id,item)
       }
 
