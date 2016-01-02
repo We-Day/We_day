@@ -8,8 +8,9 @@ angular
     $scope.htmlVariable = "Tell your story for everyone to see !";
     StoryService.getStory().success(function(res){
       console.log('storyService',res);
+      $scope.htmlVariable = res.storyContent;
       $scope.isEmpty = $scope.storyEmpty(res);
-      // $scope.htmlVariable = res[0].storyContent;
+
     })
     $scope.storyEmpty = function(obj){
       if(obj.storyContent.length < 1){
@@ -24,14 +25,10 @@ angular
         storyContent: story,
         weddingId:$routeParams.weddingId
       }
-      if(currentId.length != 0){
-        $scope.editStory(storyContent);
-      }else{
+
       StoryService.postStory(storyContent).success(function(res){
         console.log(res,'response post');
-        currentId = res._id;
       })
-    };
     };
     $scope.editStory = function(storyContent){
       StoryService.editStory(storyContent).success(function(){

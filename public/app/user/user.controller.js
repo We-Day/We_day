@@ -41,7 +41,7 @@ angular
 
 //story information////////////////////
   UserService.getStory().success(function(res){
-    $scope.htmlVariable = res[0].storyContent;
+    $scope.htmlVariable = res.storyContent;
   });
 //currentUser//////////////////
 UserService.getCurrentUser().success(function(res){

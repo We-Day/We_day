@@ -6,18 +6,19 @@
       var dateUrl = "/display-events";
       var currentUserUrl = "/current-user"
       var guestsUrl = "https://tiny-tiny.herokuapp.com/collections/sweetUser/";
-      var storyUrl = "https://tiny-tiny.herokuapp.com/collections/ourStory";
+      var getInvitees = "/display-invites/"+$routeParams.weddingId;
+      var storyUrl = "/story";
       var getPicsUrl = '/photos/'+$routeParams.weddingId;
       var logOutUrl = "/logout"
       var weddingId = $routeParams.weddingId;
       var getStory = function(){
-        return $http.get(storyUrl);
+        return $http.get(storyUrl+'/'+weddingId);
       };
       var getDates = function(){
         return $http.get(dateUrl+'/'+weddingId);
       };
       var getUsers = function(){
-        return $http.get(guestsUrl)
+        return $http.get(getInvitees)
       };
       var getCurrentUser = function(){
         return $http.get(currentUserUrl);
