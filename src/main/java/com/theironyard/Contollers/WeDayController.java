@@ -78,21 +78,25 @@ public class WeDayController {
     @RequestMapping(path = "/story", method = RequestMethod.POST)
     public Wedding story (@RequestBody Params param, HttpSession session) {
         Wedding wedding = weddings.findOne(param.weddingId);
-//        Post post = new Post();
-//        post.text = param.storyContent.replace("<p>", "").replace("</p>", "");
-//        post.wedding = wedding;
-//        posts.save(post);
-        wedding.storyContent = param.storyContent.replace("<p>", "").replace("</p>", "");
+        wedding.storyContent = param.storyContent;
         weddings.save(wedding);
         return wedding;
     }
 
 
     @RequestMapping(path = "/story/{id}", method = RequestMethod.GET)
-    public String story (@PathVariable("id") Integer id) {
+    public Wedding story (@PathVariable("id") Integer id) {
         Wedding wedding = weddings.findOne(id);
-        return wedding.storyContent;
-  //      return posts.findOneByWedding();
+        return wedding;
+    }
+
+    @RequestMapping(path ="/story", method = RequestMethod.PUT)
+    public Wedding story (@RequestBody Params params, @PathVariable("id") Integer id) {
+        Wedding wedding = weddings.findOne(id);
+        if (params.storyContent != null) {
+            wedding.storyContent = params.storyContent;
+        }
+        return  wedding;
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
