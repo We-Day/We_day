@@ -359,7 +359,7 @@ public class WeDayController {
         p.fileName = photoFile.getName();
         p.description = description;
         p.wedding = weddings.findOne(weddingId);
-        p.wedding = weddings.findOne(weddingId);
+        p.wedding = weddings.findOne(weddingId); // does this need to be in here twice?
 
         photos.save(p);
         User user = users.findOne(Integer.valueOf(userId));
