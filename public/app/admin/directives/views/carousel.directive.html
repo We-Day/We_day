@@ -1,5 +1,10 @@
 <div class="carousel-wrapper-div">
-  <span ng-class = "{'red':true}" ng-init = "slideUp = true"ng-click = "slideUp = !slideUp;console(slideUp)"class = "glyphicon glyphicon-upload"></span>
+  <div class="upload-div">
+    <span ng-class = "{'red':true}" ng-init = "slideUp = true"ng-click = "slideUp = !slideUp;console(slideUp)"class = "glyphicon glyphicon-upload"></span>
+    <p class = "upload-photos-p" ng-hide = "photosExist">
+      Upload photos
+    </p>
+  </div>
   <div>
     <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
       <uib-slide ng-repeat="slide in slides" active="slide.active">
