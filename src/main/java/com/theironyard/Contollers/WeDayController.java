@@ -144,7 +144,7 @@ public class WeDayController {
         return invites.findByWeddingId(Integer.valueOf(id));
     }
 
-    @RequestMapping(path = "/delete-invite{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete-invite/{id}", method = RequestMethod.POST)
     public void deleteInvite(@PathVariable("id") int id){
         Invite invite = invites.findOne(Integer.valueOf(id));
         invites.delete(invite);
@@ -207,28 +207,6 @@ public class WeDayController {
             }
             return null;
         }
-
-    @RequestMapping ("/join-wedding")
-    public List <Wedding> joinWeddings(String email, String password, String phone) throws Exception {
-        Invite invite = invites.findOneByEmail(email);
-
-        if (invite == null){
-            throw new Exception("No Guest Found by that Email");
-        }
-
-        if (invite != null) {
-            User user = new User();
-            user.isAdmin = invite.isAdmin;
-            user.username = invite.username;
-            user.phone = phone;
-            user.email = invite.email;
-            user.password = PasswordHash.createHash(password);
-            users.save(user);
-            invites.delete(invite);
-        }
-        return weddings.findById(invite.wedding.id);
-    }
-
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public ArrayList<Object> Login(@RequestBody User user)
@@ -323,7 +301,7 @@ public class WeDayController {
                 sendText(phoneDestination, params.title);
             }
         for (String notificationEmail : emails) {
-                sendNotificationEmail(notificationEmail, session);
+                sendNotificationEmail(notificationEmail,params.title, session);
             }
         }
 
@@ -337,10 +315,16 @@ public class WeDayController {
         return posts.findAll();
     }
 
-    @RequestMapping(path = "/create-event", method = RequestMethod.POST)
-    public void createEvent(@RequestBody CalendarEvent event){
+    @RequestMapping(path = "/create-event/{id}", method = RequestMethod.POST)
+    public void createEvent(@RequestBody CalendarEvent event, @PathVariable("id") int id){
+        event.wedding = weddings.findOne(id);
         events.save(event);
     }
+
+    @RequestMapping(path = "/display-events/{id}", method = RequestMethod.GET)
+        public List <CalendarEvent> displayEvents(@PathVariable("id") int id){
+            return events.findByWeddingId(id);
+        }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
     public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description, String userId) throws IOException {
@@ -351,6 +335,7 @@ public class WeDayController {
         Photo p = new Photo();
         p.fileName = photoFile.getName();
         p.description = description;
+        p.wedding = weddings.findOne(weddingId);
         p.wedding = weddings.findOne(weddingId);
 
         photos.save(p);
@@ -393,11 +378,11 @@ public class WeDayController {
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
         mailMsg.setTo(emailDestination);
         mailMsg.setSubject("You've just been invited to their wedding!");
-        mailMsg.setText("You've been invited to a wedding!");
+        mailMsg.setText("You've been invited to a wedding! Please visit We-Day.com to stay up to date on all your wedding info!");
         mailSender.send(mimeMessage);
     }
 
-    public static void sendNotificationEmail(String notificationDestination, HttpSession session) throws MessagingException {
+    public static void sendNotificationEmail(String notificationDestination, String title, HttpSession session) throws MessagingException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(WeDayConfig.class);
         ctx.refresh();
@@ -408,7 +393,7 @@ public class WeDayController {
         mailMsg.setReplyTo(String.valueOf(session.getAttribute("email")));
         mailMsg.setTo(notificationDestination);
         mailMsg.setSubject("Wedding Notification");
-        mailMsg.setText("This is a test notification for a wedding!");
+        mailMsg.setText(title);
         mailSender.send(mimeMessage);
     }
 }

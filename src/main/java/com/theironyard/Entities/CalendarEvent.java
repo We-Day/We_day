@@ -24,6 +24,9 @@
         @Column(nullable = false)
         public String title;
 
+        @ManyToOne
+        public Wedding wedding;
+
         public class Email {
             boolean send;
             int time; // hours before sending email
