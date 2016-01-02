@@ -41,11 +41,11 @@
         return $http.post(dateUrl+'/'+weddingId,item)
       };
       var editDate = function(item){
-        return $http.put(dateUrl+'/'+item.id,item)
+        return $http.put(editEventUrl+'/'+item._id,item)
       }
 
       var deleteDate = function(item){
-        return $http.delete(deleteEventUrl +'/'+item.id);
+        return $http.delete(deleteEventUrl +'/'+item._id);
       }
       var getWeddingObject = function(){
         return $http.get(currWedding);

@@ -76,10 +76,10 @@ public class WeDayController {
     CalendarEventRepository events;
 
     @RequestMapping(path = "/story", method = RequestMethod.POST)
-    public Post story (@RequestBody Params param, HttpSession session, String storyContent) {
+    public Post story(@RequestBody Params param, HttpSession session, String storyContent) {
         Wedding wedding = weddings.findOne(param.weddingId);
         storyContent = "storyContent";
-        Post post =  new Post();
+        Post post = new Post();
         post.text = storyContent;
         post.id = param.weddingId;
         posts.save(post);
@@ -89,7 +89,7 @@ public class WeDayController {
 
 
     @RequestMapping(path = "/story/{id}", method = RequestMethod.GET)
-    public Post story (@PathVariable("id") Integer id) {
+    public Post story(@PathVariable("id") Integer id) {
         Wedding wed = weddings.findOne(id);
         return posts.findOneByWedding(wed);
     }
@@ -103,9 +103,9 @@ public class WeDayController {
         if (user == null) {
             throw new Exception("User does not exist");
         }
-        Invite invite =  new Invite();
-        invite.isAdmin= true;
-        invite.wedding= wedding;
+        Invite invite = new Invite();
+        invite.isAdmin = true;
+        invite.wedding = wedding;
         invite.username = user.username;
         invite.email = user.email;
         createInvite(invite, invite.email, session);
@@ -139,13 +139,13 @@ public class WeDayController {
         sendEmail(invite.email, session);
     }
 
-    @RequestMapping(path="/display-invites/{id}", method = RequestMethod.GET)
-    public List <Invite> display(@PathVariable("id") int id){
+    @RequestMapping(path = "/display-invites/{id}", method = RequestMethod.GET)
+    public List<Invite> display(@PathVariable("id") int id) {
         return invites.findByWeddingId(Integer.valueOf(id));
     }
 
-    @RequestMapping(path = "/delete-invite/{id}", method = RequestMethod.POST)
-    public void deleteInvite(@PathVariable("id") int id){
+    @RequestMapping(path = "/delete-invite/{id}", method = RequestMethod.DELETE)
+    public void deleteInvite(@PathVariable("id") int id) {
         Invite invite = invites.findOne(Integer.valueOf(id));
         invites.delete(invite);
     }
@@ -179,8 +179,8 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public ArrayList <Object> userLogin(@RequestBody Params user,HttpSession session,
-                                        HttpServletResponse response) throws Exception {
+    public ArrayList<Object> userLogin(@RequestBody Params user, HttpSession session,
+                                       HttpServletResponse response) throws Exception {
         ArrayList<Object> userLogin = new ArrayList<>();
         boolean isUser;
 
@@ -199,14 +199,14 @@ public class WeDayController {
                 return userLogin;
             }
 
-            } else if (!PasswordHash.validatePassword(user.password, u.password)) {
-                isUser = false;
-                userLogin.add(isUser);
-                userLogin.add(user);
-                return userLogin;
-            }
-            return null;
+        } else if (!PasswordHash.validatePassword(user.password, u.password)) {
+            isUser = false;
+            userLogin.add(isUser);
+            userLogin.add(user);
+            return userLogin;
         }
+        return null;
+    }
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public ArrayList<Object> Login(@RequestBody User user)
@@ -247,28 +247,28 @@ public class WeDayController {
                     return createUser;
                 }
             }
-                 if (user1 == null) {
-                    exists = true;
-                    user.password = PasswordHash.createHash(user.password);
-                    user.isAdmin = true;
-                    users.save(user);
-                    createUser.add(user);
-                    createUser.add(exists);
-                    return createUser;
+            if (user1 == null) {
+                exists = true;
+                user.password = PasswordHash.createHash(user.password);
+                user.isAdmin = true;
+                users.save(user);
+                createUser.add(user);
+                createUser.add(exists);
+                return createUser;
 
-                } else if (user1 != null) {
-                    exists = true;
-                    createUser.add(user);
-                    createUser.add(exists);
-                    return createUser;
-                }
+            } else if (user1 != null) {
+                exists = true;
+                createUser.add(user);
+                createUser.add(exists);
+                return createUser;
             }
-            return null;
         }
+        return null;
+    }
 
     @RequestMapping("/current-user")
-    public User currentUser(HttpSession session){
-        int id = (int)session.getAttribute("id");
+    public User currentUser(HttpSession session) {
+        int id = (int) session.getAttribute("id");
         User user = users.findOne(id);
         user.password = null;
         return user;
@@ -285,11 +285,11 @@ public class WeDayController {
         return null;
     }
 
-    @RequestMapping (path = "/send-notification", method = RequestMethod.POST)
-    public void sendNotification( @RequestBody Params params, HttpSession session) throws TwilioRestException, MessagingException {
-        ArrayList <String> numbers = new ArrayList<>();
-        ArrayList <String> emails = new ArrayList<>();
-        List <User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.wedId));
+    @RequestMapping(path = "/send-notification", method = RequestMethod.POST)
+    public void sendNotification(@RequestBody Params params, HttpSession session) throws TwilioRestException, MessagingException {
+        ArrayList<String> numbers = new ArrayList<>();
+        ArrayList<String> emails = new ArrayList<>();
+        List<User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.wedId));
         for (User user : weddingUsers) {
             String phone = user.phone;
             String email = user.email;
@@ -297,13 +297,13 @@ public class WeDayController {
             emails.add(email);
         }
 
-        for (String phoneDestination : numbers){
-                sendText(phoneDestination, params.title);
-            }
-        for (String notificationEmail : emails) {
-                sendNotificationEmail(notificationEmail,params.title, session);
-            }
+        for (String phoneDestination : numbers) {
+            sendText(phoneDestination, params.title);
         }
+        for (String notificationEmail : emails) {
+            sendNotificationEmail(notificationEmail, params.title, session);
+        }
+    }
 
     @RequestMapping("/create-post")
     public Iterable createPost(@RequestBody Post post, HttpSession session) throws Exception {
@@ -316,15 +316,33 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-event/{id}", method = RequestMethod.POST)
-    public void createEvent(@RequestBody CalendarEvent event, @PathVariable("id") int id){
+    public void createEvent(@RequestBody CalendarEvent event, @PathVariable("id") int id) {
         event.wedding = weddings.findOne(id);
         events.save(event);
     }
 
     @RequestMapping(path = "/display-events/{id}", method = RequestMethod.GET)
-        public List <CalendarEvent> displayEvents(@PathVariable("id") int id){
-            return events.findByWeddingId(id);
-        }
+    public List<CalendarEvent> displayEvents(@PathVariable("id") int id) {
+        return events.findByWeddingId(id);
+    }
+
+    @RequestMapping(path = "delete-event/{id}", method = RequestMethod.DELETE)
+    public void deleteEvent(@PathVariable("id")int id) {
+        CalendarEvent event = events.findOne(id);
+        events.delete(event);
+    }
+
+    @RequestMapping(path = "edit-event/{_id}", method = RequestMethod.PUT)
+    public CalendarEvent editEvent(@RequestBody CalendarEvent event, @PathVariable("_id") int _id) {
+        CalendarEvent oldEvent = events.findOne(_id);
+        oldEvent._id = event._id;
+        oldEvent.end = event.end;
+        oldEvent.start = event.start;
+        oldEvent.title = event.title;
+        oldEvent.wedding = event.wedding;
+        events.delete(oldEvent);
+        return event;
+    }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
     public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description, String userId) throws IOException {
