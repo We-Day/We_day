@@ -18,7 +18,7 @@ angular
     CalendarService.getDates().success(function(el){
       var eventArray = el.map(function(newEl,idx) {
         return {
-          _id: newEl.id,
+          _id: newEl._id,
           start: new Date(newEl.start),
           end: new Date(newEl.end),
           title: newEl.title,
@@ -120,7 +120,7 @@ angular
        console.log(event,'event');
        console.log(event.$$hashKey,'event.$$hashkey')
        var currObject = {
-         _id: event.id,
+         _id: event._id,
          start: startDate,
          end: endDate,
          title: event.title,
@@ -149,7 +149,7 @@ angular
       var endDate = new Date(event.end._d);
       endDate.setHours(endDate.getHours()+5);
       var currObject = {
-        _id: event.id,
+        _id: event._id,
         start: startDate,
         end: endDate,
         title: event.title,

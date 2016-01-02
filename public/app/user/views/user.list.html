@@ -36,7 +36,7 @@
 </div>
 <div ng-class = "{'expand-div':hidden}"class="col-md-10 user-admin-directives">
   <user-story ng-show = "isCurrentIndex(0)"></user-story>
-  <!-- <user-notifications ng-show  = "isCurrentIndex(1)"></user-notifications> -->
+  <user-notifications ng-show = "isCurrentIndex(1)"></user-notifications>
   <!-- <horizontal-timeline ng-show = "isCurrentIndex(3)"></horizontal-time> -->
   <timeline ng-show = 'isCurrentIndex(3)'>
     <timeline-event ng-repeat="event in events">
