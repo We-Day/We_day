@@ -13,7 +13,7 @@
     public class CalendarEvent {
         @Id
         @GeneratedValue
-        public int id;
+        public int _id;
 
         @Column(nullable = false)
         public String start;
