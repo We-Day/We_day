@@ -4,6 +4,7 @@
     .module('admin')
     .factory('CalendarService',function($http,$routeParams){
       var dateUrl = "/create-event";
+      var displayEventsUrl = "/display-events"
       var currWedding = '/create-wedding/'+$routeParams.weddingId;
 
       var parseItem = function(item){
@@ -30,7 +31,7 @@
         return object;
       }
       var getDates = function(item){
-        return $http.get(dateUrl+'/'+$routeParams.weddingId);
+        return $http.get(displayEventsUrl+'/'+$routeParams.weddingId);
       };
       var addDate = function(item){
         // console.log('add Date item', item)
