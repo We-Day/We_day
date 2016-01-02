@@ -39,7 +39,7 @@ angular
       })
 
       $scope.events = eventArray;
-
+      console.log(events,eventArray);
       $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
 
     })
