@@ -4,7 +4,7 @@
 "use strict"
 angular
   .module('main')
-  .controller('CalendarController',function($scope,CalendarService,$compile,uiCalendarConfig,$window){
+  .controller('MainCalendarController',function($scope,$compile,uiCalendarConfig,$window){
     //reload route
     // console.log($scope.events,'scope events')
 
@@ -113,7 +113,8 @@ $scope.weddingName = "Charles & Sarah's Wedding"
     };
     /* remove event */
     $scope.remove = function(index,event) {
-        $scope.events.splice(0, $scope.events.length);
+      console.log(index);
+        $scope.events.splice(index, $scope.events.length);
     };
     /* Change View */
     $scope.changeView = function(view,calendar) {

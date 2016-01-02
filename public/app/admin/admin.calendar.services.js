@@ -30,12 +30,12 @@
         return object;
       }
       var getDates = function(item){
-        return $http.get(dateUrl);
+        return $http.get(dateUrl+'/'+$routeParams.weddingId);
       };
       var addDate = function(item){
         // console.log('add Date item', item)
         // var pObject = parseItem(item);
-        return $http.post(dateUrl,item)
+        return $http.post(dateUrl+'/'+$routeParams.weddingId,item)
       };
       var editDate = function(item){
         return $http.put(dateUrl+'/'+item._id,item)

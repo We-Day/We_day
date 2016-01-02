@@ -19,6 +19,21 @@
         100% { transform: translateX(0%); } }
 @keyframes slideIn { 0% { transform: translateX(-200%); }
         100% { transform: translateX(0%); } }
+
+// @-webkit-keyframes slideUp { 0% { transform: translateY(-100%); }
+//     100% { transform: translateY(100%); } }
+// @-moz-keyframes slideUp { 0% { transform: translateY(-100%); }
+//     100% { transform: translateY(100%); } }
+// @keyframes slideUp { 0% { transform: translateY(-100%); }
+//     100% { transform: translateY(100%); } }
+//
+// @-webkit-keyframes slideDown { 0% { transform: translateY(100%); }
+//   100% { transform: translateY(-100%); } }
+// @-moz-keyframes slideDown { 0% { transform: translateY(100%); }
+//   100% { transform: translateY(-100%); } }
+// @keyframes slideDown { 0% { transform: translateY(100%); }
+//     100% { transform: translateY(-100%); } }
+
 @mixin breakpoint($point) {
 
   @if $point == mama-bear {
@@ -31,6 +46,10 @@
 		@media (max-width: 550px)  { @content; }
 	}
 }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 .animate-enter {
 	-webkit-transition: 1s linear all; /* Chrome */
 	transition: 1s linear all;
@@ -69,7 +88,7 @@ body, html, main {
       text-decoration: none;
       color:white;
       font-size: 1.5em;
-      margin-top: 11%;
+      margin-top: 6%;
       @include breakpoint(baby-bear){
       margin-left: 20px;}
 
@@ -125,12 +144,20 @@ body, html, main {
  		}
   }
   .invitee-name{
+    transition: 1s;
+    color:white;
+    margin-top: 6%;
+    opacity: 0;
+    float: right;
     @include breakpoint(tiny-bear){
     width: 80%;
     margin-left:20%;
     margin-bottom: 5%;
      }
 
+}
+.cOpacity{
+  opacity: 1;
 }
 
 .cd-fixed-bg {
@@ -208,10 +235,10 @@ body, html, main {
 
 .cd-fixed-bg.cd-bg-1 {
   margin-top: 3%;
-  background-image: url("http://nathandesch.com/wp-content/uploads/2014/11/07-7939-post/Doylestown-weddiphotography-18-of-66.jpg");
+  background-image: url("../../gif/first.jpg");
 }
 .cd-fixed-bg.cd-bg-2 {
-  background-image: url("https://weminoredinfilm.files.wordpress.com/2013/06/will-ferrell-in-weddicrashers-will-ferrell-18126324-1280-720.jpg");
+  background-image: url("../../gif/crasher.jpg");
 }
 .cd-fixed-bg.cd-bg-3 {
   background-image: url("http://charleston-wedding-packages.com/images/angel-oak-2.jpg");
@@ -530,6 +557,19 @@ uib-slide img{
 	}
 }
 }
+.loading-icon-container{
+  h1{font-size: 100px;
+    opacity: .5;
+    position:absolute;
+    left:40%;
+    top: 170px;
+  }
+  .loading-icon{
+    margin-left: 50%;
+    margin-top: 200px;
+  }
+}
+
 // calendar
 
 .main-calendar{
@@ -556,7 +596,7 @@ uib-slide img{
 		visibility:hidden;
 	}
 
-  }
+
 	&:hover{
 		margin-bottom: 200px;
 		.other-text-calendar{
@@ -588,6 +628,7 @@ uib-slide img{
 			width:80%;
 			}
 			@include breakpoint(baby-bear){
+        margin-top:150px;
 			width:80%;}
 	box-shadow: 10px 10px 5px #888888;
 	height: 150px;
@@ -613,6 +654,7 @@ uib-slide img{
 				@include breakpoint(baby-bear){
 					margin-top:5%;
 					margin-left:5%;
+          width:10em;
 				}
 				@include breakpoint(tiny-bear){
 					width:8em;
@@ -630,7 +672,7 @@ uib-slide img{
 		width: 30%;
     margin-left: 20%;
 	}
-		width: 50px;ser
+		width: 50px;
 		padding: 2%;
 		height: 100%;
 		border-right: solid #DADADA 1px;
@@ -712,8 +754,10 @@ uib-slide img{
 }
 
 //carousel directive
+
 .carousel-wrapper-div{
-  margin-left: 10%;
+  width: 40%;
+  margin: auto;
   @include breakpoint(mama-bear){
     margin-top: 150px;
 }
@@ -723,7 +767,7 @@ uib-slide img{
 
 
   .carousel{
-    width: 80%;
+    width: 100%;
   }
 
 
@@ -736,12 +780,48 @@ uib-slide img{
 .btn-file input[type='file'] {
 background-color: rgb(192, 192, 192);
 }
+.glyphicon-upload{
+  font-size: 2em;
+  margin-left: 50%;
 }
-// .photo-upload-admin{
-//   position: absolute;
-//   bottom: -20px;
-// }
+.upload-photo-form-div{
+  transition: 1s linear all;
+  top: 50%;
+  position: absolute;
+  top: 90%;
+  height: 200px;
+}
+}
 
+
+.slide-up{
+  opacity: 0;
+  -webkit-animation:slideUp ease-in 1;  /* call our keyframe named slideUp, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:slideUp ease-in 1;
+  animation:slideUp ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+.slide-down{
+  opacity: 1;
+  -webkit-animation:slideDown ease-in 1;  /* call our keyframe named slideDown, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:slideDown ease-in 1;
+  animation:slideDown ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
 //landing page
 .landing-page-container{
 	width: 100%;
@@ -755,8 +835,9 @@ background-color: rgb(192, 192, 192);
 		border-right: 1500px solid transparent;
 	}
 	.bottom-horizontal-bar{
-		position: absolute;
-		bottom: 0;
+		position: relative;
+		bottom: -240px;
+    margin-top: 50%;
 		width: 100%;
 		height: 0;
 		border-bottom: 100px solid black;
@@ -765,7 +846,7 @@ background-color: rgb(192, 192, 192);
 .landing-page-create-wedding{
 	width: 50%;
 	margin: auto;
-	border: solid #c9c9c9 3px;
+	border: solid #c9c9c9 15px;
 	padding: 5%;
 	text-align: center;
 	a{
@@ -775,7 +856,7 @@ background-color: rgb(192, 192, 192);
 		font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 		font-style: normal;
 		font-variant: normal;
-		font-weight: 500;
+		font-weight: 800;
 		line-height: 26.4px;
 	}
 	&:hover{

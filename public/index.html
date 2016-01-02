@@ -10,15 +10,15 @@
     <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
     <link rel="stylesheet" href="bower_components/angular-timeline/dist/angular-timeline.css"/>
     <link rel="stylesheet" href="app/css/styles.css" media="screen" title="no title" charset="utf-8">
+    <script src="bower_components/angular/angular.js"></script>
 
   </head>
-  <body ng-app = "main">
+  <body ng-cloak ng-app = "main" class = "ng-cloak">
 
-    <ng-view></ng-view>
+    <ng-view ng-cloak></ng-view>
       <!-- dependencies bower  -->
       <script src="bower_components/jquery/dist/jquery.min.js"></script>
       <script src="bower_components/moment/min/moment.min.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
       <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
       <script src="bower_components/fullcalendar/dist/gcal.js"></script>
@@ -47,8 +47,7 @@
       <script src="app/main/login.controller.js" charset="utf-8"></script>
       <script src="app/main/login.services.js" charset="utf-8"></script>
       <!-- <script src="app/main/calendar.directive.js" charset="utf-8"></script>
-      <script src="app/main/calendar.sevices.js" charset="utf-8"></script>
-      <script src="app/main/calendar.controller.js" charset="utf-8"></script>  -->
+      <script src="app/main/calendar.controller.js" charset="utf-8"></script> -->
 
       <!--admin page links-->
       <script src="app/admin/admin.module.js" charset="utf-8"></script>

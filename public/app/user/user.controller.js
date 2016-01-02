@@ -3,6 +3,11 @@
 angular
   .module('user')
   .controller('UserController',function($scope,UserService,$location,$routeParams){
+    $scope.weddingId = $routeParams.weddingId;
+    $scope.loading = true;
+    setTimeout(function () {
+      $scope.loading = false;
+    }, 400);
     $scope.currentIndex = 1;
     $scope.logOut = function(){
       UserService.logOut().success(function(res){
@@ -42,6 +47,7 @@ angular
 UserService.getCurrentUser().success(function(res){
   console.log('res currentUser',res);
   $scope.currentUserName = res.username;
+  $scope.userId = res.id;
 });
 //all users to wedding////////////
 UserService.getUsers().success(function(res){
@@ -52,6 +58,7 @@ UserService.getUsers().success(function(res){
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     $scope.slides = []
+    console.log('slides',$scope.slides);
     $scope.getPhotoSlides = function(){
       $scope.slides.splice(0,$scope.slides.length);
     UserService.getPhotos().success(function(res){

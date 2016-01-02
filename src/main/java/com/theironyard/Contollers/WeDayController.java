@@ -75,6 +75,25 @@ public class WeDayController {
     @Autowired
     CalendarEventRepository events;
 
+    @RequestMapping(path = "/story", method = RequestMethod.POST)
+    public Post story (@RequestBody Params param, HttpSession session, String storyContent) {
+        Wedding wedding = weddings.findOne(param.weddingId);
+        storyContent = "storyContent";
+        Post post =  new Post();
+        post.text = storyContent;
+        post.id = param.weddingId;
+        posts.save(post);
+
+        return post;
+    }
+
+
+    @RequestMapping(path = "/story/{id}", method = RequestMethod.GET)
+    public Post story (@PathVariable("id") Integer id) {
+        Wedding wed = weddings.findOne(id);
+        return posts.findOneByWedding(wed);
+    }
+
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
@@ -109,7 +128,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-guest", method = RequestMethod.POST)
-    public void addInvite(@RequestBody Params param){
+    public void addInvite(@RequestBody Params param, HttpSession session) throws MessagingException {
         Wedding wedding = weddings.findOne(param.weddingId);
         Invite invite = new Invite();
         invite.wedding = wedding;
@@ -117,7 +136,7 @@ public class WeDayController {
         invite.isAdmin = param.isAdmin;
         invite.username = param.username;
         invites.save(invite);
-        // send - email method needs to go here?
+        sendEmail(invite.email, session);
     }
 
     @RequestMapping(path="/display-invites/{id}", method = RequestMethod.GET)
@@ -142,7 +161,9 @@ public class WeDayController {
 
     @RequestMapping(path = "/photos/{id}", method = RequestMethod.GET)
     public List<Photo> photoList(@PathVariable("id") int id) {
-        return photos.findByWedding(weddings.findOne(id));
+        Wedding one = weddings.findOne(id);
+        List<Photo> all = photos.findByWedding(one);
+        return all;
     }
 
     @RequestMapping(path = "/create-wedding/{id}", method = RequestMethod.GET)

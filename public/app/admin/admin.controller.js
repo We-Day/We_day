@@ -3,6 +3,13 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService,$location,$routeParams){
+    $scope.console = function(el){
+      console.log(el);
+    }
+    $scope.loading = true;
+    setTimeout(function () {
+      $scope.loading = false;
+    }, 300);
     $scope.logOut = function(){
       AdminService.logOut().success(function(res){
         $location.path('/');
@@ -39,8 +46,12 @@ $scope.viewInvitee = false;
     }
     $scope.guests.push(currObject);
     AdminService.inviteUser(currObject).success(function(res){
-      $scope.lastInvitee = res.username;
+      console.log(res,'inviteed USer');
+      $scope.lastInvitee = currObject.username;
       $scope.viewInvitee = true;
+      setTimeout(function () {
+        $scope.viewInvitee = false;
+      }, 500);
     })
   }
 //carousel
@@ -61,7 +72,7 @@ $scope.weddingId = $routeParams.weddingId;
   }
   $scope.getPhotoSlides();
 
-    $scope.currentIndex = 6;
+    $scope.currentIndex = 7;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

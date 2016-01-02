@@ -4,7 +4,7 @@
 "use strict"
 angular
   .module('admin')
-  .controller('CalendarController',function($scope,CalendarService,$compile,uiCalendarConfig,$window){
+  .controller('CalendarController',function($scope,$routeParams,CalendarService,$compile,uiCalendarConfig,$window){
 
     //reload route
     $scope.reloadRoute = function() {
