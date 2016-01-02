@@ -341,6 +341,7 @@ public class WeDayController {
         oldEvent.title = event.title;
         oldEvent.wedding = event.wedding;
         events.delete(oldEvent);
+        events.save(event);
         return event;
     }
 
