@@ -109,11 +109,8 @@ body, html, main {
   .navbar .navbar-header .hamburger {
     text-decoration: none;
     color: white;
-    font-size: 1.5em;
-    margin-top: 6%; }
-    @media (max-width: 770px) {
-      .navbar .navbar-header .hamburger {
-        margin-left: 20px; } }
+    font-size: 20px;
+    margin-top: 8px; }
     @media (max-width: 550px) {
       .navbar .navbar-header .hamburger {
         float: right; } }
@@ -130,9 +127,9 @@ body, html, main {
   padding-right: 2%; }
   @media (max-width: 770px) {
     .navbar-right {
+      width: 200px;
       float: right;
-      display: inline-block;
-      margin-top: -10%; } }
+      margin-top: -100px; } }
   @media (max-width: 550px) {
     .navbar-right {
       float: left;
@@ -388,16 +385,18 @@ body, html, main {
   margin-left: 10%;
   margin-top: 5%; }
 
-@media (max-width: 770px) {
-  .non-nav-wrapper {
-    margin-top: 120px; } }
+.non-nav-wrapper {
+  margin-top: 5px; }
+  @media (max-width: 770px) {
+    .non-nav-wrapper {
+      margin-top: 150px; } }
 
 .nav-column {
   border-right: ridge #9fa8a3 5px;
   width: 10%;
   transition: all 2s ease;
   margin-top: 50px;
-  position: fixed; }
+  position: absolute; }
   @media (max-width: 1000px) {
     .nav-column {
       border-right: solid white 0px; } }
@@ -554,8 +553,7 @@ uib-slide img {
   margin-top: 2%; }
   @media (max-width: 1000px) {
     .endar {
-      width: 80%;
-      margin-top: 15%; } }
+      width: 80%; } }
 
 .timeline {
   margin-top: 100px; }
