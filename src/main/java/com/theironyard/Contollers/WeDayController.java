@@ -333,17 +333,20 @@ public class WeDayController {
         events.delete(event);
     }
 
-    @RequestMapping(path = "edit-event/{_id}", method = RequestMethod.PUT)
-    public CalendarEvent editEvent(@RequestBody CalendarEvent event, @PathVariable("_id") int _id) {
-        CalendarEvent oldEvent = events.findOne(_id);
-        oldEvent._id = event._id;
-        oldEvent.end = event.end;
-        oldEvent.start = event.start;
-        oldEvent.title = event.title;
-        oldEvent.wedding = event.wedding;
-        events.delete(oldEvent);
-        events.save(event);
-        return event;
+    @RequestMapping(path = "edit-event/{id}", method = RequestMethod.PUT)
+    public void editEvent(@RequestBody Params event, @PathVariable("id") int id) {
+
+        Wedding wedding = weddings.findOne(id);
+
+        CalendarEvent event1 = events.findOne(event._id);
+
+        event1.title = event.title;
+        event1.wedding = wedding;
+        event1.start = event.start;
+        event1.end = event.end;
+
+        CalendarEvent editedEvent = (CalendarEvent)event1;
+        events.save(editedEvent);
     }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
