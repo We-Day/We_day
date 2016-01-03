@@ -114,6 +114,14 @@ public class WeDayController {
         invite.username = user.username;
         invite.email = user.email;
         createInvite(invite, invite.email, session);
+
+        CalendarEvent weddingEvent = new CalendarEvent();
+        weddingEvent.end = wedding.date;
+        weddingEvent.start = wedding.date;
+        weddingEvent.wedding = wedding;
+        weddingEvent.title = wedding.weddingName;
+        events.save(weddingEvent);
+
         return wedding;
     }
 
@@ -302,11 +310,16 @@ public class WeDayController {
             emails.add(email);
         }
 
-        for (String phoneDestination : numbers) {
-            sendText(phoneDestination, params.title);
+        if (params.text) {
+            for (String phoneDestination : numbers) {
+                sendText(phoneDestination, params.title);
+            }
         }
-        for (String notificationEmail : emails) {
-            sendNotificationEmail(notificationEmail, params.title, session);
+
+        if (params.notificationEmail) {
+            for (String notificationEmail : emails) {
+                sendNotificationEmail(notificationEmail, params.title, session);
+            }
         }
     }
 
@@ -321,9 +334,10 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-event/{id}", method = RequestMethod.POST)
-    public void createEvent(@RequestBody CalendarEvent event, @PathVariable("id") int id) {
-        event.wedding = weddings.findOne(id);
-        events.save(event);
+    public void createEvent(@RequestBody CalendarEvent calendarEvent, @PathVariable("id") int id) {
+        Wedding wedding = weddings.findOne(id);
+        calendarEvent.wedding = wedding;
+        events.save(calendarEvent);
     }
 
     @RequestMapping(path = "/display-events/{id}", method = RequestMethod.GET)
