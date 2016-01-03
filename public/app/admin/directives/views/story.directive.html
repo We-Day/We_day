@@ -1,5 +1,5 @@
 <div class="story-directive-container" ng-controller = "StoryController">
-  <form class = "story-text-editor"ng-show = 'isEmpty'>
+  <form class = "story-text-editor" ng-show = 'isEmpty'>
     <text-angular ng-model="htmlVariable"></text-angular>
     <button type="button" ng-click = "postStory(htmlVariable);isEmpty = false"name="button">Submit</button>
   </form>

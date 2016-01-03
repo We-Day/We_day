@@ -1,12 +1,10 @@
 <div class="carousel-wrapper-div">
-  <form class="photo-upload-admin" enctype= "multipart/form-data" action="/photo-upload" method="post">
-<span class = "btn btn-default btn-file">
-  <input type="file" name="pic" accept="image/*">
-  <input type="hidden" name="weddingId" value="{{weddingId}}">
-  <input type="hidden" name="userId" value="{{userId}}">
-</span>
-  <input ng-click = "getPhotoSlides()"type="submit">
-</form>
+  <div class="upload-div">
+    <span ng-class = "{'red':true}" ng-init = "slideUp = true"ng-click = "slideUp = !slideUp;console(slideUp)"class = "glyphicon glyphicon-upload"></span>
+    <p class = "upload-photos-p" ng-hide = "photosExist">
+      Upload photos
+    </p>
+  </div>
   <div>
     <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
       <uib-slide ng-repeat="slide in slides" active="slide.active">
@@ -14,5 +12,14 @@
       </uib-slide>
     </uib-carousel>
   </div>
-
+  <div ng-class = "{'slide-up':slideUp,'slide-down':!slideUp}"class="upload-photo-form-div container-fluid">
+    <form class="photo-upload-admin" enctype= "multipart/form-data" action="/photo-upload" method="post">
+  <span class = "btn btn-default btn-file">
+    <input type="file" name="pic" accept="image/*">
+    <input type="hidden" name="weddingId" value="{{weddingId}}">
+    <input type="hidden" name="userId" value="{{userId}}">
+  </span>
+    <input ng-click = "getPhotoSlides()"type="submit">
+  </form>
+  </div>
 </div>

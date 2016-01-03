@@ -137,7 +137,8 @@ body, html, main {
 .navbar {
   position: fixed;
   width: 100%;
-  top: -1%; }
+  top: -1%;
+  z-index: 5; }
   @media (max-width: 550px) {
     .navbar .navbar-header {
       margin-bottom: 10%;
@@ -196,11 +197,12 @@ body, html, main {
   margin-top: 6%;
   opacity: 0;
   float: right; }
+  @media (max-width: 770px) {
+    .invitee-name {
+      float: left; } }
   @media (max-width: 550px) {
     .invitee-name {
-      width: 80%;
-      margin-left: 20%;
-      margin-bottom: 5%; } }
+      float: left; } }
 
 .cOpacity {
   opacity: 1; }
@@ -337,8 +339,10 @@ body, html, main {
     width: 100%; }
 
 .individual-guests {
+  width: 100%;
   padding-left: 10%;
-  height: 100%; }
+  height: 100%;
+  padding-top: 30px; }
   @media (max-width: 1000px) {
     .individual-guests {
       position: absolute;
@@ -349,8 +353,9 @@ body, html, main {
       margin-left: 20%;
       margin-top: 100px; } }
   .individual-guests button {
+    float: left;
+    width: 70%;
     position: absolute;
-    left: 50%;
     top: 2%; }
 
 .repeat-guests {
@@ -736,6 +741,9 @@ uib-slide img {
     left: 35%;
     top: 60%;
     height: 200px; }
+    @media (max-width: 770px) {
+      .carousel-wrapper-div .upload-photo-form-div {
+        left: 20%; } }
 
 .slide-up {
   opacity: 0;
@@ -825,10 +833,16 @@ uib-slide img {
       .landing-page-container .landing-page .landing-page-options:hover {
         opacity: .5; }
 
+.story-directive-container .our-story-div-button {
+  width: 400px; }
+
 .story-directive-container .our-story-div, .story-directive-container .our-story-div-button {
-  margin-top: 150px;
+  margin-top: 30px;
   margin-left: 20%;
-  margin-bottom: 5%; }
+  margin-bottom: 100px; }
 
 .story-directive-container .story-text-editor {
   margin-left: 5%; }
+
+.story-directive-container img {
+  max-width: 100%; }
