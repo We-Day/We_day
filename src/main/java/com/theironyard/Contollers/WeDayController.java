@@ -104,11 +104,12 @@ public class WeDayController {
     public Wedding createWedding(@RequestBody Wedding wedding, HttpSession session) throws Exception {
         weddings.save(wedding);
         User user = users.findOneByEmail((String) session.getAttribute("email"));
-        user.wedding = wedding;
-
         if (user == null) {
             throw new Exception("User does not exist");
         }
+        user.wedding = wedding;
+        users.save(user);
+
         Invite invite = new Invite();
         invite.isAdmin = true;
         invite.wedding = wedding;
@@ -196,16 +197,13 @@ public class WeDayController {
             response.sendError(403);
 
         } else if (PasswordHash.validatePassword(user.password, u.password)) {
-            if (invites.findByEmail(u.email) != null) {
-                session.setAttribute("email", u.email);
-                session.setAttribute("id", u.id);
-                isUser = true;
-                userLogin.add(isUser);
-                userLogin.add(user);
-                return userLogin;
-            }
-
-        } else if (!PasswordHash.validatePassword(user.password, u.password)) {
+            session.setAttribute("email", u.email);
+            session.setAttribute("id", u.id);
+            isUser = true;
+            userLogin.add(isUser);
+            userLogin.add(user);
+            return userLogin;
+        } else {
             isUser = false;
             userLogin.add(isUser);
             userLogin.add(user);
@@ -220,56 +218,37 @@ public class WeDayController {
         ArrayList<Object> createUser = new ArrayList<>();
         boolean exists;
 
-        List<Invite> allInvites = (List) invites.findAll();
-
         User user1 = users.findOneByEmail(user.email);
-
-        if (allInvites.size() == 0) {
-            exists = true;
-            user.password = PasswordHash.createHash(user.password);
-            user.isAdmin = true;
-            users.save(user);
-            createUser.add(user);
+        if (user1 != null){
+            exists = false;
+            createUser.add(user1);
             createUser.add(exists);
             return createUser;
         }
 
-        if (!allInvites.isEmpty()) {
-            for (Invite invite : allInvites) {
-                String inviteEmail = invite.email;
-                if (user.email.equals(inviteEmail)) {
-                    User transferUser = new User();
-                    transferUser.isAdmin = invite.isAdmin;
-                    transferUser.username = invite.username;
-                    transferUser.phone = user.phone;
-                    transferUser.email = invite.email;
-                    transferUser.password = PasswordHash.createHash(user.password);
-                    transferUser.wedding = invite.wedding;
-                    users.save(transferUser);
-                    createUser.add(transferUser);
-                    exists = true;
-                    createUser.add(exists);
-                    //invites.delete(invite);
-                    return createUser;
-                }
-            }
-            if (user1 == null) {
-                exists = true;
-                user.password = PasswordHash.createHash(user.password);
-                user.isAdmin = true;
-                users.save(user);
-                createUser.add(user);
-                createUser.add(exists);
-                return createUser;
-
-            } else if (user1 != null) {
-                exists = true;
-                createUser.add(user);
-                createUser.add(exists);
-                return createUser;
-            }
+        Invite invite = invites.findOneByEmail(user.email);
+        if (invite != null){
+            User transferUser = new User();
+            transferUser.isAdmin = invite.isAdmin;
+            transferUser.username = invite.username;
+            transferUser.phone = user.phone;
+            transferUser.email = invite.email;
+            transferUser.password = PasswordHash.createHash(user.password);
+            transferUser.wedding = invite.wedding;
+            users.save(transferUser);
+            createUser.add(transferUser);
+            exists = true;
+            createUser.add(exists);
+            //invites.delete(invite);
+            return createUser;
         }
-        return null;
+        exists = true;
+        user.password = PasswordHash.createHash(user.password);
+        user.isAdmin = true;
+        users.save(user);
+        createUser.add(user);
+        createUser.add(exists);
+        return createUser;
     }
 
     @RequestMapping("/current-user")
