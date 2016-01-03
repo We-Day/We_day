@@ -3,7 +3,6 @@
     import javax.persistence.*;
     import java.time.LocalDate;
     import java.time.LocalDateTime;
-    import java.util.ArrayList;
 
     /**
      * Created by macbookair on 12/16/15.
@@ -32,35 +31,63 @@
 
         }
 
-        public class Email {
-            boolean bool;
-            String time; // hours before sending email
-        }
-//        @Transient
-        public ArrayList<Object> email;
 
-        public class Text {
-            boolean bool;
-            String time;
-        }
+        public Boolean emailBool;
+        public String emailTime;
 
-//        @Transient
-        public ArrayList<Object> text;
+        public Boolean textBool;
+        public String textTime;
 
-        public ArrayList<Object> getEmail() {
-            return email;
+        public Boolean notificationBool;
+        public Boolean notificationTime;
+
+        public Boolean getNotificationTime() {
+            return notificationTime;
         }
 
-        public ArrayList<Object> getText() {
-            return text;
+        public void setNotificationTime(Boolean notificationTime) {
+            this.notificationTime = notificationTime;
         }
 
-        public class Notification {
-            boolean bool;
-            String time;
+        public Boolean getNotificationBool() {
+            return notificationBool;
         }
 
-//        @Transient
-        public ArrayList<Object> notification;
+        public void setNotificationBool(Boolean notificationBool) {
+            this.notificationBool = notificationBool;
+        }
+
+        public String getTextTime() {
+            return textTime;
+        }
+
+        public void setTextTime(String textTime) {
+            this.textTime = textTime;
+        }
+
+        public Boolean getTextBool() {
+            return textBool;
+        }
+
+        public void setTextBool(Boolean textBool) {
+            this.textBool = textBool;
+        }
+
+        public String getEmailTime() {
+            return emailTime;
+        }
+
+        public void setEmailTime(String emailTime) {
+            this.emailTime = emailTime;
+        }
+
+        public Boolean getEmailBool() {
+            return emailBool;
+        }
+
+        public void setEmailBool(Boolean emailBool) {
+            this.emailBool = emailBool;
+        }
+
 
     }

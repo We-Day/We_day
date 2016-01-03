@@ -334,13 +334,10 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/create-event/{id}", method = RequestMethod.POST)
-    public void createEvent(@RequestBody Params p, @PathVariable("id") int id) {
+    public void createEvent(@RequestBody CalendarEvent calendarEvent, @PathVariable("id") int id) {
         Wedding wedding = weddings.findOne(id);
-        CalendarEvent calEvent = p.calendarEvent;
-        calEvent.text = p.textDump;
-        calEvent.email = p.emailDump;
-        calEvent.notification = p.notifcationDump;
-        events.save(calEvent);
+        calendarEvent.wedding = wedding;
+        events.save(calendarEvent);
     }
 
     @RequestMapping(path = "/display-events/{id}", method = RequestMethod.GET)

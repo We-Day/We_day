@@ -22,15 +22,15 @@ angular
           start: new Date(newEl.start),
           end: new Date(newEl.end),
           title: newEl.title,
-          Email:{
+          emailDump:{
             bool:newEl.email.bool,
             time: newEl.email.time
           },
-          Text:{
+          textDump:{
             bool:newEl.text.bool,
             time: newEl.text.time
           },
-          Notification:{
+          notificationDump:{
             bool:newEl.notification.bool,
             time:newEl.notification.time,
           }
@@ -124,15 +124,15 @@ angular
          start: startDate,
          end: endDate,
          title: event.title,
-         Email:{
+         emailDump:{
            bool:event.email.bool,
            time: event.email.time
          },
-         Text:{
+         textDump:{
            bool:event.text.bool,
            time: event.text.time
          },
-         Notification:{
+         notificationDump:{
            bool:event.notification.bool,
            time:event.notification.time,
          }
@@ -153,15 +153,15 @@ angular
         start: startDate,
         end: endDate,
         title: event.title,
-        Email:{
+        emailDump:{
           bool:event.email.bool,
           time: event.email.time
         },
-        Text:{
+        textDump:{
           bool:event.text.bool,
           time: event.text.time
         },
-        Notification:{
+        notificationDump:{
           bool:event.notification.bool,
           time:event.notification.time,
         }
@@ -191,15 +191,15 @@ angular
         title: 'Open Sesame',
         start: new Date(y, m, 22,5,10),
         end: new Date(y, m, 22,6,15),
-        Email:{
+        emailDump:{
           bool:false,
           time: "1"
         },
-        Text:{
+        textDump:{
           bool:false,
           time: "30"
         },
-        Notification:{
+        notificationDump:{
           bool:false,
           time:"30",
         }

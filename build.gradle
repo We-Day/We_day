@@ -40,6 +40,7 @@ dependencies {
     compile('com.twilio.sdk:twilio-java-sdk:5.7.1')
     compile('javax.mail:javax.mail-api:1.5.5')
     compile('javax.activation:activation:1.1.1')
+    compile('com.fasterxml.jackson.core:jackson-core:2.7.0-rc2')
     runtime('com.h2database:h2')
     runtime('org.postgresql:postgresql:9.4-1201-jdbc41')
     testCompile('org.springframework.boot:spring-boot-starter-test') 
