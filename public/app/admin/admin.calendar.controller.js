@@ -22,17 +22,12 @@ angular
           start: new Date(newEl.start),
           end: new Date(newEl.end),
           title: newEl.title,
-          emailDump:{
-            bool:newEl.email.bool,
-            time: newEl.email.time
-          },
-          textDump:{
-            bool:newEl.text.bool,
-            time: newEl.text.time
-          },
-          notificationDump:{
-            bool:newEl.notification.bool,
-            time:newEl.notification.time,
+            emailBool:newEl.emailBool,
+            emailTime: newEl.emailTime,
+            textBool:newEl.textBool,
+            textTime: newEl.textTime,
+            notificationBool:newEl.notificationBool,
+            notificatonTime:newEl.notificationTime,
           }
         }
       })
@@ -124,17 +119,12 @@ angular
          start: startDate,
          end: endDate,
          title: event.title,
-         emailDump:{
-           bool:event.email.bool,
-           time: event.email.time
-         },
-         textDump:{
-           bool:event.text.bool,
-           time: event.text.time
-         },
-         notificationDump:{
-           bool:event.notification.bool,
-           time:event.notification.time,
+           textBool:event.emailBool,
+           textTime: event.emailTime,
+           emailBool:event.textBool,
+           emailTime: event.textTime,
+           notificationBool:event.notificationBool,
+           notificationTime:event.notificationTime,
          }
        }
        console.log('currObject',currObject);
@@ -153,17 +143,12 @@ angular
         start: startDate,
         end: endDate,
         title: event.title,
-        emailDump:{
-          bool:event.email.bool,
-          time: event.email.time
-        },
-        textDump:{
-          bool:event.text.bool,
-          time: event.text.time
-        },
-        notificationDump:{
-          bool:event.notification.bool,
-          time:event.notification.time,
+          emailBool:event.emailBool,
+          emailTime: event.emailTime
+          textBool:event.textBool,
+          textTime: event.textTime
+          notificationBool:event.notificationBool,
+          notificationTime:event.notificationTime,
         }
       }
       CalendarService.editDate(currObject).success(function(el){
@@ -191,18 +176,13 @@ angular
         title: 'Open Sesame',
         start: new Date(y, m, 22,5,10),
         end: new Date(y, m, 22,6,15),
-        emailDump:{
-          bool:false,
-          time: "1"
-        },
-        textDump:{
-          bool:false,
-          time: "30"
-        },
-        notificationDump:{
-          bool:false,
-          time:"30",
-        }
+          emailBool:false,
+          emailTime: "1"
+          textBool:false,
+          textTime: "30"
+          notificationBool:false,
+          notificationTime:"30",
+
       };
 
       CalendarService.addDate(newEvent).success(function(res){
