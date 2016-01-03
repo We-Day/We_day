@@ -3,6 +3,7 @@
     import javax.persistence.*;
     import java.time.LocalDate;
     import java.time.LocalDateTime;
+    import java.util.ArrayList;
 
     /**
      * Created by macbookair on 12/16/15.
@@ -27,28 +28,39 @@
         @ManyToOne
         public Wedding wedding;
 
-        public class Email {
-            boolean send;
-            int time; // hours before sending email
+        public CalendarEvent(){
+
         }
-        @Transient
-        public Email email;
+
+        public class Email {
+            boolean bool;
+            String time; // hours before sending email
+        }
+//        @Transient
+        public ArrayList<Object> email;
 
         public class Text {
-            boolean send;
-            int time;
+            boolean bool;
+            String time;
         }
 
-        @Transient
-        public Text text;
+//        @Transient
+        public ArrayList<Object> text;
 
+        public ArrayList<Object> getEmail() {
+            return email;
+        }
+
+        public ArrayList<Object> getText() {
+            return text;
+        }
 
         public class Notification {
-            boolean send;
-            int time;
+            boolean bool;
+            String time;
         }
 
-        @Transient
-        public Notification notification;
+//        @Transient
+        public ArrayList<Object> notification;
 
     }

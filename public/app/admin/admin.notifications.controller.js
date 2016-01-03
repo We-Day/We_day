@@ -24,13 +24,13 @@ angular
     $scope.formatDate = function(item){
       return moment(item).calendar()
     };
-    $scope.postNot = function(){
+    $scope.postNot = function(email,text){
       console.log('clicked');
       var dateTime = moment().calendar();
       var currObj = {
         title: $scope.title,
-        // email: $scope.email,
-        // text: $scope.text,
+         notificationEmail: email,
+         text: text,
         wedId: $routeParams.weddingId,
         // notification: $scope.notification,
         time: new Date()

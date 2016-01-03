@@ -12,7 +12,7 @@
   </div>
   <div class="notification-input form-group">
     <h6 style="color:red"ng-show= "toLong()">Too many characters <small></small></h6>
-    <input ng-keyup="$event.keyCode == 13 && postNot()" placeholder="Send a notification" type="text" ng-change = "updateLength(title)" ng-model ="title" name="name" value="">
+    <input ng-keyup="$event.keyCode == 13 && postNot(email,text)" placeholder="Send a notification" type="text" ng-change = "updateLength(title)" ng-model ="title" name="name" value="">
   </div>
 </form>
 
