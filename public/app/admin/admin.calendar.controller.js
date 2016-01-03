@@ -27,9 +27,8 @@ angular
             textBool:newEl.textBool,
             textTime: newEl.textTime,
             notificationBool:newEl.notificationBool,
-            notificatonTime:newEl.notificationTime,
+            notificationTime:newEl.notificationTime,
           }
-        }
       })
       $scope.events = eventArray;
       console.log('events',eventArray);
@@ -95,8 +94,8 @@ angular
     };
     $scope.editDate = function(event){
       console.log('editDate',event)
-      console.log('editDate',event)
         CalendarService.editDate(event).success(function(res){
+          console.log('editDateReturn',event)
 
       });
     };
@@ -113,7 +112,6 @@ angular
        var endDate = new Date(event.end._d);
        endDate.setHours(endDate.getHours()+5);
        console.log(event,'event');
-       console.log(event.$$hashKey,'event.$$hashkey')
        var currObject = {
          _id: event._id,
          start: startDate,
@@ -126,7 +124,6 @@ angular
            notificationBool:event.notificationBool,
            notificationTime:event.notificationTime,
          }
-       }
        console.log('currObject',currObject);
        CalendarService.editDate(currObject).success(function(el){
          console.log(el,'event drop object')
@@ -144,13 +141,12 @@ angular
         end: endDate,
         title: event.title,
           emailBool:event.emailBool,
-          emailTime: event.emailTime
+          emailTime: event.emailTime,
           textBool:event.textBool,
-          textTime: event.textTime
+          textTime: event.textTime,
           notificationBool:event.notificationBool,
           notificationTime:event.notificationTime,
         }
-      }
       CalendarService.editDate(currObject).success(function(el){
         console.log('event resize object',el);
       })
@@ -177,9 +173,9 @@ angular
         start: new Date(y, m, 22,5,10),
         end: new Date(y, m, 22,6,15),
           emailBool:false,
-          emailTime: "1"
+          emailTime: "1",
           textBool:false,
-          textTime: "30"
+          textTime: "30",
           notificationBool:false,
           notificationTime:"30",
 
