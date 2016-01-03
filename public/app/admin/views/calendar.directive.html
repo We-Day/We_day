@@ -28,30 +28,30 @@
                                     {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
                                     <h5>How would you like to notify your contacts</h5>
                                     <div class="checkbox">
-                                      <label><input ng-change = "editDate(e)"type="checkbox" ng-model = "e.email.bool"value="">Email</label>
-                                      <select ng-change = "editDate(e)"ng-model = "e.email.time"class="">
-                                        <option type = "number" value="1">1 Hour Before</option>
-                                        <option type = "number"value="6">6 Hour Before</option>
-                                        <option type = "number"value="24">24 Hour Before</option>
-                                        <option type = "number"value="48">2 Days Before</option>
+                                      <label><input type="checkbox" ng-model = "e.emailBool"value="">Email</label>
+                                      <select ng-model = "e.emailTime"class="">
+                                        <option type = "number" value="3600000">1 Hour Before</option>
+                                        <option type = "number"value="21600000">6 Hour Before</option>
+                                        <option type = "number"value="86400000">24 Hour Before</option>
+                                        <option type = "number"value="172800000">2 Days Before</option>
                                       </select>
                                     </div>
                                     <div class="checkbox">
-                                        <label><input ng-change = "editDate(e)"type="checkbox" ng-model = "e.text.bool"value="">Text</label>
-                                        <select ng-change = "editDate(e)"ng-model = "e.text.time" class="">
-                                          <option type = "number"value="10">10 Mins Before</option>
-                                          <option type = "number"value="30">30 Mins Before</option>
-                                          <option type = "number"value="60">1 Hour Before</option>
-                                          <option type = "number"value="120">2 Hours Before</option>
+                                        <label><input type="checkbox" ng-model = "e.textBool"value="">Text</label>
+                                        <select ng-model = "e.textTime" class="">
+                                          <option type = "number"value="600000">10 Mins Before</option>
+                                          <option type = "number"value="1800000">30 Mins Before</option>
+                                          <option type = "number"value="3600000">1 Hour Before</option>
+                                          <option type = "number"value="7200000">2 Hours Before</option>
                                         </select>
                                       </div>
                                     <div class="checkbox">
-                                        <label><input ng-change = "editDate(e)"type="checkbox" ng-model = "e.notification.bool"value="">App</label>
-                                        <select ng-change = "editDate(e)"ng-model = "e.notification.time" class="">
-                                          <option type = "number"value=".5">30 Mins Before</option>
-                                          <option type = "number"value="2">2 Hours Before</option>
-                                          <option type = "number"value="5">5 Hour Before</option>
-                                          <option type = "number"value="24">24 Hours Before</option>
+                                        <label><input type="checkbox" ng-model = "e.notificationBool"value="">App</label>
+                                        <select ng-model = "e.notificationTime" class="">
+                                          <option type = "number"value="1800000">30 Mins Before</option>
+                                          <option type = "number"value="7200000">2 Hours Before</option>
+                                          <option type = "number"value="18000000">5 Hour Before</option>
+                                          <option type = "number"value="86400000">24 Hours Before</option>
                                         </select>
                                     </div>
                                   </div>

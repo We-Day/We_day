@@ -4,6 +4,7 @@ import com.theironyard.Entities.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.Column;
+import java.util.ArrayList;
 
 /**
  * Created by benjamindrake on 12/18/15.
@@ -44,6 +45,16 @@ public class Params {
     public String start;
 
     public String end;
+
+    public boolean notificationEmail = false;
+
+    public boolean text = false;
+
+    public ArrayList<Object> emailDump;
+
+    public ArrayList<Object> textDump;
+
+    public ArrayList<Object> notifcationDump;
 
 
 }

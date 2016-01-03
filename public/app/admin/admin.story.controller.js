@@ -5,10 +5,8 @@ angular
   .controller('StoryController',function($scope,StoryService,$routeParams){
     var currentId = '';
     $scope.isEmpty = true;
-    $scope.htmlVariable = "Tell your story for everyone to see !";
     StoryService.getStory().success(function(res){
       console.log('storyService',res);
-      $scope.htmlVariable = res.storyContent;
       $scope.isEmpty = $scope.storyEmpty(res);
 
     })
@@ -17,6 +15,7 @@ angular
         $scope.htmlVariable = "Write a story";
         return true;
       }else{
+        $scope.htmlVariable = obj.storyContent;
         return false;
       }
     };

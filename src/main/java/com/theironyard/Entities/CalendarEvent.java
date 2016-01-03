@@ -27,28 +27,67 @@
         @ManyToOne
         public Wedding wedding;
 
-        public class Email {
-            boolean send;
-            int time; // hours before sending email
-        }
-        @Transient
-        public Email email;
+        public CalendarEvent(){
 
-        public class Text {
-            boolean send;
-            int time;
         }
 
-        @Transient
-        public Text text;
 
+        public Boolean emailBool;
+        public String emailTime;
 
-        public class Notification {
-            boolean send;
-            int time;
+        public Boolean textBool;
+        public String textTime;
+
+        public Boolean notificationBool;
+        public Boolean notificationTime;
+
+        public Boolean getNotificationTime() {
+            return notificationTime;
         }
 
-        @Transient
-        public Notification notification;
+        public void setNotificationTime(Boolean notificationTime) {
+            this.notificationTime = notificationTime;
+        }
+
+        public Boolean getNotificationBool() {
+            return notificationBool;
+        }
+
+        public void setNotificationBool(Boolean notificationBool) {
+            this.notificationBool = notificationBool;
+        }
+
+        public String getTextTime() {
+            return textTime;
+        }
+
+        public void setTextTime(String textTime) {
+            this.textTime = textTime;
+        }
+
+        public Boolean getTextBool() {
+            return textBool;
+        }
+
+        public void setTextBool(Boolean textBool) {
+            this.textBool = textBool;
+        }
+
+        public String getEmailTime() {
+            return emailTime;
+        }
+
+        public void setEmailTime(String emailTime) {
+            this.emailTime = emailTime;
+        }
+
+        public Boolean getEmailBool() {
+            return emailBool;
+        }
+
+        public void setEmailBool(Boolean emailBool) {
+            this.emailBool = emailBool;
+        }
+
 
     }
