@@ -20,7 +20,7 @@
       };
       var editDate = function(item){
         console.log('item',item)
-        return $http.put(editEventUrl+'/'+item._id,item)
+        return $http.put(editEventUrl+'/'+weddingId,item)
       }
 
       var deleteDate = function(item){
