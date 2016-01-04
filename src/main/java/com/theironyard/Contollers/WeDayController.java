@@ -307,9 +307,9 @@ public class WeDayController {
         posts.save(post);
     }
 
-    @RequestMapping(path ="/send-notification", method = RequestMethod.GET)
-    public List<Post> notification(@RequestBody Params params, HttpSession session) {
-        return posts.findByWedding(weddings.findOne(params.weddingId));
+    @RequestMapping(path ="/send-notification/{id}", method = RequestMethod.GET)
+    public List<Post> notification(@PathVariable("id") int id) {
+        return posts.findByWedding(weddings.findOne(id));
     }
 
     @RequestMapping("/create-post")
@@ -374,7 +374,7 @@ public class WeDayController {
             response.sendRedirect("/#/admins/"+ weddingId);
         }
         else {
-            response.sendRedirect(("/#/user/"+ weddingId));
+            response.sendRedirect("/#/user/"+ weddingId);
         }
     }
 
