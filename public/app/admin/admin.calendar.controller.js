@@ -93,9 +93,26 @@ angular
       });
     };
     $scope.editDate = function(event){
-      console.log('editDate',event)
-        CalendarService.editDate(event,$routeParams.weddingId).success(function(res){
-          console.log('editDateReturn',event)
+      var startDate = new Date(event.start._d);
+      startDate.setHours(startDate.getHours()+5);
+      var endDate = new Date(event.end._d);
+      endDate.setHours(endDate.getHours()+5);
+      console.log(event,'event');
+      var currObject = {
+        _id: event._id,
+        start: event.start,
+        end: event.end,
+        title: event.title,
+          textBool:event.textBool,
+          textTime: event.textTime,
+          emailBool:event.emailBool,
+          emailTime: event.emailTime,
+          notificationBool:event.notificationBool,
+          notificationTime:event.notificationTime,
+        }
+        console.log(typeof(start));
+        CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
+          console.log(event)
 
       });
     };
@@ -117,10 +134,10 @@ angular
          start: startDate,
          end: endDate,
          title: event.title,
-           textBool:event.emailBool,
-           textTime: event.emailTime,
-           emailBool:event.textBool,
-           emailTime: event.textTime,
+           textBool:event.textBool,
+           textTime: event.textTime,
+           emailBool:event.emailBool,
+           emailTime: event.emailTime,
            notificationBool:event.notificationBool,
            notificationTime:event.notificationTime,
          }
@@ -179,7 +196,6 @@ angular
           notificationBool:false,
           notificationTime:"1800000",
       };
-      console.log('addEvent',newEvent)
       CalendarService.addDate(newEvent,$routeParams.weddingId).success(function(res){
         console.log('addDate',res);
         $scope.events.splice(0, $scope.events.length);

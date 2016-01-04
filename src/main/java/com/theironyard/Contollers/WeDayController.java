@@ -34,6 +34,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -307,9 +308,9 @@ public class WeDayController {
         posts.save(post);
     }
 
-    @RequestMapping(path ="/send-notification", method = RequestMethod.GET)
-    public List<Post> notification(@RequestBody Params params, HttpSession session) {
-        return posts.findByWedding(weddings.findOne(params.weddingId));
+    @RequestMapping(path ="/send-notification/{id}", method = RequestMethod.GET)
+    public List<Post> notification(@PathVariable("id") int id) {
+        return posts.findByWedding(weddings.findOne(id));
     }
 
     @RequestMapping("/create-post")
@@ -386,9 +387,9 @@ public class WeDayController {
 
                 }
             };
-            LocalDateTime time =  LocalDateTime.parse(event1.start).minusSeconds(Long.valueOf(event1.textTime)/10000);
+            ZonedDateTime time =  ZonedDateTime.parse(event1.start).minusSeconds(Long.valueOf(event1.textTime)/1000);
             Timer timer = new Timer();
-            timer.schedule(timerTask, Date.from(time.toInstant((ZoneOffset) ZoneOffset.systemDefault())));
+            timer.schedule(timerTask, Date.from(time.toInstant()));
         }
     }
 
@@ -410,7 +411,7 @@ public class WeDayController {
             response.sendRedirect("/#/admins/"+ weddingId);
         }
         else {
-            response.sendRedirect(("/#/user/"+ weddingId));
+            response.sendRedirect("/#/user/"+ weddingId);
         }
     }
 
