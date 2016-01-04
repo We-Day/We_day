@@ -2,23 +2,23 @@
   "use strict"
   angular
     .module('admin')
-    .factory('AdminService',function($http){
+    .factory('AdminService',function($http,$routeParams){
       var guestsUrl = "/create-guest";
-      var getInvitees = "/display-invites/";
-      var currWedding = '/create-wedding/';
+      var getInvitees = "/display-invites";
+      var currWedding = '/create-wedding';
       var currentUser = '/current-user';
       var logoutUrl = '/logout';
-      var getPicsUrl = '/photos/'
+      var getPicsUrl = '/photos/';
       var removeUserUrl = '/delete-invite'
-//      var currId = $routeParams.weddingId;
+
       var logOut = function(){
         return $http.post(logoutUrl);
       }
-      var getWeddingObject = function(weddingId){
-        return $http.get(currWedding + weddingId);
+      var getWeddingObject = function(id){
+        return $http.get(currWedding+'/'+id);
       }
-      var getUsers = function(weddingId){
-        return $http.get(getInvitees + weddingId);
+      var getUsers = function(id){
+        return $http.get(getInvitees+'/'+id);
       };
       var inviteUser = function(obj){
         return $http.post(guestsUrl,obj);
@@ -29,8 +29,8 @@
       var getCurrentUser = function(){
         return $http.get(currentUser);
       }
-      var getPhotos = function(weddingId){
-        return $http.get(getPicsUrl + weddingId);
+      var getPhotos = function(id){
+        return $http.get(getPicsUrl+'/'+id);
       }
     return{
       getPhotos:getPhotos,

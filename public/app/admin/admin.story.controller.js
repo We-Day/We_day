@@ -6,13 +6,12 @@ angular
     var currentId = '';
     $scope.isEmpty = true;
     StoryService.getStory().success(function(res){
-      console.log('storyService',res);
       $scope.isEmpty = $scope.storyEmpty(res);
 
     })
     $scope.storyEmpty = function(obj){
       if(obj.storyContent.length < 1){
-        $scope.htmlVariable = "Write a story";
+        $scope.htmlVariable = "<h2 style = 'color:#20B2AA'>Welcome to We-Day write your story for all your friends and family to see!</h2>";
         return true;
       }else{
         $scope.htmlVariable = obj.storyContent;

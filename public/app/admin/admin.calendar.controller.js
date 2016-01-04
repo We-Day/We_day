@@ -106,7 +106,7 @@ angular
 
     /* alert on Drop */
      $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-
+       console.log(event,'event');
        var startDate = new Date(event.start._d);
        startDate.setHours(startDate.getHours()+5);
        var endDate = new Date(event.end._d);
