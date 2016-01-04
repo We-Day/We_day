@@ -732,7 +732,8 @@ uib-slide img {
       font-size: 3em; }
   .carousel-wrapper-div .carousel {
     margin-top: 50px;
-    max-width: 90%; }
+    max-width: 90%;
+    height: 500px; }
     .carousel-wrapper-div .carousel img {
       max-height: 500px; }
   .carousel-wrapper-div .btn-file {

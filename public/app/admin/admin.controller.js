@@ -71,7 +71,9 @@ $scope.viewInvitee = false;
   $scope.slides = [];
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
+
     $scope.getPhotoSlides = function(){
+      $scope.slides.splice(0,$scope.slides.length);
     AdminService.getPhotos($routeParams.weddingId).success(function(res){
       for (var i = 0; i < res.length; i++) {
         var currItem = {image:'../pics/'+res[i].fileName};

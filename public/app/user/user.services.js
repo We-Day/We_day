@@ -9,7 +9,8 @@
       var storyUrl = "/story";
       var getPicsUrl = '/photos'
       var logOutUrl = "/logout"
-      var weddingId = $routeParams.weddingId;
+      
+
       var getStory = function(id){
         return $http.get(storyUrl+'/'+id);
       };
