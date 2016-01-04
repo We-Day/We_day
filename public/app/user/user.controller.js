@@ -5,6 +5,7 @@ angular
   .controller('UserController',function($scope,UserService,$location,$routeParams){
     $scope.weddingId = $routeParams.weddingId;
     var weddingId = $routeParams.weddingId;
+    $scope.currentPage = $location.$$path;
     $scope.loading = true;
     setTimeout(function () {
       $scope.loading = false;

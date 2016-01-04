@@ -179,7 +179,6 @@ angular
           notificationBool:false,
           notificationTime:"1800000",
       };
-      console.log('addEvent',newEvent)
       CalendarService.addDate(newEvent,$routeParams.weddingId).success(function(res){
         console.log('addDate',res);
         $scope.events.splice(0, $scope.events.length);
