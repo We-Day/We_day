@@ -3,6 +3,9 @@
 angular
   .module('admin')
   .controller('AdminController',function($scope,AdminService,$location,$routeParams){
+    $scope.weddingId = $routeParams.weddingId;
+    var weddingId = $routeParams.weddingId;
+
     $scope.slides = [];
     $scope.slides.splice(0,$scope.slides.length);
 
@@ -23,14 +26,14 @@ angular
     $scope.userId = res.id;
   });
 
-  AdminService.getWeddingObject().success(function(res){
+  AdminService.getWeddingObject(weddingId).success(function(res){
     $scope.weddingName = res.weddingName;
   })
 
 //myguests
 $scope.viewInvitee = false;
   $scope.guests = [];
-  AdminService.getUsers().success(function(res){
+  AdminService.getUsers(weddingId).success(function(res){
     console.log('invites',res)
     $scope.guests = res;
   })
@@ -58,12 +61,17 @@ $scope.viewInvitee = false;
     })
   }
 //carousel
-$scope.weddingId = $routeParams.weddingId;
 
+  $scope.reRoute = function(){
+    $location.path($location.absUrl);
+  }
+
+  $scope.slides = [];
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     $scope.getPhotoSlides = function(){
-    AdminService.getPhotos().success(function(res){
+      $scope.slides.splice(0,$scope.slides.length);
+    AdminService.getPhotos(weddingId).success(function(res){
       for (var i = 0; i < res.length; i++) {
         var currItem = {image:'../pics/'+res[i].fileName};
         $scope.slides.push(currItem);
@@ -73,6 +81,7 @@ $scope.weddingId = $routeParams.weddingId;
     })
   }
   $scope.getPhotoSlides();
+
     $scope.currentIndex = 7;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){

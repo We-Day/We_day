@@ -5,29 +5,28 @@
     .factory('UserService',function($http,$location,$window,$routeParams){
       var dateUrl = "/display-events";
       var currentUserUrl = "/current-user"
-      var guestsUrl = "https://tiny-tiny.herokuapp.com/collections/sweetUser/";
-      var getInvitees = "/display-invites/"+$routeParams.weddingId;
+      var getInvitees = "/display-invites";
       var storyUrl = "/story";
-      var getPicsUrl = '/photos/'+$routeParams.weddingId;
+      var getPicsUrl = '/photos'
       var logOutUrl = "/logout"
       var weddingId = $routeParams.weddingId;
-      var getStory = function(){
-        return $http.get(storyUrl+'/'+weddingId);
+      var getStory = function(id){
+        return $http.get(storyUrl+'/'+id);
       };
-      var getDates = function(){
-        return $http.get(dateUrl+'/'+weddingId);
+      var getDates = function(id){
+        return $http.get(dateUrl+'/'+id);
       };
-      var getUsers = function(){
-        return $http.get(getInvitees)
+      var getUsers = function(id){
+        return $http.get(getInvitees+'/'+id)
       };
-      var getCurrentUser = function(){
+      var getCurrentUser = function(id){
         return $http.get(currentUserUrl);
       }
       var logOut = function(){
         return $http.post(logOutUrl);
       }
-      var getPhotos = function(){
-        return $http.get(getPicsUrl);
+      var getPhotos = function(id){
+        return $http.get(getPicsUrl+'/'+id);
       }
     return{
       getPhotos:getPhotos,
