@@ -93,8 +93,24 @@ angular
       });
     };
     $scope.editDate = function(event){
-      console.log('editDate',event)
-        CalendarService.editDate(event,$routeParams.weddingId).success(function(res){
+      var startDate = new Date(event.start._d);
+      startDate.setHours(startDate.getHours()+5);
+      var endDate = new Date(event.end._d);
+      endDate.setHours(endDate.getHours()+5);
+      console.log(event,'event');
+      var currObject = {
+        _id: event._id,
+        start: startDate,
+        end: endDate,
+        title: event.title,
+          textBool:event.emailBool,
+          textTime: event.emailTime,
+          emailBool:event.textBool,
+          emailTime: event.textTime,
+          notificationBool:event.notificationBool,
+          notificationTime:event.notificationTime,
+        }
+        CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
           console.log('editDateReturn',event)
 
       });
