@@ -15,7 +15,7 @@ angular
     $scope.updateEvents = function(){
       $scope.events.splice(0,$scope.events.length)
 
-    CalendarService.getDates().success(function(el){
+    CalendarService.getDates($routeParams.weddingId).success(function(el){
       var eventArray = el.map(function(newEl,idx) {
         return {
           _id: newEl._id,
@@ -40,7 +40,7 @@ angular
   $scope.updateEvents();
 
   //add CurrentWedding Name
-  CalendarService.getWeddingObject().success(function(res){
+  CalendarService.getWeddingObject($scope.weddingId).success(function(res){
     $scope.weddingName = res.weddingName;
   });
   //calendar bitch
@@ -88,13 +88,13 @@ angular
     };
     $scope.editTitleDate = function(event){
       $scope.updateEvents();
-      CalendarService.editDate(event).success(function(res){
+      CalendarService.editDate(event,$routeParams.weddingId).success(function(res){
         $scope.updateEvents();
       });
     };
     $scope.editDate = function(event){
       console.log('editDate',event)
-        CalendarService.editDate(event).success(function(res){
+        CalendarService.editDate(event,$routeParams.weddingId).success(function(res){
           console.log('editDateReturn',event)
 
       });
@@ -125,7 +125,7 @@ angular
            notificationTime:event.notificationTime,
          }
        console.log('currObject',currObject);
-       CalendarService.editDate(currObject).success(function(el){
+       CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
          console.log(el,'event drop object')
        })
     };
@@ -147,7 +147,7 @@ angular
           notificationBool:event.notificationBool,
           notificationTime:event.notificationTime,
         }
-      CalendarService.editDate(currObject).success(function(el){
+      CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
         console.log('event resize object',el);
       })
       // $scope.alertMessage = ('Event Resized to make dayDelta ' + event.end._d);
@@ -173,15 +173,14 @@ angular
         start: new Date(y, m, 22,5,10),
         end: new Date(y, m, 22,6,15),
           emailBool:false,
-          emailTime: "1",
+          emailTime: "3600000",
           textBool:false,
-          textTime: "30",
+          textTime: "1800000",
           notificationBool:false,
-          notificationTime:"30",
-
+          notificationTime:"1800000",
       };
-
-      CalendarService.addDate(newEvent).success(function(res){
+      console.log('addEvent',newEvent)
+      CalendarService.addDate(newEvent,$routeParams.weddingId).success(function(res){
         console.log('addDate',res);
         $scope.events.splice(0, $scope.events.length);
         $scope.updateEvents();
@@ -190,7 +189,7 @@ angular
     };
     /* remove event */
     $scope.remove = function(index,event) {
-      CalendarService.deleteDate(event).success(function(res){
+      CalendarService.deleteDate(event,$routeParams.weddingId).success(function(res){
         $scope.events.splice(0, $scope.events.length);
         $scope.updateEvents();
       });
