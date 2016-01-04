@@ -58,4 +58,5 @@ public class Params {
 
     public String notificationText;
 
+
 }

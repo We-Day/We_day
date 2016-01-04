@@ -308,7 +308,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path ="/send-notification", method = RequestMethod.GET)
-    public List<Post> notification(@RequestBody Params params, HttpSession session) {
+    public List<Post> notification(@RequestBody Params params) {
         return posts.findByWedding(weddings.findOne(params.weddingId));
     }
 
