@@ -4,8 +4,8 @@
     .module('admin')
     .factory('NotServices',function($http){
       var urlN = "/send-notification";
-        var getNot = function(el){
-          return $http.get(urlN);
+        var getNot = function(id){
+          return $http.get(urlN+'/'+id);
         };
         var postNot = function(el){
           console.log('postNoturl',urlN);
