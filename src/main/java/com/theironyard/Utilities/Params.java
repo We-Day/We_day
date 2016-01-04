@@ -50,11 +50,18 @@ public class Params {
 
     public boolean text = false;
 
-    public ArrayList<Object> emailDump;
+    //public ArrayList<Object> emailDump;
 
-    public ArrayList<Object> textDump;
+    //public ArrayList<Object> textDump;
 
-    public ArrayList<Object> notifcationDump;
+    //public ArrayList<Object> notifcationDump;
 
+    public Boolean emailBool;
+    public String emailTime;
 
+    public Boolean textBool;
+    public String textTime;
+
+    public Boolean notificationBool;
+    public String notificationTime;
 }
