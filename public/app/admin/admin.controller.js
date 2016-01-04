@@ -26,14 +26,16 @@ angular
     $scope.userId = res.id;
   });
 
-  AdminService.getWeddingObject(weddingId).success(function(res){
+
+  AdminService.getWeddingObject($routeParams.weddingId).success(function(res){
     $scope.weddingName = res.weddingName;
   })
 
 //myguests
 $scope.viewInvitee = false;
   $scope.guests = [];
-  AdminService.getUsers(weddingId).success(function(res){
+
+  AdminService.getUsers($routeParams.weddingId).success(function(res){
     console.log('invites',res)
     $scope.guests = res;
   })
@@ -70,8 +72,7 @@ $scope.viewInvitee = false;
   $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     $scope.getPhotoSlides = function(){
-      $scope.slides.splice(0,$scope.slides.length);
-    AdminService.getPhotos(weddingId).success(function(res){
+    AdminService.getPhotos($routeParams.weddingId).success(function(res){
       for (var i = 0; i < res.length; i++) {
         var currItem = {image:'../pics/'+res[i].fileName};
         $scope.slides.push(currItem);
