@@ -8,7 +8,6 @@
       var getWeddings = function(){
         return $http.get(urlWeddings);
       }
-
     return{
       getWeddings:getWeddings,
 

@@ -28,7 +28,7 @@ angular
       console.log('clicked');
       var dateTime = moment().calendar();
       var currObj = {
-        text: $scope.title,
+        title: $scope.title,
         notificationEmail: email,
         text: text,
         wedId: $routeParams.weddingId,
