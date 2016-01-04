@@ -280,6 +280,7 @@ public class WeDayController {
 
     @RequestMapping(path = "/send-notification", method = RequestMethod.POST)
     public void sendNotification(@RequestBody Params params, HttpSession session) throws TwilioRestException, MessagingException {
+        Post post = new Post();
         ArrayList<String> numbers = new ArrayList<>();
         ArrayList<String> emails = new ArrayList<>();
         List<User> weddingUsers = users.findByWeddingId(Integer.valueOf(params.wedId));
@@ -301,6 +302,14 @@ public class WeDayController {
                 sendNotificationEmail(notificationEmail, params.title, session);
             }
         }
+        post.text = params.title;
+        post.wedding = weddings.findOne(Integer.valueOf(params.wedId));
+        posts.save(post);
+    }
+
+    @RequestMapping(path ="/send-notification", method = RequestMethod.GET)
+    public List<Post> notification(@RequestBody Params params, HttpSession session) {
+        return posts.findByWedding(weddings.findOne(params.weddingId));
     }
 
     @RequestMapping("/create-post")
