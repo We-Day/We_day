@@ -4,6 +4,7 @@ angular
   .module('user')
   .controller('UserController',function($scope,UserService,$location,$routeParams){
     $scope.weddingId = $routeParams.weddingId;
+    var weddingId = $routeParams.weddingId;
     $scope.loading = true;
     setTimeout(function () {
       $scope.loading = false;
@@ -24,7 +25,7 @@ angular
         return false;
       }
     };
-    UserService.getDates().success(function(res){
+    UserService.getDates(weddingId).success(function(res){
       console.log('dates',res)
       var localArray= [];
       localArray = res;
@@ -40,7 +41,7 @@ angular
   }
 
 //story information////////////////////
-  UserService.getStory().success(function(res){
+  UserService.getStory(weddingId).success(function(res){
     $scope.htmlVariable = res.storyContent;
   });
 //currentUser//////////////////
@@ -49,7 +50,7 @@ UserService.getCurrentUser().success(function(res){
   $scope.userId = res.id;
 });
 //all users to wedding////////////
-UserService.getUsers().success(function(res){
+UserService.getUsers(weddingId).success(function(res){
   $scope.guests = res;
 })
 //carousel
@@ -58,7 +59,7 @@ UserService.getUsers().success(function(res){
     $scope.slides = []
     $scope.getPhotoSlides = function(){
       $scope.slides.splice(0,$scope.slides.length);
-    UserService.getPhotos().success(function(res){
+    UserService.getPhotos(weddingId).success(function(res){
       for (var i = 0; i < res.length; i++) {
         var currItem = {image:'../pics/'+res[i].fileName};
         $scope.slides.push(currItem);

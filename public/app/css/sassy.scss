@@ -785,7 +785,11 @@ uib-slide img{
 
   .carousel{
     margin-top:50px;
-    width: 100%;
+    max-width: 90%;
+    height: 500px;
+    img{
+      max-height: 500px;
+    }
   }
 
 

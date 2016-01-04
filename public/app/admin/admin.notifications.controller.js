@@ -13,7 +13,7 @@ angular
     }
     $scope.notifications = [];
     $scope.refresh = function(){
-    NotServices.getNot().success(function(res){
+    NotServices.getNot($routeParams.weddingId).success(function(res){
       $scope.notifications = res;
       });
     };
@@ -28,7 +28,7 @@ angular
       console.log('clicked');
       var dateTime = moment().calendar();
       var currObj = {
-        title: $scope.title,
+        text: $scope.title,
         notificationEmail: email,
         text: text,
         wedId: $routeParams.weddingId,

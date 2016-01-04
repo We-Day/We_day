@@ -12,9 +12,9 @@ angular
 
       $scope.events = [{
 _id: "567184fcd92ae003001460f3",
-start: "2015-12-09T10:10:00.000Z",
-end: "2015-12-09T11:15:00.000Z",
-title: "Open Sesame",
+start: "2016-01-09T10:10:00.000Z",
+end: "2016-01-09T11:15:00.000Z",
+title: "Your Wedding",
 email: {
 bool: false,
 time: "1"
