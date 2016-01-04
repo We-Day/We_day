@@ -1,0 +1,203 @@
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg); }
+  to {
+    -moz-transform: rotate(360deg); } }
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+@-moz-keyframes flip {
+  from {
+    -moz-transform: rotateY(0deg); }
+  to {
+    -moz-transform: rotateY(360deg); } }
+
+@-webkit-keyframes flip {
+  from {
+    -webkit-transform: rotateY(0deg); }
+  to {
+    -webkit-transform: rotateY(360deg); } }
+
+@keyframes flip {
+  from {
+    transform: rotateY(0deg); }
+  to {
+    transform: rotateY(360deg); } }
+
+@-moz-keyframes turn {
+  from {
+    -moz-transform: rotateX(0deg); }
+  to {
+    -moz-transform: rotateX(360deg); } }
+
+@-webkit-keyframes turn {
+  from {
+    -webkit-transform: rotateX(0deg); }
+  to {
+    -webkit-transform: rotateX(360deg); } }
+
+@keyframes turn {
+  from {
+    transform: rotateX(0deg); }
+  to {
+    transform: rotateX(360deg); } }
+
+@-moz-keyframes shrink {
+  from {
+    -moz-transform: scale(1); }
+  to {
+    -moz-transform: scale(0.4); } }
+
+@-webkit-keyframes shrink {
+  from {
+    -webkit-transform: scale(1); }
+  to {
+    -webkit-transform: scale(0.4); } }
+
+@keyframes shrink {
+  from {
+    transform: scale(1); }
+  to {
+    transform: scale(0.4); } }
+
+@-moz-keyframes expand {
+  from {
+    -moz-transform: scale(0.4); }
+  to {
+    -moz-transform: scale(1); } }
+
+@-webkit-keyframes expand {
+  from {
+    -webkit-transform: scale(0.4); }
+  to {
+    -webkit-transform: scale(1); } }
+
+@keyframes expand {
+  from {
+    transform: scale(0.4); }
+  to {
+    transform: scale(1); } }
+
+@-moz-keyframes circle {
+  from {
+    border-radius: 0; }
+  to {
+    border-radius: 50%; } }
+
+@-webkit-keyframes circle {
+  from {
+    border-radius: 0; }
+  to {
+    border-radius: 50%; } }
+
+@keyframes circle {
+  from {
+    border-radius: 0; }
+  to {
+    border-radius: 50%; } }
+
+.flipping-cage .spin {
+  -webkit-animation: spin ease-in 1;
+  /* call our keyframe named spin, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: spin ease-in 1;
+  animation: spin ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+.flipping-cage .flip {
+  -webkit-animation: flip ease-in 1;
+  /* call our keyframe named flip, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: flip ease-in 1;
+  animation: flip ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+.flipping-cage .turn {
+  -webkit-animation: turn ease-in 1;
+  /* call our keyframe named turn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: turn ease-in 1;
+  animation: turn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+.flipping-cage .rotate {
+  -webkit-transform: rotateZ(-30deg);
+  -ms-transform: rotateZ(-30deg);
+  transform: rotateZ(-30deg); }
+
+.flipping-cage .shrink {
+  -webkit-animation: shrink ease-in 1;
+  /* call our keyframe named shrink, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: shrink ease-in 1;
+  animation: shrink ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+.flipping-cage .expand {
+  -webkit-animation: expand ease-in 1;
+  /* call our keyframe named expand, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: expand ease-in 1;
+  animation: expand ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+.flipping-cage .circle {
+  -webkit-animation: circle ease-in 1;
+  /* call our keyframe named circle, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: circle ease-in 1;
+  animation: circle ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+.flipping-cage .multi-flip {
+  transform: matrix3d(0.35913, -0.46947, 0.80661, 0, 0.19095, 0.88295, 0.42888, 0, -0.91355, 0, 0.40674, 0, 0, 0, 0, 1); }
+
+.flipping-cage .container-fluid {
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .flipping-cage .container-fluid img {
+    transition: all 10s;
+    max-width: 99%;
+    margin: 3px; }
+  .flipping-cage .container-fluid .col-md-3 {
+    transition: all 10s; }
