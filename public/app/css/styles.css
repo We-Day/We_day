@@ -106,6 +106,42 @@
   100% {
     transform: translateY(-100%); } }
 
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg); }
+  to {
+    -moz-transform: rotate(180deg); } }
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(180deg); } }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(180deg); } }
+
+@-moz-keyframes turn {
+  from {
+    -moz-transform: rotateX(0deg); }
+  to {
+    -moz-transform: rotateX(360deg); } }
+
+@-webkit-keyframes turn {
+  from {
+    -webkit-transform: rotateX(0deg); }
+  to {
+    -webkit-transform: rotateX(360deg); } }
+
+@keyframes turn {
+  from {
+    transform: rotateX(0deg); }
+  to {
+    transform: rotateX(360deg); } }
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
@@ -390,6 +426,32 @@ body, html, main {
       opacity: .8; }
   .repeat-guests .question, .repeat-guests .span-options {
     display: none; }
+
+.spins {
+  -webkit-animation: spin ease-in 1;
+  /* call our keyframe named spin, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: spin ease-in 1;
+  animation: spin ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+.turns {
+  -webkit-animation: turn ease-in 1;
+  /* call our keyframe named turn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: turn ease-in 1;
+  animation: turn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
 
 .large-class {
   transition: all 0.5s ease;

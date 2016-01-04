@@ -6,28 +6,28 @@
       var weddingId = $routeParams.weddingId;
       var dateUrl = "/create-event";
       var displayEventsUrl = "/display-events"
-      var currWedding = '/create-wedding/'+weddingId;
+      var currWedding = '/create-wedding';
       var editEventUrl = 'edit-event';
       var deleteEventUrl = 'delete-event';
 
-      var getDates = function(item){
-        return $http.get(displayEventsUrl+'/'+weddingId);
+      var getDates = function(id){
+        return $http.get(displayEventsUrl+'/'+id);
       };
-      var addDate = function(item){
+      var addDate = function(item,id){
         // console.log('add Date item', item)
         // var pObject = parseItem(item);
-        return $http.post(dateUrl+'/'+weddingId,item)
+        return $http.post(dateUrl+'/'+id,item)
       };
-      var editDate = function(item){
+      var editDate = function(item,id){
         console.log('item',item)
-        return $http.put(editEventUrl+'/'+weddingId,item)
+        return $http.put(editEventUrl+'/'+id,item)
       }
 
       var deleteDate = function(item){
         return $http.delete(deleteEventUrl +'/'+item._id);
       }
-      var getWeddingObject = function(){
-        return $http.get(currWedding);
+      var getWeddingObject = function(id){
+        return $http.get(currWedding+'/'+id);
       }
     return{
       getWeddingObject:getWeddingObject,
