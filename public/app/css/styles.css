@@ -166,7 +166,7 @@ body, html, main {
     .navbar-right {
       width: 200px;
       float: right;
-      margin-top: -100px; } }
+      margin-top: -40px; } }
   @media (max-width: 550px) {
     .navbar-right {
       float: left;

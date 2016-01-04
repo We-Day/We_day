@@ -10,7 +10,7 @@ angular
 
     })
     $scope.storyEmpty = function(obj){
-      if(obj.storyContent.length < 1){
+      if(!obj.storyContent){
         $scope.htmlVariable = "<h2 style = 'color:#20B2AA'>Welcome to We-Day write your story for all your friends and family to see!</h2>";
         return true;
       }else{

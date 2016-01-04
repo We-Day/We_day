@@ -111,7 +111,7 @@ body, html, main {
 			@include breakpoint(baby-bear){
         width: 200px;
         float: right;
-				margin-top:-100px;
+				margin-top:-40px;
       }
 				@include breakpoint(tiny-bear){
 					float: left;
