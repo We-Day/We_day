@@ -23,7 +23,7 @@ public class Post {
     @Column
     public String text;
 
-    @OneToOne
+    @ManyToOne
     public Wedding wedding;
 
 
