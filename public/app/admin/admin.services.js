@@ -2,23 +2,23 @@
   "use strict"
   angular
     .module('admin')
-    .factory('AdminService',function($http,$routeParams){
+    .factory('AdminService',function($http){
       var guestsUrl = "/create-guest";
-      var getInvitees = "/display-invites/"+$routeParams.weddingId;
-      var currWedding = '/create-wedding/'+$routeParams.weddingId;
+      var getInvitees = "/display-invites/";
+      var currWedding = '/create-wedding/';
       var currentUser = '/current-user';
       var logoutUrl = '/logout';
-      var getPicsUrl = '/photos/'+$routeParams.weddingId;
+      var getPicsUrl = '/photos/'
       var removeUserUrl = '/delete-invite'
-      var currId = $routeParams.weddingId;
+//      var currId = $routeParams.weddingId;
       var logOut = function(){
         return $http.post(logoutUrl);
       }
-      var getWeddingObject = function(){
-        return $http.get(currWedding);
+      var getWeddingObject = function(weddingId){
+        return $http.get(currWedding + weddingId);
       }
-      var getUsers = function(){
-        return $http.get(getInvitees);
+      var getUsers = function(weddingId){
+        return $http.get(getInvitees + weddingId);
       };
       var inviteUser = function(obj){
         return $http.post(guestsUrl,obj);
@@ -29,8 +29,8 @@
       var getCurrentUser = function(){
         return $http.get(currentUser);
       }
-      var getPhotos = function(){
-        return $http.get(getPicsUrl);
+      var getPhotos = function(weddingId){
+        return $http.get(getPicsUrl + weddingId);
       }
     return{
       getPhotos:getPhotos,
