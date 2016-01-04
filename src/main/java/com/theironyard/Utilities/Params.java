@@ -56,5 +56,6 @@ public class Params {
 
     public ArrayList<Object> notifcationDump;
 
+    public String notificationText;
 
 }
