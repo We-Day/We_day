@@ -5,7 +5,7 @@ angular
   .controller('AdminController',function($scope,AdminService,$location,$routeParams){
     $scope.weddingId = $routeParams.weddingId;
     var weddingId = $routeParams.weddingId;
-
+    $scope.currentPage = $location.$$path;
     $scope.slides = [];
     $scope.slides.splice(0,$scope.slides.length);
 
