@@ -638,24 +638,16 @@ uib-slide img {
     width: 80%;
     margin-bottom: 5px; } }
 
-.hide-class {
-  visibility: hidden; }
-
-.shrink-class {
-  max-height: 20px !important; }
-
-.calendar-repeat-animation {
-  margin-bottom: 200px; }
-
-.calendar-repeat-animation-visibility {
-  transition: all 0.3s ease;
-  visibility: hidden; }
-
 .calendar-repeat-events {
-  transition: all 1.4s ease;
+  transition: all 0.2s ease;
   max-height: 20px; }
   .calendar-repeat-events .other-text-calendar {
-    transition: all 0.1s ease; }
+    transition: all 0.1s ease;
+    visibility: hidden; }
+  .calendar-repeat-events:hover {
+    margin-bottom: 200px; }
+    .calendar-repeat-events:hover .other-text-calendar {
+      visibility: visible; }
 
 .endar {
   margin-top: 2%; }

@@ -67,38 +67,38 @@
   @else if $point == baby-bear {
     @media (max-width: 770px)  { @content; }
   }
-	@else if $point == tiny-bear {
-		@media (max-width: 550px)  { @content; }
-	}
+   @else if $point == tiny-bear {
+      @media (max-width: 550px)  { @content; }
+   }
 }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
 .animate-enter {
-	-webkit-transition: 1s linear all; /* Chrome */
-	transition: 1s linear all;
-	opacity: 0;
+   -webkit-transition: 1s linear all; /* Chrome */
+   transition: 1s linear all;
+   opacity: 0;
 }
 body, html, main {
-	/* important */
-	height: 100%;
+   /* important */
+   height: 100%;
   width: 100%;
   margin: 0;
-	font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 26.4px;
+   font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+   font-style: normal;
+   font-variant: normal;
+   font-weight: 500;
+   line-height: 26.4px;
 
 }
 .login-button{
-	background: white;
-	position: absolute;
-	width: 80%;
-	margin-left: 10%;
-	top: 20%;
-	z-index: 3;
+   background: white;
+   position: absolute;
+   width: 80%;
+   margin-left: 10%;
+   top: 20%;
+   z-index: 3;
 }
 .navbar{
   position: fixed;
@@ -132,20 +132,20 @@ body, html, main {
 
 }
   }
-	.navbar-right{
-			@include breakpoint(baby-bear){
+   .navbar-right{
+         @include breakpoint(baby-bear){
         width: 200px;
         float: right;
-				margin-top:-40px;
+            margin-top:-40px;
       }
-				@include breakpoint(tiny-bear){
-					float: left;
+            @include breakpoint(tiny-bear){
+               float: left;
           margin-top:-25px;
-					width:100%;
+               width:100%;
           text-align:center;
-		  		}
-		padding-right: 2%;
-	}
+            }
+      padding-right: 2%;
+   }
 
 
   .navbar-brand{
@@ -161,9 +161,9 @@ body, html, main {
    -webkit-animation-duration:3s;
    -moz-animation-duration:3s;
    animation-duration:3s;
-	 @include breakpoint(tiny-bear){
+    @include breakpoint(tiny-bear){
     width: 100px;
- 		}
+      }
   }
   .invitee-name{
     transition: 1s;
@@ -187,11 +187,11 @@ body, html, main {
 }
 
 .cd-fixed-bg {
-	min-height: 500px;
-	background-size: cover;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-position: center center;
+   min-height: 500px;
+   background-size: cover;
+   background-attachment: fixed;
+   background-repeat: no-repeat;
+   background-position: center center;
   h1{
     width: 60%;
     margin-left: 30%;
@@ -211,52 +211,52 @@ body, html, main {
    -moz-animation-duration:3s;
    animation-duration:3s;
   }
-	#slider{
-		width:300px;
-		height:100px;
-		background: rgba(5, 5, 10, .5);
-		color:white;
-		padding:1%;
-		position: absolute;
-		left: -400px;
-		top:40%;
-		font-size: 3em;
-		&:hover{
-			left:30%;
-		}
+   #slider{
+      width:300px;
+      height:100px;
+      background: rgba(5, 5, 10, .5);
+      color:white;
+      padding:1%;
+      position: absolute;
+      left: -400px;
+      top:40%;
+      font-size: 3em;
+      &:hover{
+         left:30%;
+      }
 
-	}
-	p{
-		width: 60%;
+   }
+   p{
+      width: 60%;
     margin-left: 30%;
 
-		a{
-			text-decoration: none;
-			color: white;
-			font-size:4em;
-			&:hover{
-	 		 opacity: .7;
-	 	 }
-		}
-		height: 100px;
-		background: rgba(20, 5, 5, 0);
-		opacity:0;  /* make things invisible upon start */
-	 -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-	 -moz-animation:fadeIn ease-in 1;
-	 animation:fadeIn ease-in 1;
+      a{
+         text-decoration: none;
+         color: white;
+         font-size:4em;
+         &:hover{
+          opacity: .7;
+       }
+      }
+      height: 100px;
+      background: rgba(20, 5, 5, 0);
+      opacity:0;  /* make things invisible upon start */
+    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation:fadeIn ease-in 1;
+    animation:fadeIn ease-in 1;
 
-	 -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-	 -moz-animation-fill-mode:forwards;
-	 animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
 
-	 -webkit-animation-duration:3s;
-	 -moz-animation-duration:3s;
-	 animation-duration:3s;
+    -webkit-animation-duration:3s;
+    -moz-animation-duration:3s;
+    animation-duration:3s;
 
-	 }
+    }
 
 
-	 }
+    }
 
 
 .cd-fixed-bg.cd-bg-1 {
@@ -271,16 +271,16 @@ body, html, main {
 }
 
 .cd-container{
-	h1{
-		width: 60%;
-		margin:auto;
-	}
+   h1{
+      width: 60%;
+      margin:auto;
+   }
 }
 .calendar-main-page{
-	margin-bottom: 5%;
+   margin-bottom: 5%;
 }
 .cd-scrolling-bg {
-	min-height: 100%;
+   min-height: 100%;
 
   .block{
     vertical-align: top;
@@ -293,7 +293,7 @@ body, html, main {
     h1{
       width: 100%;
     }
-		text-align: center;
+      text-align: center;
   }
 
 }
@@ -305,23 +305,23 @@ body, html, main {
 }
 //register-page
 .register-form{
-	padding-top: 10%;
-	text-align: center;
-	width: 90%;
+   padding-top: 10%;
+   text-align: center;
+   width: 90%;
   @include breakpoint(tiny-bear){
     margin-top: 100px;
   }
-	.glyphicon-arrow-right{
-		font-size: 3em;
-		&:hover{
-			opacity: .5;
-		}
-	}
+   .glyphicon-arrow-right{
+      font-size: 3em;
+      &:hover{
+         opacity: .5;
+      }
+   }
 }
 .login-main-page{
-	margin-top: 10%;
-	width: 90%;
-	margin-left: 5%;
+   margin-top: 10%;
+   width: 90%;
+   margin-left: 5%;
   @include breakpoint(baby-bear){
     margin-top: 100px;
   }
@@ -330,67 +330,67 @@ body, html, main {
   }
 }
 .fc-widget-content{
-	font-family: serif;
+   font-family: serif;
 }
 //admin page-------------------------------------------------------//
 
 .form-add-users{
-	margin-left: 10%;
-	width: 80%;
-	margin-top: 100px;
-	input{
-		width: 100%;
-	}
+   margin-left: 10%;
+   width: 80%;
+   margin-top: 100px;
+   input{
+      width: 100%;
+   }
 }
 
 
 .individual-guests{
   width: 100%;
-  					@include breakpoint(mama-bear){
-						position: absolute;
-						padding-top:40px;
-					}
-					@include breakpoint(tiny-bear){
+               @include breakpoint(mama-bear){
+                  position: absolute;
+                  padding-top:40px;
+               }
+               @include breakpoint(tiny-bear){
             position:absolute;
             margin-left:20%;
-					margin-top: 100px;}
-	padding-left: 10%;
-	height: 100%;
+               margin-top: 100px;}
+   padding-left: 10%;
+   height: 100%;
   padding-top: 30px;
-	button{
+   button{
     float: left;
     width: 70%;
-		position: absolute;
-		top:2%;
-	}
+      position: absolute;
+      top:2%;
+   }
 }
 .repeat-guests{
-	@include breakpoint(tiny-bear){
-	display: block;
-	font-size: 4em;
-	line-height: 50px;
-	background-color: white;
-	border: solid white 0px;
+   @include breakpoint(tiny-bear){
+   display: block;
+   font-size: 4em;
+   line-height: 50px;
+   background-color: white;
+   border: solid white 0px;
   border-bottom: solid black 1px;
   border-radius: 0px;
 }
-	transition: all 0.5s ease;
-	max-width: 40%;
-	font-size: 1.6em;
-	display: inline-block;
-	border: solid #3b3a36 3px;
-	margin: 1%;
-	padding: 2%;
-	border-radius: 4px;
-	color:#3b3a36;
-	background-color: #e9ece5;
-	a,p{display: inline}
-	a{opacity: 0;
-		&:hover{opacity: .8;}
-	}
-	.question,.span-options{
-		display: none;
-	}
+   transition: all 0.5s ease;
+   max-width: 40%;
+   font-size: 1.6em;
+   display: inline-block;
+   border: solid #3b3a36 3px;
+   margin: 1%;
+   padding: 2%;
+   border-radius: 4px;
+   color:#3b3a36;
+   background-color: #e9ece5;
+   a,p{display: inline}
+   a{opacity: 0;
+      &:hover{opacity: .8;}
+   }
+   .question,.span-options{
+      display: none;
+   }
 }
 .spins{
   -webkit-animation:spin ease-in 1;  /* call our keyframe named spin, use animattion ease-in and repeat it only 1 time */
@@ -419,39 +419,39 @@ body, html, main {
   animation-duration:1s;
 }
 .large-class{
-	transition: all 0.5s ease;
-	width: 80%;
-	font-size: 3em;
-	font-weight: 500;
-	line-height: 35px;
-	@include breakpoint(tiny-bear){
-	left: 5%;
-	top: 5%;
-	font-size: 3em;
-	width: 400px
+   transition: all 0.5s ease;
+   width: 80%;
+   font-size: 3em;
+   font-weight: 500;
+   line-height: 35px;
+   @include breakpoint(tiny-bear){
+   left: 5%;
+   top: 5%;
+   font-size: 3em;
+   width: 400px
 }
-	.question,.span-options{
-		@include breakpoint(tiny-bear){
-		max-width: 400px;
-		padding-right: 0;
-	}
-		display: block;
-		span:hover{color:black;}
-	}
-	.span-options{
-		width:60%;
-		margin: auto;
-		span{
-			margin-left: 20%;
-		}
-	}
-	.username,a{
-		display: none;
-	}
+   .question,.span-options{
+      @include breakpoint(tiny-bear){
+      max-width: 400px;
+      padding-right: 0;
+   }
+      display: block;
+      span:hover{color:black;}
+   }
+   .span-options{
+      width:60%;
+      margin: auto;
+      span{
+         margin-left: 20%;
+      }
+   }
+   .username,a{
+      display: none;
+   }
 }
 .user-admin-directives{
   transition: all 2s ease;
-	margin-left: 10%;
+   margin-left: 10%;
 }
 .non-nav-wrapper{
   margin-top: 55px;
@@ -467,35 +467,35 @@ body, html, main {
   border-right: ridge #9fa8a3 5px;
   width: 10%;
   transition: all 2s ease;
-	margin-top: 50px;
-	position: absolute;
-	.nav-tabs {
-	margin-top: 20px;
+   margin-top: 50px;
+   position: absolute;
+   .nav-tabs {
+   margin-top: 20px;
   float: left;
   border-bottom: 0;
   li {
     float: none;
     padding-bottom: 3%;
-		transition: all 0.5s ease;
-		height: 80px;
+      transition: all 0.5s ease;
+      height: 80px;
 
-		p{
-			display: none;
-			transition: all 0.5s ease;
-			font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-			font-style: normal;
-			font-variant: normal;
-			font-weight: 500;
-			line-height: 26.4px;
-		}
-		&:hover p{
-			display: block;
-		}
+      p{
+         display: none;
+         transition: all 0.5s ease;
+         font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+         font-style: normal;
+         font-variant: normal;
+         font-weight: 500;
+         line-height: 26.4px;
+      }
+      &:hover p{
+         display: block;
+      }
     a {
       margin-right: 0;
       border: 0;
       background-color: #333;
-			transition: all 0.5s ease;
+         transition: all 0.5s ease;
 
       &:hover {
         background-color: #444;
@@ -506,7 +506,7 @@ body, html, main {
 
   .glyphicon {
     color: #fff;
-		font-size: 2em;
+      font-size: 2em;
   }
 
   .active .glyphicon {
@@ -548,66 +548,66 @@ body, html, main {
 }
 //create-wedding------------------------------------------/
 .wrapper-create-wedding{
-	width: 100%;
-	height: 1000px;
-	background-image: url('http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg');
-	position: absolute;
+   width: 100%;
+   height: 1000px;
+   background-image: url('http://www.mycity-web.com/wp-content/uploads/2015/03/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg');
+   position: absolute;
 }
 .button-add-invitees{
   margin-top: 50px;
   margin-bottom: 5px;
 }
 uib-slide img{
-	max-width: 10%;
+   max-width: 10%;
 }
 .admin-form{
 
-	background: rgba(5, 5, 10, .5);
- 	width: 90%;
- 	margin:auto;
- 	margin-top: 10%;
- 	border-radius: 25px;
-	z-index: 2;
-	width: 100%;
-	text-align: center;
-	h1{
-		color:white;
-	}
-	.form-group{
-		padding-top: 5%;
-		width: 80%;
-		margin: auto;
-		font-size: 1.5em;
-		.calendar-p{
-			display: inline-block;
-			.calendar-span{
-				padding-right: 80%;
-			}
-		}
-		input{
-			float: left;
-			width: 65%;
-			border-radius: 5px;
-		}
+   background: rgba(5, 5, 10, .5);
+   width: 90%;
+   margin:auto;
+   margin-top: 10%;
+   border-radius: 25px;
+   z-index: 2;
+   width: 100%;
+   text-align: center;
+   h1{
+      color:white;
+   }
+   .form-group{
+      padding-top: 5%;
+      width: 80%;
+      margin: auto;
+      font-size: 1.5em;
+      .calendar-p{
+         display: inline-block;
+         .calendar-span{
+            padding-right: 80%;
+         }
+      }
+      input{
+         float: left;
+         width: 65%;
+         border-radius: 5px;
+      }
 
-	}
-	.glyphicon-arrow-right{
-		font-size: 4em;
-		top: 100%;
-		&:hover{
-			color:green;
-		}
-	}
-	button{
-		border-color: green;
-	}
+   }
+   .glyphicon-arrow-right{
+      font-size: 4em;
+      top: 100%;
+      &:hover{
+         color:green;
+      }
+   }
+   button{
+      border-color: green;
+   }
 #submit-new-admin{
-	margin-top: 10%;
-	margin-bottom: 10%;
-	font-size: 2em;
-	a{
-		text-decoration: none;
-	}
+   margin-top: 10%;
+   margin-bottom: 10%;
+   font-size: 2em;
+   a{
+      text-decoration: none;
+   }
 }
 }
 .loading-icon-container{
@@ -626,202 +626,186 @@ uib-slide img{
 // calendar
 
 .main-calendar{
-	.span4{
-		@include breakpoint(tiny-bear){
-  		display: none;
-  		}
-	}
-	@include breakpoint(tiny-bear){
-		margin-top:100px;
-		}
-		.btn-success{
-			@include breakpoint(tiny-bear){
-				width: 80%;
-				margin-bottom:5px;
-				}
-		}
+   .span4{
+      @include breakpoint(tiny-bear){
+      display: none;
+      }
+   }
+   @include breakpoint(tiny-bear){
+      margin-top:100px;
+      }
+      .btn-success{
+         @include breakpoint(tiny-bear){
+            width: 80%;
+            margin-bottom:5px;
+            }
+      }
 }
-//ng-classes for animating calendar events-->
-.hide-class{
-  visibility: hidden;
-}
-.shrink-class{
-  max-height: 20px !important;
-
-}
-.calendar-repeat-animation{
-  margin-bottom: 200px
-}
-.calendar-repeat-animation-visibility{
-  transition: all .3s ease;
-  visibility: hidden;
-}
-// <-----
 .calendar-repeat-events{
-	transition: all 1.4s ease;
-	max-height: 20px;
-	.other-text-calendar{
-		transition: all .1s ease;
-		// visibility:hidden;
-	}
+   transition: all .2s ease;
+   max-height: 20px;
+   .other-text-calendar{
+      transition: all .1s ease;
+      visibility:hidden;
+   }
 
 
-	// &:hover{
-	// 	margin-bottom: 200px;
-	// 	.other-text-calendar{
-	// 		visibility: visible;
-	// 	}
-	// }
+   &:hover{
+      margin-bottom: 200px;
+      .other-text-calendar{
+         visibility: visible;
+      }
+   }
 }
 
 
 .endar{
-	margin-top: 2%;
-	@include breakpoint(mama-bear){
-		width:80%;
-		// margin-top: 15%;
-	}
+   margin-top: 2%;
+   @include breakpoint(mama-bear){
+      width:80%;
+      // margin-top: 15%;
+   }
 
 }
 //timeline
 .timeline{
   margin-top: 100px;
   @include breakpoint(tiny-bear){
-		width:80%;
+      width:80%;
     margin-left: 30px;
-	}
+   }
 }
 
 .form-group-notifications{
-		@include breakpoint(mama-bear){
-			width:80%;
-			}
-			@include breakpoint(baby-bear){
+      @include breakpoint(mama-bear){
+         width:80%;
+         }
+         @include breakpoint(baby-bear){
         margin-top:150px;
-			width:80%;}
-	box-shadow: 10px 10px 5px #888888;
-	height: 150px;
-	margin-left: 10%;
-	width: 100%;
-	border: solid black 3px;
-	border-radius: 100px;
-	margin-top:80px;
-	.glyphicon-remove{
-		color:black;
-		font-size: 1.8em;
-		opacity: .7;
-		float: right;
-		&:hover{
-			opacity: .5;
-		}
-	}
-	.notification-input{
-		input{
-				@include breakpoint(mama-bear){
-				width:15em;
-			}
-				@include breakpoint(baby-bear){
-					margin-top:5%;
-					margin-left:5%;
+         width:80%;}
+   box-shadow: 10px 10px 5px #888888;
+   height: 150px;
+   margin-left: 10%;
+   width: 100%;
+   border: solid black 3px;
+   border-radius: 100px;
+   margin-top:80px;
+   .glyphicon-remove{
+      color:black;
+      font-size: 1.8em;
+      opacity: .7;
+      float: right;
+      &:hover{
+         opacity: .5;
+      }
+   }
+   .notification-input{
+      input{
+            @include breakpoint(mama-bear){
+            width:15em;
+         }
+            @include breakpoint(baby-bear){
+               margin-top:5%;
+               margin-left:5%;
           width:10em;
-				}
-				@include breakpoint(tiny-bear){
-					width:8em;
-				}
-			width: 25em;
-			font-size: 2em;
-			border: none;
-			outline: none;
-	}
+            }
+            @include breakpoint(tiny-bear){
+               width:8em;
+            }
+         width: 25em;
+         font-size: 2em;
+         border: none;
+         outline: none;
+   }
 }
-	.checkboxes-notifications{
-		@include breakpoint(baby-bear){
-		display: inline;
-		border-bottom: solid #DADADA 1px;
-		width: 30%;
+   .checkboxes-notifications{
+      @include breakpoint(baby-bear){
+      display: inline;
+      border-bottom: solid #DADADA 1px;
+      width: 30%;
     margin-left: 25%;
-	}
-		width: 50px;
+   }
+      width: 50px;
     margin-left:10px;
-		padding: 2%;
-		height: 100%;
-		border-right: solid #DADADA 1px;
+      padding: 2%;
+      height: 100%;
+      border-right: solid #DADADA 1px;
     margin-right:20px;
-		border-radius: 100px;
-		.form-group{
-			display: block;
-			@include breakpoint(baby-bear){
-			display: inline;
-		}
-		}
-	}
+      border-radius: 100px;
+      .form-group{
+         display: block;
+         @include breakpoint(baby-bear){
+         display: inline;
+      }
+      }
+   }
 
 }
 .admin-notifications-container{
-	background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
-	width: 80%;
-	margin-left: 20%;
-	margin-top: 100px;
-	margin-bottom: 30%;
+   background-image: url('https://unsplash.com/photos/xMScfzgJ7_c'); //tan
+   width: 80%;
+   margin-left: 20%;
+   margin-top: 100px;
+   margin-bottom: 30%;
 
 }
 .admin-notifications{
-	h4,h1{	transition: all .5s ease-in-out;
+   h4,h1{ transition: all .5s ease-in-out;
 }
-	transition: all 1s ease-in-out;
-	&:hover{
-		// transform: rotate(360deg);
-		width: 500px;
-		h1{
-		font-size: 4em;
-		}
-		h4{
-			font-size: .8em;
-		}
-	}
-	.tip-left{
-		width: 0px;
-  	height: 0px;
-  	position: absolute;
-  	background: transparent;
-  	border: 10px solid #ccc;
-		top: 10px;
-  	left: -25px;
-  	border-top-color: transparent;
-  	border-left-color: transparent;
-  	border-bottom-color: transparent;
-	}
-	font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 26.4px;
-	position: relative;
+   transition: all 1s ease-in-out;
+   &:hover{
+      // transform: rotate(360deg);
+      width: 500px;
+      h1{
+      font-size: 4em;
+      }
+      h4{
+         font-size: .8em;
+      }
+   }
+   .tip-left{
+      width: 0px;
+   height: 0px;
+   position: absolute;
+   background: transparent;
+   border: 10px solid #ccc;
+      top: 10px;
+   left: -25px;
+   border-top-color: transparent;
+   border-left-color: transparent;
+   border-bottom-color: transparent;
+   }
+   font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+   font-style: normal;
+   font-variant: normal;
+   font-weight: 500;
+   line-height: 26.4px;
+   position: relative;
   margin: 20px 10px;
   padding: 5px;
   background-color: #DADADA;
   border-radius: 3px;
   border: 5px solid #6ed3cf;
-	max-width: 60%;
-	h1{
-		font-size: .1em;
-		margin: 0;
-		height: auto;
-		max-width: 100%;
-	}
-	h4{
-		font-size: 3em;
-		margin: 0;
-		height: auto;
-		max-width: 100%;
-	}
-	.glyphicon-remove{
-		color:black;
-	}
+   max-width: 60%;
+   h1{
+      font-size: .1em;
+      margin: 0;
+      height: auto;
+      max-width: 100%;
+   }
+   h4{
+      font-size: 3em;
+      margin: 0;
+      height: auto;
+      max-width: 100%;
+   }
+   .glyphicon-remove{
+      color:black;
+   }
 }
 
 .full-page-div-form{
-	width: 100%;
+   width: 100%;
 }
 
 //carousel directive
@@ -914,91 +898,91 @@ background-color: rgb(192, 192, 192);
 }
 //landing page
 .landing-page-container{
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	.top-horizontal-bar{
-		position: absolute;
-		width: 100%;
-		height: 0;
-		border-top: 100px solid black;
-		border-right: 1500px solid transparent;
-	}
-	.bottom-horizontal-bar{
-		position: relative;
-		bottom: -240px;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   .top-horizontal-bar{
+      position: absolute;
+      width: 100%;
+      height: 0;
+      border-top: 100px solid black;
+      border-right: 1500px solid transparent;
+   }
+   .bottom-horizontal-bar{
+      position: relative;
+      bottom: -240px;
     margin-top: 50%;
-		width: 100%;
-		height: 0;
-		border-bottom: 100px solid black;
-		border-left: 1500px solid transparent;
-	}
+      width: 100%;
+      height: 0;
+      border-bottom: 100px solid black;
+      border-left: 1500px solid transparent;
+   }
 .landing-page-create-wedding{
-	width: 50%;
-	margin: auto;
-	border: solid #c9c9c9 15px;
-	padding: 5%;
-	text-align: center;
-	a{
-		text-decoration: none;
-		font-size: 3em;
-		color:black;
-		font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-		font-style: normal;
-		font-variant: normal;
-		font-weight: 800;
-		line-height: 26.4px;
-	}
-	&:hover{
-		opacity: .5;
-	}
+   width: 50%;
+   margin: auto;
+   border: solid #c9c9c9 15px;
+   padding: 5%;
+   text-align: center;
+   a{
+      text-decoration: none;
+      font-size: 3em;
+      color:black;
+      font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 800;
+      line-height: 26.4px;
+   }
+   &:hover{
+      opacity: .5;
+   }
 }
 .landing-page{
-	width: 80%;
-	margin: auto;
-	margin-top: 10%;
-	text-align: center;
-	.landing-page-options{
-		display: inline-block;
-		width: 40%;
-		margin: auto;
-		margin: 3%;
-		border: solid #c9c9c9 3px;
-		padding: 5%;
-		text-align: center;
-		a{
-			text-decoration: none;
-			font-size: 3em;
-			color:black;
-			font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-			font-style: normal;
-			font-variant: normal;
-			font-weight: 500;
-			line-height: 26.4px;
-		}
-		&:hover{
-			opacity: .5;
+   width: 80%;
+   margin: auto;
+   margin-top: 10%;
+   text-align: center;
+   .landing-page-options{
+      display: inline-block;
+      width: 40%;
+      margin: auto;
+      margin: 3%;
+      border: solid #c9c9c9 3px;
+      padding: 5%;
+      text-align: center;
+      a{
+         text-decoration: none;
+         font-size: 3em;
+         color:black;
+         font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+         font-style: normal;
+         font-variant: normal;
+         font-weight: 500;
+         line-height: 26.4px;
+      }
+      &:hover{
+         opacity: .5;
 
-		}
-	}
+      }
+   }
 }
 }
 .story-directive-container{
   .our-story-div-button{
     width: 400px;
   }
-	.our-story-div,.our-story-div-button{
-			@include breakpoint(mama-bear){
-			}
-			@include breakpoint(tiny-bear){
-		}
+   .our-story-div,.our-story-div-button{
+         @include breakpoint(mama-bear){
+         }
+         @include breakpoint(tiny-bear){
+      }
     margin-top: 30px;
-		margin-left: 20%;
-		margin-bottom: 100px;
-	}
-	.story-text-editor{
-		margin-left: 5%;
-	}
+      margin-left: 20%;
+      margin-bottom: 100px;
+   }
+   .story-text-editor{
+      margin-left: 5%;
+   }
   img{
     max-width: 100%;
   }
