@@ -103,12 +103,13 @@ angular
           textBool:event.textBool,
           textTime: event.textTime,
           emailBool:event.emailBool,
-          emailTime: event.emailßTime,
+          emailTime: event.emailTime,
           notificationBool:event.notificationBool,
           notificationTime:event.notificationTime,
         }
+        console.log(typeof(start));
         CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
-          console.log('editDateReturn',event)
+          console.log(event)
 
       });
     };

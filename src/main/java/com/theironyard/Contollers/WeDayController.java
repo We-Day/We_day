@@ -13,6 +13,7 @@ import com.twilio.sdk.resource.factory.MessageFactory;
 import com.twilio.sdk.resource.instance.Message;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -31,10 +32,10 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ListResourceBundle;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -342,6 +343,15 @@ public class WeDayController {
 
     @RequestMapping(path = "edit-event/{id}", method = RequestMethod.PUT)
     public void editEvent(@RequestBody Params event, @PathVariable("id") int id) {
+        ArrayList<String> numbers = new ArrayList<>();
+        ArrayList<String> emails = new ArrayList<>();
+        List<User> weddingUsers = users.findByWeddingId(Integer.valueOf(id));
+        for (User user : weddingUsers) {
+            String phone = user.phone;
+            String email = user.email;
+            numbers.add(phone);
+            emails.add(email);
+        }
 
         Wedding wedding = weddings.findOne(id);
 
@@ -351,9 +361,36 @@ public class WeDayController {
         event1.wedding = wedding;
         event1.start = event.start;
         event1.end = event.end;
+        event1.textBool = event.textBool;
+        event1.textTime = event.textTime;
+        event1.emailBool = event.emailBool;
+        event1.emailTime = event.emailTime;
+        event1.notificationBool = event.notificationBool;
+        event1.notificationTime = event.notificationTime;
 
-        CalendarEvent editedEvent = (CalendarEvent)event1;
+        CalendarEvent editedEvent = (CalendarEvent) event1;
         events.save(editedEvent);
+
+        if (event1.textBool) {
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    for (String phoneDestination : numbers) {
+                        try {
+                            sendText(phoneDestination, event1.title);
+                        } catch (TwilioRestException e) {
+                            e.printStackTrace();
+                        } catch (MessagingException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+            };
+            ZonedDateTime time =  ZonedDateTime.parse(event1.start).minusSeconds(Long.valueOf(event1.textTime)/1000);
+            Timer timer = new Timer();
+            timer.schedule(timerTask, Date.from(time.toInstant()));
+        }
     }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
