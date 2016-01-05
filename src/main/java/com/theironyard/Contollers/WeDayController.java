@@ -314,8 +314,9 @@ public class WeDayController {
     }
 
     @RequestMapping(path ="/send-notification/{id}", method = RequestMethod.DELETE)
-    public void delete (@PathVariable("id") int id) {
-        posts.delete(id);
+    public void delete (@PathVariable("id") String id) {
+        Post post = posts.findOneById(Integer.valueOf(id));
+        posts.delete(post);
     }
 
     @RequestMapping("/create-post")

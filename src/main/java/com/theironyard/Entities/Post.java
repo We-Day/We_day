@@ -10,14 +10,14 @@ import javax.persistence.*;
 public class Post {
     @Id
     @GeneratedValue
-    public int id;
+    public Integer id;
 
-    public String getText() {
+    public String getTitle() {
         return title;
     }
 
-    public void setText(String text) {
-        this.title = text;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Column
