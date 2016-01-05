@@ -641,21 +641,27 @@ uib-slide img{
             }
       }
 }
+.visibility-calendar{
+  visibility: hidden;
+}
+.expand-calendar{
+  margin-bottom:200px;
+}
 .calendar-repeat-events{
-   transition: all .2s ease;
+   transition: all .5s ease;
    max-height: 20px;
    .other-text-calendar{
       transition: all .1s ease;
-      visibility:hidden;
+      // visibility:hidden;
    }
 
 
-   &:hover{
-      margin-bottom: 200px;
-      .other-text-calendar{
-         visibility: visible;
-      }
-   }
+  //  &:hover{
+  //     margin-bottom: 200px;
+  //     .other-text-calendar{
+  //        visibility: visible;
+  //     }
+  //  }
 }
 
 
