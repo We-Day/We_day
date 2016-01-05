@@ -5,7 +5,11 @@
 angular
   .module('admin')
   .controller('CalendarController',function($scope,$routeParams,$location,CalendarService,$compile,uiCalendarConfig,$window){
-
+    //hide boxes in display when mouseover calendar
+    $scope.hideBoxes = function(){
+      $scope.var = false;
+      console.log('mouseover')
+    }
     //reload route
     $scope.reloadRoute = function() {
       $window.location.reload();
@@ -92,12 +96,7 @@ angular
           {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29)}
         ]
     };
-    $scope.editTitleDate = function(event){
-      $scope.updateEvents();
-      CalendarService.editDate(event,$routeParams.weddingId).success(function(res){
-        $scope.updateEvents();
-      });
-    };
+
     $scope.editDate = function(event){
 
         var currObject = {
@@ -129,7 +128,7 @@ angular
        startDate.setHours(startDate.getHours()+5);
        var endDate = new Date(event.end._d);
        endDate.setHours(endDate.getHours()+5);
-
+       console.log(event.title,'event.title')
        var currObject = {
          _id: event._id,
          start: startDate,
@@ -151,7 +150,6 @@ angular
          })
          console.log($scope.events,'after')
        CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
-       $scope.updateEvents();
          console.log(el,'event drop object')
        })
     };

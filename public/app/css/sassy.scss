@@ -641,21 +641,37 @@ uib-slide img{
 				}
 		}
 }
+//ng-classes for animating calendar events-->
+.hide-class{
+  visibility: hidden;
+}
+.shrink-class{
+  max-height: 20px !important;
+
+}
+.calendar-repeat-animation{
+  margin-bottom: 200px
+}
+.calendar-repeat-animation-visibility{
+  transition: all .3s ease;
+  visibility: hidden;
+}
+// <-----
 .calendar-repeat-events{
-	transition: all .2s ease;
+	transition: all 1.4s ease;
 	max-height: 20px;
 	.other-text-calendar{
 		transition: all .1s ease;
-		visibility:hidden;
+		// visibility:hidden;
 	}
 
 
-	&:hover{
-		margin-bottom: 200px;
-		.other-text-calendar{
-			visibility: visible;
-		}
-	}
+	// &:hover{
+	// 	margin-bottom: 200px;
+	// 	.other-text-calendar{
+	// 		visibility: visible;
+	// 	}
+	// }
 }
 
 
