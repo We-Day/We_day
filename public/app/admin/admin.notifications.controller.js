@@ -47,6 +47,7 @@ angular
       console.log(index)
       $scope.notifications.splice(index,1);
       NotServices.deleteNot(item).success(function(){
+        
       })
     }
 

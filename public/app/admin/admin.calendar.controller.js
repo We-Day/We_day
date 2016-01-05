@@ -115,7 +115,7 @@ angular
         console.log(event,'event,editDate')
         console.log(currObject,'editDate')
         CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
-          console.log(res,'edit date response')
+
       });
     };
 
@@ -151,6 +151,7 @@ angular
          })
          console.log($scope.events,'after')
        CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
+       $scope.updateEvents();
          console.log(el,'event drop object')
        })
     };
