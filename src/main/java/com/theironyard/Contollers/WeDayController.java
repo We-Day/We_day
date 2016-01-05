@@ -433,10 +433,10 @@ public class WeDayController {
         photos.save(p);
         User user = users.findOne(Integer.valueOf(userId));
         if(user.isAdmin){
-            response.sendRedirect("/#/" + currentPage);
+            response.sendRedirect("/#" + currentPage);
         }
         else {
-            response.sendRedirect("/#users/" + weddingId);
+            response.sendRedirect("/#" + currentPage);
         }
     }
 
