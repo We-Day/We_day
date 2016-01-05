@@ -13,7 +13,6 @@ import com.twilio.sdk.resource.factory.MessageFactory;
 import com.twilio.sdk.resource.instance.Message;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -31,9 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,7 +51,6 @@ public class WeDayController {
 
     @Inject
     public WeDayController(Facebook facebook) {
-
         this.facebook = facebook;
     }
 
@@ -311,7 +306,7 @@ public class WeDayController {
                 sendNotificationEmail(notificationEmail, params.title, session);
             }
         }
-        post.text = params.title;
+        post.title = params.title;
         post.wedding = weddings.findOne(Integer.valueOf(params.wedId));
         posts.save(post);
     }
@@ -319,6 +314,12 @@ public class WeDayController {
     @RequestMapping(path ="/send-notification/{id}", method = RequestMethod.GET)
     public List<Post> notification(@PathVariable("id") int id) {
         return posts.findByWedding(weddings.findOne(id));
+    }
+
+    @RequestMapping(path ="/send-notification/{id}", method = RequestMethod.DELETE)
+    public void delete (@PathVariable("id") String id) {
+        Post post = posts.findOneById(Integer.valueOf(id));
+        posts.delete(post);
     }
 
     @RequestMapping("/create-post")
@@ -421,7 +422,7 @@ public class WeDayController {
 
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
-    public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description, String userId) throws IOException {
+    public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic,int weddingId, String currentPage, String description, String userId) throws IOException {
         File photoFile = File.createTempFile("pic", pic.getOriginalFilename(), new File("public/pics"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(pic.getBytes());
@@ -435,10 +436,10 @@ public class WeDayController {
         photos.save(p);
         User user = users.findOne(Integer.valueOf(userId));
         if(user.isAdmin){
-            response.sendRedirect("/#/admins/"+ weddingId);
+            response.sendRedirect("/#" + currentPage);
         }
         else {
-            response.sendRedirect("/#/user/"+ weddingId);
+            response.sendRedirect("/#" + currentPage);
         }
     }
 

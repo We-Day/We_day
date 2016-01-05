@@ -10,18 +10,18 @@ import javax.persistence.*;
 public class Post {
     @Id
     @GeneratedValue
-    public int id;
+    public Integer id;
 
-    public String getText() {
-        return text;
+    public String getTitle() {
+        return title;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Column
-    public String text;
+    public String title;
 
     @ManyToOne
     public Wedding wedding;

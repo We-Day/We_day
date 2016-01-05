@@ -65,6 +65,7 @@ $scope.viewInvitee = false;
 //carousel
 
   $scope.reRoute = function(){
+    console.log($location.absUrl)
     $location.path($location.absUrl);
   }
 
