@@ -27,13 +27,13 @@ public class CalendarEvent {
     @ManyToOne
     public Wedding wedding;
 
-    public Boolean emailBool;
+    public Boolean emailBool = false;
     public String emailTime;
 
-    public Boolean textBool;
+    public Boolean textBool = false;
     public String textTime;
 
-    public Boolean notificationBool;
+    public Boolean notificationBool = false;
     public String notificationTime;
 
     public CalendarEvent(){
