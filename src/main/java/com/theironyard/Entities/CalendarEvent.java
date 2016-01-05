@@ -21,7 +21,7 @@ public class CalendarEvent {
     @Column(nullable = false)
     public String end;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     public String title;
 
     @ManyToOne

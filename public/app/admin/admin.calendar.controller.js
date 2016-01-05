@@ -112,6 +112,7 @@ angular
         }
         console.log(typeof(start));
         CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
+          $scope.updateEvents();
           console.log(event)
 
       });
@@ -143,6 +144,7 @@ angular
          }
        console.log('currObject',currObject);
        CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
+       $scope.updateEvents();
          console.log(el,'event drop object')
        })
     };
@@ -165,6 +167,7 @@ angular
           notificationTime:event.notificationTime,
         }
       CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
+        $scope.updateEvents();
         console.log('event resize object',el);
       })
       // $scope.alertMessage = ('Event Resized to make dayDelta ' + event.end._d);

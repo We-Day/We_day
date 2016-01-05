@@ -348,7 +348,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "edit-event/{id}", method = RequestMethod.PUT)
-    public void editEvent(@RequestBody Params event, @PathVariable("id") int id) {
+    public void editEvent(@RequestBody Params event,HttpSession session, @PathVariable("id") int id) {
         ArrayList<String> numbers = new ArrayList<>();
         ArrayList<String> emails = new ArrayList<>();
         List<User> weddingUsers = users.findByWeddingId(Integer.valueOf(id));
@@ -397,7 +397,26 @@ public class WeDayController {
             Timer timer = new Timer();
             timer.schedule(timerTask, Date.from(time.toInstant()));
         }
+
+        if (event1.emailBool){
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    for (String notificationEmail : emails){
+                        try {
+                            sendNotificationEmail(notificationEmail, event1.title, session);
+                        } catch (MessagingException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+            ZonedDateTime time =  ZonedDateTime.parse(event1.start).minusSeconds(Long.valueOf(event1.emailTime)/1000);
+            Timer timer = new Timer();
+            timer.schedule(timerTask, Date.from(time.toInstant()));
+        }
     }
+
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
     public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic,int weddingId, String currentPage, String description, String userId) throws IOException {
