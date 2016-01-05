@@ -302,7 +302,7 @@ public class WeDayController {
                 sendNotificationEmail(notificationEmail, params.title, session);
             }
         }
-        post.text = params.title;
+        post.title = params.title;
         post.wedding = weddings.findOne(Integer.valueOf(params.wedId));
         posts.save(post);
     }
@@ -310,6 +310,11 @@ public class WeDayController {
     @RequestMapping(path ="/send-notification/{id}", method = RequestMethod.GET)
     public List<Post> notification(@PathVariable("id") int id) {
         return posts.findByWedding(weddings.findOne(id));
+    }
+
+    @RequestMapping(path ="/send-notification/{id}", method = RequestMethod.DELETE)
+    public void delete (@PathVariable("id") int id) {
+        posts.delete(id);
     }
 
     @RequestMapping("/create-post")
@@ -357,7 +362,7 @@ public class WeDayController {
     }
 
     @RequestMapping(path = "/photo-upload", method = RequestMethod.POST)
-    public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic, int weddingId, String description, String userId) throws IOException {
+    public void upload(HttpSession session, HttpServletResponse response, MultipartFile pic,int weddingId, String currentPage, String description, String userId) throws IOException {
         File photoFile = File.createTempFile("pic", pic.getOriginalFilename(), new File("public/pics"));
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(pic.getBytes());
@@ -371,10 +376,10 @@ public class WeDayController {
         photos.save(p);
         User user = users.findOne(Integer.valueOf(userId));
         if(user.isAdmin){
-            response.sendRedirect("/#/admins/"+ weddingId);
+            response.sendRedirect("/#/" + currentPage);
         }
         else {
-            response.sendRedirect("/#/user/"+ weddingId);
+            response.sendRedirect("/#users/" + weddingId);
         }
     }
 

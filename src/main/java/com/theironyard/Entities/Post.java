@@ -13,15 +13,15 @@ public class Post {
     public int id;
 
     public String getText() {
-        return text;
+        return title;
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.title = text;
     }
 
     @Column
-    public String text;
+    public String title;
 
     @ManyToOne
     public Wedding wedding;
