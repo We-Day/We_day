@@ -14,6 +14,7 @@ angular
     $scope.notifications = [];
     $scope.refresh = function(){
     NotServices.getNot($routeParams.weddingId).success(function(res){
+      console.log(res,'notifications')
       $scope.notifications = res;
       });
     };

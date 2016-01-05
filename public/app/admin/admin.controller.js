@@ -82,7 +82,7 @@ console.log($location.$$path,'location path')
   }
   $scope.getPhotoSlides();
 
-    $scope.currentIndex = 7;
+    $scope.currentIndex = 6;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

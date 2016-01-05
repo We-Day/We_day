@@ -4,7 +4,7 @@
 "use strict"
 angular
   .module('admin')
-  .controller('CalendarController',function($scope,$routeParams,CalendarService,$compile,uiCalendarConfig,$window){
+  .controller('CalendarController',function($scope,$routeParams,$location,CalendarService,$compile,uiCalendarConfig,$window){
 
     //reload route
     $scope.reloadRoute = function() {
@@ -37,8 +37,14 @@ angular
 
     })
   };
-  $scope.updateEvents();
 
+  $scope.updateEvents();
+  //update One event
+  $scope.updateOneEvent = function(id){
+    CalendarEvent.getDates($routeParams.weddingId).success(function(res){
+
+    })
+  }
   //add CurrentWedding Name
   CalendarService.getWeddingObject($scope.weddingId).success(function(res){
     $scope.weddingName = res.weddingName;
@@ -94,8 +100,7 @@ angular
     };
     $scope.editDate = function(event){
 
-      console.log(event,'event');
-      var currObject = {
+        var currObject = {
         _id: event._id,
         start: event.start,
         end: event.end,
@@ -107,10 +112,10 @@ angular
           notificationBool:event.notificationBool,
           notificationTime:event.notificationTime,
         }
-        console.log(typeof(start));
+        console.log(event,'event,editDate')
+        console.log(currObject,'editDate')
         CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
-          console.log(event)
-
+          console.log(res,'edit date response')
       });
     };
 
@@ -120,25 +125,31 @@ angular
 
     /* alert on Drop */
      $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-       console.log(event,'event');
        var startDate = new Date(event.start._d);
        startDate.setHours(startDate.getHours()+5);
        var endDate = new Date(event.end._d);
        endDate.setHours(endDate.getHours()+5);
-       console.log(event,'event');
+
        var currObject = {
          _id: event._id,
          start: startDate,
          end: endDate,
          title: event.title,
-           textBool:event.textBool,
-           textTime: event.textTime,
-           emailBool:event.emailBool,
-           emailTime: event.emailTime,
-           notificationBool:event.notificationBool,
-           notificationTime:event.notificationTime,
+         textBool:event.textBool,
+         textTime: event.textTime,
+         emailBool:event.emailBool,
+         emailTime: event.emailTime,
+         notificationBool:event.notificationBool,
+         notificationTime:event.notificationTime,
          }
-       console.log('currObject',currObject);
+         console.log($scope.events,'before')
+         var id = currObject._id;
+         _.each($scope.events,function(el,indx){
+           if(_.contains(el,id)){
+             $scope.events.splice(indx,1,currObject)
+           }
+         })
+         console.log($scope.events,'after')
        CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
          console.log(el,'event drop object')
        })
@@ -149,6 +160,7 @@ angular
       startDate.setHours(startDate.getHours()+5);
       var endDate = new Date(event.end._d);
       endDate.setHours(endDate.getHours()+5);
+      console.log(event,'resize event');
       var currObject = {
         _id: event._id,
         start: startDate,
@@ -161,8 +173,14 @@ angular
           notificationBool:event.notificationBool,
           notificationTime:event.notificationTime,
         }
+        var id = currObject._id;
+        _.each($scope.events,function(el,indx){
+          if(_.contains(el,id)){
+            $scope.events.splice(indx,1,currObject)
+          }
+        })
       CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
-        console.log('event resize object',el);
+
       })
       // $scope.alertMessage = ('Event Resized to make dayDelta ' + event.end._d);
     };
@@ -183,7 +201,7 @@ angular
     /* add custom event*/
     $scope.addEvent = function() {
       var newEvent = {
-        title: 'Open Sesame',
+        title: 'Wedding Event',
         start: new Date(y, m, 22,5,10),
         end: new Date(y, m, 22,6,15),
           emailBool:false,
