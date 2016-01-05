@@ -23,7 +23,7 @@
                                 <div class="alert alert-info">
                                     <a class="close" ng-click="remove($index,e)"><span class="glyphicon glyphicon-remove"></span></a>
                                     <input ng-model = "title"placeholder="{{e.title}}">
-                                    <button ng-click = "e.title = title; editDate(e)" type="button" name="button">Save Event</button>
+                                    <button ng-click = "title = e.title; editDate(e)" type="button" name="button">Save Event</button>
                                     <div class="other-text-calendar">
                                     {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
                                     <h5>How would you like to notify your contacts</h5>

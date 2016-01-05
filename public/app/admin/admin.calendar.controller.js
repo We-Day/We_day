@@ -93,20 +93,17 @@ angular
       });
     };
     $scope.editDate = function(event){
-      var startDate = new Date(event.start._d);
-      startDate.setHours(startDate.getHours()+5);
-      var endDate = new Date(event.end._d);
-      endDate.setHours(endDate.getHours()+5);
+
       console.log(event,'event');
       var currObject = {
         _id: event._id,
-        start: startDate,
-        end: endDate,
+        start: event.start,
+        end: event.end,
         title: event.title,
-          textBool:event.emailBool,
-          textTime: event.emailTime,
-          emailBool:event.textBool,
-          emailTime: event.textTime,
+          textBool:event.textBool,
+          textTime: event.textTime,
+          emailBool:event.emailBool,
+          emailTime: event.emailßTime,
           notificationBool:event.notificationBool,
           notificationTime:event.notificationTime,
         }
@@ -133,10 +130,10 @@ angular
          start: startDate,
          end: endDate,
          title: event.title,
-           textBool:event.emailBool,
-           textTime: event.emailTime,
-           emailBool:event.textBool,
-           emailTime: event.textTime,
+           textBool:event.textBool,
+           textTime: event.textTime,
+           emailBool:event.emailBool,
+           emailTime: event.emailTime,
            notificationBool:event.notificationBool,
            notificationTime:event.notificationTime,
          }

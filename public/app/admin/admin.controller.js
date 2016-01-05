@@ -63,10 +63,7 @@ $scope.viewInvitee = false;
     })
   }
 //carousel
-
-  $scope.reRoute = function(){
-    $location.path($location.absUrl);
-  }
+console.log($location.$$path,'location path')
 
   $scope.slides = [];
   $scope.myInterval = 5000;
