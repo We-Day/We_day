@@ -13,7 +13,6 @@ import com.twilio.sdk.resource.factory.MessageFactory;
 import com.twilio.sdk.resource.instance.Message;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -31,9 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,7 +51,6 @@ public class WeDayController {
 
     @Inject
     public WeDayController(Facebook facebook) {
-
         this.facebook = facebook;
     }
 
@@ -119,8 +114,15 @@ public class WeDayController {
         createInvite(invite, invite.email, session);
 
         CalendarEvent weddingEvent = new CalendarEvent();
-        weddingEvent.end = wedding.date;
-        weddingEvent.start = wedding.date;
+
+        ZonedDateTime start1 = ZonedDateTime.parse(wedding.date);
+        String start = start1.toString();
+        weddingEvent.start = start;
+
+        ZonedDateTime end1 = ZonedDateTime.parse(wedding.date).plusHours(5);
+        String end = end1.toString();
+        weddingEvent.end = end;
+
         weddingEvent.wedding = wedding;
         weddingEvent.title = wedding.weddingName;
         events.save(weddingEvent);
@@ -212,6 +214,7 @@ public class WeDayController {
             userLogin.add(isUser);
             userLogin.add(user);
             return userLogin;
+
         } else {
             isUser = false;
             userLogin.add(isUser);
