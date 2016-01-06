@@ -4,14 +4,14 @@
     .module('user')
     .factory('NotificationServices',function($http){
       var urlN = "send-notification";
-        var getNot = function(el){
-          return $http.get(urlN);
+        var getNot = function(id){
+          return $http.get(urlN+'/'+id);
         };
         var postNot = function(el){
           return $http.post(urlN,el);
         }
         var deleteNot = function(el){
-          return $http.delete(urlN+'/'+el._id)
+          return $http.delete(urlN+'/'+el.id)
         }
     return{
       deleteNot:deleteNot,
