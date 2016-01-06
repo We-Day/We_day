@@ -1,5 +1,7 @@
 package com.theironyard.Entities;
 
+import javafx.scene.text.Text;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -41,8 +43,8 @@ public class Wedding {
     @OneToOne
     public Post post;
 
-    @Column(length = 2000)
-    @Size(max = 2000)
+    @Column(length = 10000)
+    @Size (max= 10000)
     public String storyContent;
 
 
