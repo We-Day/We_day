@@ -74,6 +74,8 @@ public class WeDayController {
 
     @RequestMapping(path = "/story", method = RequestMethod.POST)
     public Wedding story (@RequestBody Params param, HttpSession session) {
+        Object object = new Object();
+        object.equals(param.storyContent);
         Wedding wedding = weddings.findOne(param.weddingId);
         wedding.storyContent = param.storyContent;
         weddings.save(wedding);
@@ -89,11 +91,12 @@ public class WeDayController {
 
     @RequestMapping(path ="/story", method = RequestMethod.PUT)
     public Wedding story (@RequestBody Params params, @PathVariable("id") Integer id) {
+        Object object= params.storyContent;
         Wedding wedding = weddings.findOne(id);
         if (params.storyContent != null) {
             wedding.storyContent = params.storyContent;
         }
-        return  wedding;
+        return wedding;
     }
 
     @RequestMapping(path = "/create-wedding", method = RequestMethod.POST)

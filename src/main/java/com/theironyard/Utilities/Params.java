@@ -5,6 +5,7 @@ import org.apache.tomcat.jni.Local;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class Params {
 
     public String wedId;
 
+    @Column(length = 2000)
+    @Size(max = 2000)
     public String storyContent;
 
     public int _id;
