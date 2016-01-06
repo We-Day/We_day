@@ -1,6 +1,7 @@
 package com.theironyard.Entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,8 @@ public class Wedding {
     @OneToOne
     public Post post;
 
+    @Column(length = 2000)
+    @Size(max = 2000)
     public String storyContent;
 
 
