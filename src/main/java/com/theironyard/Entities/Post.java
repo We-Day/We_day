@@ -1,6 +1,7 @@
 package com.theironyard.Entities;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 /**
  * Created by macbookair on 12/9/15.
@@ -22,6 +23,9 @@ public class Post {
 
     @Column
     public String title;
+
+    @Column
+    public ZonedDateTime time;
 
     @ManyToOne
     public Wedding wedding;

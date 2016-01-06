@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.Column;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
@@ -67,5 +68,7 @@ public class Params {
 
     public Boolean notificationBool;
     public String notificationTime;
+
+    public ZonedDateTime time;
 }
 
