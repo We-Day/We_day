@@ -638,16 +638,18 @@ uib-slide img {
     width: 80%;
     margin-bottom: 5px; } }
 
+.visibility-calendar {
+  visibility: hidden; }
+
+.expand-calendar {
+  margin-bottom: 200px;
+  z-index: 5; }
+
 .calendar-repeat-events {
-  transition: all 0.2s ease;
+  transition: all 0.5s ease;
   max-height: 20px; }
   .calendar-repeat-events .other-text-calendar {
-    transition: all 0.1s ease;
-    visibility: hidden; }
-  .calendar-repeat-events:hover {
-    margin-bottom: 200px; }
-    .calendar-repeat-events:hover .other-text-calendar {
-      visibility: visible; }
+    z-index: -5; }
 
 .endar {
   margin-top: 2%; }

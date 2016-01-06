@@ -2,9 +2,9 @@
 "use strict"
 angular
   .module('user')
-  .controller('NotificationsController',function($scope,NotServices){
+  .controller('NotificationsController',function($scope,NotServices,$routeParams){
     $scope.refresh = function(){
-    NotServices.getNot().success(function(res){
+    NotServices.getNot($routeParams.weddingId).success(function(res){
       $scope.notifications = res;
       $scope.notifications.length > 0 ? $scope.areNotifications = true : $scope.areNotifications = false;
 

@@ -64,10 +64,6 @@ $scope.viewInvitee = false;
   }
 //carousel
 
-  $scope.reRoute = function(){
-    console.log($location.absUrl)
-    $location.path($location.absUrl);
-  }
 
   $scope.slides = [];
   $scope.myInterval = 5000;
@@ -86,7 +82,7 @@ $scope.viewInvitee = false;
   }
   $scope.getPhotoSlides();
 
-    $scope.currentIndex = 7;
+    $scope.currentIndex = 0;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

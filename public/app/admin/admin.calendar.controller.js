@@ -1,5 +1,3 @@
-
-
 (function(){
 "use strict"
 angular
@@ -111,8 +109,8 @@ angular
           notificationTime:event.notificationTime,
         }
         console.log(typeof(start));
+
         CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
-          $scope.updateEvents();
           console.log(event)
 
       });
@@ -143,8 +141,14 @@ angular
            notificationTime:event.notificationTime,
          }
        console.log('currObject',currObject);
+       _.each($scope.events,function(el,indx){
+         if(_.contains(el,currObject._id)){
+           $scope.events.splice(indx,1,currObject)
+         }
+       })
+       console.log($scope.events,'$scope.events')
+
        CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
-       $scope.updateEvents();
          console.log(el,'event drop object')
        })
     };
@@ -166,8 +170,12 @@ angular
           notificationBool:event.notificationBool,
           notificationTime:event.notificationTime,
         }
+        _.each($scope.events,function(el,indx){
+          if(_.contains(el,currObject._id)){
+            $scope.events.splice(indx,1,currObject)
+          }
+        })
       CalendarService.editDate(currObject,$routeParams.weddingId).success(function(el){
-        $scope.updateEvents();
         console.log('event resize object',el);
       })
       // $scope.alertMessage = ('Event Resized to make dayDelta ' + event.end._d);
@@ -201,16 +209,18 @@ angular
       };
       CalendarService.addDate(newEvent,$routeParams.weddingId).success(function(res){
         console.log('addDate',res);
-        $scope.events.splice(0, $scope.events.length);
         $scope.updateEvents();
       });
 
     };
     /* remove event */
     $scope.remove = function(index,event) {
+      _.each($scope.events,function(el,indx){
+        if(_.contains(el,event._id)){
+          $scope.events.splice(indx,1)
+        }
+      })
       CalendarService.deleteDate(event,$routeParams.weddingId).success(function(res){
-        $scope.events.splice(0, $scope.events.length);
-        $scope.updateEvents();
       });
     };
     /* Change View */
