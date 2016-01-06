@@ -1,6 +1,7 @@
 package com.theironyard.Utilities;
 
 import com.theironyard.Entities.*;
+import javafx.scene.text.Text;
 import org.apache.tomcat.jni.Local;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -43,8 +44,8 @@ public class Params {
 
     public String wedId;
 
-    @Column(length = 2000)
-    @Size(max = 2000)
+    @Column(length = 10000)
+    @Size(max= 10000)
     public String storyContent;
 
     public int _id;
