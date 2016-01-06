@@ -82,7 +82,7 @@ $scope.viewInvitee = false;
   }
   $scope.getPhotoSlides();
 
-    $scope.currentIndex = 6;
+    $scope.currentIndex = 0;
     $scope.myValue = true;
     $scope.setCurrentIndex = function(index){
       $scope.currentIndex = index;

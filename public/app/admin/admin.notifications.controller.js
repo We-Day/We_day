@@ -14,6 +14,7 @@ angular
     $scope.notifications = [];
     $scope.refresh = function(){
     NotServices.getNot($routeParams.weddingId).success(function(res){
+
       console.log(res,'notifications')
       $scope.notifications = res;
       });
@@ -47,7 +48,7 @@ angular
       console.log(index)
       $scope.notifications.splice(index,1);
       NotServices.deleteNot(item).success(function(){
-        
+
       })
     }
 

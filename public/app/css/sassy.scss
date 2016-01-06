@@ -646,12 +646,14 @@ uib-slide img{
 }
 .expand-calendar{
   margin-bottom:200px;
+  z-index: 5;
 }
 .calendar-repeat-events{
    transition: all .5s ease;
    max-height: 20px;
    .other-text-calendar{
-      transition: all .1s ease;
+     z-index: -5;
+      // transition: all .1s ease;
       // visibility:hidden;
    }
 

@@ -111,7 +111,6 @@ angular
         console.log(typeof(start));
 
         CalendarService.editDate(currObject,$routeParams.weddingId).success(function(res){
-          $scope.updateEvents();
           console.log(event)
 
       });
@@ -210,16 +209,18 @@ angular
       };
       CalendarService.addDate(newEvent,$routeParams.weddingId).success(function(res){
         console.log('addDate',res);
-        $scope.events.splice(0, $scope.events.length);
         $scope.updateEvents();
       });
 
     };
     /* remove event */
     $scope.remove = function(index,event) {
-      $scope.events.splice(0, $scope.events.length);
+      _.each($scope.events,function(el,indx){
+        if(_.contains(el,event._id)){
+          $scope.events.splice(indx,1)
+        }
+      })
       CalendarService.deleteDate(event,$routeParams.weddingId).success(function(res){
-        $scope.updateEvents();
       });
     };
     /* Change View */
