@@ -304,6 +304,7 @@ public class WeDayController {
             }
         }
         post.title = params.title;
+        post.time = params.time;
         post.wedding = weddings.findOne(Integer.valueOf(params.wedId));
         posts.save(post);
     }
