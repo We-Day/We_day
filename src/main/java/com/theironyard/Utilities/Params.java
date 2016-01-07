@@ -73,6 +73,6 @@ public class Params {
     public Boolean notificationBool;
     public String notificationTime;
 
-    public ZonedDateTime time;
+    public String time;
 }
 
