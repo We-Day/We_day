@@ -25,7 +25,7 @@ public class Post {
     public String title;
 
     @Column
-    public ZonedDateTime time;
+    public String time;
 
     @ManyToOne
     public Wedding wedding;
